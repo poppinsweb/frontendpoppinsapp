@@ -1,0 +1,94 @@
+.token-container {
+  background-image: url("../styles/images/cloud-stars2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1250px;
+}
+
+.logo-tokens {
+  width: 600px;
+  height: 543px;
+  /* margin-top: 2rem; */
+  opacity: .8;
+  position: absolute;
+  z-index: 1;
+  transform: rotate(-25deg);
+  margin-left: -100px;
+} 
+
+.content-container {
+  background-color: #85f79839;
+  height: 1120px;
+  padding-top: 7rem;
+}
+
+.box-information-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background-color: #d6dff97e;
+  border-radius: 20px;
+  margin: 25rem 0rem 0rem 15rem;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.radio-token {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-add {
+  margin: 1.5rem;
+}
+
+.btn-token-container {
+  margin-top: 30rem;
+}
+
+.btn-token {
+  color: #434343;
+  background-color: #bec2d3;
+  border-radius: 10px;
+  width: 350px;
+  height: 50px;
+  border-color: #5d2063;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  margin: 1.5rem;
+  font-size: 24px;
+  opacity: 90%;
+}
+
+.btn-nav-container {
+  /* margin-top: 2rem; */
+  background-color: #85f79857;
+}
+
+.btn-nav-token {
+  margin: 2.5rem;
+  color: #eaeaea;
+  background-color: #563cab;
+  width: 360px;
+  height: 50px;
+  border-bottom-color: #5d2063;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  font-size: 24px;
+  border-bottom-right-radius: 80px;
+  border-top-left-radius: 80px;
+}
+
+.btn-nav-token:hover {
+  background: #5d2063;
+  color: #ffffff;
+}
+
+.btn-token-option {
+  text-align: justify;
+  font-size: 30px;
+  margin: 0 250px;
+  color: #361639;
+  text-shadow: 1px 1px whitesmoke;
+  background-color: rgba(240, 241, 255, 0.335);
+}
+

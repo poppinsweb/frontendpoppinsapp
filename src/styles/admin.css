@@ -1,0 +1,19 @@
+.filter-data {
+  background-color: #d9d9d9;
+}
+
+.filter-btn {
+  margin: 1.5rem;
+}
+
+.render {
+  background-color: #ffffff;
+  margin-left: 11rem;
+  padding: 15px;
+  border: 2px solid #852c88;
+}
+
+/*pendiente si colocarlo o no el background*/
+.data-filter-box {
+  background-image: url("../styles/images/umbrelafondblank.png");
+}

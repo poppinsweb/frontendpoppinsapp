@@ -1,0 +1,146 @@
+/* MOBILE SIZE */
+.services-container {
+  background-color: #6870a1;
+}
+
+.logo-container {
+  background-image: url("../images/cloud-stars.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+.logo {
+  height: 330px;
+  margin-top: 280px;
+}
+
+.row>* {
+  padding: 0;
+}
+
+.img-slider {
+  margin-top: 30px;
+  border: 1px solid #852c88;
+  width: 220px;
+  height: 220px;
+  border-radius: 50px;
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+}
+
+.img-slider:hover {
+  width: 230px;
+  height: 230px;
+  opacity: .5;
+}
+
+.text-slider {
+  margin-left: auto;
+  margin-top: 20px;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-slider:hover {
+  color: #e857f5;
+}
+
+.img-individual-container1 {
+  background-color: rgba(206, 196, 252, 0.018);
+  border-radius: 10px;
+}
+
+/* MEDIUM SCREEN 1024x800 */
+@media (min-width: 992px) {
+  .logo {
+    height: 450px;
+    margin-top: 200px;
+  }
+
+  .services-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  
+  .img-individual-container1, .img-individual-container2 {
+    width: 160px;
+  }
+
+  .img-slider {
+    width: 140px;
+    height: 150px;
+    border-radius: 20px;
+  }
+
+  .img-slider:hover {
+    width: 150px;
+    height: 150px;
+  }
+
+  .text-slider {
+    font-size: 23px;
+  }
+}
+
+/* LARGE SCREEN */
+@media (min-width: 1200px) {
+  .logo-container {
+    border-radius: 10px;
+    padding-bottom: 500px;
+    margin-top: 0;
+    position: absolute;
+    z-index: -1;
+    height: 1250px;
+  }
+
+  .logo {
+    width: 550px;
+    height: 493px;
+    margin-top: 320px;
+  }  
+
+  .services-container {
+    padding: 850px 0 50px 0;
+    background-color: transparent;
+  }
+
+  .img-individual-container1, .img-individual-container2 {
+    margin-right: 50px;
+  }
+  
+  .img-slider {
+    border: 1px solid #852c88;
+    width: 180px;
+    height: 180px;
+    border-radius: 50px;
+    box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+  }
+
+  .img-slider:hover {
+    width: 190px;
+    height: 190px;
+    opacity: .5;
+  }
+}
+
+/* LARGER SCREEN */
+@media (min-width: 1400px) {
+  .logo-container {
+    height: 1550px;
+  }
+
+ .logo {
+    width: 700px;
+    height: 643px;
+    margin-top: 25rem;
+  }
+
+ .services-container {
+    margin-top: 200px;
+  }
+}

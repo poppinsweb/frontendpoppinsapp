@@ -1,0 +1,84 @@
+/* MOBILE SIZE */
+.page-container {
+  margin: 0 auto;
+  padding: 40px;
+  background-image: url("../styles/images/cloud-stars.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 850px;
+}
+
+.login-card, .register-card {
+  margin-top: 100px;
+  background-color: #e2d2ffa4;
+  padding: 20px 10px;
+  border-radius: 15px;
+}
+
+.login-card {
+  background-color: #d2fffb64;
+  margin-top: 50px;
+}
+
+/* MEDIUM SCREEN */
+@media (min-width: 800px) {
+  .page-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+  }
+
+  .login-card, .register-card {
+    width: 400px;
+    height: 400px;
+  }
+
+  .login-card {
+    margin-top: 100px;
+  }
+
+  .boxes-container {
+    display: flex;
+    gap: 20px;
+  }
+
+}
+
+/* LARGE SCREEN */
+@media (min-width: 1200px) {
+  .page-container {
+    min-height: 1250px;
+    padding-bottom: 1px;
+  }
+
+  .boxes-container {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 40px;
+    margin-top: 100px;
+    }
+
+  .login-card, .register-card {
+    padding: 50px;
+    width: 500px;
+    height: 400px;
+    border-radius: 15px;
+  }
+
+  .btn-register {
+    margin-top: 30px;
+    margin-right: 50px;
+  }
+
+  .btn-login {
+    margin-top: 50px;
+  }
+}
+
+/* LARGER SCREEN */
+@media (min-width: 1500px) {
+.boxes-container {
+  margin-top: 300px;
+  }
+}
