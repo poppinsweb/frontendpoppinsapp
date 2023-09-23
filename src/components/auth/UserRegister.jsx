@@ -1,13 +1,16 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import Swal from "sweetalert2";
 
+const initialState = {
+  email: "",
+  password: "",
+  password2: "",
+};
+
 export function UserRegister() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    password2: "",
-  });
+  const [user, setUser] = useState(initialState);
+  const [error, setError] = useState();
 
   const { email, password, password2 } = user;
   const { signup } = useAuth();
@@ -22,16 +25,17 @@ export function UserRegister() {
   };
 
   // *********
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setUser(initialState);
     try {
-      signup(email, password, password2); // Esta es la funcion del context destructurada en linea 12
+      await signup(email, password, password2); // Esta es la funcion del context destructurada en linea 12
 
-      if (!email || (!password && id === 0) || (!password2 && id === 0)) {
+      if (!email || (!password) || (!password2)) {
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "Debe ingresar todos los datos!",
+          title: "Un momento...",
+          text: "Todos los campos deben llenarse",
         });
         return;
       }
@@ -39,22 +43,32 @@ export function UserRegister() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Las contraseñas deben coincidir!",
+          text: "Las contraseñas deben coincidir",
         });
         return;
       }
       if (password.length < 6) {
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "La contraseña deben tener al menos 6 caracteres!",
+          title: "Disculpe...",
+          text: "La contraseña debe tener al menos 6 caracteres",
         });
         return;
       }
-    } catch {
-      console.log(error);
+      // ESTA VALIDACION ME VALIO
+      // if (error === "auth/email-already-in-use" ) {
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "Oops...",
+      //     text: "Su correo ya se encuentra registrado",
+      //   });
+      // }
+    } catch  {
+      if (error.code === "auth/email-already-in-use") {
+        setError("Correo existente")
+      }
+      console.log(error.code);
     }
-
     Swal.fire({
       icon: "success",
       title: "Usuario registrado",
@@ -63,7 +77,6 @@ export function UserRegister() {
       timer: 2500,
     });
   };
-
   return (
     <div className="container">
       <div className="row">
@@ -75,6 +88,7 @@ export function UserRegister() {
               placeholder="E-mail"
               type="email"
               name="email"
+              autoComplete="on"
               value={email}
               onChange={handleChange}
             />

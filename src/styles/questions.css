@@ -1,5 +1,5 @@
 .question-main-container {
-  padding-top: 30rem;
+  padding-top: 20rem;
   background-image: url("./images/cloud-stars2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,9 +9,9 @@
 /* CONTENEDOR DE LA CARD */
 .question-container {
   margin: 0 auto;
-  width: 1000px;
+  width: 1150px;
+  height: 750px;
   min-height: 200px;
-  height: 650px;
   border-radius: 15px;
   padding: 40px;
   padding-top: 80px;
@@ -19,8 +19,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  /* background-image: url("./image/habitosfondo.png");
-  opacity: .8; */
+  margin-left: 950px;
+  background-image: url("./images/habitosfondo.png");
   /* background-color: rgba(255, 204, 200, 0.252); */
 }
 
