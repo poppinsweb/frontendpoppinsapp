@@ -14,7 +14,7 @@ export function UserRegister() {
 
   const navigate = useNavigate();
   const { email, password, password2 } = userRegister;
-  const { register, user } = useAuth();
+  const { register } = useAuth();
 
   // **********
   const handleChange = ({ target }) => {
@@ -67,9 +67,9 @@ export function UserRegister() {
       navigate("/token");
     } catch (error) {
       const errorCode = error.code;
-      console.log(errorCode);
+      // console.log(errorCode);
       const errorMessage = error.message;
-      console.log(errorMessage);
+      // console.log(errorMessage);
 
       if (errorCode === "auth/email-already-in-use") {
         Swal.fire({

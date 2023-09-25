@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import "../../styles/login.css";
 import { ButtonGoogle } from "./ButtonGoogle";
+import "../../styles/login.css";
+import Swal from "sweetalert2";
 
 const initialState = {
   email: "",
@@ -12,7 +12,6 @@ const initialState = {
 
 export function UserLogin() {
   const [user, setUser] = useState(initialState);
-  const [error, setError] = useState();
 
   const navigate = useNavigate();
 
@@ -29,9 +28,9 @@ export function UserLogin() {
   };
 
   const handleGoogle = (e) => {
-    e.preventDefault()
-    loginWithGoogle()
-  }
+    e.preventDefault();
+    loginWithGoogle();
+  };
   // **********
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +39,7 @@ export function UserLogin() {
     if (!email || !password) {
       Swal.fire(
         "¿Está registrado?",
-        "Debe ingresar unas credenciales válidas",
+        "Debe ingresar sus credenciales de inicio",
         "question"
       );
       return;
@@ -50,8 +49,18 @@ export function UserLogin() {
       await login(email, password);
       navigate("/token");
     } catch (error) {
-      alert("Ingresa unas credenciales válidas");
-      navigate("/login");
+      const errorCode = error.code;
+      // console.log(errorCode);
+      const errorMessage = error.message;
+      // console.log(errorMessage);
+
+      if (errorCode === "auth/invalid-login-credentials") {
+        Swal.fire({
+          icon: "error",
+          title: "Por favor ingrese unas credenciales válidas",
+          text: "Su correo o password son incorrectos",
+        });
+      }
     }
   };
   return (
@@ -79,7 +88,7 @@ export function UserLogin() {
                   value={password}
                   onChange={handleChange}
                 />
-                  <input
+                <input
                   className="form-control my-3 "
                   placeholder="Token"
                   type="token"
@@ -89,7 +98,7 @@ export function UserLogin() {
                 />
               </div>
               <div className="buttons">
-                <ButtonGoogle onClick={handleGoogle}/>
+                <ButtonGoogle onClick={handleGoogle} />
                 <button className="btn btn-color btn-login" type="submit">
                   Ingresar
                 </button>
