@@ -1,0 +1,17 @@
+.btn-google {
+  border-radius: 20px;
+  border: #5D2063;
+  width: 190px;
+  height: 45px;
+  color: #3e3e3f; 
+  margin: 50px 0;
+}
+
+.btn-google:hover {
+  background-color: rgb(67, 151, 255);
+  color: #fff;
+}
+
+.google-icon {
+  margin-right: 5px;
+}

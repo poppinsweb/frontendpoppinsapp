@@ -6,7 +6,6 @@ import { UserAuthPage } from "../pages/auth/UserAuthPage";
 export function VisitorRoutes() {
   return (
     <Routes>
-      {/* <Route index element={<LandingPage />} /> */}
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/login" element={<UserAuthPage />} />
       <Route path="/construction" element={<ConstructionPage />} />

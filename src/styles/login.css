@@ -20,6 +20,10 @@
   margin-top: 50px;
 }
 
+.buttons {
+  display: block;
+}
+
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {
   .page-container {
@@ -73,6 +77,11 @@
 
   .btn-login {
     margin-top: 50px;
+  }
+
+  .buttons {
+    display: inline-flex;
+    gap: 20px;
   }
 }
 

@@ -1,61 +1,75 @@
-// LoginPage
-// import { useContext, useState } from "react";
-// import { AuthContext } from "../../auth/context/AuthProvider";
-import Swal from "sweetalert2";
-import '../../styles/App.css'
-import '../../styles/login.css';
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "../../styles/login.css";
+import { ButtonGoogle } from "./ButtonGoogle";
 
-const initialLoginForm = {
+const initialState = {
   email: "",
   password: "",
 };
 
 export function UserLogin() {
-  // const { handlerLogin } = useContext(AuthContext);
-  const [loginForm, setLoginForm] = useState(initialLoginForm);
-  const { email, password } = loginForm;
+  const [user, setUser] = useState(initialState);
+  const [error, setError] = useState();
 
-  const onInputChange = ({ target }) => {
+  const navigate = useNavigate();
+
+  const { email, password } = user;
+  const { login, loginWithGoogle } = useAuth();
+
+  // ***********
+  const handleChange = ({ target }) => {
     const { name, value } = target;
-    setLoginForm({
-      ...loginForm,
+    setUser({
+      ...user,
       [name]: value,
     });
   };
 
-  const onSubmitLogin = (e) => {
+  const handleGoogle = (e) => {
+    e.preventDefault()
+    loginWithGoogle()
+  }
+  // **********
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // setUser(initialState);
+
     if (!email || !password) {
       Swal.fire(
-        '¿Está registrado?',
-        'Ingrese sus credenciales',
-        'question'
-      )
+        "¿Está registrado?",
+        "Debe ingresar unas credenciales válidas",
+        "question"
+      );
       return;
     }
 
-    handlerLogin({ email, password });
-
-    console.log(loginForm);
-    setLoginForm(initialLoginForm);
+    try {
+      await login(email, password);
+      navigate("/token");
+    } catch (error) {
+      alert("Ingresa unas credenciales válidas");
+      navigate("/login");
+    }
   };
-
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col">
             <h2 className="card-title title-login">Login</h2>
-            <form onSubmit={onSubmitLogin}>
+            <form onSubmit={handleSubmit}>
               <div className="container">
                 <input
                   className="form-control my-3 "
                   placeholder="E-mail"
                   type="email"
                   name="email"
+                  autoComplete="on"
                   value={email}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
                 <input
                   className="form-control my-3 "
@@ -63,20 +77,23 @@ export function UserLogin() {
                   type="password"
                   name="password"
                   value={password}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
-                <input
+                  <input
                   className="form-control my-3 "
                   placeholder="Token"
-                  type="text"
+                  type="token"
                   name="token"
                   // value={token}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
               </div>
-              <button className="btn btn-color btn-login" type="submit">
-                Ingresar
-              </button>
+              <div className="buttons">
+                <ButtonGoogle onClick={handleGoogle}/>
+                <button className="btn btn-color btn-login" type="submit">
+                  Ingresar
+                </button>
+              </div>
             </form>
           </div>
         </div>
