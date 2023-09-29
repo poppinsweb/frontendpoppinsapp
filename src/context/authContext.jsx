@@ -20,7 +20,18 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   // HOOK QUE VA A ACTUALIZAR EL ESTADO DE LOGIN
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // if (user !== null && user.uid === "TVBwyWksmscoZDawFrUXo4Mdp2h2") {
+    if (user !== null && user === "ale.mail.com") {
+    setUser({ email: user.email, role: "admin" });
+    console.log(user);
+  }
+  // else if(user !== null){
+  //   user
+  //   console.log("user:", user.email, "role: Plain user")
+  // }
 
   // REGISTRO DE USUARIOS EN FIREBASE
   const register = async (email, password) => {
@@ -39,7 +50,6 @@ export function AuthProvider({ children }) {
       password
     );
     console.log(userCredential.operationType);
-    
   };
   // LOGIN CON GOOGLE
   const loginWithGoogle = async () => {
@@ -48,29 +58,27 @@ export function AuthProvider({ children }) {
   };
 
   // VERIFICA EL ESTADO DEL LOGIN
- useEffect(() => {
-   onAuthStateChanged(auth, currentUser => {
-    setUser(currentUser);
-    console.log(user);
-   })
- }, [])
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      // setLoading(false);
+      console.log(user);
+    });
+  }, []);
 
   // LOGOUT DE USUARIO
   const logout = async () => {
     const response = await signOut(auth);
-    console.log(response);
+    // console.log(response);
   };
 
   return (
-    <authContext.Provider value={{ register, login, user, loginWithGoogle, logout }}>
+    <authContext.Provider
+      value={{ register, login, loading, user, loginWithGoogle, logout }}
+    >
       {children}
     </authContext.Provider>
   );
 }
 
 // https://www.youtube.com/watch?v=H_vEJt5Id_I
-
-
-// if (userCredential.operationType === "signIn") {
-//   alert("dentro");
-// }

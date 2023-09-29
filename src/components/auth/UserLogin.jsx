@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { ButtonGoogle } from "./ButtonGoogle";
 import "../../styles/login.css";
@@ -47,12 +47,17 @@ export function UserLogin() {
 
     try {
       await login(email, password);
+      Swal.fire({
+        icon: "success",
+        title: "Sesión Iniciada",
+        footer: "BIENVENIDO",
+        showConfirmButton: false,
+        timer: 2000,
+      });
       navigate("/token");
     } catch (error) {
       const errorCode = error.code;
       // console.log(errorCode);
-      const errorMessage = error.message;
-      // console.log(errorMessage);
 
       if (errorCode === "auth/invalid-login-credentials") {
         Swal.fire({
