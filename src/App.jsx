@@ -8,44 +8,38 @@ import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
 import { UserAuthPage } from "./pages/auth/UserAuthPage";
 
-import { ProtectedRoutes } from "./routes/ProtectedRoutes";
 import { AdminRoutes } from "./routes/AdminRoutes";
-import { AdminDashboard } from "./pages/admin/AdminDashboard";
-
+import { UserRoutes } from "./routes/UserRoutes";
 
 function App() {
-  const { login } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
     <>
-        <Navbar />
-        <Routes>
-          {
-            login.isAuth ? (
-              <Route path="/admin" index element={<AdminRoutes />} />
-            ) :
-            <>
-              <Route path="/*" index element={<LandingPage />} />
-              <Route path="/construction" element={<ConstructionPage />} />
-              <Route path="/login" element={<UserAuthPage />} />
-            </>
-          }
-          
-          
-          
-          
-          
-      
+      <Navbar />
+      <Routes>
+        {user ? (
+          <>
+            {/* <Route path="/*" element={<AdminRoutes />} /> */}
+            <Route path="/*" element={<UserRoutes />} />
+            <Route path="/" index element={<LandingPage />} />
+            <Route path="/construction" element={<ConstructionPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/*" index element={<LandingPage />} />
+            <Route path="/construction" element={<ConstructionPage />} />
+            <Route path="/login" element={<UserAuthPage />} />
+          </>
+        )}
 
-          
-
-          {/* <Route path="/" element={
+        {/* <Route path="/" element={
           <ProtectedRoutes>
             <Route path="/admin" index element={<AdminDashboard />} />
           </ProtectedRoutes>
           } 
           /> */}
-        </Routes>
+      </Routes>
     </>
   );
 }
