@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ButtonGoogle } from "./ButtonGoogle";
 import "../../styles/login.css";
@@ -54,7 +54,7 @@ export function UserLogin() {
         showConfirmButton: false,
         timer: 2000,
       });
-      navigate("/token");
+      navigate("/admin");
     } catch (error) {
       const errorCode = error.code;
       // console.log(errorCode);
@@ -104,7 +104,7 @@ export function UserLogin() {
               </div>
               <div className="buttons">
                 <ButtonGoogle onClick={handleGoogle} />
-                <button className="btn btn-color btn-login" type="submit">
+                <button className="btn btn-color btn-login" type="submit" >
                   Ingresar
                 </button>
               </div>

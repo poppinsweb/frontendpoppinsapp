@@ -1,5 +1,5 @@
 // RUTAS PRIVADAS DE ADMIN
-import { useAuth } from "../context/authContext";
+// import { useAuth } from "../hooks/useAuth";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { UserList } from "../pages/admin/UserList";
