@@ -1,6 +1,6 @@
 .question-main-container {
   padding-top: 20rem;
-  background-image: url("./images/cloud-stars2.jpg");
+  background-image: url("./images/cloud-stars.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 1250px;
@@ -19,19 +19,15 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  margin-left: 950px;
   background-image: url("./images/habitosfondo.png");
-  /* background-color: rgba(255, 204, 200, 0.252); */
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
-/* .question-ability-container {
-  display: block;
-} */
 
 .main-question-title {
   font-size: 3rem;
   padding-top: 10px;
-  color: #4b244f;
+  color: #983aa3;
 }
 
 .secoundary-question-title {
@@ -51,7 +47,7 @@
   font-weight: 500;
 }
 
-.question-section-ability, .question-section-habit {
+.question-section-ability, .question-section-habit, .question-section {
   padding-top: 10px;
 }
 
@@ -65,14 +61,18 @@
   padding-left: 20px;
   list-style: none;
   text-align: justify;
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.question-li:hover {
+  font-size: 30px;
+  color: #96449e;
 }
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
 .question-text {
-  font-size: 25px;
+  font-size: 30px;
   color: #96449e;
-  border-radius: 10px;
 }
 
 /* EL PANTALLAZO DE LOS RESULTADOS */

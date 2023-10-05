@@ -57,10 +57,10 @@ export function UserChildForm() {
       <h2 className="user-title">Datos Personales del Niño</h2>
       <div className="row main-row">
         <div className="col first-col">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} >
             <div>
               <label className="user-label">
-                <strong>Nombres:</strong>
+                <strong>Nombres del niño:</strong>
                 <input
                   className="user-select user-code"
                   id="names"
@@ -73,7 +73,7 @@ export function UserChildForm() {
             </div>
             <div>
               <label className="user-label user-code">
-                <strong>Apellidos:</strong>
+                <strong>Apellidos del niño:</strong>
                 <input
                   className="user-select"
                   id="lastNames"
@@ -196,6 +196,7 @@ export function UserChildForm() {
             className="logo2"
             alt="Logo paraguas"
           />
+          <div className="code-container">
           <p>
             <strong>Código del Niño</strong>
           </p>
@@ -203,6 +204,7 @@ export function UserChildForm() {
           <div className="btn-container">
             <button className="btn btn-color">Siguiente</button>
           </div>
+        </div>
         </div>
       </div>
     </div>

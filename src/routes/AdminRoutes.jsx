@@ -16,7 +16,7 @@ import { PageUserResult } from "../pages/userPages/PageUserResult";
 export function AdminRoutes() {
   let { user } = useAuth();
   // console.log(user);
-  if (user && user.email === "ale@mail.com") {
+  if (user && user.email === "lorena@mail.com") {
     user = "admin";
     console.log("Es admin");
   } else {
