@@ -20,25 +20,18 @@ function App() {
       <Routes>
         {user ? (
           <>
-            {/* <Route path="/*" element={<AdminRoutes />} /> */}
-            <Route path="/*" element={<UserRoutes />} />
+            <Route path="/*" element={<AdminRoutes />} />
+            {/* <Route path="/*" element={<UserRoutes />} /> */}
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
           </>
         ) : (
           <>
-            <Route path="/*" index element={<LandingPage />} />
+            <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
-            <Route path="/login" element={<UserAuthPage />} />
+            <Route path="/*" element={<UserAuthPage />} />
           </>
         )}
-
-        {/* <Route path="/" element={
-          <ProtectedRoutes>
-            <Route path="/admin" index element={<AdminDashboard />} />
-          </ProtectedRoutes>
-          } 
-          /> */}
       </Routes>
     </>
   );
