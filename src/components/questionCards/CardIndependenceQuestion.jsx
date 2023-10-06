@@ -11,16 +11,23 @@ export default function CardIndependenceQuestion() {
   });
   const [showResult, setShowResult] = useState(false);
 
-  const { question, choices } = independenceQuestions.questions[currentQuestion];
+  const { question, choices } =
+    independenceQuestions.questions[currentQuestion];
 
-  const onAnswerClick = (choice, index) => {
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      setCurrentQuestion((prev) => prev - 1)
+    }
+  };
+
+  const handleNextQuestion = () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
@@ -43,12 +50,15 @@ export default function CardIndependenceQuestion() {
         ...prev,
         score: prev.score + pointScore,
       }));
-    } 
+    }
   };
 
+  console.log(independenceQuestions.questions[0]);
+  console.log(answerIdx);
+
   // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL1
-  let partial1 = result.score;
-  console.log(partial1);
+  // let partial1 = result.score;
+  // console.log(partial1);
 
   return (
     <div className="question-main-container">
@@ -60,10 +70,12 @@ export default function CardIndependenceQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index ? "selected-answer question-text" : null
+                      answerIdx === index
+                        ? "selected-answer question-text"
+                        : null
                     }
                   >
                     {choice}
@@ -78,25 +90,37 @@ export default function CardIndependenceQuestion() {
           </>
         ) : (
           <div className="score-section">
-            <h3>Resultados</h3>
+            <p>A continuación siguen las preguntas relacionadas con las habilidades. Por favor considera cada enunciado con relación al comportamiento del niño o niña en la última semana. Es obligatorio elegir una opción para cambiar de pregunta</p>
+
+
+            {/* <h3>Resultados</h3>
             <p>
               Preguntas Respondidas:
               <span>{independenceQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
-            </p>
+            </p> */}
           </div>
         )}
       </div>
-      <div>
+      <div className="btn-container">
         <button
-          onClick={onClickNext}
+          onClick={handleBeforeQuestion}
+          className="btn-color"
+        >
+          {showResult
+            ? "Reiniciar"
+            : "Anterior"}
+        </button>
+        {/* ********** */}
+        <button
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className="btn-color"
         >
           {showResult
-            ? "Atrás"
+            ? "Habilidades"
             : currentQuestion === independenceQuestions.questions.length - 1
             ? "Final"
             : "Siguiente"}

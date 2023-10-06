@@ -36,18 +36,20 @@
 }
 
 /* NUMERO DE LA PREGUNTA ACTUAL */
-.active-question-no {  
+.active-question-no {
   font-size: 20px;
   font-weight: 500;
 }
 
 /* NUMERO DEL TOTAL DE PREGUNTAS */
-.total-question {  
+.total-question {
   font-size: 16px;
   font-weight: 500;
 }
 
-.question-section-ability, .question-section-habit, .question-section {
+.question-section-ability,
+.question-section-habit,
+.question-section {
   padding-top: 10px;
 }
 
@@ -77,7 +79,13 @@
 
 /* EL PANTALLAZO DE LOS RESULTADOS */
 .score-section {
-    font-size: 24px;
-    align-items: center;
-    padding-top: 100px;
-  }
+  font-size: 24px;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
