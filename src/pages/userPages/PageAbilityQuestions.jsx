@@ -1,6 +1,6 @@
-import CardAbilityDressingQuestion from "../../components/question-cards/CardAbilityDressingQuestion";
-import CardAbilityGroomingQuestion from "../../components/question-cards/CardAbilityGroomingQuestion";
-import CardAbilityFeedingQuestion from "../../components/question-cards/CardAbilityFeedingQuestion";
+import CardAbilityDressingQuestion from "../../components/questionCards/CardAbilityDressingQuestion";
+import CardAbilityGroomingQuestion from "../../components/questionCards/CardAbilityGroomingQuestion";
+import CardAbilityFeedingQuestion from "../../components/questionCards/CardAbilityFeedingQuestion";
 import { useState } from "react";
 
 export function PageAbilityQuestions() {

@@ -1,6 +1,6 @@
-import CardHabitSleepingQuestion from "../../components/question-cards/CardHabitSleepingQuestion";
-import CardHabitFeedingQuestion from "../../components/question-cards/CardHabitFeedingQuestion";
-import CardHabitResponsabilityQuestion from "../../components/question-cards/CardHabitResponsabilityQuestion";
+import CardHabitSleepingQuestion from "../../components/questionCards/CardHabitSleepingQuestion";
+import CardHabitFeedingQuestion from "../../components/questionCards/CardHabitFeedingQuestion";
+import CardHabitResponsabilityQuestion from "../../components/questionCards/CardHabitResponsabilityQuestion";
 import { useState } from "react";
 
 export function PageHabitQuestions() {
