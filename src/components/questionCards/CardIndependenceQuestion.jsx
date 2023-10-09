@@ -53,12 +53,12 @@ export default function CardIndependenceQuestion() {
     }
   };
 
-  console.log(independenceQuestions.questions[0]);
-  console.log(answerIdx);
+  // console.log(independenceQuestions.questions[0]);
+  // console.log(answerIdx);
 
   // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL1
-  // let partial1 = result.score;
-  // console.log(partial1);
+  let partial1 = result.score;
+  console.log(partial1);
 
   return (
     <div className="question-main-container">

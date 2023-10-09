@@ -12,14 +12,20 @@ export default function CardAbilityDressingQuestion() {
   const [showResult, setShowResult] = useState(false);
   const { question, choices } = abilityDressingQuestions.questions[currentQuestion];
 
-  const onAnswerClick = (choice, index) => {
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      setCurrentQuestion((prev) => prev - 1)
+    }
+  };
+
+  const handleNextQuestion= () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
@@ -67,7 +73,7 @@ export default function CardAbilityDressingQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
                       answerIdx === index ? "selected-answer question-text" : null
@@ -96,9 +102,18 @@ export default function CardAbilityDressingQuestion() {
           </div>
         )}
       </div>
-      <div className="btn-card">
+      <div className="btn-container">
         <button
-          onClick={onClickNext}
+          onClick={handleBeforeQuestion}
+          className="btn-color"
+        >
+          {showResult
+            ? "Reiniciar"
+            : "Anterior"}
+        </button>
+        {/* ********** */}
+        <button
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
