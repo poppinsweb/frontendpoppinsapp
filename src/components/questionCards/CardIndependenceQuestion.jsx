@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import "../../styles/questions.css";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,14 @@ export default function CardIndependenceQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
   });
 
   const navigate = useNavigate();
-
-  const [showResult, setShowResult] = useState(false);
 
   const { question, choices } =
     independenceQuestions.questions[currentQuestion];
@@ -27,8 +28,8 @@ export default function CardIndependenceQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      setCurrentQuestion((prev) => prev - 1)
-    } 
+      setCurrentQuestion((prev) => prev - 1);
+    }
   };
 
   const handleNextQuestion = () => {
@@ -36,16 +37,15 @@ export default function CardIndependenceQuestion() {
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== independenceQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      // setShowResult(true);
+      setShowResult(true);
       setResult((prev) => ({
         ...prev,
         score: prev.score,
       }));
-      navigate("/habilidades-aseo");
+      setShowNavigation(true);
     }
   };
 
@@ -62,12 +62,19 @@ export default function CardIndependenceQuestion() {
     }
   };
 
-  // console.log(independenceQuestions.questions[0]);
-  // console.log(answerIdx);
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habilidades-aseo") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
 
-  // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL1
-  let partial1 = result.score;
-  console.log(partial1);
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
 
   return (
     <div className="question-main-container">
@@ -99,9 +106,6 @@ export default function CardIndependenceQuestion() {
           </>
         ) : (
           <div className="score-section">
-            {/* <p>A continuación siguen las preguntas relacionadas con las habilidades. Por favor considera cada enunciado con relación al comportamiento del niño o niña en la última semana. Es obligatorio elegir una opción para cambiar de pregunta</p> */}
-
-
             <h3>Resultados</h3>
             <p>
               Preguntas Respondidas:
@@ -114,28 +118,24 @@ export default function CardIndependenceQuestion() {
         )}
       </div>
       <div className="btn-container">
-        <button
-          onClick={handleBeforeQuestion}
-          className="btn-color" 
-        >
-          {showResult
-            ? "Reiniciar"
-            : "Anterior"}
+        <button onClick={handleBeforeQuestion} className="btn-color">
+          {showResult 
+          ? "Reiniciar" 
+          : "Anterior"}
         </button>
-        {/* ********** */}
+        
         <button
           onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className="btn-color"
         >
           {showResult
-            ? "Final"
-            : currentQuestion === independenceQuestions.questions.length - 1
             ? "Siguiente sección"
+            : currentQuestion === independenceQuestions.questions.length - 1
+            ? "Siguiente"
             : "Siguiente"}
         </button>
       </div>
     </div>
   );
 }
-// navigate("/habilidades-aseo")
