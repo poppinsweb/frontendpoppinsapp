@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../../styles/questions.css";
 import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
+import { useNavigate } from "react-router-dom";
+import CardAbilityDressingQuestion from "./CardAbilityDressingQuestion";
 
 export default function CardAbilityGroomingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -11,6 +13,9 @@ export default function CardAbilityGroomingQuestion() {
     // correctAnswers: 0,
     // wrongAnswers: 0,
   });
+
+  const navigate = useNavigate()
+
   const [showResult, setShowResult] = useState(false);
   const { question, choices } = abilityGroomingQuestions.questions[currentQuestion];
 
@@ -120,11 +125,15 @@ export default function CardAbilityGroomingQuestion() {
           disabled={answerIdx === null}
           className='btn-color'
         >
+          {/* {
+            showResult ? navigate('/habitos') : "siguiente"
+          } */}
           {showResult
-            ? "Atrás"
+            ? navigate("/habilidades-vestido")
             : currentQuestion === abilityGroomingQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente sección"
+            : "Siguiente"
+          }
         </button>
       </div>
     </div>

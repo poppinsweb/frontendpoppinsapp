@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import "../../styles/questions.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CardIndependenceQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -9,6 +10,9 @@ export default function CardIndependenceQuestion() {
   const [result, setResult] = useState({
     score: 0,
   });
+
+  const navigate = useNavigate();
+
   const [showResult, setShowResult] = useState(false);
 
   const { question, choices } =
@@ -24,7 +28,7 @@ export default function CardIndependenceQuestion() {
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
       setCurrentQuestion((prev) => prev - 1)
-    }
+    } 
   };
 
   const handleNextQuestion = () => {
@@ -36,7 +40,12 @@ export default function CardIndependenceQuestion() {
     if (currentQuestion !== independenceQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setShowResult(true);
+      // setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      navigate("/habilidades-aseo");
     }
   };
 
@@ -90,24 +99,24 @@ export default function CardIndependenceQuestion() {
           </>
         ) : (
           <div className="score-section">
-            <p>A continuación siguen las preguntas relacionadas con las habilidades. Por favor considera cada enunciado con relación al comportamiento del niño o niña en la última semana. Es obligatorio elegir una opción para cambiar de pregunta</p>
+            {/* <p>A continuación siguen las preguntas relacionadas con las habilidades. Por favor considera cada enunciado con relación al comportamiento del niño o niña en la última semana. Es obligatorio elegir una opción para cambiar de pregunta</p> */}
 
 
-            {/* <h3>Resultados</h3>
+            <h3>Resultados</h3>
             <p>
               Preguntas Respondidas:
               <span>{independenceQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
-            </p> */}
+            </p>
           </div>
         )}
       </div>
       <div className="btn-container">
         <button
           onClick={handleBeforeQuestion}
-          className="btn-color"
+          className="btn-color" 
         >
           {showResult
             ? "Reiniciar"
@@ -120,12 +129,13 @@ export default function CardIndependenceQuestion() {
           className="btn-color"
         >
           {showResult
-            ? "Habilidades"
-            : currentQuestion === independenceQuestions.questions.length - 1
             ? "Final"
+            : currentQuestion === independenceQuestions.questions.length - 1
+            ? "Siguiente sección"
             : "Siguiente"}
         </button>
       </div>
     </div>
   );
 }
+// navigate("/habilidades-aseo")

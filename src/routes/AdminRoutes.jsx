@@ -9,19 +9,21 @@ import { useAuth } from "../hooks/useAuth";
 import { UserToken } from "../pages/userPages/UserToken";
 import { PageUserChildData } from "../pages/userPages/PageUserChildData";
 import { PageIndependenceQuestions } from "../pages/userPages/PageIndependenceQuestions";
-import { PageAbilityQuestions } from "../pages/userPages/PageAbilityQuestions";
+// import { PageAbilityQuestions } from "../pages/userPages/PageAbilityQuestions";
 import { PageHabitQuestions } from "../pages/userPages/PageHabitQuestions";
 import { PageUserResult } from "../pages/userPages/PageUserResult";
+import { PageAbilityGrooming } from "../pages/userPages/PageAbilityGrooming";
+import { PageAbilityDressing } from "../pages/userPages/PageAbilityDressing";
 
 export function AdminRoutes() {
   let { user } = useAuth();
   // console.log(user);
-  if (user && user.email === "lorena@mail.com") {
-    user = "admin";
-    console.log("Es admin");
-  } else {
-    console.log("No es admin");
-  }
+  // if (user && user.email === "lorena@mail.com") {
+  //   user = "admin";
+  //   console.log("Es admin");
+  // } else {
+  //   console.log("No es admin");
+  // }
   return (
     <>
       <Routes>
@@ -41,7 +43,8 @@ export function AdminRoutes() {
               path="/independencia"
               element={<PageIndependenceQuestions />}
             />
-            <Route path="/habilidades" element={<PageAbilityQuestions />} />
+            <Route path="/habilidades-aseo" element={<PageAbilityGrooming />} />
+            <Route path="/habilidades-vestido" element={<PageAbilityDressing />} />
             <Route path="/habitos" element={<PageHabitQuestions />} />
             <Route path="/resultados" element={<PageUserResult />} />
             <Route path="/*" element={<Navigate to="/token" />} />

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthProvider, AuthContext } from "./context/AuthProvider"; // Componente del context
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/layout/Navbar";
 import "./styles/App.css";
 
@@ -9,7 +9,7 @@ import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
 import { UserAuthPage } from "./pages/auth/UserAuthPage";
 
 import { AdminRoutes } from "./routes/AdminRoutes";
-import { UserRoutes } from "./routes/UserRoutes";
+// import { UserRoutes } from "./routes/UserRoutes";
 
 function App() {
   const { user } = useContext(AuthContext);
