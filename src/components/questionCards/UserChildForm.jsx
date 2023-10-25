@@ -2,19 +2,21 @@ import Select from "react-select";
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import "../../styles/userChild.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function UserChildForm() {
   const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
 
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
 
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState("");
 
+  const navigate = useNavigate();
+
   const handleInputChange = ({ target }) => {
-    // console.log(target.value);
     const { name, value } = target;
     setUserData({
       ...userData,
@@ -29,27 +31,28 @@ export function UserChildForm() {
     });
   };
 
-  // console.log(userSelect);
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(userData);
     const selected = [userData, userSelect];
     console.log(selected);
   };
 
   const handleNameChange = ({ target }) => {
-    // console.log(typeof target.value);
     setUserName(target.value);
   };
 
   const handleLastNameChange = ({ target }) => {
-    // console.log(typeof target.value);
     setUserLastName(target.value);
   };
 
   const handleBirthChange = ({ target }) => {
-    // console.log(typeof target.value);
     setUserBirth(target.value);
+  };
+
+  const handleNavigate = () => {
+    setTimeout(() => {
+      navigate("/independencia");
+    }, 5000);
   };
 
   return (
@@ -57,7 +60,7 @@ export function UserChildForm() {
       <h2 className="user-title">Datos Personales del Niño</h2>
       <div className="row main-row">
         <div className="col first-col">
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit}>
             <div>
               <label className="user-label">
                 <strong>Nombres del niño:</strong>
@@ -92,12 +95,10 @@ export function UserChildForm() {
                   id="birth"
                   name="Fecha-Nacimiento"
                   onChange={handleInputChange}
-                  onClick={handleBirthChange}
+                  onInput={handleBirthChange}
                 />
               </label>
             </div>
-            {/* <div className=""> */}
-            {/* <div className=""> */}
             <label className="user-label">
               <strong>Sexo:</strong>
               <Select
@@ -115,7 +116,6 @@ export function UserChildForm() {
                 onChange={handleSelectChange}
               />
             </label>
-            {/* </div> */}
             <div className="">
               <label className="user-label">
                 <strong>Estrato:</strong>
@@ -135,8 +135,6 @@ export function UserChildForm() {
                 />
               </label>
             </div>
-            {/* </div> */}
-            {/* <div className=""> */}
             <label className="user-label">
               <strong>Nombre del Centro Educativo</strong>
               <input
@@ -146,9 +144,7 @@ export function UserChildForm() {
                 onChange={handleInputChange}
               />
             </label>
-            {/* </div> */}
             <div className="">
-              {/* <div className=""> */}
               <label className="user-label">
                 <strong>Tipo de Centro Educativo:</strong>
                 <Select
@@ -166,7 +162,6 @@ export function UserChildForm() {
                   onChange={handleSelectChange}
                 />
               </label>
-              {/* </div> */}
               <div className="">
                 <label className="label-grade user-label">
                   <strong>Grado de Escolaridad:</strong>
@@ -187,7 +182,12 @@ export function UserChildForm() {
                 </label>
               </div>
             </div>
-            <button className="btn btn-admin btn-color">Enviar</button>
+            <button
+              className="btn btn-admin btn-color"
+              onClick={handleNavigate}
+            >
+              Ir a Encuesta
+            </button>
           </form>
         </div>
         <div className="second-col col">
@@ -197,14 +197,17 @@ export function UserChildForm() {
             alt="Logo paraguas"
           />
           <div className="code-container">
-          <p>
-            <strong>Código del Niño</strong>
-          </p>
-          <p>{userName[0] + userLastName[0] + userBirth}</p>
-          <div className="btn-container">
-            <button className="btn btn-color">Siguiente</button>
+            <p>
+              <strong>Código del Niño</strong>
+            </p>
+            {userName && userLastName && userBirth ? (
+              <p>
+                {userName[0] + userLastName[0] + userBirth.replace(/-/g, "")}
+              </p>
+            ) : (
+              <p> * * * * * *</p>
+            )}
           </div>
-        </div>
         </div>
       </div>
     </div>
