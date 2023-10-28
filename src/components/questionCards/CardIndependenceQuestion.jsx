@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { independenceQuestions } from "../constants/independenceQuestions";
-import "../../styles/questions.css";
 import { useNavigate } from "react-router-dom";
+import "../../styles/questions.css";
 
 export default function CardIndependenceQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -29,6 +29,8 @@ export default function CardIndependenceQuestion() {
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
       setCurrentQuestion((prev) => prev - 1);
+    } else{
+      navigate("/personales")
     }
   };
 
@@ -133,7 +135,8 @@ export default function CardIndependenceQuestion() {
             ? "Siguiente sección"
             : currentQuestion === independenceQuestions.questions.length - 1
             ? "Siguiente"
-            : "Siguiente"}
+            : "Siguiente"
+            }
         </button>
       </div>
     </div>

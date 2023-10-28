@@ -33,7 +33,7 @@ export function UserChildForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const selected = [userData, userSelect];
+    const selected = [userData, userSelect]; // Se puede hacer un join? que el form no se vaya vacío
     console.log(selected);
   };
 
@@ -49,7 +49,7 @@ export function UserChildForm() {
     setUserBirth(target.value);
   };
 
-  const handleNavigate = () => {
+  const handleNavigate = () => { // Cuadrar la función para que no navegue a la próxima pag si no hay datos
     setTimeout(() => {
       navigate("/independencia");
     }, 5000);
@@ -184,7 +184,7 @@ export function UserChildForm() {
             </div>
             <button
               className="btn btn-admin btn-color"
-              onClick={handleNavigate}
+              onClick={handleNavigate} // HACER CONDICIONAL PARA QUE NO DEJE ENVIAR EL FORM VACIO
             >
               Ir a Encuesta
             </button>

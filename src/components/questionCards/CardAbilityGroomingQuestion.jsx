@@ -1,23 +1,23 @@
-import { useState } from "react";
-import "../../styles/questions.css";
+import { useState, useEffect } from "react";
 import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
 import { useNavigate } from "react-router-dom";
-import CardAbilityDressingQuestion from "./CardAbilityDressingQuestion";
+import "../../styles/questions.css";
 
 export default function CardAbilityGroomingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
-    // correctAnswers: 0,
-    // wrongAnswers: 0,
   });
 
   const navigate = useNavigate()
 
-  const [showResult, setShowResult] = useState(false);
-  const { question, choices } = abilityGroomingQuestions.questions[currentQuestion];
+  const {question, choices } = 
+    abilityGroomingQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -29,20 +29,25 @@ export default function CardAbilityGroomingQuestion() {
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
       setCurrentQuestion((prev) => prev - 1)
+    } else {
+      navigate("/independencia")
     }
   };
   
-
   const handleNextQuestion = () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== abilityGroomingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
     }
   };
 
@@ -51,20 +56,27 @@ export default function CardAbilityGroomingQuestion() {
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
-    if (pointScore > 2) {
+    if (pointScore) {
       setResult((prev) => ({
         ...prev,
         score: prev.score + pointScore,
-        correctAnswers: prev.correctAnswers + 1,
       }));
-    } else {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-        wrongAnswers: prev.wrongAnswers + 1,
-      }));
-    }
+    } 
   };
+
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habilidades-vestido") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
 
   // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL2
   let partial2 = result.score;
@@ -119,19 +131,16 @@ export default function CardAbilityGroomingQuestion() {
             ? "Reiniciar"
             : "Anterior"}
         </button>
-        {/* ********** */}
+        
         <button
           onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
-          {/* {
-            showResult ? navigate('/habitos') : "siguiente"
-          } */}
           {showResult
-            ? navigate("/habilidades-vestido")
-            : currentQuestion === abilityGroomingQuestions.questions.length - 1
             ? "Siguiente sección"
+            : currentQuestion === abilityGroomingQuestions.questions.length - 1
+            ? "Siguiente"
             : "Siguiente"
           }
         </button>

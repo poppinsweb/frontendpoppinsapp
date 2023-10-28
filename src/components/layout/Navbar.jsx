@@ -56,6 +56,12 @@ export function Navbar() {
               <NavLink className="nav-link" to="/habilidades-aseo">Habilidades aseo</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/habilidades-vestido">Habilidades vestido</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/habilidades-alimentacion">Habilidades alimentación</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/habitos">Hábitos</NavLink>
             </li>
             <li className="nav-item">
