@@ -44,39 +44,37 @@ export const useAuth = () => {
       email,
       password
     );
-     console.log(userCredential.operationType);
+    console.log(userCredential.operationType);
   };
 
   // LOGIN CON GOOGLE
-  const loginWithGoogle = () =>{
+  const loginWithGoogle = () => {
+    const currentUser = auth.currentUser;
+    if (
+      currentUser && currentUser.providerData[0].providerId === "google.com") {
+      return;
+    }
     const googleProvider = new GoogleAuthProvider();
 
     const auth = getAuth();
     signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-    }).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    })}
-
-  // const loginWithGoogle = async () => {
-  // const currentUser = auth.currentUser;
-  // if (currentUser && currentUser.providerData[0].providerId === 'google.com') {
-  //   return;
-  // }
-  //   const googleProvider = new GoogleAuthProvider();
-  //   return await signInWithPopup(auth, googleProvider);
-  // };
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
 
   // VERIFICA EL ESTADO DEL LOGIN
   useEffect(() => {
     const loginState = onAuthStateChanged(auth, (currentUser) => {
       // console.log({ currentUser });
-      setUser(currentUser);      
+      setUser(currentUser);
     });
     return () => loginState();
   }, []);
