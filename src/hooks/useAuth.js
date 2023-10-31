@@ -1,10 +1,10 @@
 import { auth } from "../services/firebase";
 import { useState, useEffect } from "react";
-import Swal from "sweetalert2";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
@@ -21,24 +21,53 @@ export const useAuth = () => {
 
   // REGISTRO DE USUARIOS EN FIREBASE
   const register = async (email, password) => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      return;
+    }
     const loginCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    // console.log(loginCredential);
+    console.log(loginCredential);
   };
+
   // LOGIN DE USUARIOS
   const login = async (email, password) => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      return;
+    }
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-    // console.log(userCredential.operationType);
+     console.log(userCredential.operationType);
   };
+
   // LOGIN CON GOOGLE
+  const loginWithGoogle = () =>{
+    const googleProvider = new GoogleAuthProvider();
+
+    const auth = getAuth();
+    signInWithPopup(auth, googleProvider)
+    .then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    })}
+
   // const loginWithGoogle = async () => {
+  // const currentUser = auth.currentUser;
+  // if (currentUser && currentUser.providerData[0].providerId === 'google.com') {
+  //   return;
+  // }
   //   const googleProvider = new GoogleAuthProvider();
   //   return await signInWithPopup(auth, googleProvider);
   // };
@@ -63,5 +92,6 @@ export const useAuth = () => {
     logout,
     register,
     user,
+    loginWithGoogle,
   };
 };

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { ButtonGoogle } from "./ButtonGoogle";
+import { FcGoogle } from "react-icons/fc";
+
 import "../../styles/login.css";
+import "../../styles/button-google.css";
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -28,7 +30,7 @@ export function UserLogin() {
   };
 
   const handleGoogle = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     loginWithGoogle();
   };
   // **********
@@ -103,12 +105,17 @@ export function UserLogin() {
                 />
               </div>
               <div className="buttons">
-                <ButtonGoogle onClick={handleGoogle} />
-                <button className="btn btn-color btn-login" type="submit" >
+                <button className="btn btn-color btn-login" type="submit">
                   Ingresar
                 </button>
               </div>
             </form>
+            <button className="btn-google buttons" disabled={false} onClick={handleGoogle}>
+              <span className="google-icon">
+                <FcGoogle />
+              </span>
+              Ingresar con Google
+            </button>
           </div>
         </div>
       </div>
