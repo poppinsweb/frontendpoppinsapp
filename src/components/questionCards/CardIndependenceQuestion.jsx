@@ -28,11 +28,20 @@ export default function CardIndependenceQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      setCurrentQuestion((prev) => prev - 1);
-    } else{
+      const previousQuestion = independenceQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
       navigate("/personales")
     }
-  };
+  }
 
   const handleNextQuestion = () => {
     setAnswerIdx(null);
@@ -77,11 +86,12 @@ export default function CardIndependenceQuestion() {
   if (scoreFinal > 0) {
     <p>Puntaje Final: <span>{scoreFinal}</span></p>;
   }
+  
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
       <div className="question-container">
-      <h2 className="main-question-title">Independencia</h2>
         {!showResult ? (
           <>
             <h2 className="main-question-title">{question}</h2>

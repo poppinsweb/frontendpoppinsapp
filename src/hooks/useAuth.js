@@ -1,5 +1,4 @@
 import { auth } from "../services/firebase";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import {
@@ -19,7 +18,6 @@ const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
 export const useAuth = () => {
   // HOOK QUE VA A ACTUALIZAR EL ESTADO DE LOGIN
   const [user, setUser] = useState(initialLogin);
-  // const navigate = useNavigate();
 
   // REGISTRO DE USUARIOS EN FIREBASE
   const register = async (email, password) => {

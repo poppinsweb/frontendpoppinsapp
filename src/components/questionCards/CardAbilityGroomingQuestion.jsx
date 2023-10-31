@@ -28,11 +28,20 @@ export default function CardAbilityGroomingQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
+      const previousQuestion = abilityGroomingQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
       setCurrentQuestion((prev) => prev - 1)
+
     } else {
       navigate("/independencia")
     }
-  };
+  }
   
   const handleNextQuestion = () => {
     setAnswerIdx(null);
@@ -77,10 +86,8 @@ export default function CardAbilityGroomingQuestion() {
   if (scoreFinal > 0) {
     <p>Puntaje Final: <span>{scoreFinal}</span></p>;
   }
-
-  // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL2
-  // let partial2 = result.score;
-  // console.log(partial2);
+  
+  console.log(result.score);
 
   return (
     <div className="question-main-container">

@@ -28,11 +28,20 @@ export default function CardAbilityResponsabilityQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      setCurrentQuestion((prev) => prev - 1);
-    } else{
+      const previousQuestion = habitResponsabilityQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
       navigate("/habitos-dormir")
     }
-  };
+  }
 
   const handleNextQuestion = () => {
     setAnswerIdx(null);
@@ -77,6 +86,8 @@ export default function CardAbilityResponsabilityQuestion() {
   if (scoreFinal > 0) {
     <p>Puntaje Final: <span>{scoreFinal}</span></p>;
   }
+
+  console.log(result.score);
 
   return (
     <div className="question-main-container">

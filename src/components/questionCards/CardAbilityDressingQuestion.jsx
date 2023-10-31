@@ -28,11 +28,20 @@ export default function CardAbilityDressingQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
+      const previousQuestion = abilityDressingQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
       setCurrentQuestion((prev) => prev - 1)
+
     } else {
       navigate("/habilidades-aseo")
     }
-  };
+  }
 
   const handleNextQuestion= () => {
     setAnswerIdx(null);
@@ -77,6 +86,8 @@ export default function CardAbilityDressingQuestion() {
   if (scoreFinal > 0) {
     <p>Puntaje Final: <span>{scoreFinal}</span></p>;
   }
+
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
