@@ -1,4 +1,4 @@
-import { UserChildForm } from "../../components/Questions/UserChildForm";
+import { UserChildForm } from "../../components/questionCards/UserChildForm";
 
 export function PageUserChildData() {
   return (

@@ -1,34 +1,62 @@
-import { useState } from "react";
-import "../../styles/questions.css";
+import { useState, useEffect } from "react";
 import { abilityDressingQuestions } from "../constants/abilityDressingQuestions";
+import { useNavigate } from "react-router-dom";
+import "../../styles/questions.css";
 
 export default function CardAbilityDressingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
   });
-  const [showResult, setShowResult] = useState(false);
-  const { question, choices } = abilityDressingQuestions.questions[currentQuestion];
 
-  const onAnswerClick = (choice, index) => {
+  const navigate = useNavigate();
+
+  const { question, choices } =
+    abilityDressingQuestions.questions[currentQuestion];
+
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      const previousQuestion = abilityDressingQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
+      navigate("/habilidades-aseo")
+    }
+  }
+
+  const handleNextQuestion= () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== abilityDressingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
     }
   };
 
@@ -37,29 +65,34 @@ export default function CardAbilityDressingQuestion() {
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
-    if (pointScore > 2) {
+    if (pointScore) {
       setResult((prev) => ({
         ...prev,
         score: prev.score + pointScore,
-        correctAnswers: prev.correctAnswers + 1,
       }));
-    } else {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-        wrongAnswers: prev.wrongAnswers + 1,
-      }));
-    }
+    } 
   };
 
-  // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL3
-  let partial3 = result.score;
-  console.log(partial3);
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habilidades-alimentacion") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
+
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
       <div className='question-container question-ability-container'>
-        <h2 className="main-question-title">Habilidades del Vestido</h2>
+      <h2 className="main-question-title">Habilidades de Vestido</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
@@ -67,10 +100,12 @@ export default function CardAbilityDressingQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index ? "selected-answer question-text" : null
+                      answerIdx === index 
+                      ? "selected-answer question-text" 
+                      : null
                     }
                   >
                     {choice}
@@ -87,7 +122,7 @@ export default function CardAbilityDressingQuestion() {
           <div className="score-section">
             <h3>Resultados</h3>
             <p>
-              Preguntas Respondidas:{" "}
+              Preguntas Respondidas:
               <span>{abilityDressingQuestions.questions.length}</span>
             </p>
             <p>
@@ -96,17 +131,24 @@ export default function CardAbilityDressingQuestion() {
           </div>
         )}
       </div>
-      <div className="btn-card">
+      <div className="btn-container">
+        <button onClick={handleBeforeQuestion} className="btn-color">
+          {showResult
+            ? "Reiniciar"
+            : "Anterior"}
+        </button>
+        
         <button
-          onClick={onClickNext}
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
           {showResult
-            ? "Atrás"
+            ? "Siguiente sección"
             : currentQuestion === abilityDressingQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente"
+            : "Siguiente"
+            }
         </button>
       </div>
     </div>

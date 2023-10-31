@@ -8,16 +8,15 @@
 .logo-tokens {
   width: 600px;
   height: 543px;
-  /* margin-top: 2rem; */
+  margin-top: 3rem;
   opacity: .8;
   position: absolute;
   z-index: 1;
-  transform: rotate(-25deg);
   margin-left: -100px;
 } 
 
 .content-container {
-  background-color: #85f79839;
+  /* background-color: #85f79839; */
   height: 1120px;
   padding-top: 7rem;
 }
@@ -28,9 +27,10 @@
   align-items: center;
   justify-content: center;
   height: 400px;
+  width: 400px;
   background-color: #d6dff97e;
   border-radius: 20px;
-  margin: 25rem 0rem 0rem 15rem;
+  margin: 30rem 0rem 0rem 30rem;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -58,11 +58,6 @@
   margin: 1.5rem;
   font-size: 24px;
   opacity: 90%;
-}
-
-.btn-nav-container {
-  /* margin-top: 2rem; */
-  background-color: #85f79857;
 }
 
 .btn-nav-token {

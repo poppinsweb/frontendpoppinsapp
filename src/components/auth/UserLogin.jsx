@@ -1,61 +1,91 @@
-// LoginPage
-// import { useContext, useState } from "react";
-// import { AuthContext } from "../../auth/context/AuthProvider";
-import Swal from "sweetalert2";
-import '../../styles/App.css'
-import '../../styles/login.css';
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 
-const initialLoginForm = {
+import "../../styles/login.css";
+import "../../styles/button-google.css";
+import Swal from "sweetalert2";
+
+const initialState = {
   email: "",
   password: "",
 };
 
 export function UserLogin() {
-  // const { handlerLogin } = useContext(AuthContext);
-  const [loginForm, setLoginForm] = useState(initialLoginForm);
-  const { email, password } = loginForm;
+  const [user, setUser] = useState(initialState);
 
-  const onInputChange = ({ target }) => {
+  const navigate = useNavigate();
+
+  const { email, password } = user;
+  const { login, loginWithGoogle } = useAuth();
+
+  // ***********
+  const handleChange = ({ target }) => {
     const { name, value } = target;
-    setLoginForm({
-      ...loginForm,
+    setUser({
+      ...user,
       [name]: value,
     });
   };
 
-  const onSubmitLogin = (e) => {
+  const handleGoogle = (e) => {
+    // e.preventDefault();
+    loginWithGoogle();
+  };
+  // **********
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // setUser(initialState);
+
     if (!email || !password) {
       Swal.fire(
-        '¿Está registrado?',
-        'Ingrese sus credenciales',
-        'question'
-      )
+        "¿Está registrado?",
+        "Debe ingresar sus credenciales de inicio",
+        "question"
+      );
       return;
     }
 
-    handlerLogin({ email, password });
+    try {
+      await login(email, password);
+      Swal.fire({
+        icon: "success",
+        title: "Sesión Iniciada",
+        footer: "BIENVENIDO",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/admin");
+    } catch (error) {
+      const errorCode = error.code;
+      // console.log(errorCode);
 
-    console.log(loginForm);
-    setLoginForm(initialLoginForm);
+      if (errorCode === "auth/invalid-login-credentials") {
+        Swal.fire({
+          icon: "error",
+          title: "Por favor ingrese unas credenciales válidas",
+          text: "Su correo o password son incorrectos",
+        });
+      }
+    }
   };
-
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col">
             <h2 className="card-title title-login">Login</h2>
-            <form onSubmit={onSubmitLogin}>
+            <form onSubmit={handleSubmit}>
               <div className="container">
                 <input
                   className="form-control my-3 "
                   placeholder="E-mail"
                   type="email"
                   name="email"
+                  autoComplete="on"
                   value={email}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
                 <input
                   className="form-control my-3 "
@@ -63,21 +93,29 @@ export function UserLogin() {
                   type="password"
                   name="password"
                   value={password}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
                 <input
                   className="form-control my-3 "
                   placeholder="Token"
-                  type="text"
+                  type="token"
                   name="token"
                   // value={token}
-                  onChange={onInputChange}
+                  onChange={handleChange}
                 />
               </div>
-              <button className="btn btn-color btn-login" type="submit">
-                Ingresar
-              </button>
+              <div className="buttons">
+                <button className="btn btn-color btn-login" type="submit">
+                  Ingresar
+                </button>
+              </div>
             </form>
+            <button className="btn-google buttons" disabled={false} onClick={handleGoogle}>
+              <span className="google-icon">
+                <FcGoogle />
+              </span>
+              Ingresar con Google
+            </button>
           </div>
         </div>
       </div>

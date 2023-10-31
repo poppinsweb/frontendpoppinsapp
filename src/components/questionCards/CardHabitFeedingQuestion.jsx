@@ -1,36 +1,62 @@
-import { useState } from "react";
-import "../../styles/questions.css";
+import { useState, useEffect } from "react";
 import { habitFeedingQuestions } from "../constants/habitFeedingQuestions";
+import { useNavigate } from "react-router-dom";
+import "../../styles/questions.css";
 
 export default function CardAbilityFeedingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
-    // correctAnswers: 0,
-    // wrongAnswers: 0,
   });
-  const [showResult, setShowResult] = useState(false);
-  const { question, choices } = habitFeedingQuestions.questions[currentQuestion];
 
-  const onAnswerClick = (choice, index) => {
+  const navigate = useNavigate();
+
+  const { question, choices } =
+    habitFeedingQuestions.questions[currentQuestion];
+
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      const previousQuestion = habitFeedingQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
+      navigate("/habilidades-alimentacion")
+    }
+  }
+
+  const handleNextQuestion = () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== habitFeedingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
     }
   };
 
@@ -39,20 +65,29 @@ export default function CardAbilityFeedingQuestion() {
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
-    if (pointScore > 2) {
+    if (pointScore) {
       setResult((prev) => ({
         ...prev,
         score: prev.score + pointScore,
-        correctAnswers: prev.correctAnswers + 1,
       }));
-    } else {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-        wrongAnswers: prev.wrongAnswers + 1,
-      }));
-    }
+    } 
   };
+
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habitos-dormir") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
+
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
@@ -65,10 +100,12 @@ export default function CardAbilityFeedingQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index ? "selected-answer question-text" : null
+                      answerIdx === index 
+                      ? "selected-answer question-text" 
+                      : null
                     }
                   >
                     {choice}
@@ -94,20 +131,26 @@ export default function CardAbilityFeedingQuestion() {
           </div>
         )}
       </div>
-      <div className='footer'>
+      <div className="btn-container">
+        <button onClick={handleBeforeQuestion} className="btn-color">
+          {showResult
+            ? "Reiniciar"
+            : "Anterior"}
+        </button>
+        
         <button
-          onClick={onClickNext}
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
           {showResult
-            ? "Atrás"
+            ? "Siguiente sección"
             : currentQuestion === habitFeedingQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente"
+            : "Siguiente"
+            }
         </button>
       </div>
     </div>
   );
 }
-

@@ -1,36 +1,62 @@
-import { useState } from "react";
-import "../../styles/questions.css";
+import { useState, useEffect } from "react";
 import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
+import { useNavigate } from "react-router-dom";
+import "../../styles/questions.css";
 
 export default function CardAbilityGroomingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
-    // correctAnswers: 0,
-    // wrongAnswers: 0,
   });
-  const [showResult, setShowResult] = useState(false);
-  const { question, choices } = abilityGroomingQuestions.questions[currentQuestion];
 
-  const onAnswerClick = (choice, index) => {
+  const navigate = useNavigate()
+
+  const {question, choices } = 
+    abilityGroomingQuestions.questions[currentQuestion];
+
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      const previousQuestion = abilityGroomingQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
+      navigate("/independencia")
+    }
+  }
+  
+  const handleNextQuestion = () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== abilityGroomingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
     }
   };
 
@@ -39,24 +65,29 @@ export default function CardAbilityGroomingQuestion() {
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
-    if (pointScore > 2) {
+    if (pointScore) {
       setResult((prev) => ({
         ...prev,
         score: prev.score + pointScore,
-        correctAnswers: prev.correctAnswers + 1,
       }));
-    } else {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-        wrongAnswers: prev.wrongAnswers + 1,
-      }));
-    }
+    } 
   };
 
-  // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL2
-  let partial2 = result.score;
-  console.log(partial2);
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habilidades-vestido") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
+  
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
@@ -69,7 +100,7 @@ export default function CardAbilityGroomingQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
                       answerIdx === index ? "selected-answer question-text" : null
@@ -98,17 +129,27 @@ export default function CardAbilityGroomingQuestion() {
           </div>
         )}
       </div>
-      <div className='footer'>
+      <div className="btn-container">
         <button
-          onClick={onClickNext}
+          onClick={handleBeforeQuestion}
+          className="btn-color"
+        >
+          {showResult
+            ? "Reiniciar"
+            : "Anterior"}
+        </button>
+        
+        <button
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
           {showResult
-            ? "Atrás"
+            ? "Siguiente sección"
             : currentQuestion === abilityGroomingQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente"
+            : "Siguiente"
+          }
         </button>
       </div>
     </div>

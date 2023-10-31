@@ -1,6 +1,6 @@
 .question-main-container {
-  padding-top: 30rem;
-  background-image: url("./images/cloud-stars2.jpg");
+  padding-top: 20rem;
+  background-image: url("./images/cloud-stars.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 1250px;
@@ -9,9 +9,9 @@
 /* CONTENEDOR DE LA CARD */
 .question-container {
   margin: 0 auto;
-  width: 1000px;
+  width: 1150px;
+  height: 750px;
   min-height: 200px;
-  height: 650px;
   border-radius: 15px;
   padding: 40px;
   padding-top: 80px;
@@ -19,19 +19,15 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  /* background-image: url("./image/habitosfondo.png");
-  opacity: .8; */
-  /* background-color: rgba(255, 204, 200, 0.252); */
+  background-image: url("./images/habitosfondo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
-/* .question-ability-container {
-  display: block;
-} */
 
 .main-question-title {
   font-size: 3rem;
   padding-top: 10px;
-  color: #4b244f;
+  color: #983aa3;
 }
 
 .secoundary-question-title {
@@ -40,18 +36,20 @@
 }
 
 /* NUMERO DE LA PREGUNTA ACTUAL */
-.active-question-no {  
+.active-question-no {
   font-size: 20px;
   font-weight: 500;
 }
 
 /* NUMERO DEL TOTAL DE PREGUNTAS */
-.total-question {  
+.total-question {
   font-size: 16px;
   font-weight: 500;
 }
 
-.question-section-ability, .question-section-habit {
+.question-section-ability,
+.question-section-habit,
+.question-section {
   padding-top: 10px;
 }
 
@@ -65,19 +63,29 @@
   padding-left: 20px;
   list-style: none;
   text-align: justify;
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.question-li:hover {
+  font-size: 30px;
+  color: #96449e;
 }
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
 .question-text {
-  font-size: 25px;
+  font-size: 30px;
   color: #96449e;
-  border-radius: 10px;
 }
 
 /* EL PANTALLAZO DE LOS RESULTADOS */
 .score-section {
-    font-size: 24px;
-    align-items: center;
-    padding-top: 100px;
-  }
+  font-size: 24px;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}

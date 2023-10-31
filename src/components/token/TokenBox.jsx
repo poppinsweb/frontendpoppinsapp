@@ -16,7 +16,7 @@ function TokenBox() {
         </div>
       </div>
       <div className="row content-container">
-        <div className="col-12 col-md-5 ">
+        <div className="col-12 col-md-6 ">
           <div className="box-information-container">
             <h2>Códigos disponibles</h2>
 

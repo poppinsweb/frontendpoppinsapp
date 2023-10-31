@@ -1,8 +1,18 @@
 // import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export function Navbar() {
+  const navigate = useNavigate();
   // const { login, handlerLogout } = useState();
+  const { user, logout } = useAuth()
+  // console.log(user);
+
+  const handleLogout = () => {
+    logout()
+    navigate("/");
+  }
+
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>
@@ -43,10 +53,22 @@ export function Navbar() {
               <NavLink className="nav-link" to="/independencia">Independencia</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades">Habilidades</NavLink>
+              <NavLink className="nav-link" to="/habilidades-aseo">Habilidades aseo</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habitos">Hábitos</NavLink>
+              <NavLink className="nav-link" to="/habilidades-vestido">Habilidades vestido</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/habilidades-alimentacion">Habilidades alimentación</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/habitos-alimentacion">Hábitos alimentación</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/habitos-dormir">Hábitos sueño</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/responsabilidades">Responsabilidades</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/resultados">Resultados</NavLink>
@@ -56,11 +78,11 @@ export function Navbar() {
         <div
           className='collapse navbar-collapse justify-content-end'
           id='navbarNavLogout'>
-          {/* <span className='nav-item nav-link text-primary mx-3'>
-            {login.user?.email}
-          </span> */}
+          <span className='nav-item nav-link text-primary mx-3'>
+            {user?.email}
+          </span>
           <button
-            // onClick={handlerLogout}  
+            onClick={handleLogout}  
             className='btn btn-outline-success'>
               Logout
           </button>

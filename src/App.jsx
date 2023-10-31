@@ -1,42 +1,36 @@
-import { AuthProvider } from './context/authContext'; // Componente del context
-import { Navigate, Routes, Route } from "react-router-dom";
-import { AdminFilterPage } from "./pages/admin/AdminFilterPage";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthProvider"; // Componente del context
+import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/layout/Navbar";
-import { UserList } from "./pages/admin/UserList";
-import { UserToken } from "./pages/userPages/UserToken";
+import "./styles/App.css";
+
 import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
 import { UserAuthPage } from "./pages/auth/UserAuthPage";
-import { PageUserChildData } from "./pages/userPages/PageUserChildData";
-import { PageIndependenceQuestions } from "./pages/userPages/PageIndependenceQuestions";
-import { PageAbilityQuestions } from "./pages/userPages/PageAbilityQuestions";
-import { PageHabitQuestions }from "./pages/userPages/PageHabitQuestions";
-import { PageUserResult } from "./pages/userPages/PageUserResult";
-import { UserRoutes } from "./routes/UserRoutes";
 
+import { AdminRoutes } from "./routes/AdminRoutes";
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
-    <Navbar />
-      <AuthProvider>
-        <Routes> 
-          <Route path="/" element={<LandingPage />} /> 
-          <Route path="/construction" element={<ConstructionPage />} />
-          <Route path="/login" element={<UserAuthPage />} />
-          <Route path="admin" element={<AdminFilterPage />} />
-          <Route path="list" element={<UserList />} /> 
-          {/* <Route path="/*" element={<Navigate to="/login" />} /> */}
-          
-        
-          <Route path="token" element={<UserToken />} />
-          <Route path="/personales" element={<PageUserChildData/>} />
-          <Route path="/independencia" element={<PageIndependenceQuestions />} />
-          <Route path="/habilidades" element={<PageAbilityQuestions />} />
-          <Route path="/habitos" element={<PageHabitQuestions />} />
-          <Route path="/resultados" element={<PageUserResult />} />
-        </Routes>
-      </AuthProvider>
+      <Navbar />
+      <Routes>
+        {user ? (
+          <>
+            <Route path="/*" element={<AdminRoutes />} />
+            <Route path="/" index element={<LandingPage />} />
+            <Route path="/construction" element={<ConstructionPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" index element={<LandingPage />} />
+            <Route path="/construction" element={<ConstructionPage />} />
+            <Route path="/*" element={<UserAuthPage />} />
+          </>
+        )}
+      </Routes>
     </>
   );
 }

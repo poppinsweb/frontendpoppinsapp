@@ -1,4 +1,4 @@
-import CardIndependenceQuestion from "../../components/Questions/CardIndependenceQuestion";
+import CardIndependenceQuestion from "../../components/questionCards/CardIndependenceQuestion";
 import { independenceQuestions } from "../../components/constants/independenceQuestions";
 
 export function PageIndependenceQuestions() {

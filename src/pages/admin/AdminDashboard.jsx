@@ -1,7 +1,7 @@
 // UsersPage
 import {AdminFilterSelectors} from "../../components/admin/AdminFilterSelectors";
 
-export function AdminFilterPage() {
+export function AdminDashboard() {
   return (
     <div className="container my-4">
     <div className="">

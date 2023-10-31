@@ -1,35 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { independenceQuestions } from "../constants/independenceQuestions";
+import { useNavigate } from "react-router-dom";
 import "../../styles/questions.css";
 
 export default function CardIndependenceQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
   });
-  const [showResult, setShowResult] = useState(false);
 
-  const { question, choices } = independenceQuestions.questions[currentQuestion];
+  const navigate = useNavigate();
 
-  const onAnswerClick = (choice, index) => {
+  const { question, choices } =
+    independenceQuestions.questions[currentQuestion];
+
+  const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
     if (choice) {
       setAnswer(true);
     }
   };
 
-  const onClickNext = () => {
+  const handleBeforeQuestion = () => {
+    if (currentQuestion !== 0) {
+      const previousQuestion = independenceQuestions.questions[currentQuestion - 1]
+      const previousQuestionScore = previousQuestion.score.pop()
+
+      setResult((prev) => ({
+      ...prev,
+      score: prev.score - previousQuestionScore,
+      }))
+
+      setCurrentQuestion((prev) => prev - 1)
+
+    } else {
+      navigate("/personales")
+    }
+  }
+
+  const handleNextQuestion = () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== independenceQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
     }
   };
 
@@ -43,12 +70,24 @@ export default function CardIndependenceQuestion() {
         ...prev,
         score: prev.score + pointScore,
       }));
-    } 
+    }
   };
 
-  // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL1
-  let partial1 = result.score;
-  console.log(partial1);
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/habilidades-aseo") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
+  
+  console.log(result.score);
 
   return (
     <div className="question-main-container">
@@ -60,10 +99,12 @@ export default function CardIndependenceQuestion() {
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
-                    onClick={() => onAnswerClick(choice, index)}
+                    onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index ? "selected-answer question-text" : null
+                      answerIdx === index
+                      ? "selected-answer question-text"
+                      : null
                     }
                   >
                     {choice}
@@ -89,17 +130,24 @@ export default function CardIndependenceQuestion() {
           </div>
         )}
       </div>
-      <div>
+      <div className="btn-container">
+        <button onClick={handleBeforeQuestion} className="btn-color">
+          {showResult 
+          ? "Reiniciar" 
+          : "Anterior"}
+        </button>
+        
         <button
-          onClick={onClickNext}
+          onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className="btn-color"
         >
           {showResult
-            ? "Atrás"
+            ? "Siguiente sección"
             : currentQuestion === independenceQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente"
+            : "Siguiente"
+            }
         </button>
       </div>
     </div>

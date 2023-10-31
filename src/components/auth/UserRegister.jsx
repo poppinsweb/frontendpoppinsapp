@@ -1,69 +1,85 @@
-import { useState, useContext } from "react";
-import { useAuth } from "../../context/authContext";
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export function UserRegister() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    password2: "",
-  });
+const initialState = {
+  email: "",
+  password: "",
+  password2: "",
+};
 
-  const { email, password, password2 } = user;
-  const { signup } = useAuth();
+export function UserRegister() {
+  const [userRegister, setUserRegister] = useState(initialState);
+
+  const navigate = useNavigate();
+  const { email, password, password2 } = userRegister;
+  const { register } = useAuth();
 
   // **********
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    setUser({
-      ...user,
+    setUserRegister({
+      ...userRegister,
       [name]: value,
     });
   };
 
   // *********
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      signup(email, password, password2); // Esta es la funcion del context destructurada en linea 12
-
-      if (!email || (!password && id === 0) || (!password2 && id === 0)) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Debe ingresar todos los datos!",
-        });
-        return;
-      }
-      if (password !== password2) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Las contraseñas deben coincidir!",
-        });
-        return;
-      }
-      if (password.length < 6) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "La contraseña deben tener al menos 6 caracteres!",
-        });
-        return;
-      }
-    } catch {
-      console.log(error);
+    setUserRegister(initialState);
+    if (!email || !password || !password2) {
+      Swal.fire({
+        icon: "warning",
+        title: "Un momento...",
+        text: "Todos los campos deben llenarse",
+      });
+      return;
     }
+    if (password !== password2) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Las contraseñas deben coincidir",
+      });
+      return;
+    }
+    if (password.length < 6) {
+      Swal.fire({
+        icon: "warning",
+        title: "Disculpe...",
+        text: "La contraseña debe tener al menos 6 caracteres",
+      });
+      return;
+    }
+    try {
+      const userCredential = await register(email, password);
+      console.log(userCredential);
+      // SIGNED IN
+      Swal.fire({
+        icon: "success",
+        title: "Usuario registrado",
+        footer: "SESION INICIADA",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      navigate("/token");
+    } catch (error) {
+      const errorCode = error.code;
+      // console.log(errorCode);
+      const errorMessage = error.message;
+      // console.log(errorMessage);
 
-    Swal.fire({
-      icon: "success",
-      title: "Usuario registrado",
-      footer: "Puede iniciar sesión",
-      showConfirmButton: false,
-      timer: 2500,
-    });
+      if (errorCode === "auth/email-already-in-use") {
+        Swal.fire({
+          icon: "warning",
+          title: "Por favor inicie sesión...",
+          text: "Su correo ya se encuentra registrado",
+        });
+      }
+    }
   };
-
   return (
     <div className="container">
       <div className="row">
@@ -75,6 +91,7 @@ export function UserRegister() {
               placeholder="E-mail"
               type="email"
               name="email"
+              autoComplete="on"
               value={email}
               onChange={handleChange}
             />
