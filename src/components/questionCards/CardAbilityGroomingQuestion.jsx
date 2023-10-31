@@ -79,8 +79,8 @@ export default function CardAbilityGroomingQuestion() {
   }
 
   // AQUI LA VARIABLE CON EL PUNTAJE PARCIAL2
-  let partial2 = result.score;
-  console.log(partial2);
+  // let partial2 = result.score;
+  // console.log(partial2);
 
   return (
     <div className="question-main-container">

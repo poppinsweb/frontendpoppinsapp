@@ -81,6 +81,7 @@ export default function CardAbilityFeedingQuestion() {
   return (
     <div className="question-main-container">
       <div className="question-container">
+      <h2 className="main-question-title">Habilidades de Alimentación</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>

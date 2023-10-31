@@ -81,6 +81,7 @@ export default function CardAbilityDressingQuestion() {
   return (
     <div className="question-main-container">
       <div className='question-container question-ability-container'>
+      <h2 className="main-question-title">Habilidades de Vestido</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
