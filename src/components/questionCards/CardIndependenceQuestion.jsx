@@ -81,6 +81,7 @@ export default function CardIndependenceQuestion() {
   return (
     <div className="question-main-container">
       <div className="question-container">
+      <h2 className="main-question-title">Independencia</h2>
         {!showResult ? (
           <>
             <h2 className="main-question-title">{question}</h2>
@@ -92,8 +93,8 @@ export default function CardIndependenceQuestion() {
                     key={choice}
                     className={
                       answerIdx === index
-                        ? "selected-answer question-text"
-                        : null
+                      ? "selected-answer question-text"
+                      : null
                     }
                   >
                     {choice}

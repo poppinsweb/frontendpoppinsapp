@@ -1,18 +1,23 @@
-import { useState } from "react";
-import "../../styles/questions.css";
+import { useState, useEffect } from "react";
 import { habitSleepingQuestions } from "../constants/habitSleepingQuestions";
+import { useNavigate } from "react-router-dom";
+import "../../styles/questions.css";
 
 export default function CardAbilitySleepingQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [showNavigation, setShowNavigation] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [scoreFinal, setScoreFinal] = useState(0)
   const [result, setResult] = useState({
     score: 0,
-    // correctAnswers: 0,
-    // wrongAnswers: 0,
   });
-  const [showResult, setShowResult] = useState(false);
-  const { question, choices } = habitSleepingQuestions.questions[currentQuestion];
+
+  const navigate = useNavigate();
+
+  const { question, choices } =
+    habitSleepingQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -23,7 +28,9 @@ export default function CardAbilitySleepingQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      setCurrentQuestion((prev) => prev - 1)
+      setCurrentQuestion((prev) => prev - 1);
+    } else{
+      navigate("/habitos-alimentacion")
     }
   };
 
@@ -32,12 +39,16 @@ export default function CardAbilitySleepingQuestion() {
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-
     if (currentQuestion !== habitSleepingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setShowResult(true);
-    }
+        setShowResult(true);
+        setResult((prev) => ({
+          ...prev,
+          score: prev.score,
+        }));
+        setShowNavigation(true);
+      }
   };
 
   const scoreAsignation = (questionIndex, optionIndex) => {
@@ -45,20 +56,27 @@ export default function CardAbilitySleepingQuestion() {
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
-    if (pointScore > 2) {
+    if (pointScore) {
       setResult((prev) => ({
         ...prev,
         score: prev.score + pointScore,
-        correctAnswers: prev.correctAnswers + 1,
       }));
-    } else {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-        wrongAnswers: prev.wrongAnswers + 1,
-      }));
-    }
+    } 
   };
+
+  useEffect(() => {
+    // Navega a la siguiente pantalla después de 2 segundos
+    if (showNavigation) {
+      setTimeout(() => {
+       navigate("/responsabilidades") 
+      }, 2000)
+      setScoreFinal(result.score);
+    }
+  }, [showNavigation, result.score])
+
+  if (scoreFinal > 0) {
+    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
+  }
 
   return (
     <div className="question-main-container">
@@ -74,7 +92,9 @@ export default function CardAbilitySleepingQuestion() {
                     onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index ? "selected-answer question-text" : null
+                      answerIdx === index 
+                      ? "selected-answer question-text" 
+                      : null
                     }
                   >
                     {choice}
@@ -101,28 +121,25 @@ export default function CardAbilitySleepingQuestion() {
         )}
       </div>
       <div className="btn-container">
-        <button
-          onClick={handleBeforeQuestion}
-          className="btn-color"
-        >
+        <button onClick={handleBeforeQuestion} className="btn-color" >
           {showResult
             ? "Reiniciar"
             : "Anterior"}
         </button>
-        {/* ********** */}
+        
         <button
           onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
           {showResult
-            ? "Atrás"
+            ? "Siguiente sección"
             : currentQuestion === habitSleepingQuestions.questions.length - 1
-            ? "Final"
-            : "Siguiente"}
+            ? "Siguiente"
+            : "Siguiente"
+            }
         </button>
       </div>
     </div>
   );
 }
-
