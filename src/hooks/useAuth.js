@@ -8,6 +8,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 
 const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
@@ -85,11 +87,22 @@ export const useAuth = () => {
     // console.log(response);
   };
 
+  // PERSISTENCIA DEL ESTADO DE AUTENTICACION DE USUARIO
+  const persistence = setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+      return signInWithEmailAndPassword(auth, email, password);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    })
+
   return {
     login,
     logout,
     register,
     user,
     loginWithGoogle,
+    persistence,
   };
 };
