@@ -26,12 +26,15 @@ export function AdminRoutes() {
         {user === "admin" ? (
           <>
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/list" element={<UserList />} />
-            <Route path="/inicio" element={<LandingPage />} />
             <Route path="/*" element={<Navigate to="/admin" />} />
           </>
         ) : (
           <>
+        {/* solo admin */}
+            <Route path="/list" element={<UserList />} />
+            <Route path="/inicio" element={<LandingPage />} />
+
+        {/* todo el mundo */}
             <Route path="/" element={<UserToken />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />

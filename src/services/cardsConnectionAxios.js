@@ -15,14 +15,27 @@ const getAllChildren = async () => {
 };
 
 // Crea un nuevo usuario infante
-const postNewSurvey = async () => {
+const postNewSurvey = async (objectChild) => {
   try {
-    return await axios.post(BASE_URL);
+    return await axios.post(BASE_URL, objectChild);
   } catch (error) {
     console.error(error)
+    throw error;
   }
-  return undefined;
 }
+
+// const postNewSurvey = async (objectChild) => {
+//   const res = await axios({
+//       method: 'POST',
+//       url: BASE_URL,
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': 'Bearer',
+//       },
+//       data: objectChild
+//   });
+//   return res
+// };
 
 // Edita agregando informacion a las tablas del usuario infante
 const updateDataSurvey = async(id, email) => {
