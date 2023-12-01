@@ -1,18 +1,18 @@
-// import axios from "axios"
+import axios from "axios"
 
-// // const BASE_URL = "https://jsonplaceholder.typicode.com/users"
-// const BASE_URL = "http://shy-tree-3437.fly.dev/api/usuarios";
+// const BASE_URL = "https://jsonplaceholder.typicode.com/users"
+// const BASE_URL = "http://shy-tree-3437.fly.dev/api/usuario";
+const BASE_URL = "http://localhost:8080/api/usuario";
 
-// // Trae los usuarios existentes en el endpoint
-// export const findAll = async() => {
-//   try {
-//     const response = await axios.get(BASE_URL);
-//     return response;
-//   } catch (error) {
-//     console.error(error);
-//   }
-//   return null;
-// }
+// Trae los usuarios existentes en el endpoint
+export const findAll = async() => {
+  try {
+    const response = await axios.get(BASE_URL);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // // Crea un nuevo usuario
 // export const save = async ({ email, password, password2 }) => {

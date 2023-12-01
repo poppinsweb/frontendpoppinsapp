@@ -3,6 +3,9 @@ import { userChildFormOptions } from "../constants/userChildFormOptions";
 import "../../styles/userChild.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postNewSurvey } from "../../services/cardsConnectionAxios";
+
+// http://localhost:8080/api/infante para ver los infantes agregados en la bd y para hacer el post
 
 export function UserChildForm() {
   const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
@@ -15,7 +18,7 @@ export function UserChildForm() {
   const [userBirth, setUserBirth] = useState("");
 
   const navigate = useNavigate();
-
+  
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
     setUserData({
@@ -31,10 +34,20 @@ export function UserChildForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const selected = [userData, userSelect]; // Se puede hacer un join? que el form no se vaya vacío
-    console.log(selected);
+    try {
+      const selected =  {...userData, ...userSelect};
+      console.log(selected);
+      const res = await postNewSurvey(selected)
+      if(res){
+        navigate("/independencia");
+      }
+      return res;
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      throw error;
+    }
   };
 
   const handleNameChange = ({ target }) => {
@@ -49,12 +62,6 @@ export function UserChildForm() {
     setUserBirth(target.value);
   };
 
-  const handleNavigate = () => { // Cuadrar la función para que no navegue a la próxima pag si no hay datos
-    setTimeout(() => {
-      navigate("/independencia");
-    }, 5000);
-  };
-
   return (
     <div className="container user-container">
       <h2 className="user-title">Datos Personales del Niño</h2>
@@ -67,7 +74,7 @@ export function UserChildForm() {
                 <input
                   className="user-select user-code"
                   id="names"
-                  name="Nombres:"
+                  name="name"
                   onChange={handleInputChange}
                   onInput={handleNameChange}
                   required
@@ -80,9 +87,10 @@ export function UserChildForm() {
                 <input
                   className="user-select"
                   id="lastNames"
-                  name="Apellidos:"
+                  name="lastName"
                   onChange={handleInputChange}
                   onInput={handleLastNameChange}
+                  required
                 />
               </label>
             </div>
@@ -93,9 +101,10 @@ export function UserChildForm() {
                   type="date"
                   className="user-select user-code"
                   id="birth"
-                  name="Fecha-Nacimiento"
+                  name="birthdate"
                   onChange={handleInputChange}
                   onInput={handleBirthChange}
+                  required
                 />
               </label>
             </div>
@@ -140,8 +149,9 @@ export function UserChildForm() {
               <input
                 className="user-select"
                 id="school"
-                name="Centro-Educativo"
+                name="school"
                 onChange={handleInputChange}
+                required
               />
             </label>
             <div className="">
@@ -182,12 +192,22 @@ export function UserChildForm() {
                 </label>
               </div>
             </div>
-            <button
-              className="btn btn-admin btn-color"
-              onClick={handleNavigate} // HACER CONDICIONAL PARA QUE NO DEJE ENVIAR EL FORM VACIO
-            >
-              Ir a Encuesta
-            </button>
+            {
+              Object.values(userSelect).length >= 4 ? 
+                <button
+                  className="btn btn-admin btn-color"
+                >
+                  Ir a Encuesta
+                </button>
+
+                :
+                <button
+                  disabled
+                  className="btn btn-admin btn-color"
+                >
+                  Ir a Encuesta
+                </button>
+            }
           </form>
         </div>
         <div className="second-col col">
