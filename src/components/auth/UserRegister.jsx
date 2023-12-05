@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Select from "react-select";
 
 const initialState = {
   email: "",
@@ -11,6 +12,7 @@ const initialState = {
 
 export function UserRegister() {
   const [userRegister, setUserRegister] = useState(initialState);
+  const [rol, setRol] = useState(null);
 
   const navigate = useNavigate();
   const { email, password, password2 } = userRegister;
@@ -24,6 +26,12 @@ export function UserRegister() {
       [name]: value,
     });
   };
+
+  const handleRolChange = (e)=> {
+    const value = e.value
+    setRol(value)
+    console.log(value)
+  }
 
   // *********
   const handleSubmit = async (e) => {
@@ -54,8 +62,9 @@ export function UserRegister() {
       return;
     }
     try {
-      const userCredential = await register(email, password);
+      const userCredential = await register(email, password, rol);
       console.log(userCredential);
+      console.log(rol)
       // SIGNED IN
       Swal.fire({
         icon: "success",
@@ -112,6 +121,19 @@ export function UserRegister() {
               onChange={handleChange}
             />
             <label>
+              <Select
+                defaultValue={{
+                  label: "Seleccione el rol",
+                  value: "empty",
+                }}
+                options={[
+                  {label: "administrador", value: "admin"},
+                  {label: "usuario", value: "usuario"}
+                ]}
+                onChange={handleRolChange}
+              />
+            </label>
+            {/* <label>
               <input
                 className="acept-register"
                 type="checkbox"
@@ -120,7 +142,7 @@ export function UserRegister() {
                 required
               />
               Acepto la politica de tratamiento de datos
-            </label>
+            </label> */}
             <button className="btn btn-color btn-register" type="submit">
               Registrar
             </button>
