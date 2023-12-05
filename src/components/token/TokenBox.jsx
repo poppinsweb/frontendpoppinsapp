@@ -3,7 +3,7 @@ import "../../styles/token.css";
 
 function TokenBox() {
   // const token = generateToken(); comento el codigo para trabajarlo provisionalmente harcodeado
-  const token = 12345;
+  const token = "########"; // TODO: CREAR EL MECANISMO DE TOKEN
   return (
     <div className="container-fluid">
       <div className="row">
@@ -20,7 +20,7 @@ function TokenBox() {
           <div className="box-information-container">
             <h2>Códigos disponibles</h2>
 
-            <form className="radio-token">
+            <form className="radio-token p-4">
               <label className="check-token">
                 <input
                   className="input-token"
@@ -40,22 +40,27 @@ function TokenBox() {
                 Token: {token}
               </label>
             </form>
-
-
-            <button className="btn btn-color btn-add"> + Agregar Token</button>
+            {/* TODO: DAR FUNCION AL BOTON DE CREAR TOKEN */}
+            <button className="btn btn-color btn-add">+ Agregar Token</button>
           </div>
         </div>
         <div className="col-12 col-md-6">
           <div className="btn-token-container">
-            <a href="/inicio-encuesta"><button className="btn btn-outline  btn-token">
-              Crear Usuario
-            </button></a>
+            <a href="/personales">
+              <button className="btn btn-outline  btn-token">
+                Crear Usuario
+              </button>
+            </a>
             <br />
-            <button className="btn btn-outline btn-token"> Aplicar Test</button>
+            <a href="/independencia">
+              <button className="btn btn-outline btn-token"> Aplicar Test</button>
+            </a>
             <br />
-            <button className="btn btn-outline btn-token">
-              Ver Resultados / Imprimir
-            </button>
+            <a href="/resultados">
+              <button className="btn btn-outline btn-token">
+                Ver Resultados / Imprimir
+              </button>
+            </a>
           </div>
         </div>
       </div>
