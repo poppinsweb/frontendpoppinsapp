@@ -1,4 +1,5 @@
-import { auth } from "../services/firebase";
+import { auth, db } from "../services/firebase";
+import { doc, setDoc } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -12,6 +13,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 
+
 const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
   isAuth: false,
   user: undefined,
@@ -22,7 +24,7 @@ export const useAuth = () => {
   const [user, setUser] = useState(initialLogin);
 
   // REGISTRO DE USUARIOS EN FIREBASE
-  const register = async (email, password) => {
+  const register = async (email, password, rol) => {
     const currentUser = auth.currentUser;
     if (currentUser) {
       return;
@@ -31,8 +33,12 @@ export const useAuth = () => {
       auth,
       email,
       password
-    );
-    console.log(loginCredential);
+    ).then((usuarioFirebase) => {
+      return usuarioFirebase
+    });
+    console.log(loginCredential.user.uid);
+    const docRef = doc(db, `usuarios/${loginCredential.user.uid}`)
+    await setDoc(docRef, {email: email, rol: rol})
   };
 
   // LOGIN DE USUARIOS

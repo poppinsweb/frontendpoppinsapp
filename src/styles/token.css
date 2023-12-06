@@ -116,6 +116,8 @@
 
 /* LARGER SCREEN */
 @media (min-width: 1500px) {
-  
- 
+  .btn-info-text {
+    font-size: 25px;
+    padding: 0 25rem;
+  }
 }
