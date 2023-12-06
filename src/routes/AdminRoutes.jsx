@@ -18,21 +18,35 @@ import { PageHabitSleeping } from "../pages/userPages/PageHabitSleeping";
 import PageResponsability from "../pages/userPages/PageResponsability";
 
 export function AdminRoutes() {
-  let { user } = useAuth();
+  const { user, userRol } = useAuth();
+
+  console.log(user)
   
   return (
     <>
       <Routes>
-        {user === "admin" ? (
+        {userRol && userRol.rol === "admin" ? (
           <>
+            <Route path="/inicio" element={<LandingPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/list" element={<UserList />} />
+
+            <Route path="/" element={<UserToken />} />
+            <Route path="/personales" element={<PageUserChildData />} />
+            <Route path="/token" element={<UserToken />} />
+            <Route path="/independencia" element={<PageIndependenceQuestions />} />
+            <Route path="/habilidades-aseo" element={<PageAbilityGrooming />} />
+            <Route path="/habilidades-vestido" element={<PageAbilityDressing />} />
+            <Route path="/habilidades-alimentacion" element={<PageAbilityFeeding />} />
+            <Route path="/habitos-alimentacion" element={<PageHabitFeeding />} />
+            <Route path="/habitos-dormir" element={<PageHabitSleeping />} />
+            <Route path="/responsabilidades" element={<PageResponsability />} />
+            <Route path="/resultados" element={<PageUserResult />} />
+
             <Route path="/*" element={<Navigate to="/admin" />} />
           </>
         ) : (
           <>
-        {/* solo admin */}
-            <Route path="/list" element={<UserList />} />
-            <Route path="/inicio" element={<LandingPage />} />
 
         {/* todo el mundo */}
             <Route path="/" element={<UserToken />} />

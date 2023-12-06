@@ -1,12 +1,10 @@
-// import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const navigate = useNavigate();
   // const { login, handlerLogout } = useState();
-  const { user, logout} = useAuth()
-  // console.log(user)
+  const { user, logout } = useAuth()
 
   const handleLogout = () => {
     logout()
