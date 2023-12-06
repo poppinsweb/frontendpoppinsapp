@@ -3,7 +3,6 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 import "../../styles/login.css";
-import "../../styles/button-google.css";
 import Swal from "sweetalert2";
 
 const initialState = {

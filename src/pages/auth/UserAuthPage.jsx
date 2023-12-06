@@ -1,5 +1,4 @@
 import { UserLogin } from "../../components/auth/UserLogin";
-import "../../styles/login.css";
 
 export function UserAuthPage() {
   return (
