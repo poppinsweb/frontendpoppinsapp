@@ -36,7 +36,7 @@ export const useAuth = () => {
     ).then((usuarioFirebase) => {
       return usuarioFirebase
     });
-    console.log(loginCredential.user.uid);
+    // console.log(loginCredential.user.uid);
     const docRef = doc(db, `usuarios/${loginCredential.user.uid}`)
     await setDoc(docRef, {email: email, rol: rol})
   };
@@ -108,6 +108,7 @@ export const useAuth = () => {
     logout,
     register,
     user,
+    userRol,
     loginWithGoogle,
     persistence,
   };
