@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 
 import "../../styles/login.css";
-import "../../styles/button-google.css";
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -18,7 +16,7 @@ export function UserLogin() {
   const navigate = useNavigate();
 
   const { email, password } = user;
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth();
 
   // ***********
   const handleChange = ({ target }) => {
@@ -29,19 +27,15 @@ export function UserLogin() {
     });
   };
 
-  const handleGoogle = (e) => {
-    // e.preventDefault();
-    loginWithGoogle();
-  };
   // **********
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setUser(initialState);
+    setUser(initialState);
 
     if (!email || !password) {
       Swal.fire(
         "¿Está registrado?",
-        "Debe ingresar sus credenciales de inicio",
+        "Debe ingresar sus credenciales de inicio o contactar a la administradora para solicitarlas",
         "question"
       );
       return;
@@ -56,7 +50,7 @@ export function UserLogin() {
         showConfirmButton: false,
         timer: 2000,
       });
-      navigate("/admin");
+      navigate("/token");
     } catch (error) {
       const errorCode = error.code;
       // console.log(errorCode);
@@ -65,7 +59,7 @@ export function UserLogin() {
         Swal.fire({
           icon: "error",
           title: "Por favor ingrese unas credenciales válidas",
-          text: "Su correo o password son incorrectos",
+          text: "Revise que sus datos estén correctos o contacte a la administradora"
         });
       }
     }
@@ -110,12 +104,6 @@ export function UserLogin() {
                 </button>
               </div>
             </form>
-            <button className="btn-google buttons" disabled={false} onClick={handleGoogle}>
-              <span className="google-icon">
-                <FcGoogle />
-              </span>
-              Ingresar con Google
-            </button>
           </div>
         </div>
       </div>
