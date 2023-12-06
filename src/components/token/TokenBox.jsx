@@ -1,6 +1,11 @@
 import "../../styles/token.css";
 
 export const TokenBox= () => {
+
+  const handleChange = () => {
+    console.log("probando input de token")
+  }
+
   const token = "########"; // TODO: CREAR EL MECANISMO DE TOKEN
   return (
     // <div className="container-fluid">
@@ -13,8 +18,9 @@ export const TokenBox= () => {
               // className="input-token"
               type="radio"
               id="cbox1"
-              checked={true}
-              // value="first_checkbox"
+              checked={false}
+              value="first_checkbox"
+              onChange={handleChange}
             />
             Token: { token }
           </label>
@@ -24,7 +30,8 @@ export const TokenBox= () => {
               type="radio"
               id="cbox2"
               checked={false}
-              // value="second_checkbox"
+              value="second_checkbox"
+              onChange={handleChange}
             />
             Token: { token }
           </label>
