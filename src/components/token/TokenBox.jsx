@@ -1,6 +1,11 @@
 import "../../styles/users/token.css";
 
 export const TokenBox= () => {
+
+  const handleChange = () => {
+    console.log("probando input de token")
+  }
+
   const token = "########"; // TODO: CREAR EL MECANISMO DE TOKEN
   return (
     // <div className="container-fluid">
