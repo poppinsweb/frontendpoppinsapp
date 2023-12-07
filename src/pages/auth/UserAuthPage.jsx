@@ -9,9 +9,6 @@ export function UserAuthPage() {
           <UserLogin />
         </div>
         <div className="boxes-container">
-          <div className="login-card">
-            <UserRegister />
-          </div>
         </div>
       </div>
     </>
