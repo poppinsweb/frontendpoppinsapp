@@ -20,6 +20,12 @@
   justify-content: center;
 }
 
+.btn-info-text {
+  font-size: 20px;
+  padding: 0 35px;
+  text-align: justify;
+}
+
 .btn-info-token {
   margin: 1rem 0rem;
 }
@@ -27,12 +33,6 @@
 .btn-info-token:hover {
   background: #5d2063;
   color: #ffffff;
-}
-
-.btn-info-text {
-  font-size: 20px;
-  padding: 0 35px;
-  text-align: justify;
 }
 
 .logo-token {
@@ -102,6 +102,7 @@
 
   .btn-info-token {
     margin-left: 20px;
+    
   }
 
   .logo-token {
@@ -110,7 +111,7 @@
 
   .btn-info-text {
     font-size: 25px;
-    padding: 0 15rem;
+    /* padding: 0 15rem; */
   }
 }
 
@@ -121,13 +122,17 @@
     height: 1950px;
   }
 
+  .info-btninfo {
+    padding: 150px 10px;
+  }
+
   .logo-token {
     height: 700px;
   }
 
   .btn-info-text {
     font-size: 30px;
-    padding: 0 15rem;
+    padding: 0px;
   }
 
   .box-tokens-container {
@@ -146,6 +151,6 @@
 @media (min-width: 1500px) {
   .btn-info-text {
     font-size: 25px;
-    padding: 0 25rem;
+    /* padding: 0 25rem; */
   }
 }
