@@ -8,8 +8,6 @@ export function UserAuthPage() {
         <div className="login-card">
           <UserLogin />
         </div>
-        <div className="boxes-container">
-        </div>
       </div>
     </>
   );
