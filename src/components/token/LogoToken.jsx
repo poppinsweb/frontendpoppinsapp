@@ -1,4 +1,4 @@
-import "../../styles/token.css";
+import "../../styles/users/token.css";
 
 export const LogoToken = () => {
   return (

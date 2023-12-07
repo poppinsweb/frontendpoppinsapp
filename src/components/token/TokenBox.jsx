@@ -1,4 +1,4 @@
-import "../../styles/token.css";
+import "../../styles/users/token.css";
 
 export const TokenBox= () => {
   const token = "########"; // TODO: CREAR EL MECANISMO DE TOKEN
@@ -13,7 +13,6 @@ export const TokenBox= () => {
               // className="input-token"
               type="radio"
               id="cbox1"
-              checked={true}
               // value="first_checkbox"
             />
             Token: { token }
@@ -23,7 +22,6 @@ export const TokenBox= () => {
               // className="input-token"
               type="radio"
               id="cbox2"
-              checked={false}
               // value="second_checkbox"
             />
             Token: { token }

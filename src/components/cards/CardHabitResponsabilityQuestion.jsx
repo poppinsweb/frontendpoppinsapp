@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { abilityFeedingQuestions } from "../constants/abilityFeedingQuestions";
 import { useNavigate } from "react-router-dom";
-import "../../styles/questions.css";
+import { habitResponsabilityQuestions } from "../constants/habitResponsabilityQuestions";
+import "../../styles/users/questions.css";
 
-export default function CardAbilityFeedingQuestion() {
+export default function CardAbilityResponsabilityQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
@@ -13,11 +13,11 @@ export default function CardAbilityFeedingQuestion() {
   const [result, setResult] = useState({
     score: 0,
   });
- 
+
   const navigate = useNavigate();
 
   const { question, choices } =
-    abilityFeedingQuestions.questions[currentQuestion];
+    habitResponsabilityQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -28,7 +28,7 @@ export default function CardAbilityFeedingQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      const previousQuestion = abilityFeedingQuestions.questions[currentQuestion - 1]
+      const previousQuestion = habitResponsabilityQuestions.questions[currentQuestion - 1]
       const previousQuestionScore = previousQuestion.score.pop()
 
       setResult((prev) => ({
@@ -39,7 +39,7 @@ export default function CardAbilityFeedingQuestion() {
       setCurrentQuestion((prev) => prev - 1)
 
     } else {
-      navigate("/habilidades-vestido")
+      navigate("/habitos-dormir")
     }
   }
 
@@ -48,7 +48,7 @@ export default function CardAbilityFeedingQuestion() {
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-    if (currentQuestion !== abilityFeedingQuestions.questions.length - 1) {
+    if (currentQuestion !== habitResponsabilityQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
@@ -61,7 +61,7 @@ export default function CardAbilityFeedingQuestion() {
   };
 
   const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = abilityFeedingQuestions.questions[questionIndex];
+    const question = habitResponsabilityQuestions.questions[questionIndex];
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
@@ -70,14 +70,14 @@ export default function CardAbilityFeedingQuestion() {
         ...prev,
         score: prev.score + pointScore,
       }));
-    }
+    } 
   };
 
   useEffect(() => {
     // Navega a la siguiente pantalla después de 2 segundos
     if (showNavigation) {
       setTimeout(() => {
-       navigate("/habitos") 
+       navigate("/resultados") 
       }, 2000)
       setScoreFinal(result.score);
     }
@@ -91,12 +91,12 @@ export default function CardAbilityFeedingQuestion() {
 
   return (
     <div className="question-main-container">
-      <div className="question-container">
-      <h2 className="main-question-title">Habilidades de Alimentación</h2>
+      <div className='question-container'>
+        <h2 className="main-question-title">Cumplimiento de Responsabilidades Personales y Escolares</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
-            <ul className="question-section-ability">
+            <ul className="question-section-habit">
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
@@ -104,8 +104,8 @@ export default function CardAbilityFeedingQuestion() {
                     key={choice}
                     className={
                       answerIdx === index 
-                        ? "selected-answer question-text" 
-                        : null
+                      ? "selected-answer question-text" 
+                      : null
                     }
                   >
                     {choice}
@@ -115,7 +115,7 @@ export default function CardAbilityFeedingQuestion() {
             </ul>
             <span className="active-question-no">{currentQuestion + 1}</span>
             <span className="total-question">
-              /{abilityFeedingQuestions.questions.length}
+              /{habitResponsabilityQuestions.questions.length}
             </span>
           </>
         ) : (
@@ -123,7 +123,7 @@ export default function CardAbilityFeedingQuestion() {
             <h3>Resultados</h3>
             <p>
               Preguntas Respondidas:
-              <span>{abilityFeedingQuestions.questions.length}</span>
+              <span>{habitResponsabilityQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
@@ -137,16 +137,16 @@ export default function CardAbilityFeedingQuestion() {
             ? "Reiniciar"
             : "Anterior"}
         </button>
-        {/* ********** */}
+        
         <button
           onClick={handleNextQuestion}
           disabled={answerIdx === null}
           className='btn-color'
         >
           {showResult
-            ? "Siguiente sección"
-            : currentQuestion === abilityFeedingQuestions.questions.length - 1
-            ? "Siguiente"
+            ? "Atrás"
+            : currentQuestion === habitResponsabilityQuestions.questions.length - 1
+            ? "Resultados"
             : "Siguiente"
             }
         </button>

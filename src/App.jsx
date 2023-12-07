@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthProvider"; // Componente del context
 import { Routes, Route } from "react-router-dom";
-import { Navbar } from "./components/layout/Navbar";
+import { Navbar } from "./components/ui/Navbar";
 import "./styles/App.css";
 
 import { LandingPage } from "./pages/home/LandingPage";

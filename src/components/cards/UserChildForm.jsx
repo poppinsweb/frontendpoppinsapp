@@ -1,9 +1,9 @@
-import Select from "react-select";
-import { userChildFormOptions } from "../constants/userChildFormOptions";
-import "../../styles/userChild.css";
 import { useState } from "react";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-import { postNewSurvey } from "../../services/cardsConnectionAxios";
+import { userChildFormOptions } from "../constants/userChildFormOptions";
+// import { postNewSurvey } from "../../services/cardsConnectionAxios";
+import "../../styles/users/userChild.css";
 
 // http://localhost:8080/api/infante para ver los infantes agregados en la bd y para hacer el post
 

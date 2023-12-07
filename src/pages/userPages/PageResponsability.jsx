@@ -1,4 +1,4 @@
-import CardHabitResponsabilityQuestion from "../../components/questionCards/CardHabitResponsabilityQuestion";
+import CardHabitResponsabilityQuestion from "../../components/cards/CardHabitResponsabilityQuestion";
 
 function PageResponsability() {
   return (

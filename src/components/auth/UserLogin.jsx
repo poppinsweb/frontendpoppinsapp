@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
-import "../../styles/login.css";
+import "../../styles/home/login.css";
 import Swal from "sweetalert2";
 
 const initialState = {

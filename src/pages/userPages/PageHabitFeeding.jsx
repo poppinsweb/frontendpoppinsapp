@@ -1,4 +1,4 @@
-import CardHabitFeedingQuestion from "../../components/questionCards/CardHabitFeedingQuestion";
+import CardHabitFeedingQuestion from "../../components/cards/CardHabitFeedingQuestion";
 
 export function PageHabitFeeding() {
   return (

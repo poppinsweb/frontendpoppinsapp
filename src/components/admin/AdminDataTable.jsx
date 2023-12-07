@@ -2,29 +2,7 @@
 // import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { UserTableRow } from "../admin/UserTableRow";
-import { findAll } from "../../services/userAuthAxios";
-// import { UserContext } from "../../context/UserContext";
-
-// const users = [
-//   {
-//     id:1,
-//     email: "rosa@email.com",
-//     password: 12345,
-//     token: "abc123",
-//   },
-//   {
-//     id:2,
-//     email: "ana@email.com",
-//     password: 12345,
-//     token: "def123",
-//   },
-//   {
-//     id:3,
-//     email: "carlos@email.com",
-//     password: 12345,
-//     token: "ghi123",
-//   },
-// ]
+// import { findAll } from "../../services/userAuthAxios";
 
 export function AdminDataTable() {
   const [ dataChildren, setDataChildren ] = useState([])

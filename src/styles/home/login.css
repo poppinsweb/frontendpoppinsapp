@@ -2,7 +2,7 @@
 .page-container {
   margin: 0 auto;
   padding: 40px;
-  background-image: url("../styles/images/cloud-stars.jpg");
+  background-image: url("../images/cloud-stars.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 850px;

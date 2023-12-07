@@ -1,4 +1,4 @@
-import CardAbilityFeedingQuestion from "../../components/questionCards/CardAbilityFeedingQuestion";
+import CardAbilityFeedingQuestion from "../../components/cards/CardAbilityFeedingQuestion";
 
 export function PageAbilityFeeding() {
   return (
