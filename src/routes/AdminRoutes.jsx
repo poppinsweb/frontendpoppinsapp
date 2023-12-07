@@ -31,7 +31,6 @@ export function AdminRoutes() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/list" element={<UserList />} />
 
-            <Route path="/" element={<UserToken />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
             <Route path="/independencia" element={<PageIndependenceQuestions />} />
@@ -49,7 +48,7 @@ export function AdminRoutes() {
           <>
 
         {/* todo el mundo */}
-            <Route path="/" element={<UserToken />} />
+            <Route path="/inicio" element={<LandingPage />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
             <Route path="/independencia" element={<PageIndependenceQuestions />} />

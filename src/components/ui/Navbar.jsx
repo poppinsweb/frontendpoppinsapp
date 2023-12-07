@@ -9,6 +9,9 @@ export function Navbar() {
     logout()
     navigate("/");
   }
+  const handleLogIn = () => {
+    navigate("/login");
+  }
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
@@ -78,11 +81,17 @@ export function Navbar() {
           <span className='nav-item nav-link text-primary mx-3'>
             {user?.email}
           </span>
-          <button
-            onClick={handleLogout}  
-            className='btn btn-outline-success'>
-              Logout
-          </button>
+         {
+            user ? (
+                <>
+                  <button className='btn btn-outline-success' onClick={handleLogout}>Logout</button>
+                </>
+            ) : (
+              <>
+               <button className='btn btn-outline-success' onClick={handleLogIn}>Login</button>
+              </>
+            )
+        }
         </div>
       </div>
     </nav>
