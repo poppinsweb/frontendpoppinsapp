@@ -1,64 +1,94 @@
+/* MOBILE SIZE */
 .user-container {
   background-image: url("../images/cloud-stars.jpg");
-  background-size: cover;
-  border-radius: 20px;
-  font-size: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 1.5rem;
   color: #4a0a6a;
   min-height: 100vh;
+  background-color: #6971a1;
+}
+
+.logo2 {
+  margin-top: 80px;
+  width: 240px;
+  height: 218px; 
 }
 
 .user-title {
-  font-size: 3rem;
-  padding-top: 2rem;
-  color: #852c88;
-}
-
-.main-row {
-  padding-top: 150px;
-  border-radius: 10px;
-}
-
-.first-col {
-  width: 60vw;
-  padding-left: 3rem;
-  padding-bottom: 50px;
+  font-size: 2.8rem;
 }
 
 .user-label {
-  margin: 1.5rem 0;
-  color:#852c88;
-  background-color: #f0f8ff3e;
-}
-
-.user-input,
-.user-select,
-.user-label {
-  width: 500px;
-  height: 45px;
+  margin: 1rem 0;
+  color: #6a1396;
+  width: 90%;
+  background-color: #f0f8ff39;
 }
 
 .user-input,
 .user-select {
-  border: 1px solid #852c88;
+  width: 90%;
+  height: 45px;
+  margin: 0px auto;
   border-radius: 5px;
 }
 
-.second-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-  gap: 20px;
+.css-13cymwt-control {
+  width: 330px;
 }
 
-.logo2 {
-  width: 640px;
-  height: 618px; 
-  margin-right: 20rem;
-  padding-bottom: 20px;
+/* MEDIUM SCREEN */
+@media (min-width: 800px) {
+  .code-container {
+    margin-top: 50rem;
+  }
 }
 
-.code-container {
-  margin-right: 20rem;
+/* LARGE SCREEN */
+@media (min-width: 1200px) {
+  .logo2 {
+    position: relative;
+    top: 700px;
+    left: 450px;
+    width: 450px;
+    height: 450px; 
+  }
+
+  .css-13cymwt-control {
+    width: 750px;
+  }
+}
+
+/* LARGER SCREEN */
+@media (min-width: 1500px) {
+
+  .css-13cymwt-control {
+    width: 500px;
+  }
+ 
+  .main-row {
+    padding-top: 100px;
+  }
+  
+  .user-label {
+    margin: 1.5rem 0;
+  }
+  
+  .user-input,
+  .user-select,
+  .user-label {
+    width: 500px;
+    height: 45px;
+  }
+  
+  .logo2 {
+    width: 550px;
+    height: 550px;
+    top: 800px; 
+  }
+  
+  .code-container {
+    margin-right: 20rem;
+  }
 }

@@ -2,10 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { userChildFormOptions } from "../constants/userChildFormOptions";
-// import { postNewSurvey } from "../../services/cardsConnectionAxios";
 import "../../styles/users/userChild.css";
-
-// http://localhost:8080/api/infante para ver los infantes agregados en la bd y para hacer el post
 
 export function UserChildForm() {
   const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
@@ -18,7 +15,7 @@ export function UserChildForm() {
   const [userBirth, setUserBirth] = useState("");
 
   const navigate = useNavigate();
-  
+
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
     setUserData({
@@ -34,18 +31,18 @@ export function UserChildForm() {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const selected =  {...userData, ...userSelect};
+      const selected = { ...userData, ...userSelect };
       console.log(selected);
-      const res = await postNewSurvey(selected)
-      if(res){
+      const res = await postNewSurvey(selected);
+      if (res) {
         navigate("/independencia");
       }
       return res;
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      console.error("Error al enviar el formulario:", error);
       throw error;
     }
   };
@@ -64,6 +61,11 @@ export function UserChildForm() {
 
   return (
     <div className="container user-container">
+      <img
+        src="src/styles/images/umbrellaFirst.png"
+        className="logo2"
+        alt="Logo paraguas"
+      />
       <h2 className="user-title">Datos Personales del Niño</h2>
       <div className="row main-row">
         <div className="col first-col">
@@ -192,30 +194,16 @@ export function UserChildForm() {
                 </label>
               </div>
             </div>
-            {
-              Object.values(userSelect).length >= 4 ? 
-                <button
-                  className="btn btn-admin btn-color"
-                >
-                  Ir a Encuesta
-                </button>
-
-                :
-                <button
-                  disabled
-                  className="btn btn-admin btn-color"
-                >
-                  Ir a Encuesta
-                </button>
-            }
+            {Object.values(userSelect).length >= 4 ? (
+              <button className="btn btn-admin btn-color">Ir a Encuesta</button>
+            ) : (
+              <button disabled className="btn btn-admin btn-color">
+                Ir a Encuesta
+              </button>
+            )}
           </form>
         </div>
         <div className="second-col col">
-          <img
-            src="src/styles/images/umbrellaFirst.png"
-            className="logo2"
-            alt="Logo paraguas"
-          />
           <div className="code-container">
             <p>
               <strong>Código del Niño</strong>
