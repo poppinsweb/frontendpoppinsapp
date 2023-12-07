@@ -4,10 +4,8 @@ export function UserAuthPage() {
   return (
     <>
       <div className="page-container">
-        <div className="boxes-container">
-          <div className="login-card">
-            <UserLogin />
-          </div>
+        <div className="login-card">
+          <UserLogin />
         </div>
       </div>
     </>

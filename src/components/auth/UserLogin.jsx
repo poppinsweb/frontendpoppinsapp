@@ -59,54 +59,48 @@ export function UserLogin() {
         Swal.fire({
           icon: "error",
           title: "Por favor ingrese unas credenciales válidas",
-          text: "Revise que sus datos estén correctos o contacte a la administradora"
+          text: "Revise que sus datos estén correctos o contacte a la administradora",
         });
       }
     }
   };
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h2 className="card-title title-login">Login</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="container">
-                <input
-                  className="form-control my-3 "
-                  placeholder="E-mail"
-                  type="email"
-                  name="email"
-                  autoComplete="on"
-                  value={email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-control my-3 "
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-control my-3 "
-                  placeholder="Token"
-                  type="token"
-                  name="token"
-                  // value={token}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="buttons">
-                <button className="btn btn-color btn-login" type="submit">
-                  Ingresar
-                </button>
-              </div>
-            </form>
-          </div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            className="form-control my-3 "
+            placeholder="E-mail"
+            type="email"
+            name="email"
+            autoComplete="on"
+            value={email}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control my-3 "
+            placeholder="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control my-3 "
+            placeholder="Token"
+            type="token"
+            name="token"
+            // value={token}
+            onChange={handleChange}
+          />
         </div>
-      </div>
+        <div className="buttons">
+          <button className="btn btn-color btn-login" type="submit">
+            Ingresar
+          </button>
+        </div>
+      </form>
     </>
   );
 }
