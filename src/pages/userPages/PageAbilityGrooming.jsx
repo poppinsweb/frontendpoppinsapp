@@ -1,4 +1,4 @@
-import CardAbilityGroomingQuestion from "../../components/questionCards/CardAbilityGroomingQuestion";
+import CardAbilityGroomingQuestion from "../../components/cards/CardAbilityGroomingQuestion";
 
 export function PageAbilityGrooming() {
   return (

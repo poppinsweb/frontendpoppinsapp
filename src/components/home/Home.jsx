@@ -1,6 +1,6 @@
 import "../../styles/home/home.css";
 
-export function Content() {
+export function Home() {
   return (
     <div className="container">
       <div className="row">

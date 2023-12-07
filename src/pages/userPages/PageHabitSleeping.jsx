@@ -1,4 +1,4 @@
-import CardHabitSleepingQuestion from "../../components/questionCards/CardHabitSleepingQuestion";
+import CardHabitSleepingQuestion from "../../components/cards/CardHabitSleepingQuestion";
 
 export function PageHabitSleeping() {
   return (

@@ -1,4 +1,4 @@
-import "../../styles/token.css";
+import "../../styles/users/token.css";
 
 export const TokenBox= () => {
 
@@ -18,9 +18,7 @@ export const TokenBox= () => {
               // className="input-token"
               type="radio"
               id="cbox1"
-              checked={false}
-              value="first_checkbox"
-              onChange={handleChange}
+              // value="first_checkbox"
             />
             Token: { token }
           </label>
@@ -29,9 +27,7 @@ export const TokenBox= () => {
               // className="input-token"
               type="radio"
               id="cbox2"
-              checked={false}
-              value="second_checkbox"
-              onChange={handleChange}
+              // value="second_checkbox"
             />
             Token: { token }
           </label>

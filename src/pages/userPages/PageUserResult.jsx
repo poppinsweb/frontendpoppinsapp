@@ -1,4 +1,4 @@
-import FinalScoreCard from "../../components/questionCards/FinalScoreCard";
+import FinalScoreCard from "../../components/cards/FinalScoreCard";
 
 export function PageUserResult() {
   return (

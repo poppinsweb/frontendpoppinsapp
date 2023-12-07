@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllChildren } from "../../services/cardsConnectionAxios";
+// import { getAllChildren } from "../../services/cardsConnectionAxios";
 
 export default function FinalScoreCard() {
   const [ dataChildren, setDataChildren ] = useState([])

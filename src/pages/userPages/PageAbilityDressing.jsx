@@ -1,4 +1,4 @@
-import CardAbilityDressingQuestion from "../../components/questionCards/CardAbilityDressingQuestion";
+import CardAbilityDressingQuestion from "../../components/cards/CardAbilityDressingQuestion";
 
 export function PageAbilityDressing() {
   return (

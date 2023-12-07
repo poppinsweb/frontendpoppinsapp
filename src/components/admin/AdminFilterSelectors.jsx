@@ -2,7 +2,7 @@ import Select from "react-select";
 import { useState } from "react";
 import { QuestionFilter } from "./QuestionFilter";
 import { userChildFormOptions } from "../constants/userChildFormOptions";
-import "../../styles/admin.css";
+import "../../styles/admin/admin.css";
 
 export function AdminFilterSelectors() {
   const { gender, socialClass, edCenterType, degree, years, months } = userChildFormOptions;

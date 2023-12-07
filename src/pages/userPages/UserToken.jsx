@@ -6,14 +6,16 @@ import { TokenNavigation } from "../../components/token/TokenNavigation";
 export function UserToken() {
   return (
     <div className="token-container">
-      {/* <div className="row">
-        <div className="col-12"> */}
-          <InfoToken />
-          <LogoToken />
+      <InfoToken />
+      <LogoToken />
+      <div className="row">
+        <div className="col-md-8 token-card">
           <TokenBox />
+        </div>
+        <div className="col-md-4">
           <TokenNavigation />
-        {/* </div>
-      </div> */}
-     </div>
-  )
+        </div>
+      </div>
+    </div>
+  );
 }

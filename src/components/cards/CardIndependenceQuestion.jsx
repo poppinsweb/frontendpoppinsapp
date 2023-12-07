@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { habitResponsabilityQuestions } from "../constants/habitResponsabilityQuestions";
+import { useEffect, useState } from "react";
+import { independenceQuestions } from "../constants/independenceQuestions";
 import { useNavigate } from "react-router-dom";
-import "../../styles/questions.css";
+import "../../styles/users/questions.css";
 
-export default function CardAbilityResponsabilityQuestion() {
+export default function CardIndependenceQuestion() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
@@ -17,7 +17,7 @@ export default function CardAbilityResponsabilityQuestion() {
   const navigate = useNavigate();
 
   const { question, choices } =
-    habitResponsabilityQuestions.questions[currentQuestion];
+    independenceQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -28,7 +28,7 @@ export default function CardAbilityResponsabilityQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      const previousQuestion = habitResponsabilityQuestions.questions[currentQuestion - 1]
+      const previousQuestion = independenceQuestions.questions[currentQuestion - 1]
       const previousQuestionScore = previousQuestion.score.pop()
 
       setResult((prev) => ({
@@ -39,7 +39,7 @@ export default function CardAbilityResponsabilityQuestion() {
       setCurrentQuestion((prev) => prev - 1)
 
     } else {
-      navigate("/habitos-dormir")
+      navigate("/personales")
     }
   }
 
@@ -48,7 +48,7 @@ export default function CardAbilityResponsabilityQuestion() {
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-    if (currentQuestion !== habitResponsabilityQuestions.questions.length - 1) {
+    if (currentQuestion !== independenceQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setShowResult(true);
@@ -61,7 +61,7 @@ export default function CardAbilityResponsabilityQuestion() {
   };
 
   const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = habitResponsabilityQuestions.questions[questionIndex];
+    const question = independenceQuestions.questions[questionIndex];
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
@@ -70,14 +70,14 @@ export default function CardAbilityResponsabilityQuestion() {
         ...prev,
         score: prev.score + pointScore,
       }));
-    } 
+    }
   };
 
   useEffect(() => {
     // Navega a la siguiente pantalla después de 2 segundos
     if (showNavigation) {
       setTimeout(() => {
-       navigate("/resultados") 
+       navigate("/habilidades-aseo") 
       }, 2000)
       setScoreFinal(result.score);
     }
@@ -86,25 +86,24 @@ export default function CardAbilityResponsabilityQuestion() {
   if (scoreFinal > 0) {
     <p>Puntaje Final: <span>{scoreFinal}</span></p>;
   }
-
+  
   console.log(result.score);
 
   return (
     <div className="question-main-container">
-      <div className='question-container'>
-        <h2 className="main-question-title">Cumplimiento de Responsabilidades Personales y Escolares</h2>
+      <div className="question-container">
         {!showResult ? (
           <>
-            <h2 className="secoundary-question-title">{question}</h2>
-            <ul className="question-section-habit">
+            <h2 className="main-question-title">{question}</h2>
+            <ul className="question-section">
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
                     onClick={() => handleAnswer(choice, index)}
                     key={choice}
                     className={
-                      answerIdx === index 
-                      ? "selected-answer question-text" 
+                      answerIdx === index
+                      ? "selected-answer question-text"
                       : null
                     }
                   >
@@ -115,7 +114,7 @@ export default function CardAbilityResponsabilityQuestion() {
             </ul>
             <span className="active-question-no">{currentQuestion + 1}</span>
             <span className="total-question">
-              /{habitResponsabilityQuestions.questions.length}
+              /{independenceQuestions.questions.length}
             </span>
           </>
         ) : (
@@ -123,7 +122,7 @@ export default function CardAbilityResponsabilityQuestion() {
             <h3>Resultados</h3>
             <p>
               Preguntas Respondidas:
-              <span>{habitResponsabilityQuestions.questions.length}</span>
+              <span>{independenceQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
@@ -133,20 +132,20 @@ export default function CardAbilityResponsabilityQuestion() {
       </div>
       <div className="btn-container">
         <button onClick={handleBeforeQuestion} className="btn-color">
-          {showResult
-            ? "Reiniciar"
-            : "Anterior"}
+          {showResult 
+          ? "Reiniciar" 
+          : "Anterior"}
         </button>
         
         <button
           onClick={handleNextQuestion}
           disabled={answerIdx === null}
-          className='btn-color'
+          className="btn-color"
         >
           {showResult
-            ? "Atrás"
-            : currentQuestion === habitResponsabilityQuestions.questions.length - 1
-            ? "Resultados"
+            ? "Siguiente sección"
+            : currentQuestion === independenceQuestions.questions.length - 1
+            ? "Siguiente"
             : "Siguiente"
             }
         </button>
