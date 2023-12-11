@@ -1,9 +1,8 @@
+/* MOBILE SIZE */
 .question-main-container {
-  padding-top: 20rem;
-  /* background-image: url("../images/cloud-stars.jpg"); */
-  /* background-image: url("../images/umbrelafondblank.png"); */
-  background-image: url("../images/fondo-nubes-blancas-lila2.jpg");
-  /* background-repeat: no-repeat; */
+  padding-top: 10rem;
+  background-image: url("../images/cloud-stars.jpg");
+  background-image: url("../images/fondo-nubes-blancas-lila.jpg");
   background-size: contain;
   min-height: 1250px;
 }
@@ -11,30 +10,26 @@
 /* CONTENEDOR DE LA CARD */
 .question-container {
   margin: 0 auto;
-  width: 1150px;
-  height: 750px;
   min-height: 200px;
+  width: 90%;
+  height: fit-content;
   border-radius: 15px;
   padding: 40px;
-  padding-top: 80px;
-  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
-  justify-content: center;
-  align-items: center;
+  padding-top: 40px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   margin-bottom: 2rem;
-  background-image: url("../images/card-fondo.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #ac8baf6e;
 }
 
 .main-question-title {
-  font-size: 3rem;
-  padding-top: 10px;
+  font-size: 2.8rem;
   color: #983aa3;
 }
 
 .secoundary-question-title {
-  padding-top: 50px;
-  font-size: 2.3rem;
+  padding-top: 25px;
+  font-size: 2rem;
+  color: #5d2063;
 }
 
 /* NUMERO DE LA PREGUNTA ACTUAL */
@@ -53,30 +48,32 @@
 .question-section-habit,
 .question-section {
   padding-top: 10px;
+  padding-left: 0;
 }
 
 /* CADA OPCION DE RESPUESTA ANTES DEL CLICK */
 .question-li {
-  background-color: #ffffff77;
+  background-color: #eeeded81;
   border-radius: 10px;
-  border: 1px solid #5d2063;
   margin: 0.5rem;
   padding: 8px 5px;
-  padding-left: 20px;
   list-style: none;
-  text-align: justify;
+  text-align: left;
   font-size: 25px;
+  width: 100%;
 }
 
 .question-li:hover {
   font-size: 30px;
-  color: #96449e;
+  background-color: #96449e;
+  color: #f0f8ff;
 }
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
 .question-text {
   font-size: 30px;
-  color: #96449e;
+  background-color: #96449e;
+  color: #f0f8ff;
 }
 
 /* EL PANTALLAZO DE LOS RESULTADOS */
@@ -89,5 +86,64 @@
 .btn-container {
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 25px;
+}
+
+/* MEDIUM SCREEN */
+@media (min-width: 800px) {
+  .question-main-container {
+    padding-top: 15rem;
+    background-image: url("../images/fondo-nubes-blancas-lila2.jpg");
+    /* background-repeat: no-repeat; */
+    min-height: 1000px;
+
+  }
+
+  .question-container {
+    background-image: url("../images/card-fondo.jpg");
+    background-size: cover;
+  }
+
+  .main-question-title {
+    font-size: 3rem;
+    padding-top: 10px;
+  }
+
+  .secoundary-question-title {
+    padding-top: 30px;
+    font-size: 2.3rem;
+  }
+
+  .question-li {
+    margin: 0.5rem;
+    padding: 8px 5px;
+    padding-left: 20px;
+    list-style: none;
+    text-align: justify;
+    font-size: 25px;
+  }
+
+  .btn-container {
+    gap: 50px;
+  }
+}
+
+/* LARGE SCREEN */
+@media (min-width: 1200px) {
+  .question-main-container {
+    min-height: 1200px;
+
+  }
+
+  .question-container {
+    width: 1150px;
+    height: 750px;
+    background-size: cover;
+    /* justify-content: center;
+    align-items: center; */
+  }
+}
+
+/* LARGER SCREEN */
+@media (min-width: 1500px) {
 }
