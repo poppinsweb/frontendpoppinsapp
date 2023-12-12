@@ -66,9 +66,9 @@ export function UserLogin() {
   };
   return (
     <>
-      <h2>Login</h2>
+      <h2 className="title-login">Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="login-container">
           <input
             className="form-control my-3 "
             placeholder="E-mail"
