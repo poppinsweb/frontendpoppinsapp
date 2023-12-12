@@ -5,5 +5,5 @@ export function PageUserChildData() {
     <div>
       <UserChildForm />
     </div>
-  )
+  );
 }
