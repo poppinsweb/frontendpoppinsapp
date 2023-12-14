@@ -84,7 +84,7 @@ export function Navbar() {
          {
             user ? (
                 <>
-                  <button className='btn btn-outline-success' onClick={handleLogout}>Logout</button>
+                  <button className='btn btn-outline-danger' onClick={handleLogout}>Logout</button>
                 </>
             ) : (
               <>
