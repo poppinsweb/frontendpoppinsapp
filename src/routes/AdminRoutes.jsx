@@ -1,6 +1,5 @@
 // RUTAS PRIVADAS DE ADMIN
 import { Routes, Route, Navigate } from "react-router-dom";
-// import { Navbar } from "../components/layout/Navbar";
 import { UserList } from "../pages/admin/UserList";
 import { AdminDashboard } from "../pages/admin/AdminDashboard";
 import { LandingPage } from "../pages/home/LandingPage";
@@ -18,9 +17,7 @@ import { PageHabitSleeping } from "../pages/userPages/PageHabitSleeping";
 import PageResponsability from "../pages/userPages/PageResponsability";
 
 export function AdminRoutes() {
-  const { user, userRol } = useAuth();
-
-  console.log(user)
+  const { userRol } = useAuth();
   
   return (
     <>
