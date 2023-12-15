@@ -1,11 +1,26 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/infante";
+const BASE_URL = "http://localhost:8080/api";
+
+// "http://localhost:8080/api/infante";
+// "http://localhost:8080/api/survey";
+
+// const getSurvey = async () => {
+//   try {
+//     const response = await axios.get("http://localhost:8080/api/survey/habitosAlimentacion");
+//     // console.log(response);
+//     return response;
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// };
+
 
 // Trae los usuarios infante existentes en el endpoint
 const getAllChildren = async () => {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axios.get(`${BASE_URL}/infante}`);
     console.log(response);
     return response;
   } catch (error) {
@@ -17,7 +32,7 @@ const getAllChildren = async () => {
 // Crea un nuevo usuario infante
 const postNewSurvey = async (objectChild) => {
   try {
-    return await axios.post(BASE_URL, objectChild);
+    return await axios.post(`${BASE_URL}/infante}`, objectChild);
   } catch (error) {
     console.error(error)
     throw error;
@@ -40,7 +55,7 @@ const postNewSurvey = async (objectChild) => {
 // Edita agregando informacion a las tablas del usuario infante
 const updateDataSurvey = async(id, email) => {
   try {
-    return await axios.put(`${BASE_URL}/${id}`, {
+    return await axios.put(`${BASE_URL}/infante/${id}`, {
       email,
     })
   } catch (error) {
