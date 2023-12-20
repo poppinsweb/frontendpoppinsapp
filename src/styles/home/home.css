@@ -26,6 +26,8 @@
   height: 220px;
   border-radius: 50px;
   box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+  cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
+
 }
 
 .img-slider:hover {
