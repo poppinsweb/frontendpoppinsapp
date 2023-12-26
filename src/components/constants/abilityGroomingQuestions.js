@@ -1,7 +1,7 @@
 export const abilityGroomingQuestions = {
   questions: [
     {
-      question: "Se seca el cuerpo después del baño", // db: se_seca_alducharse
+      question: "Se seca el cuerpo después del baño", // db: secarse_alducharse
       choices: [
         "1. No lo ha intentado",
         "2. En proceso inicial de aprendizaje",
@@ -21,7 +21,7 @@ export const abilityGroomingQuestions = {
       score: [],
     },
     {
-      question: "Se limpia la nariz", // db: limpia_nariz
+      question: "Se limpia la nariz", // db: selimpia_nariz
       choices: [
         "1. No lo ha intentado",
         "2. En proceso inicial de aprendizaje",
@@ -31,7 +31,7 @@ export const abilityGroomingQuestions = {
       score: [],
     },
     {
-      question: "Se limpia después de ir al baño (cuando hace popó)", // db: limpia_cola
+      question: "Se limpia después de ir al baño (cuando hace popó)", // db: selimpia_cola
       choices: [
         "1. No lo ha intentado",
         "2. En proceso inicial de aprendizaje",
@@ -41,7 +41,7 @@ export const abilityGroomingQuestions = {
       score: [],
     },
     {
-      question: "Se lava las manos al salir del baño", // db: lava_manos
+      question: "Se lava las manos al salir del baño", // db: selava_manos
       choices: [
         "1. No lo ha intentado",
         "2. En proceso inicial de aprendizaje",
@@ -51,7 +51,7 @@ export const abilityGroomingQuestions = {
       score: [],
     },
     {
-      question: "Se cepilla los dientes solo (recibe apoyo por las noches)", // db: cepilla_dientes
+      question: "Se cepilla los dientes solo (recibe apoyo por las noches)", // db: secepilla_dientes
       choices: [
         "1. No lo ha intentado",
         "2. En proceso inicial de aprendizaje",

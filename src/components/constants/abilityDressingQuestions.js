@@ -11,7 +11,7 @@ export const abilityDressingQuestions = {
         score: [],
       },
       {
-        question: "Se amarra los cordones", // bd: se_ata_cordones
+        question: "Se amarra los cordones", // bd: ata_suscordones
         choices: [
           "1. No lo ha intentado",
           "2. En proceso inicial de aprendizaje",
@@ -21,7 +21,7 @@ export const abilityDressingQuestions = {
         score: [],
       },
       {
-        question: "Se pone las medias", // bd: se_pone_medias
+        question: "Se pone las medias", // bd: pone_susmedias
         choices: [
           "1. No lo ha intentado",
           "2. En proceso inicial de aprendizaje",
@@ -31,7 +31,7 @@ export const abilityDressingQuestions = {
         score: [],
       },
       {
-        question: "Se pone los zapatos", // bd: se_pone_zapatos
+        question: "Se pone los zapatos", // bd: pone_suszapatos
         choices: [
           "1. No lo ha intentado",
           "2. En proceso inicial de aprendizaje",
@@ -41,7 +41,7 @@ export const abilityDressingQuestions = {
         score: [],
       },
       {
-        question: "Sube y baja cremalleras", // bd: sube_baja_cremalleras
+        question: "Sube y baja cremalleras", // bd: manipula_cremalleras
         choices: [
           "1. No lo ha intentado",
           "2. En proceso inicial de aprendizaje",

@@ -1,7 +1,7 @@
 export const habitFeedingQuestions = {
   questions: [
     {
-      question: "Come la mayoría de las frutas",  // bd: come_fruta
+      question: "Come la mayoría de las frutas",  // bd: come_frutas
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -41,7 +41,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Come la misma comida que el resto de la familia (sin menú especial)",  // bd: comida_familia
+      question: "Come la misma comida que el resto de la familia (sin menú especial)",  // bd: comeigual_familia
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -51,7 +51,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Desayuna antes de ir al jardín/colegio",  // bd: desayuna_antes_colegio
+      question: "Desayuna antes de ir al jardín/colegio",  // bd: desayuna_antesdel_colegio
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -111,7 +111,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Come todas las comidas sin reemplazarlas por suplementos nutricionales",  // bd: come_todo_sinsuplementos
+      question: "Come todas las comidas sin reemplazarlas por suplementos nutricionales",  // bd: cometodo_sinsuplementos
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -121,7 +121,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Su peso es adecuado para su talla",  // bd: peso_adecuado
+      question: "Su peso es adecuado para su talla",  // bd: pesotalla_adecuado
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",

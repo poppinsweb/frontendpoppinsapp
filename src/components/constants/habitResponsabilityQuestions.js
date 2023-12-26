@@ -51,7 +51,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Tiene asignados oficios en casa que beneficien a toda la familia", // db: oficios_asignados
+      question: "Tiene asignados oficios en casa que beneficien a toda la familia", // db: tieneoficios_asignados
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -61,7 +61,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Tiene horarios y rutinas establecidos", // db: horarios_rutinas
+      question: "Tiene horarios y rutinas establecidos", // db: tienehorarios_rutinas
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",

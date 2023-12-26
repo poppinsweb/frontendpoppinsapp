@@ -1,7 +1,7 @@
 export const habitSleepingQuestions = {
   questions: [
     {
-      question: "Tiene un horario establecido para dormir", // db: horario_paradormir
+      question: "Tiene un horario establecido para dormir", // db: horario_dormir
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
