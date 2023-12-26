@@ -1,5 +1,5 @@
-import CardAbilityDressingQuestion from "../../components/cards/CardAbilityDressingQuestion";
-import CardAbilityDressingTest from "../../components/cards/CardAbilityDressingTest";
+// import CardAbilityDressingQuestion from "../../components/cards/CardAbilityDressingQuestion";
+import CardAbilityDressingTest from "../../components/cards/CardAbilityDressingQuestion";
 
 export function PageAbilityDressing() {
   return (

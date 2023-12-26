@@ -5,18 +5,24 @@
 }
 
 .btn-color {
-  background-color: #5D2063;
+  /* background-color: #5D2063; */
+  background-color: #543c80;
   border-radius: 20px;
-  border: #5D2063;
+  border: #198754;
   width: 160px;
   height: 45px;
-  color: #ffff;  
+  color: #fff;  
 }   
 
 /*pendiente la seleccion del color para el hover de los botones*/
 .btn-color:hover {
-  background: #e22382;
+  background: #198754;
   color: #ffff;
+  cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
+}
+
+.btn:hover {
+  cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
 }
 
 .selectors {
@@ -49,4 +55,8 @@
 .question-card {
   margin: 100px auto;
   padding: 50px;
+}
+
+.nav-link:hover {
+  cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
 }

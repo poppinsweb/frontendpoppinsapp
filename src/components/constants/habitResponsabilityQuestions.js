@@ -1,7 +1,7 @@
 export const habitResponsabilityQuestions = {
   questions: [
     {
-      question: "Ayuda a dejar listo su uniforme en las noches",
+      question: "Ayuda a dejar listo su uniforme en las noches", // db: uniforme_listo
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -11,7 +11,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Ayuda a preparar su maleta para el colegio",
+      question: "Ayuda a preparar su maleta para el colegio", // db: prepara_maletin
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -21,7 +21,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Recoge y organiza sus juguetes",
+      question: "Recoge y organiza sus juguetes", // db: organiza_juguetes
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -31,7 +31,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Recoge y lleva a su lugar ropa sucia y zapatos",
+      question: "Recoge y lleva a su lugar ropa sucia y zapatos", // db: recoge_suropa_sucia
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -41,7 +41,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Recoge el plato de la mesa después de las comidas",
+      question: "Recoge el plato de la mesa después de las comidas", // db: recoge_suplato
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -51,7 +51,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Tiene asignados oficios en casa que beneficien a toda la familia",
+      question: "Tiene asignados oficios en casa que beneficien a toda la familia", // db: tieneoficios_asignados
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -61,7 +61,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Tiene horarios y rutinas establecidos",
+      question: "Tiene horarios y rutinas establecidos", // db: tienehorarios_rutinas
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -71,7 +71,7 @@ export const habitResponsabilityQuestions = {
       score: [],
     },
     {
-      question: "Cumple con los horarios y rutinas que se han acordado",
+      question: "Cumple con los horarios y rutinas que se han acordado", // db: cumple_acuerdos
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
