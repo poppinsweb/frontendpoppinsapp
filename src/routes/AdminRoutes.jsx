@@ -58,7 +58,7 @@ export function AdminRoutes() {
             <Route path="/habitos-dormir" element={<PageHabitSleeping />} />
             <Route path="/responsabilidades" element={<PageResponsability />} />
             <Route path="/resultados" element={<PageUserResult />} />
-            <Route path="/*" element={<Navigate to="/token" />} />
+            {/* <Route path="/*" element={<Navigate to="/token" />} /> */}
           </>
         )}
       </Routes>
