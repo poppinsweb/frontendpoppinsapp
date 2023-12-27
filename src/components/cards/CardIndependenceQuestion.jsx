@@ -16,8 +16,9 @@ export default function CardIndependenceQuestion() {
 
   const navigate = useNavigate();
 
-  const { question, choices } =
-    independenceQuestions.questions[currentQuestion];
+  const { question, choices } = independenceQuestions.questions[currentQuestion];
+  // console.log(question)
+  // console.log(choices)
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -97,10 +98,9 @@ export default function CardIndependenceQuestion() {
             <h2 className="main-question-title">{question}</h2>
             <ul className="question-section">
               {choices.map((choice, index) => (
-                <div className="question-li" key={choice}>
+                <div key={index} className="question-li" >
                   <li
                     onClick={() => handleAnswer(choice, index)}
-                    key={choice}
                     className={
                       answerIdx === index
                       ? "selected-answer question-text"

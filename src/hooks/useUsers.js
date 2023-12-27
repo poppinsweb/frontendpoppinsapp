@@ -3,7 +3,37 @@
 // import { usersReducer } from "../reducers/usersReducer";
 // import { findAll, save } from "../services/userService";
 
+import { collection, getDocs, query } from "firebase/firestore/lite";
+import { useState } from "react";
+import { db } from "../services/firebase";
+
 // const initialUsers = [];
+
+export const useUsers = () => {
+    // AQUI LOS HOOKS QUE MODIFICAN EL ESTADO DE LAS CARDS
+    const [data, setData] = useState([]);
+    // const [error, setError] = useState();
+    // const [loading, setLoading] = useState({});
+  
+    const getAllUsers = async () => {
+      try {
+        // setLoading((prev) => ({ ...prev, getData: true }));
+        const q = query(collection(db, "usuarios"));
+        const querySnapshot = await getDocs(q);
+        const datos = querySnapshot.docs.map((doc) => doc.data());
+        console.log("probando datos de firestore", datos)
+        setData(datos);
+      } catch (error) {
+        console.log(error);
+        // setError(error.code);
+      } 
+    //   finally {
+    //     setLoading((prev) => ({ ...prev, getData: false }));
+    //   }
+    };
+  
+    return { data, getAllUsers };
+  }
 
 // const initialUserForm = {
 //   id: 0,
