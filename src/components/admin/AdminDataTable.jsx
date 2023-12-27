@@ -1,16 +1,24 @@
 // UsersList
 // import { useContext } from "react";
+// import { useEffect, useState } from "react";
+// import { UserTableRow } from "../admin/UserTableRow";
+// import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import { UserTableRow } from "../admin/UserTableRow";
-// import { findAll } from "../../services/userAuthAxios";
+import { useUsers } from "../../hooks/useUsers";
+// import { getAllUsers } from "../../services/userAuthAxios";
 
 export function AdminDataTable() {
   const [ dataChildren, setDataChildren ] = useState([])
+
+  // const { user } = useAuth()
+  const { data, getAllUsers } = useUsers();
+
+  console.log(data) 
   
   useEffect(() =>{
     const getAllData = async () => {
-      const result = await findAll()
-      console.log(result.data)
+      const result = await getAllUsers()
+      // console.log(result.data)
       setDataChildren(result.data)
     }
     getAllData()
@@ -29,13 +37,18 @@ export function AdminDataTable() {
               </tr>
             </thead>
             <tbody>
-              {dataChildren.map(({ id, email }) => (
+              {/* <tr>
+                <td>{user.uid}</td>
+                <td>{user.email}</td>
+                <td>{token}</td>
+              </tr> */}
+              {/* {dataChildren.map(({ id, email }) => (
                 <UserTableRow
                   key={id}
                   id={id}
                   email={email}
                 />
-              ))}
+              ))} */}
             </tbody>
           </table>
         </div>

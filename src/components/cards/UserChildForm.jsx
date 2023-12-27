@@ -35,7 +35,9 @@ export function UserChildForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const selected = { ...userData, ...userSelect };
+      const selected = { ...userData, ...userSelect, 
+        "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
+      };
       console.log(selected);
       const res = await postNewSurvey(selected);
       if (res) {
@@ -76,8 +78,8 @@ export function UserChildForm() {
                 <strong>Nombres del niño:</strong>
                 <input
                   className="user-select user-code"
-                  id="names"
-                  name="name"
+                  id="name"
+                  name="nombres"
                   onChange={handleInputChange}
                   onInput={handleNameChange}
                   required
@@ -89,8 +91,8 @@ export function UserChildForm() {
                 <strong>Apellidos del niño:</strong>
                 <input
                   className="user-select"
-                  id="lastNames"
-                  name="lastName"
+                  id="lasname"
+                  name="apellidos"
                   onChange={handleInputChange}
                   onInput={handleLastNameChange}
                   required
@@ -104,7 +106,7 @@ export function UserChildForm() {
                   type="date"
                   className="user-select user-code"
                   id="birth"
-                  name="birthdate"
+                  name="fecha_nacimiento"
                   onChange={handleInputChange}
                   onInput={handleBirthChange}
                   required
@@ -147,16 +149,6 @@ export function UserChildForm() {
                 />
               </label>
             </div>
-            <label className="user-label">
-              <strong>Nombre del Centro Educativo</strong>
-              <input
-                className="user-select"
-                id="school"
-                name="school"
-                onChange={handleInputChange}
-                required
-              />
-            </label>
             <div className="">
               <label className="user-label">
                 <strong>Tipo de Centro Educativo:</strong>
@@ -210,6 +202,7 @@ export function UserChildForm() {
               <strong>Código del Niño</strong>
             </p>
             {userName && userLastName && userBirth ? (
+
               <p>
                 {userName[0] + userLastName[0] + userBirth.replace(/-/g, "")}
               </p>

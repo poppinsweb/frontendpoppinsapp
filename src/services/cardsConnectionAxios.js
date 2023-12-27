@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "http://localhost:3000";
 
 // "http://localhost:8080/api/infante";
 // "http://localhost:8080/api/survey";
@@ -20,7 +20,7 @@ const BASE_URL = "http://localhost:8080/api";
 // Trae los usuarios infante existentes en el endpoint
 const getAllChildren = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/infante}`);
+    const response = await axios.get(`${BASE_URL}/infantes/}`);
     console.log(response);
     return response;
   } catch (error) {
@@ -32,7 +32,7 @@ const getAllChildren = async () => {
 // Crea un nuevo usuario infante
 const postNewSurvey = async (objectChild) => {
   try {
-    return await axios.post(`${BASE_URL}/infante}`, objectChild);
+    return await axios.post('http://localhost:3000/infantes/', objectChild);
   } catch (error) {
     console.error(error)
     throw error;
@@ -55,7 +55,7 @@ const postNewSurvey = async (objectChild) => {
 // Edita agregando informacion a las tablas del usuario infante
 const updateDataSurvey = async(id, email) => {
   try {
-    return await axios.put(`${BASE_URL}/infante/${id}`, {
+    return await axios.put(`${BASE_URL}/infantes/${id}`, {
       email,
     })
   } catch (error) {
