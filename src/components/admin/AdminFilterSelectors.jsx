@@ -71,6 +71,7 @@ export function AdminFilterSelectors() {
             <div className="select">
               <label>SEXO</label>
               <Select
+                className="indiv-select"
                 defaultValue={{
                   label: "Seleccione una opción",
                   value: "empty",
@@ -149,9 +150,6 @@ export function AdminFilterSelectors() {
                 onChange={handleDegreeChange}
               />
             </div>
-            {/* <button className="btn btn-primary filter-btn btn-color">
-              Filtrar
-            </button> */}
           </div>
           {/* <div className="render-data">
             <h3>Sexo: {selectedGender}</h3>
