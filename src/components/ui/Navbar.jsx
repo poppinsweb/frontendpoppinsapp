@@ -42,6 +42,9 @@ export function Navbar() {
               <NavLink className="nav-link" to="/admin">Admin</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/crear">Crear</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/list">Lista</NavLink>
             </li>
             <li className="nav-item">

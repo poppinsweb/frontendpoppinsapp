@@ -1,6 +1,6 @@
 import CardHabitResponsabilityQuestion from "../../components/cards/CardHabitResponsabilityQuestion";
 
-function PageResponsability() {
+export function PageResponsability() {
   return (
     <>
       <CardHabitResponsabilityQuestion />
@@ -8,4 +8,3 @@ function PageResponsability() {
   )
 }
 
-export default PageResponsability

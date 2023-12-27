@@ -8,9 +8,9 @@ export default function FinalScoreCard() {
   
   return (
     <div className='question-container'>
-      <h1>Poppins Resultados</h1>
+      <h1 className="main-title">Poppins Resultados</h1>
       <div className="header-container">
-        <p>Nombre: Cosme Fulanito</p>
+        <p>Nombre: Cosme Fulanita</p>
         <p>Edad: 2 años 3 meses</p>
         <p>Sexo: Femenino</p>
         <p>Grado: Maternal</p>

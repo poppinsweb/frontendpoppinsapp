@@ -1,4 +1,3 @@
-// UsersPage
 import {AdminFilterSelectors} from "../../components/admin/AdminFilterSelectors";
 
 export function AdminDashboard() {
