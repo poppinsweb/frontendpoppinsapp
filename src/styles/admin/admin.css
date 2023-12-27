@@ -1,19 +1,29 @@
-.filter-data {
-  background-color: #d9d9d9;
+/* MOBILE SIZE */
+.main-container {
+
+}
+
+.select-container {
+  padding: 15px;
+  background-color: rgb(153, 132, 175);
+  width: max-content;
 }
 
 .filter-btn {
-  margin: 1.5rem;
+  margin: 2rem;
 }
 
-.render {
-  background-color: #ffffff;
-  margin-left: 11rem;
+.render-data {
+  display: block;
+  margin: 100px 250px;
+  text-align: left;
   padding: 15px;
   border: 2px solid #852c88;
+  margin: 0;
 }
 
-/*pendiente si colocarlo o no el background*/
-.data-filter-box {
-  background-image: url("../images/umbrelafondblank.png");
-}
+/* MEDIUM SCREEN */
+
+/* LARGE SCREEN */
+
+/* LARGER SCREEN */

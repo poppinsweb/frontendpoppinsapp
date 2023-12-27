@@ -30,9 +30,7 @@
 }
 
 .select {
-  /* display: flex; */
-  gap: 25px;
-  margin-top: 20px;
+  margin-top: 25px;
   
 }
 
@@ -59,4 +57,8 @@
 
 .nav-link:hover {
   cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
+}
+
+h1, h2, h3 {
+  color: #543c80;
 }

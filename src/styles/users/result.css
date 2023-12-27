@@ -7,7 +7,12 @@
 .header-container p {
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
+}
+
+.main-title {
+  color: rgb(104, 52, 152);
+  font-size: 55px;
 }
 
 .result-titles {

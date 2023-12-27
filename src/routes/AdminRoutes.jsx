@@ -14,7 +14,8 @@ import { PageAbilityGrooming } from "../pages/userPages/PageAbilityGrooming";
 import { PageAbilityDressing } from "../pages/userPages/PageAbilityDressing";
 import { PageHabitFeeding } from "../pages/userPages/PageHabitFeeding";
 import { PageHabitSleeping } from "../pages/userPages/PageHabitSleeping";
-import PageResponsability from "../pages/userPages/PageResponsability";
+import { PageResponsability } from "../pages/userPages/PageResponsability";
+import { CreateUser } from "../pages/admin/CreateUser";
 
 export function AdminRoutes() {
   const { userRol } = useAuth();
@@ -26,6 +27,7 @@ export function AdminRoutes() {
           <>
             <Route path="/inicio" element={<LandingPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/crear" element={<CreateUser />} />
             <Route path="/list" element={<UserList />} />
 
             <Route path="/personales" element={<PageUserChildData />} />
