@@ -1,0 +1,16 @@
+.header-container {
+  margin-top: 50px;
+  display: flex;
+  gap: 50px;
+}
+
+.header-container p {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+.result-titles {
+  /* text-align: left; */
+  color: rgb(250, 255, 240);
+}

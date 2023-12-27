@@ -7,6 +7,7 @@ import "../../styles/users/userChild.css";
 
 export function UserChildForm() {
   const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
+  // cambiar socialClass por socialLevel. cambiar edCenterType por educationType. 
 
   const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
