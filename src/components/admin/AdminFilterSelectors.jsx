@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { useState } from "react";
-import { QuestionFilter } from "./QuestionFilter";
+// import { QuestionFilter } from "./QuestionFilter";
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import "../../styles/admin/admin.css";
 
@@ -65,14 +65,9 @@ export function AdminFilterSelectors() {
 
   return (
     <>
-      <div className="container main-container">
+      <div className="container">
         <form onSubmit={handleSubmit}>
-          <h2>Panel del Administrador Poppins</h2>
           <div className="select-container">
-            <div className='select'>
-                  <label>PREGUNTAS:</label>
-                  <QuestionFilter />
-                </div>
             <div className="select">
               <label>SEXO</label>
               <Select
@@ -154,18 +149,18 @@ export function AdminFilterSelectors() {
                 onChange={handleDegreeChange}
               />
             </div>
-            <button className="btn btn-primary filter-btn btn-color">
+            {/* <button className="btn btn-primary filter-btn btn-color">
               Filtrar
-            </button>
+            </button> */}
           </div>
-          <div className="render-data">
+          {/* <div className="render-data">
             <h3>Sexo: {selectedGender}</h3>
             <h3>Años: {selectedYears}</h3>
             <h3>Meses: {selectedMonths}</h3>
             <h3>Estrato: {selectedSocialClass}</h3>
             <h3>Centro Educativo: {SelectedEdCenterType}</h3>
             <h3>Nivel: {selectedDegree}</h3>
-          </div>
+          </div> */}
         </form>
       </div>
     </>

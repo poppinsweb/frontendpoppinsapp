@@ -1,13 +1,20 @@
-import {AdminFilterSelectors} from "../../components/admin/AdminFilterSelectors";
+import { AdminFilterSelectors } from "../../components/admin/AdminFilterSelectors";
+import { QuestionFilter } from "../../components/admin/QuestionFilter";
+import "../../styles/admin/admin.css";
 
 export function AdminDashboard() {
   return (
-    <div className="container my-4">
-    <div className="">
-      <div className="">
-        <AdminFilterSelectors />
+    <>
+      <h2>Panel del Administrador Poppins</h2>
+      <div className="container main-container">
+        <div className="">
+          <AdminFilterSelectors />
+        </div>
+        <div className="">
+          {/* <label>PREGUNTAS:</label> */}
+          <QuestionFilter />
+        </div>
       </div>
-    </div>
-  </div>
+    </>
   );
 }

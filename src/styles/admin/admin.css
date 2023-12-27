@@ -1,6 +1,9 @@
 /* MOBILE SIZE */
 .main-container {
-
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 .select-container {

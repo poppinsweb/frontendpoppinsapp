@@ -1,0 +1,41 @@
+/* MOBILE SIZE */
+.register-container {
+  margin-top: -150px;
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a6a5a7;
+}
+
+#btn-register {
+  margin-top: 20px;
+}
+
+/* MEDIUM SCREEN */
+@media (min-width: 800px) {
+  .page-container {
+    padding: 50px;
+    padding-top: 150px;
+    min-height: 1024px;
+  }
+}
+
+/* LARGE SCREEN */
+@media (min-width: 1200px) {
+  .page-container {
+    min-height: 1250px;
+    padding-bottom: 1px;
+  }
+
+  .title-register {
+    font-size: 2.8rem;
+    color: #4a0a6a;
+    margin-top: 100px;
+  }
+}
+
+/* LARGER SCREEN */
+@media (min-width: 1500px) {
+}

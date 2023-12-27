@@ -1,13 +1,8 @@
 import Select from "react-select";
 import { useState } from "react";
-import "../../styles/App.css";
+import "../../styles/admin/admin.css";
 
-const DBQuestion = [
-  "1", 
-  "2", 
-  "3", 
-  "4",
-];
+const DBQuestion = ["1", "2", "3", "4"];
 
 export function QuestionFilter() {
   const [selectedQuestion, setSelectedQuestion] = useState();
@@ -18,37 +13,37 @@ export function QuestionFilter() {
   };
 
   return (
-    <>
-      <div className="select">
+    <div className="select-container">
+      <div className="container">
         <label>Independencia en el Baño:</label>
         <Select
-          defaultValue={{ label: "Seleccione una opción:", value: "empty" }} 
-            options={DBQuestion.map((q) => ({ label: q, value: q }))}
-            name="question"
-            onChange={handleQuestionChange} 
+          defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
+          options={DBQuestion.map((q) => ({ label: q, value: q }))}
+          name="question"
+          onChange={handleQuestionChange}
         />
       </div>
       <div className="select">
-      <label>Independencia en el Vestido:</label>
-      <Select
-        defaultValue={{ label: "Seleccione una opción:", value: "empty" }}
-        name=""
-      />
+        <label>Independencia en el Vestido:</label>
+        <Select
+          defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
+          name=""
+        />
+      </div>
+      <div className="select">
+        <label>Independencia en la Alimentación:</label>
+        <Select
+          defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
+          name=""
+        />
+      </div>
+      <div className="select">
+        <label>Independencia en el Sueño:</label>
+        <Select
+          defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
+          name=""
+        />
+      </div>
     </div>
-    <div className="select">
-      <label>Independencia en la Alimentación:</label>
-      <Select
-        defaultValue={{ label: "Seleccione una opción:", value: "empty" }}
-        name=""
-      />
-    </div>
-    <div className="select">
-      <label>Independencia en el Sueño:</label>
-      <Select
-        defaultValue={{ label: "Seleccione una opción:", value: "empty" }}
-        name=""
-      />
-    </div>
-  </>
   );
 }
