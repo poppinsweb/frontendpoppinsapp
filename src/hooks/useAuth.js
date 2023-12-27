@@ -40,7 +40,7 @@ export const useAuth = () => {
     });
     // console.log(loginCredential.user.uid);
     const docRef = doc(db, `usuarios/${loginCredential.user.uid}`)
-    await setDoc(docRef, {email: email, rol: rol})
+    await setDoc(docRef, {email: email, rol: rol, id: loginCredential.user.uid})
   };
 
   // LOGIN DE USUARIOS

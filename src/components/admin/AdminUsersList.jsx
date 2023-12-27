@@ -1,35 +1,38 @@
 import { useState, useEffect } from "react";
 // import { getAllChildren } from "../../services/cardsConnectionAxios";
+import { useUsers } from "../../hooks/useUsers";
 
 export const AdminUsersList = () => {
-  const [dataChildren, setDataChildren] = useState([]);
+  // const [dataChildren, setDataChildren] = useState([]);
+  const { getAllUsers, data } = useUsers()
+  
 
   useEffect(() => {
     const getAllData = async () => {
-      const result = await getAllChildren();
-      console.log(result.data);
-      setDataChildren(result.data);
+      await getAllUsers()  
     };
+
     getAllData();
   }, []);
+
   return (
     <div>
       <h2>Resultados</h2>
       <table className="table table-hover table-striped">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>LASTNAME</th>
+            <th>ROL</th>
+            <th>EMAIL</th>
+            <th>TOKEN</th>
           </tr>
         </thead>
         <tbody>
-          {dataChildren.map(({ idinfantes, name, lastName }) => {
+          {data.map(({ id, rol, email }) => {
             return (
-              <tr key={idinfantes}>
-                <td>{idinfantes}</td>
-                <td>{name}</td>
-                <td>{lastName}</td>
+              <tr key={id}>
+                <td>{rol}</td>
+                <td>{email}</td>
+                <td>{id}</td>
               </tr>
             );
           })}
