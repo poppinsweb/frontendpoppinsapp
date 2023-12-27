@@ -17,9 +17,9 @@ export function Navbar() {
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>
-        <h1 className='navbar-brand'>
+        {/* <h1 className='navbar-brand'>
           Poppins
-        </h1>
+        </h1> */}
         <button
           className='navbar-toggler'
           type='button'
@@ -33,10 +33,10 @@ export function Navbar() {
         <div className='collapse navbar-collapse' id='navbarNav'>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Inicio</NavLink>
+              <NavLink className="nav-link" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/login">Autenticación</NavLink>
+              <NavLink className="nav-link" to="/login">Login</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/admin">Admin</NavLink>
@@ -57,25 +57,25 @@ export function Navbar() {
               <NavLink className="nav-link" to="/independencia">Independencia</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-aseo">Habilidades aseo</NavLink>
+              <NavLink className="nav-link" to="/habilidades-aseo">Habilaseo</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-vestido">Habilidades vestido</NavLink>
+              <NavLink className="nav-link" to="/habilidades-vestido">Habilvestido</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-alimentacion">Habilidades alimentación</NavLink>
+              <NavLink className="nav-link" to="/habilidades-alimentacion">Habilalimenta</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habitos-alimentacion">Hábitos alimentación</NavLink>
+              <NavLink className="nav-link" to="/habitos-alimentacion">Hábitalimenta</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/habitos-dormir">Hábitos sueño</NavLink>
+              <NavLink className="nav-link" to="/habitos-dormir">Hábitsueño</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/responsabilidades">Responsabilidades</NavLink>
+              <NavLink className="nav-link" to="/responsabilidades">Responsab</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/resultados">Resultados</NavLink>
+              <NavLink className="nav-link" to="/resultados">Result</NavLink>
             </li>
           </ul>
         </div>
