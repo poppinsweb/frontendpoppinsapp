@@ -148,7 +148,8 @@ export function UserChildForm() {
                 />
               </label>
             </div>
-            <label className="user-label">
+            {/* EVALUAR CON LA CLIENTE LA NECESIDAD DE AGREGAR EL NOMBRE DEL COLEGIO */}
+            {/* <label className="user-label">
               <strong>Nombre del Centro Educativo</strong>
               <input
                 className="user-select"
@@ -157,7 +158,7 @@ export function UserChildForm() {
                 onChange={handleInputChange}
                 required
               />
-            </label>
+            </label> */}
             <div className="">
               <label className="user-label">
                 <strong>Tipo de Centro Educativo:</strong>
