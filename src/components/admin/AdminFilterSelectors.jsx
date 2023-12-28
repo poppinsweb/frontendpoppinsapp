@@ -8,17 +8,12 @@ export function AdminFilterSelectors() {
   const { gender, socialClass, edCenterType, degree, years, months } =
     userChildFormOptions;
 
-  // const [inputName, setInputName] = useState();
-
   const [selectedGender, setSelectedGender] = useState();
   const [selectedYears, setSelectedYears] = useState();
   const [selectedMonths, setSelectedMonths] = useState();
   const [selectedSocialClass, setSelectedSocialClass] = useState();
   const [SelectedEdCenterType, setSelectedEdCenterType] = useState();
   const [selectedDegree, setSelectedDegree] = useState();
-
-  // USAR USEEFFECT PARA CAPTURAR CADA ELECCION EN UN ARRAY, QUE SERA ENVIADO A TRAVES DEL ONSUBMIT DEL FORM
-  // SE PODRA USAR UN PAR NAME: VALUE?
 
   const handleGenderChange = ({ name, value }) => {
     console.log(name + ":", value);
@@ -50,9 +45,8 @@ export function AdminFilterSelectors() {
     setSelectedDegree(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const selected = [
+  // GUARDA LAS SELECCIONES EN UN ARRAY
+  const selected = [
       selectedGender,
       selectedYears,
       selectedMonths,
@@ -61,27 +55,30 @@ export function AdminFilterSelectors() {
       selectedDegree,
     ];
     console.log(selected);
-  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
   return (
     <>
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={ handleSubmit }>
           <div className="select-container">
             <div className="select">
               <label>SEXO</label>
               <Select
-                className="indiv-select"
+                className=""
                 defaultValue={{
                   label: "Seleccione una opción",
                   value: "empty",
                 }}
-                options={gender.map((gen) => ({
+                options={ gender.map((gen) => ({
                   label: gen.label,
                   name: gen.name,
                   value: gen.value,
                 }))}
-                onChange={handleGenderChange}
+                onChange={ handleGenderChange }
               />
             </div>
             <div className="select">
@@ -151,14 +148,13 @@ export function AdminFilterSelectors() {
               />
             </div>
           </div>
-          {/* <div className="render-data">
-            <h3>Sexo: {selectedGender}</h3>
-            <h3>Años: {selectedYears}</h3>
-            <h3>Meses: {selectedMonths}</h3>
-            <h3>Estrato: {selectedSocialClass}</h3>
-            <h3>Centro Educativo: {SelectedEdCenterType}</h3>
-            <h3>Nivel: {selectedDegree}</h3>
-          </div> */}
+          <div className="render-data">
+            <p><strong>Sexo:</strong> { selectedGender }</p>
+            <p><strong>Años:</strong> { selectedYears } <strong>Meses:</strong> { selectedMonths }</p>
+            <p><strong>Estrato:</strong> { selectedSocialClass }</p>
+            <p><strong>Centro Educativo:</strong> { SelectedEdCenterType }</p>
+            <p><strong>Nivel:</strong> { selectedDegree }</p>
+          </div>
         </form>
       </div>
     </>

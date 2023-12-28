@@ -3,17 +3,17 @@ import { useState } from "react";
 
 import "../../styles/admin/admin.css";
 
-const DBQuestion = ["1", "2", "3", "4"];
+const DBQuestion = [1, 2, 3, 4]; // ESTO VENDRIA DE LA BASE DE DATOS
 
 export function QuestionFilter() {
   const [selectedQuestion, setSelectedQuestion] = useState();
 
   const handleQuestionChange = ({ value }) => {
-    // REVISAR LA FUNCION PARA QUE CAPTURE EL DATO, POSTERIORMENTE GUARDAR ESTE DATO EN UN ARRAY PARA EL FILTRADO
     console.log(selectedQuestion);
     setSelectedQuestion(value);
   };
-
+  const selectedScore = [selectedQuestion]
+  console.log(selectedScore);
   return (
     <div className="container">
       <form>
@@ -24,7 +24,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="independencia_ducha"
-              onChange={handleQuestionChange}
+              onChange={ handleQuestionChange }
             />
           </div>
           <div className="select">

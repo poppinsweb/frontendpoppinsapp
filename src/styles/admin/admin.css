@@ -29,7 +29,7 @@
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {
 .main-container {
-  flex-direction: row;
+  /* flex-direction: row; */
 }
 }
 
