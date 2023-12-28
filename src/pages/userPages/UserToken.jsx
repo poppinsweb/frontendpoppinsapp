@@ -5,11 +5,13 @@ import { TokenNavigation } from "../../components/token/TokenNavigation";
 
 export function UserToken() {
   return (
-    <div className="token-container">
-      <InfoToken />
+    <div className="token-main-container">
       <LogoToken />
       <div className="row">
-        <div className="col-md-8 token-card">
+        <div className="col-md-4">
+          <InfoToken />
+        </div>
+        <div className="col-md-4 token-card">
           <TokenBox />
         </div>
         <div className="col-md-4">

@@ -23,7 +23,7 @@
 
 .main-question-title {
   font-size: 2.8rem;
-  color: #983aa3;
+  color: #683498;
 }
 
 .secoundary-question-title {
@@ -64,9 +64,7 @@
 }
 
 .question-li:hover {
-  font-size: 30px;
-  background-color: #96449e;
-  color: #f0f8ff;
+  background-color: #b8adbb;
 }
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
@@ -136,11 +134,19 @@
   }
 
   .question-container {
-    width: 1150px;
-    height: 750px;
+    width: 1050px;
+    height: 650px;
     background-size: cover;
-    /* justify-content: center;
-    align-items: center; */
+  }
+
+  .main-question-title {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+  
+  .secoundary-question-title {
+    padding-top: 10px;
+    font-size: 1.8rem;
   }
 }
 
