@@ -7,10 +7,7 @@ export function UserAuthPage() {
         <div className="login-card">
           <UserLogin />
         </div>
-        <div className="login-card">
-          <UserRegister/>
-        </div>
       </div>
     </>
   );
-}
+};
