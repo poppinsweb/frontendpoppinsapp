@@ -1,12 +1,15 @@
 /* MOBILE SIZE */
 .main-container {
-  /* background-color:#a4bda2; */
+  background-color:#a4bda2;
   display: flex;
   flex-direction: column; 
   gap: 20px;
   align-items: center;
   justify-content: center;
-  /* margin-top: 50px; */
+}
+
+.title-panel{
+  margin-top: 30px;
 }
 
 .select-container {

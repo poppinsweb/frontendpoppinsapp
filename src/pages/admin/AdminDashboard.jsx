@@ -7,7 +7,7 @@ export function AdminDashboard() {
   return (
     <>
       <div className="container main-container">
-        <h2>Panel del Administrador Poppins</h2>
+        <h1 className="title-panel">Panel del Administrador Poppins</h1>
         <div className="">
           <AdminFilterSelectors />
           {/* <RenderDataChild /> */}
