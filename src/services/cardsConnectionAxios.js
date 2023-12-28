@@ -20,13 +20,13 @@ const BASE_URL = "http://localhost:3000";
 // Trae los usuarios infante existentes en el endpoint
 const getAllChildren = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/infantes/}`);
+    const response = await axios.get('http://localhost:3000/infantes/');
     console.log(response);
     return response;
   } catch (error) {
     console.error(error);
+    throw error;
   }
-  return null;
 };
 
 // Crea un nuevo usuario infante
