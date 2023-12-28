@@ -17,7 +17,7 @@ export const AdminUsersList = () => {
 
   return (
     <div>
-      <h2>Resultados</h2>
+      <h2>Usuarios</h2>
       <table className="table table-hover table-striped">
         <thead>
           <tr>

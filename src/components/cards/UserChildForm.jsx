@@ -7,14 +7,14 @@ import "../../styles/users/userChild.css";
 
 export function UserChildForm() {
   const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
-  // cambiar socialClass por socialLevel. cambiar edCenterType por educationType. 
+  // cambiar nombres socialClass por socialLevel. cambiar edCenterType por educationType. 
 
   const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
 
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [userBirth, setUserBirth] = useState("");
+  const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS
 
   const navigate = useNavigate();
 
