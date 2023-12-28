@@ -6,35 +6,29 @@ export const TokenBox= () => {
     console.log("probando input de token")
   }
 
-  const token = "########"; // TODO: CREAR EL MECANISMO DE TOKEN
+  const token = "########"; // CREAR EL MECANISMO DE TOKEN/TRAER TOKEN DE FIREBASE Y ASOCIAR A ENCUESTA X2
   return (
-    // <div className="container-fluid">
       <div className="box-tokens-container">
         <h2>Códigos disponibles</h2>
         <form className="radio-token-container">
           {/* TODO: CHECKEAR UNA SOLA OPCION */}
           <label>
             <input
-              // className="input-token"
               type="radio"
               id="cbox1"
-              // value="first_checkbox"
             />
             Token: { token }
           </label>
           <label>
             <input
-              // className="input-token"
               type="radio"
               id="cbox2"
-              // value="second_checkbox"
             />
             Token: { token }
           </label>
         </form>
-        {/* TODO: DAR FUNCION AL BOTON DE CREAR TOKEN */}
+        {/*DAR FUNCION AL BOTON DE CREAR TOKEN O ELIMINAR BOTON*/}
         <button className="btn btn-color btn-add">+ Agregar Token</button>
       </div>
-    // </div>
   );
 }
