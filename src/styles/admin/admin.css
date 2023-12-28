@@ -1,6 +1,6 @@
 /* MOBILE SIZE */
 .main-container {
-  background-color:#a4bda2;
+  /* background-color:#a4bda2; */
   display: flex;
   flex-direction: column; 
   gap: 20px;
@@ -11,7 +11,7 @@
 
 .select-container {
   padding: 15px;
-  background-color: #9984af;
+  /* background-color: #9984af; */
   width: max-content;
 }
 
