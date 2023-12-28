@@ -1,5 +1,4 @@
 import { UserLogin } from "../../components/auth/UserLogin";
-import { UserRegister } from "../../components/auth/UserRegister";
 
 export function UserAuthPage() {
   return (
@@ -8,10 +7,7 @@ export function UserAuthPage() {
         <div className="login-card">
           <UserLogin />
         </div>
-        <div className="login-card">
-          <UserRegister/>
-        </div>
       </div>
     </>
   );
-}
+};

@@ -28,28 +28,49 @@ export default function FinalScoreCard() {
         </thead>
         <tbody className="result-titles">
           <tr >
-            <td>Independencia</td>
+            <td>Independencia en el Baño</td>
+            <td className="table-primary">*</td>
+            <td className="table-success"></td>
+            <td className="table-warning"></td>
+            <td className="table-danger"></td>
+          </tr>
+          <tr >
+            <td>Independencia en el Vestido</td>
+            <td className="table-primary">*</td>
+            <td className="table-success"></td>
+            <td className="table-warning"></td>
+            <td className="table-danger"></td>
+          </tr>
+          <tr >
+            <td>Independencia en la Alimentación</td>
+            <td className="table-primary">*</td>
+            <td className="table-success"></td>
+            <td className="table-warning"></td>
+            <td className="table-danger"></td>
+          </tr>
+          <tr >
+            <td>Independencia del Sueño</td>
             <td className="table-primary">*</td>
             <td className="table-success"></td>
             <td className="table-warning"></td>
             <td className="table-danger"></td>
           </tr>
           <tr>
-            <td>Habilidades de aseo</td>
+            <td>Habilidades de Aseo Personal</td>
             <td className="table-primary"></td>
             <td className="table-success">*</td>
             <td className="table-warning"></td>
             <td className="table-danger"></td>
           </tr>
           <tr>
-            <td>Habilidades de vestido</td>
+            <td>Habilidades del Vestido</td>
             <td className="table-primary"></td>
             <td className="table-success">*</td>
             <td className="table-warning"></td>
             <td className="table-danger"></td>
           </tr>
           <tr>
-            <td>Habilidades de alimentación</td>
+            <td>Habilidades en la Alimentación</td>
             <td className="table-primary"></td>
             <td className="table-success"></td>
             <td className="table-warning">*</td>
@@ -70,7 +91,7 @@ export default function FinalScoreCard() {
             <td className="table-danger"></td>
           </tr>
           <tr>
-            <td>Responsabilidades</td>
+            <td>Responsabilidades Personales y Escolares</td>
             <td className="table-primary"></td>
             <td className="table-success">*</td>
             <td className="table-warning"></td>

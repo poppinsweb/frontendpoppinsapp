@@ -5,7 +5,8 @@
 
 .logo-container {
   background-image: url("../images/cloud-stars.jpg");
-  background-size: cover;
+  background-size: contain;
+  background-color: #6870a1;
   background-repeat: no-repeat;
   height: 600px;
 }
@@ -112,20 +113,20 @@ a {
   }
 
   .img-individual-container1, .img-individual-container2 {
-    margin-right: 50px;
+    margin-right: 20px;
   }
   
   .img-slider {
     border: 1px solid #852c88;
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 50px;
     box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
   }
 
   .img-slider:hover {
-    width: 190px;
-    height: 190px;
+    width: 160px;
+    height: 160px;
     opacity: .5;
   }
 }
