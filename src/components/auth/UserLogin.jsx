@@ -50,7 +50,7 @@ export function UserLogin() {
         showConfirmButton: false,
         timer: 2000,
       });
-      navigate("/token");
+      navigate("/token"); // DEBERIA SER CONDICIONAL PARA QUE AL ADMIN LO DIRIJA A ADMIN
     } catch (error) {
       const errorCode = error.code;
       // console.log(errorCode);

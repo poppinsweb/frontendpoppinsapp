@@ -1,5 +1,5 @@
 import { auth, db } from "../services/firebase";
-import { doc, getDoc, setDoc} from "firebase/firestore/lite";
+import { doc, getDoc, setDoc } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -11,8 +11,8 @@ import {
   signOut,
   setPersistence,
   browserSessionPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
-
 
 const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
   isAuth: false,
@@ -26,42 +26,48 @@ export const useAuth = () => {
 
   // REGISTRO DE USUARIOS EN FIREBASE
   const register = async (email, password, rol) => {
-    // console.log(rol)
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      return;
+    try {
+      await setPersistence(auth, browserSessionPersistence);
+
+      const usuarioFirebase = await createUserWithEmailAndPassword(auth, email, password);
+      // console.log('Usuario de Firebase:', usuarioFirebase);
+      const assignedRol = rol || "usuario";
+      const docRef = doc(db, `usuarios/${usuarioFirebase.user.uid}`);
+      await setDoc(docRef, {
+        email: email,
+        rol: rol,
+        id: usuarioFirebase.user.uid,
+      });
+
+      await setPersistence(auth, browserLocalPersistence);
+
+      return usuarioFirebase;
+    } catch (error) {
+      console.error("Error durante el registro del usuario", error);
     }
-    const loginCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    ).then((usuarioFirebase) => {
-      return usuarioFirebase
-    });
-    // console.log(loginCredential.user.uid);
-    const docRef = doc(db, `usuarios/${loginCredential.user.uid}`)
-    await setDoc(docRef, {email: email, rol: rol, id: loginCredential.user.uid})
   };
 
   // LOGIN DE USUARIOS
   const login = async (email, password) => {
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      return;
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        return;
+      }
+      await signInWithEmailAndPassword(auth, email, password);
+      // console.log(userCredential.operationType);
+    } catch (error) {
+      console.error("Error durante el inicio de sesion", error);
     }
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    // console.log(userCredential.operationType);
   };
 
   // LOGIN CON GOOGLE
   const loginWithGoogle = () => {
     const currentUser = auth.currentUser;
     if (
-      currentUser && currentUser.providerData[0].providerId === "google.com") {
+      currentUser &&
+      currentUser.providerData[0].providerId === "google.com"
+    ) {
       return;
     }
     const googleProvider = new GoogleAuthProvider();
@@ -81,33 +87,33 @@ export const useAuth = () => {
   };
 
   // OBTENER EL ROL DE LA BD
-  const getRol = async(uid) => {
-    const docuRef = doc(db, `usuarios/${uid}`)
-    const docu = await getDoc(docuRef)
-    const finalData = docu.data().rol;
-    return finalData
-  }
+  const getRol = async (uid) => {
+    const docuRef = doc(db, `usuarios/${uid}`);
+    const docu = await getDoc(docuRef);
+    const finalData = docu.data() ? docu.data().rol : "usuario";
+    return finalData;
+  };
 
   // VERIFICA EL ESTADO DEL LOGIN
   useEffect(() => {
     const loginState = onAuthStateChanged(auth, (currentUser) => {
       console.log({ currentUser });
 
-      const resultado = async()=>{
-        if(currentUser){
+      const resultado = async () => {
+        if (currentUser) {
           await getRol(currentUser.uid).then((rol) => {
             const userData = {
               uid: currentUser.uid,
               email: currentUser.email,
-              rol: rol
-            }
-            setUserRol(userData)
-            console.log("userData final", userData)
-          })
-        } 
-      }
-      resultado()
-      
+              rol: rol,
+            };
+            setUserRol(userData);
+            console.log("userData final", userData);
+          });
+        }
+      };
+      resultado();
+
       setUser(currentUser);
     });
     return () => loginState();
@@ -126,7 +132,8 @@ export const useAuth = () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-    })
+      console.error("Error en la persistencia:", errorCode, errorMessage)
+    });
 
   return {
     login,
@@ -138,9 +145,3 @@ export const useAuth = () => {
     persistence,
   };
 };
-
-
-
-
-
-

@@ -30,7 +30,7 @@ export const AdminCreateUser = () => {
 
   const handleRolChange = (e) => {
     const value = e.value;
-    setRol(value);
+    setRol(value === "default" ? "usuario" : value);
     console.log(value);
   };
 
@@ -74,7 +74,7 @@ export const AdminCreateUser = () => {
         showConfirmButton: false,
         timer: 2500,
       });
-      navigate("/token");
+      // navigate("/token");
     } catch (error) {
       const errorCode = error.code;
       // console.log(errorCode);
@@ -122,11 +122,11 @@ export const AdminCreateUser = () => {
         <Select
           defaultValue={{
             label: "Seleccione el rol",
-            value: "empty",
+            value: "default",
           }}
           options={[
-            { label: "administrador", value: "admin" },
-            { label: "usuario", value: "usuario" },
+            { label: "Administrador", value: "admin" },
+            { label: "Usuario", value: "usuario" },
           ]}
           onChange={handleRolChange}
         />
