@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import Select from "react-select";
+import Swal from "sweetalert2";
+import { useAuth } from "../../hooks/useAuth";
 import "../../styles/admin/create-user.css";
 
 const initialState = {
@@ -15,11 +14,9 @@ export const AdminCreateUser = () => {
   const [userRegister, setUserRegister] = useState(initialState);
   const [rol, setRol] = useState(null);
 
-  const navigate = useNavigate();
   const { email, password, password2 } = userRegister;
   const { register } = useAuth();
 
-  // **********
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUserRegister({
@@ -31,10 +28,9 @@ export const AdminCreateUser = () => {
   const handleRolChange = (e) => {
     const value = e.value;
     setRol(value === "default" ? "usuario" : value);
-    console.log(value);
+    // console.log(value);
   };
 
-  // *********
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUserRegister(initialState);
@@ -65,27 +61,20 @@ export const AdminCreateUser = () => {
     try {
       const userCredential = await register(email, password, rol);
       console.log(userCredential);
-      console.log(rol);
-      // SIGNED IN
+      // console.log(rol);
+
       Swal.fire({
         icon: "success",
         title: "Usuario registrado",
-        footer: "SESION INICIADA",
-        showConfirmButton: false,
-        timer: 2500,
+        footer: "REGISTRO EXITOSO",
+        showConfirmButton: true,
       });
-      // navigate("/token");
     } catch (error) {
-      const errorCode = error.code;
-      // console.log(errorCode);
-      //   const errorMessage = error.message;
-      // console.log(errorMessage);
-
-      if (errorCode === "auth/email-already-in-use") {
+      if (error.code === "auth/email-already-in-use") {
         Swal.fire({
           icon: "warning",
-          title: "Por favor inicie sesión...",
-          text: "Su correo ya se encuentra registrado",
+          title: "Por favor verifique...",
+          text: "El correo ya se encuentra registrado",
         });
       }
     }
@@ -120,15 +109,16 @@ export const AdminCreateUser = () => {
           onChange={handleChange}
         />
         <Select
-          defaultValue={{
+          required={true}
+          value={{
             label: "Seleccione el rol",
-            value: "default",
+            value: rol || "default",
           }}
           options={[
             { label: "Administrador", value: "admin" },
             { label: "Usuario", value: "usuario" },
           ]}
-          onChange={handleRolChange}
+          onChange={ handleRolChange }
         />
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar

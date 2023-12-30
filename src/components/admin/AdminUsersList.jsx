@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
-// import { getAllChildren } from "../../services/cardsConnectionAxios";
+import { useEffect } from "react";
 import { useUsers } from "../../hooks/useUsers";
 
 export const AdminUsersList = () => {
-  // const [dataChildren, setDataChildren] = useState([]);
-  const { getAllUsers, data } = useUsers()
-  
+  const { getAllUsers, data } = useUsers();
 
   useEffect(() => {
     const getAllData = async () => {
-      await getAllUsers()  
+      await getAllUsers();
     };
 
     getAllData();

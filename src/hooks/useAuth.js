@@ -5,9 +5,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
   signOut,
   setPersistence,
   browserSessionPersistence,
@@ -20,30 +17,25 @@ const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
 };
 
 export const useAuth = () => {
-  // HOOK QUE VA A ACTUALIZAR EL ESTADO DE LOGIN
   const [user, setUser] = useState(initialLogin);
   const [userRol, setUserRol] = useState();
 
   // REGISTRO DE USUARIOS EN FIREBASE
   const register = async (email, password, rol) => {
     try {
-      await setPersistence(auth, browserSessionPersistence);
-
       const usuarioFirebase = await createUserWithEmailAndPassword(auth, email, password);
-      // console.log('Usuario de Firebase:', usuarioFirebase);
       const assignedRol = rol || "usuario";
       const docRef = doc(db, `usuarios/${usuarioFirebase.user.uid}`);
       await setDoc(docRef, {
         email: email,
-        rol: rol,
+        rol: assignedRol,
         id: usuarioFirebase.user.uid,
       });
-
-      await setPersistence(auth, browserLocalPersistence);
 
       return usuarioFirebase;
     } catch (error) {
       console.error("Error durante el registro del usuario", error);
+      throw error;
     }
   };
 
@@ -59,31 +51,6 @@ export const useAuth = () => {
     } catch (error) {
       console.error("Error durante el inicio de sesion", error);
     }
-  };
-
-  // LOGIN CON GOOGLE
-  const loginWithGoogle = () => {
-    const currentUser = auth.currentUser;
-    if (
-      currentUser &&
-      currentUser.providerData[0].providerId === "google.com"
-    ) {
-      return;
-    }
-    const googleProvider = new GoogleAuthProvider();
-
-    const auth = getAuth();
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
   };
 
   // OBTENER EL ROL DE LA BD
@@ -119,21 +86,24 @@ export const useAuth = () => {
     return () => loginState();
   }, []);
 
-  // LOGOUT DE USUARIO
+  // LOGOUT DEL USUARIO
   const logout = async () => {
     await signOut(auth);
   };
 
   // PERSISTENCIA DEL ESTADO DE AUTENTICACION DE USUARIO
-  const persistence = setPersistence(auth, browserSessionPersistence)
-    .then(() => {
-      return signInWithEmailAndPassword(auth, email, password);
-    })
-    .catch((error) => {
+  const persistence = async () => {
+    try {
+      await setPersistence(auth, browserSessionPersistence);
+      await setPersistence(auth, browserLocalPersistence);
+      console.log("Persistencia configurada ok");
+    }
+    catch(error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error("Error en la persistencia:", errorCode, errorMessage)
-    });
+    };
+  };
 
   return {
     login,
@@ -141,7 +111,6 @@ export const useAuth = () => {
     register,
     user,
     userRol,
-    loginWithGoogle,
     persistence,
   };
 };

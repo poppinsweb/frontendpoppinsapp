@@ -1,14 +1,12 @@
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthProvider"; // Componente del context
 import { Routes, Route } from "react-router-dom";
+import { AuthContext } from "./context/AuthProvider";
 import { Navbar } from "./components/ui/Navbar";
-import "./styles/App.css";
-
 import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
 import { UserAuthPage } from "./pages/auth/UserAuthPage";
-
 import { AdminRoutes } from "./routes/AdminRoutes";
+import "./styles/App.css";
 
 function App() {
   const { user } = useContext(AuthContext);

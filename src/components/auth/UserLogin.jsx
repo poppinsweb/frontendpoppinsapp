@@ -18,7 +18,6 @@ export function UserLogin() {
   const { email, password } = user;
   const { login } = useAuth();
 
-  // ***********
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUser({
@@ -27,7 +26,6 @@ export function UserLogin() {
     });
   };
 
-  // **********
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUser(initialState);

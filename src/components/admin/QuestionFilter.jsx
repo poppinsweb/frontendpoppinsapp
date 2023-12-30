@@ -6,7 +6,6 @@ import "../../styles/admin/admin.css";
 const DBQuestion = [1, 2, 3, 4]; // ESTO VENDRIA DE LA BASE DE DATOS?
 
 export function QuestionFilter() {
-
   const [selectedQuestion, setSelectedQuestion] = useState({});
 
   const handleQuestionChange = ({ value }) => {
@@ -19,12 +18,12 @@ export function QuestionFilter() {
 
   useEffect(() => {
     console.log("Score selected: ", selectedQuestion);
-  }, [selectedQuestion])
+  }, [selectedQuestion]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submited", selectedQuestion);
-  }
+  };
 
   return (
     <div className="container">
@@ -36,7 +35,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="independencia_ducha"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -45,7 +44,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="independencia_vestido"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -54,7 +53,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="independencia_alimentacion"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -63,7 +62,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="independencia_dormir"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -72,7 +71,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habilidades_higiene"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -81,7 +80,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habilidades_vestido"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -90,7 +89,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habilidades_alimentacion"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -99,7 +98,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habitos_alimentacion"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -108,7 +107,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habitos_dormir"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
           <div className="select">
@@ -117,7 +116,7 @@ export function QuestionFilter() {
               defaultValue={{ label: "Seleccione un puntaje:", value: "empty" }}
               options={DBQuestion.map((q) => ({ label: q, value: q }))}
               name="habitos_responsabilidad"
-              onChange={ handleQuestionChange }
+              onChange={handleQuestionChange}
             />
           </div>
         </div>
