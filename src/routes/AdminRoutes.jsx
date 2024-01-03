@@ -7,7 +7,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import { UserToken } from "../pages/userPages/UserToken";
 import { PageUserChildData } from "../pages/userPages/PageUserChildData";
-import { PageIndependenceQuestions } from "../pages/userPages/PageIndependenceQuestions";
+import { PageIndependence } from "../pages/userPages/PageIndependence";
 import { PageSkillsFeeding } from "../pages/userPages/PageSkillsFeeding";
 import { PageUserResult } from "../pages/userPages/PageUserResult";
 import { PageSkillsGrooming } from "../pages/userPages/PageSkillsGrooming";
@@ -32,7 +32,7 @@ export function AdminRoutes() {
 
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
-            <Route path="/independencia" element={<PageIndependenceQuestions />} />
+            <Route path="/independencia" element={<PageIndependence />} />
             <Route path="/habilidades-aseo" element={<PageSkillsGrooming />} />
             <Route path="/habilidades-vestido" element={<PageSkillsDressing />} />
             <Route path="/habilidades-alimentacion" element={<PageSkillsFeeding />} />
@@ -50,13 +50,13 @@ export function AdminRoutes() {
             <Route path="/inicio" element={<LandingPage />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
-            <Route path="/independencia" element={<PageIndependenceQuestions />} />
+            <Route path="/independencia" element={<PageIndependence />} />
             <Route path="/habilidades-aseo" element={<PageSkillsGrooming />} />
             <Route path="/habilidades-vestido" element={<PageSkillsDressing />} />
             <Route path="/habilidades-alimentacion" element={<PageSkillsFeeding />} />
-            <Route path="/habitos-alimentacion" element={<PageHabitFeeding />} />
-            <Route path="/habitos-dormir" element={<PageHabitSleeping />} />
-            <Route path="/responsabilidades" element={<PageResponsSkills />} />
+            <Route path="/habitos-alimentacion" element={<PageHabitsFeeding />} />
+            <Route path="/habitos-dormir" element={<PageHabitsSleeping />} />
+            <Route path="/responsabilidades" element={<PageHabitsResponsability/>} />
             <Route path="/resultados" element={<PageUserResult />} />
             {/* <Route path="/*" element={<Navigate to="/token" />} /> */}
           </>
