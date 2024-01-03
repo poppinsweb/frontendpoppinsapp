@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { habitSleepingQuestions } from "../constants/habitSleepingQuestions";
+import { abilityDressingQuestions } from "../constants/abilityDressingQuestions";
 import "../../styles/users/questions.css";
 
-export default function CardAbilitySleepingQuestion() {
+export const SkillsDressing = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
@@ -18,7 +18,7 @@ export default function CardAbilitySleepingQuestion() {
   const navigate = useNavigate();
 
   const { question, choices } =
-    habitSleepingQuestions.questions[currentQuestion];
+    abilityDressingQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -29,7 +29,7 @@ export default function CardAbilitySleepingQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      const previousQuestion = habitSleepingQuestions.questions[currentQuestion - 1]
+      const previousQuestion = abilityDressingQuestions.questions[currentQuestion - 1]
       const previousQuestionScore = previousQuestion.score.pop()
 
       setResult((prev) => ({
@@ -40,29 +40,29 @@ export default function CardAbilitySleepingQuestion() {
       setCurrentQuestion((prev) => prev - 1)
 
     } else {
-      navigate("/habitos-alimentacion")
+      navigate("/habilidades-aseo")
     }
   }
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion= () => {
     setAnswerIdx(null);
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-    if (currentQuestion !== habitSleepingQuestions.questions.length - 1) {
+    if (currentQuestion !== abilityDressingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-        setShowResult(true);
-        setResult((prev) => ({
-          ...prev,
-          score: prev.score,
-        }));
-        setShowNavigation(true);
-      }
+      setShowResult(true);
+      setResult((prev) => ({
+        ...prev,
+        score: prev.score,
+      }));
+      setShowNavigation(true);
+    }
   };
 
   const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = habitSleepingQuestions.questions[questionIndex];
+    const question = abilityDressingQuestions.questions[questionIndex];
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
@@ -78,7 +78,7 @@ export default function CardAbilitySleepingQuestion() {
     // Navega a la siguiente pantalla después de 2 segundos
     if (showNavigation) {
       setTimeout(() => {
-       navigate("/responsabilidades") 
+       navigate("/habilidades-alimentacion") 
       }, 2000)
       setScoreFinal(result.score);
     }
@@ -92,12 +92,12 @@ export default function CardAbilitySleepingQuestion() {
 
   return (
     <div className="question-main-container">
-      <div className='question-container'>
-        <h2 className="main-question-title">Hábitos de Sueño</h2>
+      <div className='question-container question-ability-container'>
+      <h2 className="main-question-title">Habilidades de Vestido</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
-            <ul className="question-section-habit">
+            <ul className="question-section-ability">
               {choices.map((choice, index) => (
                 <div className="question-li" key={choice}>
                   <li
@@ -116,15 +116,15 @@ export default function CardAbilitySleepingQuestion() {
             </ul>
             <span className="active-question-no">{currentQuestion + 1}</span>
             <span className="total-question">
-              /{habitSleepingQuestions.questions.length}
+              /{abilityDressingQuestions.questions.length}
             </span>
           </>
         ) : (
           <div className="score-section">
             <h3>Resultados</h3>
             <p>
-              Preguntas Respondidas:{" "}
-              <span>{habitSleepingQuestions.questions.length}</span>
+              Preguntas Respondidas:
+              <span>{abilityDressingQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
@@ -133,7 +133,7 @@ export default function CardAbilitySleepingQuestion() {
         )}
       </div>
       <div className="btn-container">
-        <button onClick={handleBeforeQuestion} className="btn-color" >
+        <button onClick={handleBeforeQuestion} className="btn-color">
           {showResult
             ? "Reiniciar"
             : "Anterior"}
@@ -146,7 +146,7 @@ export default function CardAbilitySleepingQuestion() {
         >
           {showResult
             ? "Siguiente sección"
-            : currentQuestion === habitSleepingQuestions.questions.length - 1
+            : currentQuestion === abilityDressingQuestions.questions.length - 1
             ? "Siguiente"
             : "Siguiente"
             }
@@ -154,4 +154,4 @@ export default function CardAbilitySleepingQuestion() {
       </div>
     </div>
   );
-}
+};
