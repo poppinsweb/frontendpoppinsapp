@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
-import "../../styles/home/login.css";
 import Swal from "sweetalert2";
+
+import { useAuth } from "../../hooks/useAuth";
+import "../../styles/home/login.css";
 
 const initialState = {
   email: "",

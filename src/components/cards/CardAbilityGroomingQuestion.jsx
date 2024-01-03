@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
 import { useNavigate } from "react-router-dom";
+
+import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
 import "../../styles/users/questions.css";
 
 export default function CardAbilityGroomingQuestion() {

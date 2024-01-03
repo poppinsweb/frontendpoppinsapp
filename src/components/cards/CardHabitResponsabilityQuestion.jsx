@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { habitResponsabilityQuestions } from "../constants/habitResponsabilityQuestions";
 import "../../styles/users/questions.css";
 

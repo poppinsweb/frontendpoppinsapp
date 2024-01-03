@@ -5,7 +5,7 @@ import "../../styles/admin/admin.css";
 
 const DBQuestion = [1, 2, 3, 4]; // ESTO VENDRIA DE LA BASE DE DATOS?
 
-export function QuestionFilter() {
+export function AdminQuestionFilter() {
   const [selectedQuestion, setSelectedQuestion] = useState({});
 
   const handleQuestionChange = ({ value }) => {

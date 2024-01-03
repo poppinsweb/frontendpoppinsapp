@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { independenceQuestions } from "../constants/independenceQuestions";
 import { useNavigate } from "react-router-dom";
+
+import { independenceQuestions } from "../constants/independenceQuestions";
 import "../../styles/users/questions.css";
 
 export default function CardIndependenceQuestion() {

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useUsers } from "../../hooks/useUsers";
+// import { useUsers } from "../../hooks/useUsers";
 
 export const AdminUsersList = () => {
-  const { getAllUsers, data } = useUsers();
+  // const { getAllUsers, data } = useUsers();
 
   useEffect(() => {
     const getAllData = async () => {
-      await getAllUsers();
+      // await getAllUsers();
     };
 
     getAllData();
@@ -23,7 +23,7 @@ export const AdminUsersList = () => {
             <th>TOKEN</th>
           </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
           {data.map(({ id, rol, email }) => {
             return (
               <tr key={id}>
@@ -33,7 +33,7 @@ export const AdminUsersList = () => {
               </tr>
             );
           })}
-        </tbody>
+        </tbody> */}
       </table>
     </div>
   );

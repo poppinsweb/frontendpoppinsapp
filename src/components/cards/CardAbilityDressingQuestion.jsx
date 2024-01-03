@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { abilityDressingQuestions } from "../constants/abilityDressingQuestions";
 import { useNavigate } from "react-router-dom";
+
+import { abilityDressingQuestions } from "../constants/abilityDressingQuestions";
 import "../../styles/users/questions.css";
 
 export default function CardAbilityDressingQuestion() {
