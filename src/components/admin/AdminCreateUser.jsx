@@ -2,7 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import Swal from "sweetalert2";
 
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import "../../styles/admin/create-user.css";
 
 const initialState = {
@@ -16,7 +16,7 @@ export const AdminCreateUser = () => {
   const [rol, setRol] = useState(null);
 
   const { email, password, password2 } = userRegister;
-  const { register } = useAuth();
+  // const { register } = useAuth();
 
   const handleChange = ({ target }) => {
     const { name, value } = target;

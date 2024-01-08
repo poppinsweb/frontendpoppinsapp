@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { UserList } from "../pages/admin/UserList";
 import { AdminDashboard } from "../pages/admin/AdminDashboard";
 import { LandingPage } from "../pages/home/LandingPage";
-import { useAuth } from "../hooks/useAuth";
+// import { useAuth } from "../hooks/useAuth";
 
 import { UserToken } from "../pages/userPages/UserToken";
 import { PageUserChildData } from "../pages/userPages/PageUserChildData";
@@ -18,7 +18,8 @@ import { PageHabitsResponsability } from "../pages/userPages/PageHabitsResponsab
 import { CreateUser } from "../pages/admin/CreateUser";
 
 export function AdminRoutes() {
-  const { userRol } = useAuth();
+  // const { userRol } = useAuth();
+  const userRol = "admin"
   
   return (
     <>
