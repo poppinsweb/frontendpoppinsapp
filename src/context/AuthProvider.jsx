@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { loginRequest } from "../services/authAxiosService";
+import { loginRequest, registerRequest } from "../services/authAxiosService";
 
 export const AuthContext = createContext();
 
@@ -15,6 +15,15 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   // REGISTRO DE USUARIO
+  const signup = async (user) => {
+    try {
+      const res = await registerRequest(user);
+      setUser(res);
+      console.log("Respuesta de registrar en context", res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // LOGIN DE USUARIO
   const signin = async (user) => {
@@ -25,7 +34,6 @@ export const AuthProvider = ({ children }) => {
       const loguedUser = res.usuarioEncontrado;
       console.log(loguedUser);
       console.log(user);
-      
     } catch (error) {
       console.error(error);
     }
@@ -35,6 +43,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         signin,
+        signup,
       }}
     >
       {children}

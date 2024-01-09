@@ -1,126 +1,56 @@
-import { useState } from "react";
-import Select from "react-select";
-import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/AuthProvider";
+// import Select from "react-select";
+// import Swal from "sweetalert2";
 
 // import { useAuth } from "../../hooks/useAuth";
 import "../../styles/admin/create-user.css";
 
-const initialState = {
-  email: "",
-  password: "",
-  password2: "",
+const rol = {
+  usuario: "usuario",
+  admin: "admin,"
 };
 
 export const AdminCreateUser = () => {
-  const [userRegister, setUserRegister] = useState(initialState);
-  const [rol, setRol] = useState(null);
+  const { register, handleSubmit } = useForm();
+  const { signup, user } = useAuth();
 
-  const { email, password, password2 } = userRegister;
-  // const { register } = useAuth();
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setUserRegister({
-      ...userRegister,
-      [name]: value,
-    });
-  };
-
-  const handleRolChange = (e) => {
-    const value = e.value;
-    setRol(value === "default" ? "usuario" : value);
-    // console.log(value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setUserRegister(initialState);
-    if (!email || !password || !password2) {
-      Swal.fire({
-        icon: "warning",
-        title: "Un momento...",
-        text: "Todos los campos deben llenarse",
-      });
-      return;
-    }
-    if (password !== password2) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Las contraseñas deben coincidir",
-      });
-      return;
-    }
-    if (password.length < 6) {
-      Swal.fire({
-        icon: "warning",
-        title: "Disculpe...",
-        text: "La contraseña debe tener al menos 6 caracteres",
-      });
-      return;
-    }
+  const onSubmit = async (values) => {
     try {
-      const userCredential = await register(email, password, rol);
-      console.log(userCredential);
-      // console.log(rol);
-
-      Swal.fire({
-        icon: "success",
-        title: "Usuario registrado",
-        footer: "REGISTRO EXITOSO",
-        showConfirmButton: true,
-      });
+      await signup(values);
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        Swal.fire({
-          icon: "warning",
-          title: "Por favor verifique...",
-          text: "El correo ya se encuentra registrado",
-        });
-      }
+      console.error("Error en la solicitud de registro:", error);
     }
   };
   return (
     <div className="register-container">
       <h2 className="title-register">Registro de Usuarios</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ handleSubmit(onSubmit) }>
         <input
           className="form-control my-3 "
           placeholder="E-mail"
           type="email"
           name="email"
-          autoComplete="on"
-          value={email}
-          onChange={handleChange}
+          { ...register("email", { required: true })}
         />
         <input
           className="form-control my-3 "
           placeholder="Password"
           type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
+          { ...register("password", { required: true })}
         />
-        <input
+        {/* <input
           className="form-control my-3 "
           placeholder="Repetir password"
           type="password"
-          name="password2"
-          value={password2}
-          onChange={handleChange}
-        />
-        <Select
-          required={true}
-          value={{
-            label: "Seleccione el rol",
-            value: rol || "default",
-          }}
-          options={[
-            { label: "Administrador", value: "admin" },
-            { label: "Usuario", value: "usuario" },
-          ]}
-          onChange={ handleRolChange }
-        />
+          { ...register("password2", { required: true })}
+        /> */}
+
+        <label>Rol</label>
+        <select {...register("rol")}>
+          <option value={rol.usuario}>Usuario</option>
+          <option value={rol.admin}>Admin</option>
+        </select>
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar
         </button>
@@ -128,3 +58,49 @@ export const AdminCreateUser = () => {
     </div>
   );
 };
+
+
+   // if (!email || !password || !password2) {
+    //   Swal.fire({
+    //     icon: "warning",
+    //     title: "Un momento...",
+    //     text: "Todos los campos deben llenarse",
+    //   });
+  //     return;
+  //   }
+  //   if (password !== password2) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Las contraseñas deben coincidir",
+  //     });
+  //     return;
+  //   }
+  //   if (password.length < 6) {
+  //     Swal.fire({
+  //       icon: "warning",
+  //       title: "Disculpe...",
+  //       text: "La contraseña debe tener al menos 6 caracteres",
+  //     });
+  //     return;
+  //   }
+  //   try {
+  //     const userCredential = await register(email, password, rol);
+  //     console.log(userCredential);
+  //     // console.log(rol);
+
+  //     Swal.fire({
+  //       icon: "success",
+  //       title: "Usuario registrado",
+  //       footer: "REGISTRO EXITOSO",
+  //       showConfirmButton: true,
+  //     });
+  //   } catch (error) {
+  //     if (error.code === "auth/email-already-in-use") {
+  //       Swal.fire({
+  //         icon: "warning",
+  //         title: "Por favor verifique...",
+  //         text: "El correo ya se encuentra registrado",
+  //       });
+  //     }
+  //   }
