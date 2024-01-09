@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { AuthContext } from "./context/AuthProvider";
+import { AuthContext, useAuth } from "./context/AuthProvider";
 import { Navbar } from "./components/ui/Navbar";
 import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
@@ -9,7 +9,8 @@ import { AdminRoutes } from "./routes/AdminRoutes";
 import "./styles/App.css";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  // console.log(user.rol);
 
   return (
     <>

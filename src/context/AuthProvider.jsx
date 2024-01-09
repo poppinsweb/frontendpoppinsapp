@@ -20,13 +20,16 @@ export const AuthProvider = ({ children }) => {
   const signin = async (user) => {
     try {
       const res = await loginRequest(user);
-      setUser(res);
-      console.log("Response: ", res);
+      setUser(res.usuarioEncontrado);
+      // console.log("Response: ", res.usuarioEncontrado)
+      const loguedUser = res.usuarioEncontrado;
+      console.log(loguedUser);
+      console.log(user);
+      
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <AuthContext.Provider
       value={{

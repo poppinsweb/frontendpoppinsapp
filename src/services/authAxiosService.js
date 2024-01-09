@@ -21,7 +21,8 @@ export const loginRequest = async (user) => {
   try {
     console.log("Enviando solicitud de inicio de sesión...");
     const response = await axios.post(`${API}/api/login`, user)
-    console.log("Solicitud de inicio de sesión exitosa. Respuesta:", response);
+    const loguedUser = response.data.usuarioEncontrado;
+    // console.log(loguedUser);
     return response.data;
   } catch (error) {
     throw new Error("Error en el ingreso de usuario");

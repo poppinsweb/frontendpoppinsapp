@@ -8,11 +8,12 @@ export const UserLogin = () => {
   const { register, handleSubmit } = useForm();
   const { signin } = useAuth();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async(values) => {
     try {
       await signin(values)
+      navigate("/token");
     } catch (error) {
       console.error("Error en la solicitud de login:", error);
     }
