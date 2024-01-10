@@ -43,7 +43,7 @@
 /* LARGE SCREEN */
 @media (min-width: 1200px) {
   .page-container {
-    /* min-height: 1250px; */
+    min-height: 1250px;
     padding: 0;
   }
 

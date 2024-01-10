@@ -33,17 +33,17 @@ export const loginRequest = async (user) => {
   }
 };
 
-// // TRAE LOS USUARIOS REGISTRADOS
-// export const getAll = async () => {
-//   try {
-//     const response = await axios.get(`${API}/usuarios`);
-//     console.log(response);
-//     return response;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };
+// TRAE LOS USUARIOS REGISTRADOS
+export const getAll = async () => {
+  try {
+    const response = await axios.get(`${API}/usuarios`);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 // // Elimina un usuario
 // export const remove = async (id) => {
