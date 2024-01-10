@@ -1,11 +1,14 @@
 // import { useAuth } from "../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../context/AuthProvider";
 import '../../styles/App.css';
 
 export function Navbar() {
   const navigate = useNavigate();
-  // const { user, logout } = useAuth()
-  const user = "email"
+
+  const { user, logout } = useAuth()
+  //  user = "email"
 
   const handleLogout = () => {
     logout()
@@ -14,7 +17,6 @@ export function Navbar() {
   const handleLogIn = () => {
     navigate("/login");
   }
-
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>

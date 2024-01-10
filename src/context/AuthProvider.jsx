@@ -38,12 +38,18 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+  // LOGOUT DE USUARIO
+  const logout = () => {
+    setUser(null);
+  }
   return (
     <AuthContext.Provider
       value={{
         user,
         signin,
         signup,
+        logout,
       }}
     >
       {children}

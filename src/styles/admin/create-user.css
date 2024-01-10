@@ -1,4 +1,9 @@
 /* MOBILE SIZE */
+.page-container {
+  background-image: none;
+  background-image: url("../images/paraguas.png");
+}
+
 .register-container {
   margin-top: -150px;
   height: 850px;
@@ -6,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #a6a5a7;
+  
 }
 
 #btn-register {
@@ -27,6 +32,16 @@
   .page-container {
     min-height: 1250px;
     padding-bottom: 1px;
+    padding-top: 0;
+  }
+
+  .login-card {
+    background: transparent;
+    border: 1px solid #444343;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px #414040;
+    padding-bottom: 50px;
+    border-radius: 10px;
   }
 
   .title-register {

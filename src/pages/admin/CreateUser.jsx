@@ -1,10 +1,13 @@
-import { AdminCreateUser } from "../../components/admin/AdminCreateUser"
+import { AdminCreateUser } from "../../components/admin/AdminCreateUser";
 
 export const CreateUser = () => {
   return (
     <>
-      <AdminCreateUser />
+      <div className="page-container">
+        <div className="login-card">
+          <AdminCreateUser />
+        </div>
+      </div>
     </>
-  )
-}
-
+  );
+};
