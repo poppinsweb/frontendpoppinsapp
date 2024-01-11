@@ -1,139 +1,97 @@
-import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import Select from "react-select";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/AuthProvider";
+
 import "../../styles/admin/create-user.css";
 
-const initialState = {
-  email: "",
-  password: "",
-  password2: "",
+const rol = {
+  usuario: "usuario",
+  admin: "admin,",
 };
 
 export const AdminCreateUser = () => {
-  const [userRegister, setUserRegister] = useState(initialState);
-  const [rol, setRol] = useState(null);
+  const { register, handleSubmit } = useForm();
+  const { signup, user } = useAuth();
 
-  const navigate = useNavigate();
-  const { email, password, password2 } = userRegister;
-  const { register } = useAuth();
-
-  // **********
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setUserRegister({
-      ...userRegister,
-      [name]: value,
-    });
-  };
-
-  const handleRolChange = (e) => {
-    const value = e.value;
-    setRol(value === "default" ? "usuario" : value);
-    console.log(value);
-  };
-
-  // *********
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setUserRegister(initialState);
-    if (!email || !password || !password2) {
-      Swal.fire({
-        icon: "warning",
-        title: "Un momento...",
-        text: "Todos los campos deben llenarse",
-      });
-      return;
-    }
-    if (password !== password2) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Las contraseñas deben coincidir",
-      });
-      return;
-    }
-    if (password.length < 6) {
-      Swal.fire({
-        icon: "warning",
-        title: "Disculpe...",
-        text: "La contraseña debe tener al menos 6 caracteres",
-      });
-      return;
-    }
+  const onSubmit = async (values) => {
     try {
-      const userCredential = await register(email, password, rol);
-      console.log(userCredential);
-      console.log(rol);
-      // SIGNED IN
-      Swal.fire({
-        icon: "success",
-        title: "Usuario registrado",
-        footer: "SESION INICIADA",
-        showConfirmButton: false,
-        timer: 2500,
-      });
-      // navigate("/token");
+      await signup(values);
     } catch (error) {
-      const errorCode = error.code;
-      // console.log(errorCode);
-      //   const errorMessage = error.message;
-      // console.log(errorMessage);
-
-      if (errorCode === "auth/email-already-in-use") {
-        Swal.fire({
-          icon: "warning",
-          title: "Por favor inicie sesión...",
-          text: "Su correo ya se encuentra registrado",
-        });
-      }
+      console.error("Error en la solicitud de registro:", error);
     }
   };
   return (
-    <div className="register-container">
+    <>
       <h2 className="title-register">Registro de Usuarios</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="form-control my-3 "
-          placeholder="E-mail"
-          type="email"
-          name="email"
-          autoComplete="on"
-          value={email}
-          onChange={handleChange}
-        />
-        <input
-          className="form-control my-3 "
-          placeholder="Password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <input
-          className="form-control my-3 "
-          placeholder="Repetir password"
-          type="password"
-          name="password2"
-          value={password2}
-          onChange={handleChange}
-        />
-        <Select
-          defaultValue={{
-            label: "Seleccione el rol",
-            value: "default",
-          }}
-          options={[
-            { label: "Administrador", value: "admin" },
-            { label: "Usuario", value: "usuario" },
-          ]}
-          onChange={handleRolChange}
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="login-container">
+          <input
+            className="form-control my-3"
+            placeholder="E-mail"
+            type="email"
+            name="email"
+            {...register("email", { required: true })}
+          />
+          <input
+            className="form-control my-3 "
+            placeholder="Password"
+            type="password"
+            {...register("password", { required: true })}
+          />
+          <label>Rol</label>
+          <select {...register("rol")} className="form-select my-3">
+            <option value={rol.usuario}>Usuario</option>
+            <option value={rol.admin}>Admin</option>
+          </select>
+        </div>
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar
         </button>
       </form>
-    </div>
+    </>
   );
 };
+
+// if (!email || !password || !password2) {
+//   Swal.fire({
+//     icon: "warning",
+//     title: "Un momento...",
+//     text: "Todos los campos deben llenarse",
+//   });
+//     return;
+//   }
+//   if (password !== password2) {
+//     Swal.fire({
+//       icon: "error",
+//       title: "Oops...",
+//       text: "Las contraseñas deben coincidir",
+//     });
+//     return;
+//   }
+//   if (password.length < 6) {
+//     Swal.fire({
+//       icon: "warning",
+//       title: "Disculpe...",
+//       text: "La contraseña debe tener al menos 6 caracteres",
+//     });
+//     return;
+//   }
+//   try {
+//     const userCredential = await register(email, password, rol);
+//     console.log(userCredential);
+//     // console.log(rol);
+
+//     Swal.fire({
+//       icon: "success",
+//       title: "Usuario registrado",
+//       footer: "REGISTRO EXITOSO",
+//       showConfirmButton: true,
+//     });
+//   } catch (error) {
+//     if (error.code === "auth/email-already-in-use") {
+//       Swal.fire({
+//         icon: "warning",
+//         title: "Por favor verifique...",
+//         text: "El correo ya se encuentra registrado",
+//       });
+//     }
+//   }

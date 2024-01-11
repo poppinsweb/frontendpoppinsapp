@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { habitResponsabilityQuestions } from "../constants/habitResponsabilityQuestions";
+
+import { habitSleepingQuestions } from "../constants/habitSleepingQuestions";
 import "../../styles/users/questions.css";
 
-export default function CardAbilityResponsabilityQuestion() {
+export const HabitsSleeping = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);
@@ -17,7 +18,7 @@ export default function CardAbilityResponsabilityQuestion() {
   const navigate = useNavigate();
 
   const { question, choices } =
-    habitResponsabilityQuestions.questions[currentQuestion];
+    habitSleepingQuestions.questions[currentQuestion];
 
   const handleAnswer = (choice, index) => {
     setAnswerIdx(index);
@@ -28,7 +29,7 @@ export default function CardAbilityResponsabilityQuestion() {
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      const previousQuestion = habitResponsabilityQuestions.questions[currentQuestion - 1]
+      const previousQuestion = habitSleepingQuestions.questions[currentQuestion - 1]
       const previousQuestionScore = previousQuestion.score.pop()
 
       setResult((prev) => ({
@@ -39,7 +40,7 @@ export default function CardAbilityResponsabilityQuestion() {
       setCurrentQuestion((prev) => prev - 1)
 
     } else {
-      navigate("/habitos-dormir")
+      navigate("/habitos-alimentacion")
     }
   }
 
@@ -48,20 +49,20 @@ export default function CardAbilityResponsabilityQuestion() {
     if (answer !== null) {
       scoreAsignation(currentQuestion, answerIdx);
     }
-    if (currentQuestion !== habitResponsabilityQuestions.questions.length - 1) {
+    if (currentQuestion !== habitSleepingQuestions.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setShowResult(true);
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score,
-      }));
-      setShowNavigation(true);
-    }
+        setShowResult(true);
+        setResult((prev) => ({
+          ...prev,
+          score: prev.score,
+        }));
+        setShowNavigation(true);
+      }
   };
 
   const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = habitResponsabilityQuestions.questions[questionIndex];
+    const question = habitSleepingQuestions.questions[questionIndex];
     const pointScore = optionIndex + 1;
     question.score.push(pointScore);
 
@@ -77,7 +78,7 @@ export default function CardAbilityResponsabilityQuestion() {
     // Navega a la siguiente pantalla después de 2 segundos
     if (showNavigation) {
       setTimeout(() => {
-       navigate("/resultados") 
+       navigate("/responsabilidades") 
       }, 2000)
       setScoreFinal(result.score);
     }
@@ -92,7 +93,7 @@ export default function CardAbilityResponsabilityQuestion() {
   return (
     <div className="question-main-container">
       <div className='question-container'>
-        <h2 className="main-question-title">Cumplimiento de Responsabilidades Personales y Escolares</h2>
+        <h2 className="main-question-title">Hábitos de Sueño</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
@@ -115,15 +116,15 @@ export default function CardAbilityResponsabilityQuestion() {
             </ul>
             <span className="active-question-no">{currentQuestion + 1}</span>
             <span className="total-question">
-              /{habitResponsabilityQuestions.questions.length}
+              /{habitSleepingQuestions.questions.length}
             </span>
           </>
         ) : (
           <div className="score-section">
             <h3>Resultados</h3>
             <p>
-              Preguntas Respondidas:
-              <span>{habitResponsabilityQuestions.questions.length}</span>
+              Preguntas Respondidas:{" "}
+              <span>{habitSleepingQuestions.questions.length}</span>
             </p>
             <p>
               Puntaje Parcial: <span>{result.score}</span>
@@ -132,7 +133,7 @@ export default function CardAbilityResponsabilityQuestion() {
         )}
       </div>
       <div className="btn-container">
-        <button onClick={handleBeforeQuestion} className="btn-color">
+        <button onClick={handleBeforeQuestion} className="btn-color" >
           {showResult
             ? "Reiniciar"
             : "Anterior"}
@@ -144,9 +145,9 @@ export default function CardAbilityResponsabilityQuestion() {
           className='btn-color'
         >
           {showResult
-            ? "Atrás"
-            : currentQuestion === habitResponsabilityQuestions.questions.length - 1
-            ? "Resultados"
+            ? "Siguiente sección"
+            : currentQuestion === habitSleepingQuestions.questions.length - 1
+            ? "Siguiente"
             : "Siguiente"
             }
         </button>

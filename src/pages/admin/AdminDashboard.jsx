@@ -1,5 +1,5 @@
-import { AdminFilterSelectors } from "../../components/admin/AdminFilterSelectors";
-import { QuestionFilter } from "../../components/admin/QuestionFilter";
+import { AdminQuestionFilter } from "../../components/admin/AdminQuestionFilter";
+import { UserChildData } from "../../components/admin/UserChildData";
 // import { RenderDataChild } from "../../components/admin/RenderDataChild";
 import "../../styles/admin/admin.css";
 
@@ -9,11 +9,11 @@ export function AdminDashboard() {
       <div className="container main-container">
         <h1 className="title-panel">Panel del Administrador Poppins</h1>
         <div className="">
-          <AdminFilterSelectors />
+          <UserChildData />
           {/* <RenderDataChild /> */}
         </div>
         <div className="">
-          <QuestionFilter />
+          <AdminQuestionFilter />
         </div>
         <button className="btn btn-primary filter-btn btn-color">
           Filtrar

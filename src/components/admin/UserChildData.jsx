@@ -1,12 +1,10 @@
-// Cambiar el nombre de este componente por UserChildDataSelectors
 import Select from "react-select";
 import { useEffect, useState } from "react";
+
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import "../../styles/admin/admin.css";
 
-import React from "react";
-
-export const AdminFilterSelectors = () => {
+export const UserChildData = () => {
   const { 
     gender, 
     socialClass, 

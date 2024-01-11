@@ -1,12 +1,12 @@
-import CardIndependenceQuestion from "../../components/cards/CardIndependenceQuestion";
+import { Independence } from "../../components/cards/Independence";
 // import CardSurveyTest from "../../components/cards/CardSurveyTest";
 import { independenceQuestions } from "../../components/constants/independenceQuestions";
 
-export function PageIndependenceQuestions() {
+export function PageIndependence() {
   return (
     <div>
       {/* <CardSurveyTest/> */}
-      <CardIndependenceQuestion questions={independenceQuestions.questions}/>
+      <Independence questions={independenceQuestions.questions}/>
     </div>
   )
 }

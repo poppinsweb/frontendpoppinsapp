@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { independenceQuestions } from "../constants/independenceQuestions";
 import { useNavigate } from "react-router-dom";
+
+import { independenceQuestions } from "../constants/independenceQuestions";
 import "../../styles/users/questions.css";
 
-export default function CardIndependenceQuestion() {
+export const Independence = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);

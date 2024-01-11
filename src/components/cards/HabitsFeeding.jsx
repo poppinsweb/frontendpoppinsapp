@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { habitFeedingQuestions } from "../constants/habitFeedingQuestions";
 import { useNavigate } from "react-router-dom";
+
+import { habitFeedingQuestions } from "../constants/habitFeedingQuestions";
 import "../../styles/users/questions.css";
 
-export default function CardAbilityFeedingQuestion() {
+export const HabitsFeeding = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
   const [answer, setAnswer] = useState(null);

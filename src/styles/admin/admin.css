@@ -1,6 +1,6 @@
 /* MOBILE SIZE */
 .main-container {
-  background-color:#a4bda2;
+  background-color:#a4bda26d;
   display: flex;
   flex-direction: column; 
   gap: 20px;
@@ -32,7 +32,7 @@
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {
 .main-container {
-  /* flex-direction: row; */
+  flex-direction: row;
 }
 }
 
