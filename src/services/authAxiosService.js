@@ -34,11 +34,14 @@ export const loginRequest = async (user) => {
 };
 
 // TRAE LOS USUARIOS REGISTRADOS
-export const getAll = async () => {
+export const getAll = async (state) => {
   try {
-    const response = await axios.get(`${API}/usuarios`);
-    console.log(response);
-    return response;
+    // console.log("Iniciando la solicitud GET...");
+    const response = await axios.get(`${API}/api/usuarios`);
+    state(response.data);
+    // console.log("Respuesta: ", response.data);
+    return response.data;
+    // return state
   } catch (error) {
     console.error(error);
     throw error;
@@ -48,7 +51,7 @@ export const getAll = async () => {
 // // Elimina un usuario
 // export const remove = async (id) => {
 //   try {
-//     await axios.delete(`${API}/${id}`);
+//     await axios.delete(`${API}/api/${id}`);
 //   } catch (error) {
 //     console.error(error);
 //   }
@@ -57,7 +60,7 @@ export const getAll = async () => {
 // // Edita un usuario
 // export const update = async (id, email) => {
 //   try {
-//     return await axios.put(`${API}/${id}`, {
+//     return await axios.put(`${API}/api/${id}`, {
 //       email,
 //     });
 //   } catch (error) {
