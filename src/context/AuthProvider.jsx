@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      setUser(res);
       localStorage.setItem("user", JSON.stringify(res));
       console.log("Respuesta de registrar en context", res);
       getAllUsers();
