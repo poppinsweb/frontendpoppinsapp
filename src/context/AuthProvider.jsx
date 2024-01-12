@@ -1,5 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, registerRequest, getAll } from "../services/authAxiosService";
+import {
+  loginRequest,
+  registerRequest,
+  getAll,
+} from "../services/authAxiosService";
 
 export const AuthContext = createContext();
 
@@ -14,18 +18,17 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const initialUser = JSON.parse(localStorage.getItem("user")) || null;
   const [user, setUser] = useState(initialUser);
-  const [userList, setUserlist] = useState([{}]);
+  const [userList, setUserList] = useState([{}]);
 
-    // LISTAR USUARIOS REGISTRADOS
-    const getAllUsers = async () => {
-      try {
-        const users = await getAll();
-        setUserlist(users);
-        console.log(users);
-      } catch (error) {
-        console.error(error);
-      }
-    };  
+  // LISTAR USUARIOS REGISTRADOS
+  const getAllUsers = async () => {
+    try {
+      const users = await getAll(setUserList);
+      setUserList(users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // REGISTRO DE USUARIO
   const signup = async (user) => {
@@ -45,7 +48,10 @@ export const AuthProvider = ({ children }) => {
       const res = await loginRequest(user);
       setUser(res.usuarioEncontrado);
       localStorage.setItem("user", JSON.stringify(res.usuarioEncontrado));
-      console.log("Response de iniciar sesion en context: ", res.usuarioEncontrado);
+      console.log(
+        "Response de iniciar sesion en context: ",
+        res.usuarioEncontrado
+      );
       console.log(user);
     } catch (error) {
       console.error(error);

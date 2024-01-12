@@ -41,21 +41,22 @@ export const getAll = async (state) => {
     state(response.data);
     // console.log("Respuesta: ", response.data);
     return response.data;
-    // return state
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
-// // Elimina un usuario
-// export const remove = async (id) => {
-//   try {
-//     await axios.delete(`${API}/api/${id}`);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+// BORRAR USUARIO REGISTRADO
+export const removeUser = async (userId) => {
+  try {
+    const response = await axios.delete(`${API}/api/usuarios/${userId}`);
+    console.log("Usuario eliminado: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // // Edita un usuario
 // export const update = async (id, email) => {
