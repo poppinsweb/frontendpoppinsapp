@@ -4,10 +4,14 @@ import {
   registerRequest,
   getAll,
 } from "../services/authAxiosService";
+import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext();
 
 export const useAuth = () => {
+  
+
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -16,6 +20,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  
   JSON.parse(localStorage.getItem("user")) || null;
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
@@ -50,8 +56,13 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(res.usuarioEncontrado));
       console.log(
         "Response de iniciar sesion en context: ",
-        res.usuarioEncontrado
+        res.usuarioEncontrado.rol
       );
+      if (res.usuarioEncontrado.rol === "admin") {
+        navigate("/admin")
+      } else {
+        navigate("/token")
+      }
       console.log(user);
     } catch (error) {
       console.error(error);
