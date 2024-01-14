@@ -1,8 +1,10 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, registerRequest, getAll } from "../services/authAxiosService";
+import { loginRequest, registerRequest, getAllUsers } from "../services/authAxiosService";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
+// HOOK PARA LLAMAR A ESTE CONTEXTO
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -11,28 +13,29 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }) => {
-  const initialUser = JSON.parse(localStorage.getItem("user")) || null;
-  const [user, setUser] = useState(initialUser);
-  const [userList, setUserlist] = useState([{}]);
+// ***********
 
-    // LISTAR USUARIOS REGISTRADOS
-    const getAllUsers = async () => {
-      try {
-        const users = await getAll();
-        setUserlist(users);
-        console.log(users);
-      } catch (error) {
-        console.error(error);
-      }
-    };  
+export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+
+  JSON.parse(localStorage.getItem("user")) || null;
+  const [user, setUser] = useState();
+  const [userList, setUserList] = useState([{}]);
+
+  // LISTAR USUARIOS REGISTRADOS
+  const getUsers = async () => {
+    try {
+      const users = await getUsers(setUserList);
+      setUserList(users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // REGISTRO DE USUARIO
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      setUser(res);
-      localStorage.setItem("user", JSON.stringify(res));
       console.log("Respuesta de registrar en context", res);
       getAllUsers();
     } catch (error) {
@@ -46,7 +49,15 @@ export const AuthProvider = ({ children }) => {
       const res = await loginRequest(user);
       setUser(res.usuarioEncontrado);
       localStorage.setItem("user", JSON.stringify(res.usuarioEncontrado));
-      console.log("Response de iniciar sesion en context: ", res.usuarioEncontrado);
+      console.log(
+        "Response de iniciar sesion en context: ",
+        res.usuarioEncontrado.rol
+      );
+      if (res.usuarioEncontrado.rol === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/token");
+      }
       console.log(user);
     } catch (error) {
       console.error(error);

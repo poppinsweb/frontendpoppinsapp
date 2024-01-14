@@ -5,12 +5,12 @@ import "../../styles/admin/create-user.css";
 
 const rol = {
   usuario: "usuario",
-  admin: "admin,",
+  admin: "admin",
 };
 
 export const AdminCreateUser = () => {
   const { register, handleSubmit } = useForm();
-  const { signup, user } = useAuth();
+  const { signup } = useAuth();
 
   const onSubmit = async (values) => {
     try {

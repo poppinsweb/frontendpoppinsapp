@@ -6,14 +6,15 @@ import "../../styles/home/login.css";
 
 export const UserLogin = () => {
   const { register, handleSubmit } = useForm();
-  const { signin } = useAuth();
+  const { signin, user } = useAuth();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async(values) => {
     try {
       await signin(values)
-      navigate("/token");
+      console.log(values);
+      // navigate("/token");
     } catch (error) {
       console.error("Error en la solicitud de login:", error);
     }
