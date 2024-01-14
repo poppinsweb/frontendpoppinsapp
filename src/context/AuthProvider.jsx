@@ -2,16 +2,13 @@ import { createContext, useState, useContext, useEffect } from "react";
 import {
   loginRequest,
   registerRequest,
-  getAll,
+  getAllUsers,
 } from "../services/authAxiosService";
 import { useNavigate } from "react-router-dom";
-
 
 export const AuthContext = createContext();
 
 export const useAuth = () => {
-  
-
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -21,15 +18,15 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  
+
   JSON.parse(localStorage.getItem("user")) || null;
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
 
   // LISTAR USUARIOS REGISTRADOS
-  const getAllUsers = async () => {
+  const getUsers = async () => {
     try {
-      const users = await getAll(setUserList);
+      const users = await getUsers(setUserList);
       setUserList(users);
     } catch (error) {
       console.error(error);
@@ -59,9 +56,9 @@ export const AuthProvider = ({ children }) => {
         res.usuarioEncontrado.rol
       );
       if (res.usuarioEncontrado.rol === "admin") {
-        navigate("/admin")
+        navigate("/admin");
       } else {
-        navigate("/token")
+        navigate("/token");
       }
       console.log(user);
     } catch (error) {

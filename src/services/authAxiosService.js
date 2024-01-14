@@ -34,7 +34,7 @@ export const loginRequest = async (user) => {
 };
 
 // TRAE LOS USUARIOS REGISTRADOS
-export const getAll = async (state) => {
+export const getAllUsers = async (state) => {
   try {
     // console.log("Iniciando la solicitud GET...");
     const response = await axios.get(`${API}/api/usuarios`);
