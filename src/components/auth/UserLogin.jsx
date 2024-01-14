@@ -6,7 +6,7 @@ import "../../styles/home/login.css";
 
 export const UserLogin = () => {
   const { register, handleSubmit } = useForm();
-  const { signin } = useAuth();
+  const { signin, user } = useAuth();
 
   const navigate = useNavigate();
 

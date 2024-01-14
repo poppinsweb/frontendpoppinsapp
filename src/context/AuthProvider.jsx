@@ -16,8 +16,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const initialUser = JSON.parse(localStorage.getItem("user")) || null;
-  const [user, setUser] = useState(initialUser);
+  JSON.parse(localStorage.getItem("user")) || null;
+  const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
 
   // LISTAR USUARIOS REGISTRADOS
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      localStorage.setItem("user", JSON.stringify(res));
+      // localStorage.setItem("user", JSON.stringify(res));
       console.log("Respuesta de registrar en context", res);
       getAllUsers();
     } catch (error) {
