@@ -58,11 +58,12 @@ export const AdminUsersList = () => {
         ) : (
           "No hay usuarios"
         )}
-      </div>{"***"}
-      <div>{"***"}
+      </div>
+      <div>
         <h2>Niños</h2>
-        <table className="table table-hover table-striped">
-        <thead>
+        {children != null ? (
+          <table className="table table-hover table-striped">
+            <thead>
               <tr>
                 <th>CODIGO</th>
                 <th>Nacimiento AAAA-MM-DD</th>
@@ -71,7 +72,7 @@ export const AdminUsersList = () => {
               </tr>
             </thead>
             <tbody>
-              {children.map((child) =>(
+              {children.map((child) => (
                 <tr key={child.id}>
                   <td>{child.codigo_identificador}</td>
                   <td>{child.fecha_nacimiento}</td>
@@ -80,7 +81,10 @@ export const AdminUsersList = () => {
                 </tr>
               ))}
             </tbody>
-        </table>
+          </table>
+        ) : (
+          "No hay Niños"
+        )}
       </div>
     </>
   );
