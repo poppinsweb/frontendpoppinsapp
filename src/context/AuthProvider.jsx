@@ -1,13 +1,10 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import {
-  loginRequest,
-  registerRequest,
-  getAllUsers,
-} from "../services/authAxiosService";
+import { loginRequest, registerRequest, getAllUsers } from "../services/authAxiosService";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
+// HOOK PARA LLAMAR A ESTE CONTEXTO
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -15,6 +12,8 @@ export const useAuth = () => {
   }
   return context;
 };
+
+// ***********
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ export const AuthProvider = ({ children }) => {
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      // localStorage.setItem("user", JSON.stringify(res));
       console.log("Respuesta de registrar en context", res);
       getAllUsers();
     } catch (error) {

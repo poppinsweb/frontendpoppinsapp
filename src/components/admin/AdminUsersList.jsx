@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { getAllUsers, removeUser } from "../../services/authAxiosService";
+import { getAllChildren } from "../../services/testAxiosAPI";
 
 export const AdminUsersList = () => {
   const [users, setUsers] = useState(null);
+  const [children, setChildren] = useState(null);
 
   useEffect(() => {
     getAllUsers(setUsers);
+  }, []);
+
+  useEffect(() => {
+    getAllChildren(setChildren);
   }, []);
 
   const handleDelete = async (userId) => {
@@ -52,18 +58,28 @@ export const AdminUsersList = () => {
         ) : (
           "No hay usuarios"
         )}
-      </div>
-      <div>
-        <h2>Children</h2>
+      </div>{"***"}
+      <div>{"***"}
+        <h2>Niños</h2>
         <table className="table table-hover table-striped">
         <thead>
               <tr>
                 <th>CODIGO</th>
-                <th>EDAD</th>
+                <th>Nacimiento AAAA-MM-DD</th>
                 <th>SEXO</th>
                 <th>GRADO</th>
               </tr>
             </thead>
+            <tbody>
+              {children.map((child) =>(
+                <tr key={child.id}>
+                  <td>{child.codigo_identificador}</td>
+                  <td>{child.fecha_nacimiento}</td>
+                  <td>{child.sexo}</td>
+                  <td>{child.grado}</td>
+                </tr>
+              ))}
+            </tbody>
         </table>
       </div>
     </>

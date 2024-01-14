@@ -1,18 +1,19 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const BASE_URL = "http://localhost:3000/infantes";
+const TESTAPI = "http://localhost:3000";
 
 // // TRAE LOS INFANTES EXISTENTES
-// export const getAllChildren = async () => {
-//     try {
-//       const response = await axios.get(BASE_URL);
-//       console.log(response);
-//       return response;
-//     } catch (error) {
-//       console.error(error);
-//       throw error;
-//     }
-//   };
+export const getAllChildren = async (state) => {
+    try {
+      const response = await axios.get(`${TESTAPI}/api/infantes`);
+      state(response.data)
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
   
 //   // CREA UN INFANTE. RENDERIZA EN PERSONALES
 //   export const postNewChild = async (objectChild) => {
