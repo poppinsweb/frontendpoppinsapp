@@ -15,7 +15,7 @@
   height: fit-content;
   border-radius: 15px;
   padding: 40px;
-  padding-top: 40px;
+  padding-top: 20px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   margin-bottom: 2rem;
   background-color: #ac8baf6e;
@@ -69,9 +69,9 @@
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
 .question-text {
-  font-size: 30px;
-  background-color: #96449e;
-  color: #f0f8ff;
+  background-color: #b8adbb;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 /* EL PANTALLAZO DE LOS RESULTADOS */
@@ -94,7 +94,6 @@
     background-image: url("../images/fondo-nubes-blancas-lila2.jpg");
     /* background-repeat: no-repeat; */
     min-height: 1000px;
-
   }
 
   .question-container {
@@ -103,7 +102,7 @@
   }
 
   .main-question-title {
-    font-size: 3rem;
+    font-size: 2rem;
     padding-top: 10px;
   }
 
@@ -116,9 +115,7 @@
     margin: 0.5rem;
     padding: 8px 5px;
     padding-left: 20px;
-    list-style: none;
     text-align: justify;
-    font-size: 25px;
   }
 
   .btn-container {
@@ -130,7 +127,6 @@
 @media (min-width: 1200px) {
   .question-main-container {
     min-height: 1200px;
-
   }
 
   .question-container {
@@ -139,14 +135,20 @@
     background-size: cover;
   }
 
+  .question-section-ability,
+  .question-section-habit,
+  .question-section {
+    padding-top: 0;
+  }
+
   .main-question-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: left;
   }
-  
+
   .secoundary-question-title {
-    padding-top: 10px;
-    font-size: 1.8rem;
+    padding-top: 0;
+    font-size: 2rem;
   }
 }
 

@@ -92,11 +92,13 @@ export const Independence = () => {
   console.log(result.score);
 
   return (
-    <div className="question-main-container">
+    // CREAR CSS INDEPENDIENTE POR EL TAMANIO DEL CONTENEDOR Y ESPACIOS
+    <div className="question-main-container"> 
       <div className="question-container">
+        <h2 className="main-question-title">Independencia</h2>
         {!showResult ? (
           <>
-            <h2 className="main-question-title">{question}</h2>
+            <h2 className="secoundary-question-title">{question}</h2>
             <ul className="question-section">
               {choices.map((choice, index) => (
                 <div key={index} className="question-li" >
