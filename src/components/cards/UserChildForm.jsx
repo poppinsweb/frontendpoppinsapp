@@ -1,13 +1,13 @@
-import { useState } from "react";
 import Select from "react-select";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { userChildFormOptions } from "../constants/userChildFormOptions";
+import { postNewChild } from "../../services/testAxiosAPI";
 import "../../styles/users/userChild.css";
 
 export function UserChildForm() {
-  const { gender, socialClass, edCenterType, degree } = userChildFormOptions;
-  // cambiar nombres socialClass por socialLevel. cambiar edCenterType por educationType. 
+  const { gender, socialLevel, educationType, degree } = userChildFormOptions;
 
   const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
@@ -40,7 +40,7 @@ export function UserChildForm() {
         "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
       };
       console.log(selected);
-      const res = await postNewSurvey(selected);
+      const res = await postNewChild(selected);
       if (res) {
         navigate("/independencia");
       }
@@ -136,12 +136,12 @@ export function UserChildForm() {
                 <strong>Estrato:</strong>
                 <Select
                   className="user-select"
-                  id="socialClass"
+                  id="socialLevel"
                   defaultValue={{
                     label: "Seleccione una opción",
                     value: "empty",
                   }}
-                  options={socialClass.map((social) => ({
+                  options={socialLevel.map((social) => ({
                     label: social.label,
                     name: social.name,
                     value: social.value,
@@ -160,7 +160,7 @@ export function UserChildForm() {
                     label: "Seleccione una opción",
                     value: "empty",
                   }}
-                  options={edCenterType.map((edCenter) => ({
+                  options={educationType.map((edCenter) => ({
                     label: edCenter.label,
                     name: edCenter.name,
                     value: edCenter.value,
