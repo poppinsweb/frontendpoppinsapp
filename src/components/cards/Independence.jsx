@@ -1,113 +1,70 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { independenceQuestions } from "../constants/independenceQuestions";
 import "../../styles/users/questions.css";
 
 export const Independence = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answerIdx, setAnswerIdx] = useState(null);
-  const [answer, setAnswer] = useState(null);
-  const [showNavigation, setShowNavigation] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [scoreFinal, setScoreFinal] = useState(0)
+  const [userResponses, setUserResponses] = useState(Array(independenceQuestions.questions.length).fill(null));
   const [result, setResult] = useState({
     score: 0,
   });
 
   const navigate = useNavigate();
 
-  const { question, choices } = independenceQuestions.questions[currentQuestion];
-  // console.log(question)
-  // console.log(choices)
-
-  const handleAnswer = (choice, index) => {
-    setAnswerIdx(index);
-    if (choice) {
-      setAnswer(true);
-    }
+  const handleAnswer = (choice) => {
+    setUserResponses((prevResponses) => {
+      const newResponses = [...prevResponses];
+      newResponses[currentQuestion] = choice;
+      console.log("userResponses:", newResponses);
+      return newResponses;
+    });
   };
 
   const handleBeforeQuestion = () => {
     if (currentQuestion !== 0) {
-      const previousQuestion = independenceQuestions.questions[currentQuestion - 1]
-      const previousQuestionScore = previousQuestion.score.pop()
-
-      setResult((prev) => ({
-      ...prev,
-      score: prev.score - previousQuestionScore,
-      }))
-
-      setCurrentQuestion((prev) => prev - 1)
-
+      setCurrentQuestion((prev) => prev - 1);
     } else {
-      navigate("/personales")
+      navigate("/personales");
     }
-  }
+  };
 
   const handleNextQuestion = () => {
-    setAnswerIdx(null);
-    if (answer !== null) {
-      scoreAsignation(currentQuestion, answerIdx);
-    }
-    if (currentQuestion !== independenceQuestions.questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
+    const nextQuestion = currentQuestion + 1;
+
+    if (nextQuestion < independenceQuestions.questions.length) {
+      setCurrentQuestion(nextQuestion);
     } else {
-      setShowResult(true);
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score,
-      }));
-      setShowNavigation(true);
+      const finalScore = userResponses.reduce((totalScore, choice, index) => {
+        const questionScore = choice; // Puntaje según la opción elegida
+        independenceQuestions.questions[index].score.push(questionScore);
+
+        return totalScore + questionScore;
+      }, 0);
+
+      setResult({
+        score: finalScore,
+      });
     }
   };
-
-  const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = independenceQuestions.questions[questionIndex];
-    const pointScore = optionIndex + 1;
-    question.score.push(pointScore);
-
-    if (pointScore) {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-      }));
-    }
-  };
-
-  useEffect(() => {
-    // Navega a la siguiente pantalla después de 2 segundos
-    if (showNavigation) {
-      setTimeout(() => {
-       navigate("/habilidades-aseo") 
-      }, 2000)
-      setScoreFinal(result.score);
-    }
-  }, [showNavigation, result.score])
-
-  if (scoreFinal > 0) {
-    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
-  }
-  
-  console.log(result.score);
-
   return (
-    // CREAR CSS INDEPENDIENTE POR EL TAMANIO DEL CONTENEDOR Y ESPACIOS
-    <div className="question-main-container"> 
+    <div className="question-main-container">
       <div className="question-container">
         <h2 className="main-question-title">Independencia</h2>
-        {!showResult ? (
+        {!result.score ? (
           <>
-            <h2 className="secoundary-question-title">{question}</h2>
+            <h2 className="secoundary-question-title">
+              {independenceQuestions.questions[currentQuestion].question}
+            </h2>
             <ul className="question-section">
-              {choices.map((choice, index) => (
-                <div key={index} className="question-li" >
+              {independenceQuestions.questions[currentQuestion].choices.map((choice, index) => (
+                <div key={index} className="question-li">
                   <li
-                    onClick={() => handleAnswer(choice, index)}
+                    onClick={() => handleAnswer(index + 1)}
                     className={
-                      answerIdx === index
-                      ? "selected-answer question-text"
-                      : null
+                      userResponses[currentQuestion] === index + 1
+                        ? "selected-answer question-text"
+                        : null
                     }
                   >
                     {choice}
@@ -135,24 +92,20 @@ export const Independence = () => {
       </div>
       <div className="btn-container">
         <button onClick={handleBeforeQuestion} className="btn-color">
-          {showResult 
-          ? "Reiniciar" 
-          : "Anterior"}
+          {result.score ? "Reiniciar" : "Anterior"}
         </button>
-        
         <button
           onClick={handleNextQuestion}
-          disabled={answerIdx === null}
+          disabled={userResponses[currentQuestion] === null}
           className="btn-color"
         >
-          {showResult
+          {result.score
             ? "Siguiente sección"
             : currentQuestion === independenceQuestions.questions.length - 1
-            ? "Siguiente"
-            : "Siguiente"
-            }
+            ? "Finalizar"
+            : "Siguiente"}
         </button>
       </div>
     </div>
   );
-}
+};
