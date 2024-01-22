@@ -34,12 +34,33 @@ export const getAllChildren = async (state) => {
   };
 
 //   // EDITA UN USUARIO INFANTE SEGUN SU ID
+// ********SE PUEDE HACER MAS ADELANTE EN UNA VENTANA EMERGENTE.********
 // export const updateDataChild = async(id, email) => {
 //     try {
-//       return await axios.put(`${BASE_URL}/infantes/${id}`, {
+//       return await axios.put(`${TESTAPI}/api/infantes/${id}`, {
 //         email,
 //       })
 //     } catch (error) {
 //       console.error(error);
 //     }
 //   };
+
+// ENVIA LOS DATOS DE INDEPENDENCIA AL DUCHARSE, VESTIRSE, ALIMENTARSE, DORMIR: `${TESTAPI}/api/independencia`
+export const postIndependenceScore = () => {
+
+}
+
+// ENVIA LOS DATOS DE HABILIDADES HIGIENE: `${TESTAPI}/api/habilidadeshigiene`
+export const postSkillGroomingScore = () => {
+
+}
+
+// ENVIA LOS DATOS DE HABILIDADES VESTIDO: `${TESTAPI}/api/habilidadesvestido`
+
+// ENVIA LOS DATOS DE HABILIDADES ALIMENTACION: `${TESTAPI}/api/habilidadesalimentacion`
+
+// ENVIA LOS DATOS DE HABITOS ALIMENTACION: `${TESTAPI}/api/habitosalimentacion`
+
+// ENVIA LOS DATOS DE HABITOS SUENIO: `${TESTAPI}/api/habitosdormir`
+
+// ENVIA LOS DATOS DE HABITOS RESPONSABILIDADES: `${TESTAPI}/api/habitosresponsabilidad`

@@ -7,8 +7,8 @@ import "../../styles/admin/admin.css";
 export const UserChildData = () => {
   const { 
     gender, 
-    socialClass, 
-    edCenterType, 
+    socialLevel, 
+    educationType, 
     degree, 
     years, 
     months 
@@ -82,7 +82,7 @@ export const UserChildData = () => {
                   label: "Seleccione una opción:",
                   value: "empty",
                 }}
-                options={socialClass.map((social) => ({
+                options={socialLevel.map((social) => ({
                   label: social.label,
                   name: social.name,
                   value: social.value,
@@ -97,7 +97,7 @@ export const UserChildData = () => {
                   label: "Seleccione una opción",
                   value: "empty",
                 }}
-                options={edCenterType.map((edCenter) => ({
+                options={educationType.map((edCenter) => ({
                   label: edCenter.label,
                   name: edCenter.name,
                   value: edCenter.value,
@@ -125,8 +125,8 @@ export const UserChildData = () => {
           {/* <div className="render-data"> 
             <p>Género: {userChildSelect.value}</p>
             <p>Edad: {years.value} años y {months.value} meses</p>
-            <p>Estrato: {socialClass.value}</p>
-            <p>Centro educativo: {edCenterType.value}</p>
+            <p>Estrato: {socialLevel.value}</p>
+            <p>Centro educativo: {educationType.value}</p>
             <p>Nivel de escolaridad: {degree.value}</p>
           </div> */}
         </form>
