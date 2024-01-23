@@ -5,12 +5,19 @@ import "../../styles/users/questions.css";
 
 export const Independence = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [resultsSent, setResultsSent] = useState(false);
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [userResponses, setUserResponses] = useState(Array(independenceQuestions.questions.length).fill(null));
   const [result, setResult] = useState({
     score: 0,
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar si estamos en la última pregunta
+    setIsLastQuestion(currentQuestion === independenceQuestions.questions.length - 1);
+  }, [currentQuestion]);
 
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => {
@@ -49,8 +56,8 @@ export const Independence = () => {
   };
   return (
     <div className="question-main-container">
-      <div className="question-container">
-        <h2 className="main-question-title">Independencia</h2>
+      <div className="question-container-independence">
+        <h2 className="main-question-title-independence">Independencia</h2>
         {!result.score ? (
           <>
             <h2 className="secoundary-question-title">
@@ -91,17 +98,17 @@ export const Independence = () => {
         )}
       </div>
       <div className="btn-container">
-        <button onClick={handleBeforeQuestion} className="btn-color">
-          {result.score ? "Reiniciar" : "Anterior"}
+        <button onClick={handleBeforeQuestion} className="btn-color" disabled={currentQuestion === 0 || resultsSent}>
+          {resultsSent ? "Reiniciar" : "Anterior"}
         </button>
         <button
           onClick={handleNextQuestion}
-          disabled={userResponses[currentQuestion] === null}
+          disabled={resultsSent || isLastQuestion}
           className="btn-color"
         >
-          {result.score
+          {resultsSent
             ? "Siguiente sección"
-            : currentQuestion === independenceQuestions.questions.length - 1
+            : isLastQuestion
             ? "Finalizar"
             : "Siguiente"}
         </button>
