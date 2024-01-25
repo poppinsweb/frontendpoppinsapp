@@ -1,13 +1,12 @@
 export const independenceQuestions = {
   questions: [
     {
-      question: "Al Bañarse:", // bd: independencia_ducha
+      question: "Al Bañarse", // bd: independencia_ducha
       choices: [
         "1. No se baña solo, siempre un adulto se encarga de bañarlo. (El adulto es quien realiza la mayoría de la actividad con poca colaboración del niño)",
         "2. Para bañarse siempre recibe ayuda, independiente del tiempo que tenga para hacerlo (Es decir, que el niño colabora con la actividad, pero el adulto no solo supervisa, sino que la realiza con él). ",
         "3. Se baña todos los días con apoyo de un adulto cuando tiene poco tiempo (por ejemplo, en las mañanas antes de ir al colegio), pero cuando tiene tiempo suficiente, lo hace solo. ",
         "4. Se baña solo todos los días recibiendo apoyo solamente para lavar bien el cabello y supervisión de seguridad (evitar caídas, mezclar el agua caliente).",
-        
       ],
       score: []
     },
@@ -18,7 +17,6 @@ export const independenceQuestions = {
         "2. Le ayudan a vestirse frecuentemente realizando la actividad de manera compartida entre el niño y el adulto.",
         "3. Se viste solo frecuentemente, pero cuando tiene poco tiempo los adultos lo ayudan a vestir.",
         "4. Se viste solo todos los días, incluso si tiene poco tiempo para hacerlo, como cuando debe prepararse para el colegio en las mañanas.",
-
       ],
       score: []
     },

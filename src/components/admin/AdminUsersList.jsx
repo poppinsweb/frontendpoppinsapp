@@ -13,6 +13,7 @@ export const AdminUsersList = () => {
   useEffect(() => {
     getAllChildren(setChildren);
   }, []);
+  // console.log(children);
 
   const handleDelete = async (userId) => {
     try {
