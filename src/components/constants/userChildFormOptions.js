@@ -3,7 +3,7 @@ export const userChildFormOptions = {
     {label: "Femenino", name: "sexo", value: "femenino"},
     {label: "Masculino", name: "sexo", value: "masculino"}
   ],
-  socialClass: [
+  socialLevel: [
    {label: "1", name: "estrato", value: "1"}, 
    {label: "2", name: "estrato", value: "2"}, 
    {label: "3", name: "estrato", value: "3"}, 
@@ -13,7 +13,7 @@ export const userChildFormOptions = {
    {label: "Rural", name: "estrato", value: "rural"},  
    {label: "No Aplica", name: "estrato", value: "no-aplica"}, 
   ],
-  edCenterType: [
+  educationType: [
     {label:"Público", name:"educacion", value:"publico"}, 
     {label:"Privado", name:"educacion", value:"privado"}, 
     {label:"Mixto", name:"educacion", value:"mixto"}, 

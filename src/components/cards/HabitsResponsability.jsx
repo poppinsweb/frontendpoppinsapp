@@ -93,7 +93,7 @@ export const HabitsResponsability = () => {
   return (
     <div className="question-main-container">
       <div className='question-container'>
-        <h2 className="main-question-title">Cumplimiento de Responsabilidades Personales y Escolares</h2>
+        <h2 className="main-question-title">Responsabilidades Personales y Escolares</h2>
         {!showResult ? (
           <>
             <h2 className="secoundary-question-title">{question}</h2>
