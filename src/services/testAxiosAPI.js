@@ -7,7 +7,7 @@ export const getAllChildren = async (state) => {
   try {
     const response = await axios.get(`${TESTAPI}/api/infantes`);
     state(response.data);
-    // console.log(response);
+    console.log(response.data);
     return response;
   } catch (error) {
     console.error(error);
@@ -15,7 +15,7 @@ export const getAllChildren = async (state) => {
   }
 };
 
-//   // CREA UN INFANTE. RENDERIZA EN PERSONALES
+//   // CREA UN INFANTE. RENDERIZAR EN PERSONALES
 export const postNewChild = async (objectChild) => {
   try {
     const response = await axios.post(`${TESTAPI}/api/infantes`, objectChild);
@@ -46,11 +46,11 @@ export const postNewChild = async (objectChild) => {
 //   };
 
 // ENVIA LOS DATOS DE INDEPENDENCIA AL DUCHARSE, VESTIRSE, ALIMENTARSE, DORMIR: `${TESTAPI}/api/independencia`
-export const postIndependenceScore = async (results) => {
+export const postIndependenceScore = async (results, childID) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/independencia`, results);
-    console.log("Respuesta de API: ", response);
+    const response = await axios.post(`${TESTAPI}/api/independencia`, { results, childID });
+    console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
     console.error("Error al enviar los resultados a la API: ", error);

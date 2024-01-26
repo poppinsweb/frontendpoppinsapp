@@ -1,12 +1,12 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import { postNewChild } from "../../services/testAxiosAPI";
 import "../../styles/users/userChild.css";
 
-export function UserChildForm() {
+export function UserChildForm({ onChildIDChange }) {
   const { gender, socialLevel, educationType, degree } = userChildFormOptions;
 
   const [userData, setUserData] = useState({});
@@ -17,6 +17,11 @@ export function UserChildForm() {
   const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS
 
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   onChildIDChange(childID);
+  //   console.log("ID infante: ", childID);
+  // },[childID, onChildIDChange]);
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -39,10 +44,15 @@ export function UserChildForm() {
       const selected = { ...userData, ...userSelect, 
         "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
       };
-      console.log(selected);
+      // console.log(selected);
       const res = await postNewChild(selected);
       if (res) {
-        navigate("/independencia");
+        const childID = res.id;
+        console.log("ID infante: ", childID);
+        onChildIDChange(childID);
+        // setChildID(res.id);
+        // console.log("ID infante: ", res.id);
+        // navigate("/independencia");
       }
       return res;
     } catch (error) {
@@ -50,7 +60,7 @@ export function UserChildForm() {
       throw error;
     }
   };
-
+   
   const handleNameChange = ({ target }) => {
     setUserName(target.value);
   };

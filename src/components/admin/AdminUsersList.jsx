@@ -66,6 +66,7 @@ export const AdminUsersList = () => {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>CODIGO</th>
                 <th>Nacimiento AAAA-MM-DD</th>
                 <th>SEXO</th>
@@ -75,6 +76,7 @@ export const AdminUsersList = () => {
             <tbody>
               {children.map((child) => (
                 <tr key={child.id}>
+                  <td>{child.id}</td>
                   <td>{child.codigo_identificador}</td>
                   <td>{child.fecha_nacimiento}</td>
                   <td>{child.sexo}</td>

@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserChildForm } from "./UserChildForm";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import { postIndependenceScore } from "../../services/testAxiosAPI";
 import "../../styles/users/questions.css";
 
 export const Independence = () => {
+  const [childID, setChildID] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState(
     Array(independenceQuestions.questions.length).fill(null)
   );
-  const [result, setResult] = useState({
-    score: 0,
-  });
 
   const navigate = useNavigate();
 
@@ -56,21 +55,20 @@ export const Independence = () => {
 
         setResultsSent(true);
 
-        const totalScore = userResponses.reduce(
-          (total, response) => total + response,
-          0
-        );
-        console.log(totalScore);
+        // const childID = OBTENER EL ID
 
         try {
-          const res = await postIndependenceScore({
-            ...dataToSend,
-            score: totalScore,
-          });
+          const res = await postIndependenceScore(
+            {
+              ...dataToSend,
+              // score: totalScore,
+            },
+            childID
+          );
+
           console.log("Puntaje enviado a la API:", res);
 
           if (res) {
-            // setResultsSent(true);
             navigate("/habilidades-aseo");
           }
         } catch (error) {
@@ -83,46 +81,33 @@ export const Independence = () => {
     <div className="question-main-container">
       <div className="question-container-independence">
         <h2 className="main-question-title-independence">Independencia</h2>
-        {!result.score ? (
-          <>
-            <h2 className="secoundary-question-title">
-              {independenceQuestions.questions[currentQuestion].question}
-            </h2>
-            <ul className="question-section">
-              {independenceQuestions.questions[currentQuestion].choices.map(
-                (choice, index) => (
-                  <div key={index} className="question-li">
-                    <li
-                      onClick={() => handleAnswer(index + 1)}
-                      className={
-                        userResponses[currentQuestion] === index + 1
-                          ? "selected-answer question-text"
-                          : null
-                      }
-                    >
-                      {choice}
-                    </li>
-                  </div>
-                )
-              )}
-            </ul>
-            <span className="active-question-no">{currentQuestion + 1}</span>
-            <span className="total-question">
-              /{independenceQuestions.questions.length}
-            </span>
-          </>
-        ) : (
-          <div className="score-section">
-            <h3>Resultados</h3>
-            <p>
-              Preguntas Respondidas:
-              <span>{independenceQuestions.questions.length}</span>
-            </p>
-            <p>
-              Puntaje Parcial: <span>{result.score}</span>
-            </p>
-          </div>
-        )}
+        <>
+          <h2 className="secoundary-question-title">
+            {independenceQuestions.questions[currentQuestion].question}
+          </h2>
+          <ul className="question-section">
+            {independenceQuestions.questions[currentQuestion].choices.map(
+              (choice, index) => (
+                <div key={index} className="question-li">
+                  <li
+                    onClick={() => handleAnswer(index + 1)}
+                    className={
+                      userResponses[currentQuestion] === index + 1
+                        ? "selected-answer question-text"
+                        : null
+                    }
+                  >
+                    {choice}
+                  </li>
+                </div>
+              )
+            )}
+          </ul>
+          <span className="active-question-no">{currentQuestion + 1}</span>
+          <span className="total-question">
+            /{independenceQuestions.questions.length}
+          </span>
+        </>
       </div>
       <div className="btn-container">
         <button
