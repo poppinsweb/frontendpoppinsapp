@@ -19,7 +19,7 @@ export const getAllChildren = async (state) => {
 export const postNewChild = async (objectChild) => {
   try {
     const response = await axios.post(`${TESTAPI}/api/infantes`, objectChild);
-    console.log("Respuesta crear infante: ", response);
+    console.log("Respuesta crear infante: ", response.data);
     if (response.status === 201 || response.status === 200) {
       return response.data;
     } else {

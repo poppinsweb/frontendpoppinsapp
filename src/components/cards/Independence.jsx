@@ -55,7 +55,7 @@ export const Independence = () => {
 
         setResultsSent(true);
 
-        // const childID = OBTENER EL ID
+        // const childID = setChildID()
 
         try {
           const res = await postIndependenceScore(

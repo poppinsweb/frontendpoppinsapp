@@ -6,7 +6,7 @@ import { userChildFormOptions } from "../constants/userChildFormOptions";
 import { postNewChild } from "../../services/testAxiosAPI";
 import "../../styles/users/userChild.css";
 
-export function UserChildForm({ onChildIDChange }) {
+export function UserChildForm() {
   const { gender, socialLevel, educationType, degree } = userChildFormOptions;
 
   const [userData, setUserData] = useState({});
@@ -15,13 +15,13 @@ export function UserChildForm({ onChildIDChange }) {
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS
+  const [childID, setChildID] = useState(null);
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   onChildIDChange(childID);
-  //   console.log("ID infante: ", childID);
-  // },[childID, onChildIDChange]);
+  useEffect(() => {
+    console.log(childID);
+  }, [])
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -47,11 +47,9 @@ export function UserChildForm({ onChildIDChange }) {
       // console.log(selected);
       const res = await postNewChild(selected);
       if (res) {
-        const childID = res.id;
-        console.log("ID infante: ", childID);
-        onChildIDChange(childID);
-        // setChildID(res.id);
-        // console.log("ID infante: ", res.id);
+        const idChild = res.id;
+        console.log("ID infante: ", idChild);
+        setChildID(idChild);
         // navigate("/independencia");
       }
       return res;
@@ -72,7 +70,7 @@ export function UserChildForm({ onChildIDChange }) {
   const handleBirthChange = ({ target }) => {
     setUserBirth(target.value);
   };
-
+   
   return (
     <div className="container user-container">
       <img
