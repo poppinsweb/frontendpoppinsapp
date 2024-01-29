@@ -46,10 +46,10 @@ export const postNewChild = async (objectChild) => {
 //   };
 
 // ENVIA LOS DATOS DE INDEPENDENCIA AL DUCHARSE, VESTIRSE, ALIMENTARSE, DORMIR: `${TESTAPI}/api/independencia`
-export const postIndependenceScore = async (results, childID) => {
+export const postIndependenceScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/independencia`, { results, childID });
+    const response = await axios.post(`${TESTAPI}/api/independencia`, results);
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {

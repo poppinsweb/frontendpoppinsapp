@@ -50,7 +50,7 @@ export function UserChildForm() {
         const idChild = res.id;
         console.log("ID infante: ", idChild);
         setChildID(idChild);
-        // navigate("/independencia");
+        navigate("/independencia");
       }
       return res;
     } catch (error) {

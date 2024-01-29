@@ -4,15 +4,15 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import "./styles/index.css";
-import { ChildIDProvider } from "./context/ChildIDContext.jsx";
+import { ChildProvider } from "./context/ChildContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ChildIDProvider>
+        <ChildProvider>
           <App />
-        </ChildIDProvider>
+        </ChildProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

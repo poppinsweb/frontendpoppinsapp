@@ -1,33 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserChildForm } from "./UserChildForm";
+// import { ChildContext } from "../../context/ChildContext";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import { postIndependenceScore } from "../../services/testAxiosAPI";
 import "../../styles/users/questions.css";
 
 export const Independence = () => {
-  const [childID, setChildID] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState(
     Array(independenceQuestions.questions.length).fill(null)
   );
+  const [result, setResult] = useState({
+    score: 0,
+  });
+  // const { latestChild } = useContext(ChildContext);
 
   const navigate = useNavigate();
 
   const handleAnswer = (choice) => {
-    setUserResponses((prevResponses) => {
-      const newResponses = [...prevResponses];
-      newResponses[currentQuestion] = choice;
-      console.log("userResponses:", newResponses);
-      return newResponses;
-    });
+    setUserResponses((prevResponses) => [
+      ...prevResponses.slice(0, currentQuestion),
+      choice,
+      ...prevResponses.slice(currentQuestion + 1),
+    ]);
   };
 
   const handleBeforeQuestion = () => {
-    if (currentQuestion !== 0) {
-      setCurrentQuestion((prev) => prev - 1);
-    }
+    setCurrentQuestion((prev) => Math.max(prev - 1, 0));
   };
 
   const handleNextQuestion = async () => {
@@ -47,24 +47,22 @@ export const Independence = () => {
           independencia_dormir: "Al dormir",
         };
 
-        const dataToSend = {};
-        userResponses.forEach((response, index) => {
-          const fieldName = Object.keys(fieldMap)[index];
-          dataToSend[fieldName] = response;
-        });
+        // console.log("latestChild.id:", latestChild.id);
+
+        const dataToSend = {
+          ...Object.fromEntries(
+            independenceQuestions.questions.map((_, index) => [
+              Object.keys(fieldMap)[index],
+              userResponses[index],
+            ])
+          ),
+          // datos_infante_id: latestChild.id,
+        };
 
         setResultsSent(true);
 
-        // const childID = setChildID()
-
         try {
-          const res = await postIndependenceScore(
-            {
-              ...dataToSend,
-              // score: totalScore,
-            },
-            childID
-          );
+          const res = await postIndependenceScore(dataToSend);
 
           console.log("Puntaje enviado a la API:", res);
 
