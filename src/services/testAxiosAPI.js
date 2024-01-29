@@ -2,7 +2,7 @@ import axios from "axios";
 
 const TESTAPI = "http://localhost:3000";
 
-// // TRAE LOS INFANTES EXISTENTES
+// TRAE LOS INFANTES EXISTENTES
 export const getAllChildren = async (state) => {
   try {
     const response = await axios.get(`${TESTAPI}/api/infantes`);
@@ -15,7 +15,24 @@ export const getAllChildren = async (state) => {
   }
 };
 
-//   // CREA UN INFANTE. RENDERIZAR EN PERSONALES
+// TRAE LOS DATOS DEL ULTIMO INFANTE REGISTRADO
+export const getLastChild = async () => {
+  try {
+    const response = await axios.get(
+      `${TESTAPI}/api/infantes`
+    );
+    const latestChildArray = response.data.length - 1;
+    const latestChild = response.data[latestChildArray];
+    // console.log("Latest Child ID:", latestChild.id);
+    // console.log("Latest Child Codigo Identificador:", latestChild.codigo_identificador);
+    return latestChild;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// CREA UN INFANTE.
 export const postNewChild = async (objectChild) => {
   try {
     const response = await axios.post(`${TESTAPI}/api/infantes`, objectChild);
@@ -32,18 +49,6 @@ export const postNewChild = async (objectChild) => {
     throw error;
   }
 };
-
-//   // EDITA UN USUARIO INFANTE SEGUN SU ID
-// ********SE PUEDE HACER MAS ADELANTE EN UNA VENTANA EMERGENTE.********
-// export const updateDataChild = async(id, email) => {
-//     try {
-//       return await axios.put(`${TESTAPI}/api/infantes/${id}`, {
-//         email,
-//       })
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
 
 // ENVIA LOS DATOS DE INDEPENDENCIA AL DUCHARSE, VESTIRSE, ALIMENTARSE, DORMIR: `${TESTAPI}/api/independencia`
 export const postIndependenceScore = async (results) => {

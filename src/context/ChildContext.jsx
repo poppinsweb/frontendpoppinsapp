@@ -1,38 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-// import { getLastChild } from "../services/testAxiosAPI";
+import { getLastChild } from "../services/testAxiosAPI";
 
 export const ChildContext = createContext();
-
-export const ChildProvider = ({ children }) => {
-  JSON.parse(localStorage.getItem("child")) || null
-  const [latestChild, setLatestChild] = useState(null);
-    
-  // useEffect(() => {
-  //   const getLatestChild = async() => {
-  //     try {
-  //       const lastChild = await getLastChild();
-  //       setLatestChild(lastChild);
-        
-  //     } catch (error) {
-  //       console.error("Error al obtener el infante: ", error);
-  //     }
-  //   };
-
-  //   getLatestChild();
-  // }, []);
-  // console.log(latestChild);
-
-  return (
-    <ChildContext.Provider 
-      value={{ 
-        latestChild,
-        // getChild,
-      }}
-    >
-      {children}
-    </ChildContext.Provider>
-  );
-};
 
 // ***********
 // HOOK PARA LLAMAR A ESTE CONTEXTO
@@ -42,4 +11,37 @@ export const useLatestChild = () => {
     throw new Error("useChildID must be used within an ChildIDProvider");
   }
   return context;
+};
+// ***********
+
+export const ChildProvider = ({ children }) => {
+  // JSON.parse(localStorage.getItem("child")) || null
+  const [latestChild, setLatestChild] = useState(null);
+    
+  useEffect(() => {
+    const getLatestChild = async() => {
+      try {
+        const lastChild = await getLastChild();
+        setLatestChild(lastChild);
+        
+      } catch (error) {
+        console.error("Error al obtener el infante: ", error);
+      }
+    };
+
+    getLatestChild();
+  }, []);
+
+  if (latestChild) console.log(latestChild.id);
+  
+
+  return (
+    <ChildContext.Provider 
+      value={{ 
+        latestChild,
+      }}
+    >
+      {children}
+    </ChildContext.Provider>
+  );
 };
