@@ -23,7 +23,7 @@ export const ChildProvider = ({ children }) => {
       try {
         const lastChild = await getLastChild();
         setLatestChild(lastChild);
-        
+        console.log("Dato actualizado correctamente:", lastChild);
       } catch (error) {
         console.error("Error al obtener el infante: ", error);
       }
@@ -32,13 +32,22 @@ export const ChildProvider = ({ children }) => {
     getLatestChild();
   }, []);
 
-  // if (latestChild) console.log(latestChild.id);
+  const updateLatestChild = async() => {
+    try {
+      const lastChild = await getLastChild();
+      setLatestChild(lastChild);
+      // console.log("Dato actualizado correctamente:", lastChild);
+    } catch (error) {
+      console.error("Error al actualizar el infante: ", error);
+    }
+  };
   
 
   return (
     <ChildContext.Provider 
       value={{ 
         latestChild,
+        updateLatestChild,
       }}
     >
       {children}

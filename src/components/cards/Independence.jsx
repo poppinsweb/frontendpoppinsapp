@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChildContext } from "../../context/ChildContext";
+import { useLatestChild } from "../../context/ChildContext";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import { postIndependenceScore } from "../../services/testAxiosAPI";
 import "../../styles/users/questions.css";
@@ -11,13 +11,16 @@ export const Independence = () => {
   const [userResponses, setUserResponses] = useState(
     Array(independenceQuestions.questions.length).fill(null)
   );
-  // const [result, setResult] = useState({
-  //   score: 0,
-  // });
-  const { latestChild } = useContext(ChildContext);
-  if (latestChild) console.log(latestChild.id);
+  const {latestChild, updateLatestChild} = useLatestChild();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadInitialData = async() => {
+      await updateLatestChild();
+    }
+    loadInitialData();
+  }, [updateLatestChild]);
 
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => [
