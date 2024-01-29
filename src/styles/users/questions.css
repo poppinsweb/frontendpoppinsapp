@@ -21,7 +21,7 @@
   padding-top: 20px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   margin-bottom: 2rem;
-  background-color: #ac8baf6e;
+  background-color: #9d8bafde;
 }
 
 .main-question-title {
@@ -99,7 +99,7 @@
   }
 
   .question-container {
-    background-image: url("../images/card-fondo.jpg");
+    /* background-image: url("../images/card-fondo.jpg"); */
     background-size: cover;
   }
 
@@ -135,7 +135,7 @@
     width: 1050px;
     height: 650px;
     padding: 50px 100px;
-    background-image: url("../images/card-fondo.jpg");
+    /* background-image: url("../images/card-fondo.jpg"); */
     background-size: cover;
   }
 

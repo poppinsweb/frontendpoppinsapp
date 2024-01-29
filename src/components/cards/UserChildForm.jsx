@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { userChildFormOptions } from "../constants/userChildFormOptions";
@@ -15,8 +15,13 @@ export function UserChildForm() {
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS
+  const [childID, setChildID] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(childID);
+  }, [])
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -39,9 +44,12 @@ export function UserChildForm() {
       const selected = { ...userData, ...userSelect, 
         "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
       };
-      console.log(selected);
+      // console.log(selected);
       const res = await postNewChild(selected);
       if (res) {
+        const idChild = res.id;
+        console.log("ID infante: ", idChild);
+        setChildID(idChild);
         navigate("/independencia");
       }
       return res;
@@ -50,7 +58,7 @@ export function UserChildForm() {
       throw error;
     }
   };
-
+   
   const handleNameChange = ({ target }) => {
     setUserName(target.value);
   };
@@ -62,7 +70,7 @@ export function UserChildForm() {
   const handleBirthChange = ({ target }) => {
     setUserBirth(target.value);
   };
-
+   
   return (
     <div className="container user-container">
       <img
