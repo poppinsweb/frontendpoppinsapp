@@ -32,7 +32,7 @@ export const ChildProvider = ({ children }) => {
     getLatestChild();
   }, []);
 
-  if (latestChild) console.log(latestChild.id);
+  // if (latestChild) console.log(latestChild.id);
   
 
   return (

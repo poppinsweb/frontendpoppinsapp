@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { ChildContext } from "../../context/ChildContext";
+import { ChildContext } from "../../context/ChildContext";
 import { independenceQuestions } from "../constants/independenceQuestions";
 import { postIndependenceScore } from "../../services/testAxiosAPI";
 import "../../styles/users/questions.css";
@@ -11,10 +11,11 @@ export const Independence = () => {
   const [userResponses, setUserResponses] = useState(
     Array(independenceQuestions.questions.length).fill(null)
   );
-  const [result, setResult] = useState({
-    score: 0,
-  });
-  // const { latestChild } = useContext(ChildContext);
+  // const [result, setResult] = useState({
+  //   score: 0,
+  // });
+  const { latestChild } = useContext(ChildContext);
+  if (latestChild) console.log(latestChild.id);
 
   const navigate = useNavigate();
 
@@ -47,8 +48,6 @@ export const Independence = () => {
           independencia_dormir: "Al dormir",
         };
 
-        // console.log("latestChild.id:", latestChild.id);
-
         const dataToSend = {
           ...Object.fromEntries(
             independenceQuestions.questions.map((_, index) => [
@@ -56,7 +55,7 @@ export const Independence = () => {
               userResponses[index],
             ])
           ),
-          // datos_infante_id: latestChild.id,
+          datos_infante_id: latestChild.id,
         };
 
         setResultsSent(true);
