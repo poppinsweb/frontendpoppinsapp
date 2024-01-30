@@ -77,7 +77,17 @@ export const getIndependenceScore = async (state) => {
 };
 
 // ENVIA LOS DATOS DE HABILIDADES HIGIENE: `${TESTAPI}/api/habilidadeshigiene`
-export const postSkillGroomingScore = () => {};
+export const postSkillGroomingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habilidadeshigiene`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABILIDADES VESTIDO: `${TESTAPI}/api/habilidadesvestido`
 
