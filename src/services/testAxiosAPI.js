@@ -116,6 +116,17 @@ export const postSkillFeedingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABITOS ALIMENTACION: `${TESTAPI}/api/habitosalimentacion`
+export const postHabitsFeedingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosalimentacion`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABITOS SUENIO: `${TESTAPI}/api/habitosdormir`
 

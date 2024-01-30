@@ -91,7 +91,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Utiliza el comedor o una mesa adaptada para las comidas ",  // bd: usa_comedor
+      question: "Utiliza el comedor o una mesa adaptada para las comidas",  // bd: usa_comedor
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
@@ -121,7 +121,7 @@ export const habitFeedingQuestions = {
       score: [],
     },
     {
-      question: "Su peso es adecuado para su talla",  // bd: pesotalla_adecuado
+      question: "Su peso es adecuado para su talla",  // bd: pesotalla_adecuados
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",
