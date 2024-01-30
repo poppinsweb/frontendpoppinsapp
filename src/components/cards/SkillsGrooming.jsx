@@ -34,7 +34,7 @@ export const SkillsGrooming = () => {
     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
   };
 
-  const handleNextQuestion = async () => {
+  const handleNextQuestion = async() => {
     const nextQuestion = currentQuestion + 1;
 
     if (nextQuestion < abilityGroomingQuestions.questions.length) {
@@ -75,7 +75,7 @@ export const SkillsGrooming = () => {
           console.log("Puntaje enviado a la API:", res);
 
           if (res) {
-            // navigate("/");
+            navigate("/habilidades-vestido");
           }
         } catch (error) {
           console.error("Error al enviar resultados a la API: ", error);
