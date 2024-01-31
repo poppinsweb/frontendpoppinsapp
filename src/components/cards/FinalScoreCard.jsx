@@ -1,9 +1,21 @@
 import "../../styles/users/result.css";
 
-export default function FinalScoreCard() {
+const categories = [
+  "Independencia en el Baño",
+  "Independencia en el Vestido",
+  "Independencia en la Alimentación",
+  "Independencia del Sueño",
+  "Habilidades de Aseo Personal",
+  "Habilidades del Vestido",
+  "Habilidades en la Alimentación",
+  "Habitos de alimentación",
+  "Habitos de sueño",
+  "Responsabilidades Personales y Escolares",
+];
+
+export const FinalScoreCard = () => {
   // TRAER LA TABLA DE RESPUESTAS Y TRANSFORMAR EL DATO NUMERICO EN UN SIMBOLO QUE SE UBIQUE EL EL COLOR CORRESPONDIENTE
   // HAY QUE PROMEDIAR LOS PUNTAJES?
-
   return (
     <div className="results-container">
       <h1 className="main-title">Poppins Resultados</h1>
@@ -24,93 +36,33 @@ export default function FinalScoreCard() {
           <strong>Código:</strong>
         </p>
       </div>
-      <table className="table table-hover ">
+      <table className="table table-hover">
         <thead className="result-titles">
           <tr>
             <th>CATEGORIA</th>
-            <th className="table-primary">AZUL</th>
-            <th className="table-success">VERDE</th>
-            <th className="table-warning">NARANJA</th>
-            <th className="table-danger">ROJO</th>
+            <th className="table-primary">ESPERADO</th>
+            <th className="table-success">ACEPTABLE</th>
+            <th className="table-warning">INSUFICIENTE</th>
+            <th className="table-danger">DEFICIENTE</th>
           </tr>
         </thead>
         <tbody className="result-titles">
-          <tr>
-            <td>Independencia en el Baño</td>
-            <td className="table-primary">*</td>
-            <td className="table-success"></td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Independencia en el Vestido</td>
-            <td className="table-primary">*</td>
-            <td className="table-success"></td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Independencia en la Alimentación</td>
-            <td className="table-primary">*</td>
-            <td className="table-success"></td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Independencia del Sueño</td>
-            <td className="table-primary">*</td>
-            <td className="table-success"></td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Habilidades de Aseo Personal</td>
-            <td className="table-primary"></td>
-            <td className="table-success">*</td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Habilidades del Vestido</td>
-            <td className="table-primary"></td>
-            <td className="table-success">*</td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Habilidades en la Alimentación</td>
-            <td className="table-primary"></td>
-            <td className="table-success"></td>
-            <td className="table-warning">*</td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Habitos de alimentación</td>
-            <td className="table-primary"></td>
-            <td className="table-success"></td>
-            <td className="table-warning"></td>
-            <td className="table-danger">*</td>
-          </tr>
-          <tr>
-            <td>Habitos de sueño</td>
-            <td className="table-primary"></td>
-            <td className="table-success"></td>
-            <td className="table-warning">*</td>
-            <td className="table-danger"></td>
-          </tr>
-          <tr>
-            <td>Responsabilidades Personales y Escolares</td>
-            <td className="table-primary"></td>
-            <td className="table-success">*</td>
-            <td className="table-warning"></td>
-            <td className="table-danger"></td>
-          </tr>
+          {categories.map((category, index) => (
+            <tr key={index}>
+              <td>{category}</td>
+              <td className="table-primary"></td>
+              <td className="table-success"></td>
+              <td className="table-warning"></td>
+              <td className="table-danger"></td>
+            </tr>
+          ))}
         </tbody>
       </table>
       DESCARGAR IMPRIMIR
     </div>
   );
-}
+};
+
 
 // TRAER NOMBRES, APELLIDOS, EDAD, SEXO, GRADO Y EL CODIGO DEL NIÑO COMO ENCABEZADO
 // LISTADO DE ITEMS EVALUADOS **
