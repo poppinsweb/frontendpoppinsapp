@@ -1,157 +1,134 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useLatestChild } from "../../context/ChildContext";
 import { habitResponsabilityQuestions } from "../constants/habitResponsabilityQuestions";
 import "../../styles/users/questions.css";
+import { postHabitsResponsabilityScore } from "../../services/testAxiosAPI";
 
 export const HabitsResponsability = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answerIdx, setAnswerIdx] = useState(null);
-  const [answer, setAnswer] = useState(null);
-  const [showNavigation, setShowNavigation] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [scoreFinal, setScoreFinal] = useState(0)
-  const [result, setResult] = useState({
-    score: 0,
-  });
+  const [resultsSent, setResultsSent] = useState(false);
+  const [userResponses, setUserResponses] = useState(
+    Array(habitResponsabilityQuestions.questions.length).fill(null)
+  );
+  const { latestChild, updateLatestChild } = useLatestChild();
 
   const navigate = useNavigate();
 
-  const { question, choices } =
-    habitResponsabilityQuestions.questions[currentQuestion];
+  useEffect(() => {
+    const loadInitialData = async () => {
+      await updateLatestChild();
+    };
+    loadInitialData();
+  }, []);
 
-  const handleAnswer = (choice, index) => {
-    setAnswerIdx(index);
-    if (choice) {
-      setAnswer(true);
-    }
+  const handleAnswer = (choice) => {
+    setUserResponses((prevResponses) => [
+      ...prevResponses.slice(0, currentQuestion),
+      choice,
+      ...prevResponses.slice(currentQuestion + 1),
+    ]);
   };
 
   const handleBeforeQuestion = () => {
-    if (currentQuestion !== 0) {
-      const previousQuestion = habitResponsabilityQuestions.questions[currentQuestion - 1]
-      const previousQuestionScore = previousQuestion.score.pop()
-
-      setResult((prev) => ({
-      ...prev,
-      score: prev.score - previousQuestionScore,
-      }))
-
-      setCurrentQuestion((prev) => prev - 1)
-
-    } else {
-      navigate("/habitos-dormir")
-    }
-  }
-
-  const handleNextQuestion = () => {
-    setAnswerIdx(null);
-    if (answer !== null) {
-      scoreAsignation(currentQuestion, answerIdx);
-    }
-    if (currentQuestion !== habitResponsabilityQuestions.questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      setShowResult(true);
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score,
-      }));
-      setShowNavigation(true);
-    }
+    setCurrentQuestion((prev) => Math.max(prev - 1, 0));
   };
 
-  const scoreAsignation = (questionIndex, optionIndex) => {
-    const question = habitResponsabilityQuestions.questions[questionIndex];
-    const pointScore = optionIndex + 1;
-    question.score.push(pointScore);
+  const handleNextQuestion = async() => {
+    const nextQuestion = currentQuestion + 1;
 
-    if (pointScore) {
-      setResult((prev) => ({
-        ...prev,
-        score: prev.score + pointScore,
-      }));
-    } 
-  };
+    if (nextQuestion < habitResponsabilityQuestions.questions.length) {
+      setCurrentQuestion(nextQuestion);
+      setResultsSent(false);
+    } else {
+      if (userResponses.includes(null)) {
+        alert("Responde todas las preguntas antes de enviar los resultados");
+      } else {
+        const fieldMap = {
+          uniforme_listo: "Ayuda a dejar listo su uniforme en las noches",
+          prepara_maletin: "Ayuda a preparar su maleta para el colegio",
+          organiza_juguetes: "Recoge y organiza sus juguetes",
+          recoge_suropa_sucia: "Recoge y lleva a su lugar ropa sucia y zapatos",
+          recoge_suplato: "Recoge el plato de la mesa después de las comidas",
+          tieneoficios_asignados: "Tiene asignados oficios en casa que beneficien a toda la familia",
+          tienehorarios_rutinas: "Tiene horarios y rutinas establecidos",
+          cumple_acuerdos: "Cumple con los horarios y rutinas que se han acordado",
+        };
 
-  useEffect(() => {
-    // Navega a la siguiente pantalla después de 2 segundos
-    if (showNavigation) {
-      setTimeout(() => {
-       navigate("/resultados") 
-      }, 2000)
-      setScoreFinal(result.score);
+        const dataToSend = {
+          ...Object.fromEntries(
+            habitResponsabilityQuestions.questions.map((_, index) => [
+              Object.keys(fieldMap)[index],
+              userResponses[index],
+            ])
+          ),
+          datos_infante_id: latestChild.id,
+        };
+
+        setResultsSent(true);
+
+        try {
+          const res = await postHabitsResponsabilityScore(dataToSend);
+
+          console.log("Puntaje enviado a la API:", res);
+
+          if (res) {
+            navigate("/habitos-dormir");
+          }
+        } catch (error) {
+          console.error("Error al enviar resultados a la API: ", error);
+        }
+      }
     }
-  }, [showNavigation, result.score])
-
-  if (scoreFinal > 0) {
-    <p>Puntaje Final: <span>{scoreFinal}</span></p>;
-  }
-
-  console.log(result.score);
-
+  };
   return (
     <div className="question-main-container">
-      <div className='question-container'>
-        <h2 className="main-question-title">Responsabilidades Personales y Escolares</h2>
-        {!showResult ? (
-          <>
-            <h2 className="secoundary-question-title">{question}</h2>
-            <ul className="question-section-habit">
-              {choices.map((choice, index) => (
-                <div className="question-li" key={choice}>
+      <div className="question-container">
+        <h2 className="main-question-title">Responsabilidades y Cumplimiento de Acuerdos</h2>
+        <>
+          <h2 className="secoundary-question-title">
+            {habitResponsabilityQuestions.questions[currentQuestion].question}
+          </h2>
+          <ul className="question-section-ability">
+            {habitResponsabilityQuestions.questions[currentQuestion].choices.map(
+              (choice, index) => (
+                <div key={index} className="question-li">
                   <li
-                    onClick={() => handleAnswer(choice, index)}
-                    key={choice}
+                    onClick={() => handleAnswer(index + 1)}
                     className={
-                      answerIdx === index 
-                      ? "selected-answer question-text" 
-                      : null
+                      userResponses[currentQuestion] === index + 1
+                        ? "selected-answer question-text"
+                        : null
                     }
                   >
                     {choice}
                   </li>
                 </div>
-              ))}
-            </ul>
-            <span className="active-question-no">{currentQuestion + 1}</span>
-            <span className="total-question">
-              /{habitResponsabilityQuestions.questions.length}
-            </span>
-          </>
-        ) : (
-          <div className="score-section">
-            <h3>Resultados</h3>
-            <p>
-              Preguntas Respondidas:
-              <span>{habitResponsabilityQuestions.questions.length}</span>
-            </p>
-            <p>
-              Puntaje Parcial: <span>{result.score}</span>
-            </p>
-          </div>
-        )}
+              )
+            )}
+          </ul>
+          <span className="active-question-no">{currentQuestion + 1}</span>
+          <span className="total-question">
+            /{habitResponsabilityQuestions.questions.length}
+          </span>
+        </>
       </div>
       <div className="btn-container">
-        <button onClick={handleBeforeQuestion} className="btn-color">
-          {showResult
-            ? "Reiniciar"
-            : "Anterior"}
+        <button
+          onClick={handleBeforeQuestion}
+          className="btn-color"
+          disabled={currentQuestion === 0 || resultsSent}
+        >
+          {resultsSent || currentQuestion === 0 ? "Inactivo" : "Anterior"}
         </button>
-        
         <button
           onClick={handleNextQuestion}
-          disabled={answerIdx === null}
-          className='btn-color'
+          disabled={resultsSent}
+          className="btn-color"
         >
-          {showResult
-            ? "Atrás"
-            : currentQuestion === habitResponsabilityQuestions.questions.length - 1
-            ? "Resultados"
-            : "Siguiente"
-            }
+          {resultsSent ? "Siguiente Sección" : "Siguiente"}
         </button>
       </div>
     </div>
   );
-}
+};

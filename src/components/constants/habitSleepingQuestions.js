@@ -21,7 +21,7 @@ export const habitSleepingQuestions = {
       score: [],
     },
     {
-      question: "Duerme entre 10 y 12 horas", // db: duerme_ 10a12h
+      question: "Duerme entre 10 y 12 horas", // db: duerme_10a12h
       choices: [
         "1. Nunca (Menos del 10% de las veces)",
         "2. Casi Nunca (Entre el 10% y el 40% de las veces)",

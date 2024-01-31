@@ -129,5 +129,27 @@ export const postHabitsFeedingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABITOS SUENIO: `${TESTAPI}/api/habitosdormir`
+export const postHabitsSleepingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosdormir`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABITOS RESPONSABILIDADES: `${TESTAPI}/api/habitosresponsabilidad`
+export const postHabitsResponsabilityScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosresponsabilidad`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
