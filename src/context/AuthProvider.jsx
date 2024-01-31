@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user);
       console.log("Respuesta de registrar en context", res);
-      getAllUsers();
     } catch (error) {
       console.error(error);
     }

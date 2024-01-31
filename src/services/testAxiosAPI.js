@@ -77,14 +77,79 @@ export const getIndependenceScore = async (state) => {
 };
 
 // ENVIA LOS DATOS DE HABILIDADES HIGIENE: `${TESTAPI}/api/habilidadeshigiene`
-export const postSkillGroomingScore = () => {};
+export const postSkillGroomingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habilidadeshigiene`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABILIDADES VESTIDO: `${TESTAPI}/api/habilidadesvestido`
+export const postSkillDressingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habilidadesvestido`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABILIDADES ALIMENTACION: `${TESTAPI}/api/habilidadesalimentacion`
+export const postSkillFeedingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habilidadesalimentacion`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABITOS ALIMENTACION: `${TESTAPI}/api/habitosalimentacion`
+export const postHabitsFeedingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosalimentacion`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABITOS SUENIO: `${TESTAPI}/api/habitosdormir`
+export const postHabitsSleepingScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosdormir`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};
 
 // ENVIA LOS DATOS DE HABITOS RESPONSABILIDADES: `${TESTAPI}/api/habitosresponsabilidad`
+export const postHabitsResponsabilityScore = async(results) => {
+  try {
+    console.log("Datos a enviar a la API:", results);
+    const response = await axios.post(`${TESTAPI}/api/habitosresponsabilidad`, results);
+    console.log("Respuesta de API: ", response.data);
+    return true;
+  } catch (error) {
+    console.error("Error al enviar los resultados a la API: ", error);
+    return false;
+  }
+};

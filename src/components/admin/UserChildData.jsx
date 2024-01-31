@@ -25,7 +25,7 @@ export const UserChildData = () => {
   };
 
   useEffect(() => {
-    console.log("User Child Select Updated:", userChildSelect);
+    // console.log("User Child Select Updated:", userChildSelect);
   }, [userChildSelect]);
 
   const handleSubmit = (e) => {

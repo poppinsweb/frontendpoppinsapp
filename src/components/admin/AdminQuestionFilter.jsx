@@ -17,7 +17,7 @@ export function AdminQuestionFilter() {
   };
 
   useEffect(() => {
-    console.log("Score selected: ", selectedQuestion);
+    // console.log("Score selected: ", selectedQuestion);
   }, [selectedQuestion]);
 
   const handleSubmit = (e) => {

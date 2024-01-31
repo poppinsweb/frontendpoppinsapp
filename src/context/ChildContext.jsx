@@ -21,9 +21,10 @@ export const ChildProvider = ({ children }) => {
   useEffect(() => {
     const getLatestChild = async() => {
       try {
+        if(latestChild) {
         const lastChild = await getLastChild();
         setLatestChild(lastChild);
-        console.log("Dato actualizado correctamente:", lastChild);
+        console.log("Dato actualizado correctamente:", lastChild)}
       } catch (error) {
         console.error("Error al obtener el infante: ", error);
       }

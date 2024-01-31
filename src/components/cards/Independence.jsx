@@ -20,7 +20,7 @@ export const Independence = () => {
       await updateLatestChild();
     }
     loadInitialData();
-  }, [updateLatestChild]);
+  }, []);
 
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => [
