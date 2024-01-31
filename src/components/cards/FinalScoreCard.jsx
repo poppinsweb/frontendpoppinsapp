@@ -1,4 +1,6 @@
 import "../../styles/users/result.css";
+import { useLatestChild } from "../../context/ChildContext";
+import { useEffect, useState } from "react";
 
 const categories = [
   "Independencia en el Baño",
@@ -14,26 +16,66 @@ const categories = [
 ];
 
 export const FinalScoreCard = () => {
-  // TRAER LA TABLA DE RESPUESTAS Y TRANSFORMAR EL DATO NUMERICO EN UN SIMBOLO QUE SE UBIQUE EL EL COLOR CORRESPONDIENTE
-  // HAY QUE PROMEDIAR LOS PUNTAJES?
+  const [childAge, setChildAge] = useState({ years: 0, months: 0 });
+  const { latestChild, updateLatestChild } = useLatestChild();
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      await updateLatestChild();
+    };
+    loadInitialData();
+  }, []);
+
+  useEffect(() => {
+    const yearsMonthsCalc = (birthDay, todaysDay) => {
+      const birthDayObj = new Date(birthDay);
+      const todaysDayObj = new Date(todaysDay);
+
+      const milisecsDiff = todaysDayObj - birthDayObj;
+
+      const years = Math.floor(milisecsDiff / (365.25 * 24 * 60 * 60 * 1000));
+      const remainingMilisecs = milisecsDiff % (365.25 * 24 * 60 * 60 * 1000);
+      const months = Math.floor(
+        remainingMilisecs / (30.44 * 24 * 60 * 60 * 1000)
+      );
+      setChildAge({ years, months });
+    };
+
+    if (latestChild?.fecha_nacimiento && latestChild?.fecha_actual) {
+      yearsMonthsCalc(latestChild.fecha_nacimiento, latestChild.fecha_actual);
+    }
+  }, [latestChild]);
+
+  const childName = latestChild?.nombres || "null";
+  const childLastName = latestChild?.apellidos || "null";
+  const childGender = latestChild?.sexo || "null";
+  const childGrade = latestChild?.grado || "null";
+  const childCode = latestChild?.codigo_identificador || "null";
+  // console.log(childAge);
+  // console.log(latestChild);
   return (
     <div className="results-container">
       <h1 className="main-title">Poppins Resultados</h1>
       <div className="header-container">
         <p>
-          <strong>Nombre:</strong>
+          <strong>Nombre: </strong>
+          {childName} {childLastName}
         </p>
         <p>
-          <strong>Edad:</strong>
+          <strong>Edad: </strong>
+          {childAge.years}años {childAge.months} meses
         </p>
         <p>
-          <strong>Sexo:</strong>
+          <strong>Sexo: </strong>
+          {childGender}
         </p>
         <p>
-          <strong>Grado:</strong>
+          <strong>Grado: </strong>
+          {childGrade}
         </p>
         <p>
-          <strong>Código:</strong>
+          <strong>Código: </strong>
+          {childCode}
         </p>
       </div>
       <table className="table table-hover">
@@ -58,16 +100,16 @@ export const FinalScoreCard = () => {
           ))}
         </tbody>
       </table>
-      DESCARGAR IMPRIMIR
+      DESCARGAR___ ___ IMPRIMIR
     </div>
   );
 };
 
-
-// TRAER NOMBRES, APELLIDOS, EDAD, SEXO, GRADO Y EL CODIGO DEL NIÑO COMO ENCABEZADO
 // LISTADO DE ITEMS EVALUADOS **
 // UBICACION DE LOS PUNTAJES EN UNA DE TRES COLUMNAS (TABLA) SEGUN CONVENCION DE COLORES
 // ESPECIFICAR SI ES PRIMERA O SEGUNDA ENCUESTA
 // BOTON PARA IMPRIMIR Y/O BOTON PARA DESCARGAR
 // LINK A RECOMENDACIONES ESPECIFICAS?
 // CODIGO PARA CONDICIONAR LA APARICION DE LOS SIMBOLOS EN LA CASILLA CORRESPONDIENTE A LA PUNTUACION
+// TRAER LA TABLA DE RESPUESTAS Y TRANSFORMAR EL DATO NUMERICO EN UN SIMBOLO QUE SE UBIQUE EL EL COLOR CORRESPONDIENTE
+// HAY QUE PROMEDIAR LOS PUNTAJES? sipi
