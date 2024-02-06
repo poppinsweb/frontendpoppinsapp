@@ -1,6 +1,7 @@
 import "../../styles/users/result.css";
 import { useLatestChild } from "../../context/ChildContext";
 import { useEffect, useState } from "react";
+import { useScores } from "../../context/ScoresContext";
 
 const categories = [
   "Independencia en el Baño",
@@ -18,7 +19,12 @@ const categories = [
 export const FinalScoreCard = () => {
   const [childAge, setChildAge] = useState({ years: 0, months: 0 });
   const { latestChild, updateLatestChild } = useLatestChild();
+  const { independenceScores, getIndependenceScores } = useScores();
 
+  // console.log(independenceScores);
+  // console.log(latestChild);
+
+  // EVITA ERRORES CUANDO NO HAY DATO MIENTRAS SE COMPLETA LA FUNC ASINCRONA
   useEffect(() => {
     const loadInitialData = async () => {
       await updateLatestChild();
@@ -26,6 +32,7 @@ export const FinalScoreCard = () => {
     loadInitialData();
   }, []);
 
+  // CALCULA LA EDAD EN ANIOS Y MESES
   useEffect(() => {
     const yearsMonthsCalc = (birthDay, todaysDay) => {
       const birthDayObj = new Date(birthDay);
@@ -46,13 +53,25 @@ export const FinalScoreCard = () => {
     }
   }, [latestChild]);
 
+  // RECOPILA LA INFO AL COMPLETARSE LA ASINCRONIA
+  const childId = latestChild?.id || "null";
+  console.log(childId);
   const childName = latestChild?.nombres || "null";
+  console.log(childName);
   const childLastName = latestChild?.apellidos || "null";
   const childGender = latestChild?.sexo || "null";
   const childGrade = latestChild?.grado || "null";
   const childCode = latestChild?.codigo_identificador || "null";
-  // console.log(childAge);
-  // console.log(latestChild);
+
+  // TRAE LOS SCORES DE INDEPENDENCIA
+  useEffect(() => {
+    const independenceScore = async() =>{
+      getIndependenceScores(1)
+    };
+    independenceScore()
+  }, []);
+
+ 
   return (
     <div className="results-container">
       <h1 className="main-title">Poppins Resultados</h1>

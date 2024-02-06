@@ -64,11 +64,10 @@ export const postIndependenceScore = async (results) => {
 };
 
 // TRAE LOS DATOS DE INDEPENDENCIA... ES PARA PROBAR
-export const getIndependenceScore = async (state) => {
+export const getIndependenceScore = async (id) => {
   try {
-    const response = await axios.get(`${TESTAPI}/api/independencia`);
-    state(response.data);
-    console.log("Respuesta de getApi: ", response);
+    const response = await axios.get(`${TESTAPI}/api/independencia/${id}`);
+    // console.log("Respuesta de getApi: ", response.data);
     return response.data;
   } catch (error) {
     console.error(error);
