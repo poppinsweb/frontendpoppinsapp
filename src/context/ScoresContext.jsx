@@ -26,22 +26,10 @@ export const ScoresProvider = ({ children }) => {
       console.error("Error al obtener el score: ", error);
     }
   };
-   if(independenceScores) {
-    // console.log(independenceScores[0]);
-   }
-
-  // habilidades-aseo scores
-  const getSkillsGroomingScores = () => {};
-
-  // habilidades-vestido scores
-
-  // habilidades-alimentacion scores
-
-  // habitos-alimentacion scores
-
-  // habitos-dormir scores
-
-  // responsabilidades scores
+  
+  //  if(independenceScores) {
+  //   console.log("independencia ducha: ", independenceScores.independencia_ducha);
+  //  }
 
   return (
     <ScoresContext.Provider
@@ -54,3 +42,18 @@ export const ScoresProvider = ({ children }) => {
     </ScoresContext.Provider>
   );
 };
+
+
+
+// habilidades-aseo scores
+const getSkillsGroomingScores = () => {};
+
+// habilidades-vestido scores
+
+// habilidades-alimentacion scores
+
+// habitos-alimentacion scores
+
+// habitos-dormir scores
+
+// responsabilidades scores

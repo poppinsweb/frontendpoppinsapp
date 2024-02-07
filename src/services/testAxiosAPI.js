@@ -63,7 +63,7 @@ export const postIndependenceScore = async (results) => {
   }
 };
 
-// TRAE LOS DATOS DE INDEPENDENCIA... ES PARA PROBAR
+// TRAE LOS DATOS DE INDEPENDENCIA POR ID
 export const getIndependenceScore = async (id) => {
   try {
     const response = await axios.get(`${TESTAPI}/api/independencia/${id}`);
