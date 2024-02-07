@@ -3,26 +3,24 @@ import { useLatestChild } from "../../context/ChildContext";
 import { useEffect, useState } from "react";
 import { useScores } from "../../context/ScoresContext";
 
-const categories = [
-  "Independencia en el Baño",
-  "Independencia en el Vestido",
-  "Independencia en la Alimentación",
-  "Independencia del Sueño",
-  "Habilidades de Aseo Personal",
-  "Habilidades del Vestido",
-  "Habilidades en la Alimentación",
-  "Habitos de alimentación",
-  "Habitos de sueño",
-  "Responsabilidades Personales y Escolares",
-];
+const initialCategoryData = {
+  "Independencia en el Baño": 0,
+  "Independencia en el Vestido": 0,
+  "Independencia en la Alimentación": 0,
+  "Independencia del Sueño": 0,
+  "Habilidades de Aseo Personal": 0,
+  "Habilidades del Vestido": 0,
+  "Habilidades en la Alimentación": 0,
+  "Habitos de alimentación": 0,
+  "Habitos de sueño": 0,
+  "Responsabilidades Personales y Escolares": 0,
+};
 
 export const FinalScoreCard = () => {
   const [childAge, setChildAge] = useState({ years: 0, months: 0 });
   const { latestChild, updateLatestChild } = useLatestChild();
   const { independenceScores, getIndependenceScores } = useScores();
-
-  // console.log(independenceScores);
-  // console.log(latestChild);
+  const [categoryData, setCategoryData] = useState(initialCategoryData);
 
   // EVITA ERRORES CUANDO NO HAY DATOS MIENTRAS SE COMPLETA LA FUNC ASINCRONA
   useEffect(() => {
@@ -53,32 +51,25 @@ export const FinalScoreCard = () => {
     }
   }, [latestChild]);
 
-  // RECOPILA LA INFO AL COMPLETARSE LA ASINCRONIA
-  const childId = latestChild?.id || "null";
-  // console.log(childId);
-  const childName = latestChild?.nombres || "null";
-  // console.log(childName);
-  const childLastName = latestChild?.apellidos || "null";
-  const childGender = latestChild?.sexo || "null";
-  const childGrade = latestChild?.grado || "null";
-  const childCode = latestChild?.codigo_identificador || "null";
-
   // TRAE LOS SCORES DE INDEPENDENCIA
   useEffect(() => {
-    if(latestChild)
+    if (latestChild) {
       getIndependenceScores(latestChild.id);
-  }, [latestChild]);
+      if (independenceScores) {
+        setCategoryData({
+          ...independenceScores,
+        });
+      }
+    }
+  }, [latestChild, independenceScores]);
 
-  if(independenceScores)
-  console.log("independence score: ", independenceScores.independencia_ducha);
- 
   return (
     <div className="results-container">
       <h1 className="main-title">Poppins Resultados</h1>
       <div className="header-container">
         <p>
           <strong>Nombre: </strong>
-          {childName} {childLastName}
+          {latestChild?.nombres} {latestChild?.apellidos}
         </p>
         <p>
           <strong>Edad: </strong>
@@ -86,15 +77,15 @@ export const FinalScoreCard = () => {
         </p>
         <p>
           <strong>Sexo: </strong>
-          {childGender}
+          {latestChild?.sexo}
         </p>
         <p>
           <strong>Grado: </strong>
-          {childGrade}
+          {latestChild?.grado}
         </p>
         <p>
           <strong>Código: </strong>
-          {childCode}
+          {latestChild?.codigo_identificador}
         </p>
       </div>
       <table className="table table-hover">
@@ -108,24 +99,18 @@ export const FinalScoreCard = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          {categories.map((category, index) => (
+          {Object.entries(categoryData).map(([category, value], index) => (
             <tr key={index}>
               <td>{category}</td>
-              <td className="table-primary"></td>
-              <td className="table-success"></td>
-              <td className="table-warning"></td>
-              <td className="table-danger"></td>
+              <td className="table-primary">{value}</td>
+              <td className="table-success">{value}</td>
+              <td className="table-warning">{value}</td>
+              <td className="table-danger">{value}</td>
             </tr>
           ))}
         </tbody>
       </table>
       DESCARGAR___ ___ IMPRIMIR
-       {/* Renderiza los datos obtenidos */}
-      {independenceScores && (
-        <p>Independence Score (Ducha): {independenceScores.independencia_ducha}</p>
-      )}
-      <div>
-    </div>
     </div>
   );
 };
