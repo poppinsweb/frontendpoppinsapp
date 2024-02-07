@@ -57,6 +57,7 @@ export const FinalScoreCard = () => {
       getIndependenceScores(latestChild.id);
       if (independenceScores) {
         setCategoryData({
+          ...initialCategoryData,
           ...independenceScores,
         });
       }
@@ -102,10 +103,18 @@ export const FinalScoreCard = () => {
           {Object.entries(categoryData).map(([category, value], index) => (
             <tr key={index}>
               <td>{category}</td>
-              <td className="table-primary">{value}</td>
+              {value === 4 ? (
+                <td className="table-primary">{value}</td>
+              ) : <td className="table-primary"></td>}
+              {value === 3 ? (
               <td className="table-success">{value}</td>
+              ) : <td className="table-success"></td>}
+              {value === 2 ? (
               <td className="table-warning">{value}</td>
+              ) : <td className="table-warning"></td>}
+              {value === 1 || value === 0 ? (
               <td className="table-danger">{value}</td>
+              ) : <td className="table-danger"></td>}
             </tr>
           ))}
         </tbody>

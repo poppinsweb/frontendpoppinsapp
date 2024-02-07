@@ -23,3 +23,5 @@ useEffect(() => {
       });
     }
   }, [independenceScores]);
+  
+// HAY QUE SUMAR Y PROMEDIAR LOS PUNTAJES DE CADA CARD!!!!
