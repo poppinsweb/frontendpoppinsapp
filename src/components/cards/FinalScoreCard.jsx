@@ -4,23 +4,25 @@ import { useEffect, useState } from "react";
 import { useScores } from "../../context/ScoresContext";
 
 const initialCategoryData = {
-  "Independencia en el Baño": 0,
-  "Independencia en el Vestido": 0,
-  "Independencia en la Alimentación": 0,
-  "Independencia del Sueño": 0,
-  "Habilidades de Aseo Personal": 0,
-  "Habilidades del Vestido": 0,
-  "Habilidades en la Alimentación": 0,
-  "Habitos de alimentación": 0,
-  "Habitos de sueño": 0,
-  "Responsabilidades Personales y Escolares": 0,
+  0: "Independencia en el Baño",
+  1: "Independencia en el Vestido",
+  2: "Independencia en la Alimentación",
+  3: "Independencia del Sueño",
+  4: "Habilidades de Aseo Personal",
+  5: "Habilidades del Vestido",
+  6: "Habilidades en la Alimentación",
+  7: "Habitos de alimentación",
+  8: "Habitos de sueño",
+  9: "Responsabilidades Personales y Escolares",
 };
+
+const categoryArray = Object.values(initialCategoryData);
 
 export const FinalScoreCard = () => {
   const [childAge, setChildAge] = useState({ years: 0, months: 0 });
   const { latestChild, updateLatestChild } = useLatestChild();
   const { independenceScores, getIndependenceScores } = useScores();
-  const [categoryData, setCategoryData] = useState(initialCategoryData);
+  const [categoryData, setCategoryData] = useState({});
 
   // EVITA ERRORES CUANDO NO HAY DATOS MIENTRAS SE COMPLETA LA FUNC ASINCRONA
   useEffect(() => {
@@ -55,14 +57,17 @@ export const FinalScoreCard = () => {
   useEffect(() => {
     if (latestChild) {
       getIndependenceScores(latestChild.id);
-      if (independenceScores) {
-        setCategoryData({
-          ...initialCategoryData,
-          ...independenceScores,
-        });
-      }
+      setCategoryData({
+        ...categoryData,
+      });
     }
-  }, [latestChild, independenceScores]);
+  }, [latestChild, getIndependenceScores]);
+
+  useEffect(() => {
+    if (independenceScores) {
+      setCategoryData(independenceScores);
+    }
+  }, [independenceScores]);
 
   return (
     <div className="results-container">
@@ -74,7 +79,7 @@ export const FinalScoreCard = () => {
         </p>
         <p>
           <strong>Edad: </strong>
-          {childAge.years}años {childAge.months} meses
+          {childAge.years} años {childAge.months} meses
         </p>
         <p>
           <strong>Sexo: </strong>
@@ -100,23 +105,35 @@ export const FinalScoreCard = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          {Object.entries(categoryData).map(([category, value], index) => (
-            <tr key={index}>
-              <td>{category}</td>
-              {value === 4 ? (
-                <td className="table-primary">{value}</td>
-              ) : <td className="table-primary"></td>}
-              {value === 3 ? (
-              <td className="table-success">{value}</td>
-              ) : <td className="table-success"></td>}
-              {value === 2 ? (
-              <td className="table-warning">{value}</td>
-              ) : <td className="table-warning"></td>}
-              {value === 1 || value === 0 ? (
-              <td className="table-danger">{value}</td>
-              ) : <td className="table-danger"></td>}
-            </tr>
-          ))}
+          {/* {Object.entries(categoryData).map(([category, value], index) => ( */}
+          {Object.entries(categoryData).map(([categoryIndex, value], index) => {
+            const category = initialCategoryData[categoryIndex];
+            return (
+              <tr key={index}>
+                <td>{category}</td>
+                {value === 4 ? (
+                  <td className="table-primary">{value}</td>
+                ) : (
+                  <td className="table-primary"></td>
+                )}
+                {value === 3 ? (
+                  <td className="table-success">{value}</td>
+                ) : (
+                  <td className="table-success"></td>
+                )}
+                {value === 2 ? (
+                  <td className="table-warning">{value}</td>
+                ) : (
+                  <td className="table-warning"></td>
+                )}
+                {value === 1 || value === 0 ? (
+                  <td className="table-danger">{value}</td>
+                ) : (
+                  <td className="table-danger"></td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       DESCARGAR___ ___ IMPRIMIR

@@ -18,18 +18,33 @@ export const useScores = () => {
 export const ScoresProvider = ({ children }) => {
   const [independenceScores, setIndependenceScores] = useState(null);
 
-  const getIndependenceScores = async(id) => {
+  const getIndependenceScores = async (id) => {
     try {
       const independenceScore = await getIndependenceScore(id);
-      setIndependenceScores(independenceScore);
+      // Extraer solo los valores y convertirlos a un array
+      const scoresArray = Object.values(independenceScore);
+      setIndependenceScores(scoresArray);
+      // console.log(scoresArray);
     } catch (error) {
       console.error("Error al obtener el score: ", error);
     }
   };
+
+
+
+
+
+  // const [independenceScores, setIndependenceScores] = useState(null);
+
+  // const getIndependenceScores = async(id) => {
+  //   try {
+  //     const independenceScore = await getIndependenceScore(id);
+  //     setIndependenceScores(independenceScore);
+  //   } catch (error) {
+  //     console.error("Error al obtener el score: ", error);
+  //   }
+  // };
   
-  //  if(independenceScores) {
-  //   console.log("independencia ducha: ", independenceScores.independencia_ducha);
-  //  }
 
   return (
     <ScoresContext.Provider
