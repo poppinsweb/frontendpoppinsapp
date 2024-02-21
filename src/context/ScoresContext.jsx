@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { getIndependenceScore } from "../services/testAxiosAPI";
+import { createContext, useContext, useState } from "react";
+import { getIndependenceScore,  getSkillsGroomingScore } from "../services/scoresAxiosAPI";
 
 export const ScoresContext = createContext();
 
@@ -17,6 +17,7 @@ export const useScores = () => {
 
 export const ScoresProvider = ({ children }) => {
   const [independenceScores, setIndependenceScores] = useState(null);
+  const [skillGroomingScores, setSkillGroomingScores] = useState(null);
 
   const getIndependenceScores = async (id) => {
     try {
@@ -28,29 +29,27 @@ export const ScoresProvider = ({ children }) => {
     } catch (error) {
       console.error("Error al obtener el score: ", error);
     }
+  };  
+
+  // habilidades-aseo scores
+  const getSkillsGroomingScores = async(id) => {
+    try {
+      const skillGroomingScore = await getSkillsGroomingScore(id)
+      const scoresArray = Object.values(skillGroomingScore);
+      setSkillGroomingScores(scoresArray);
+      console.log(scoresArray);
+    } catch (error) {
+      console.error("Error al obtener el score: ", error);
+    }
   };
-
-
-
-
-
-  // const [independenceScores, setIndependenceScores] = useState(null);
-
-  // const getIndependenceScores = async(id) => {
-  //   try {
-  //     const independenceScore = await getIndependenceScore(id);
-  //     setIndependenceScores(independenceScore);
-  //   } catch (error) {
-  //     console.error("Error al obtener el score: ", error);
-  //   }
-  // };
-  
 
   return (
     <ScoresContext.Provider
       value={{
         getIndependenceScores,
         independenceScores,
+        getSkillsGroomingScores,
+        skillGroomingScores,
       }}
     >
       {children}
@@ -60,8 +59,7 @@ export const ScoresProvider = ({ children }) => {
 
 
 
-// habilidades-aseo scores
-const getSkillsGroomingScores = () => {};
+
 
 // habilidades-vestido scores
 

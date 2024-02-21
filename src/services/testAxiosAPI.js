@@ -18,13 +18,9 @@ export const getAllChildren = async (state) => {
 // TRAE LOS DATOS DEL ULTIMO INFANTE REGISTRADO
 export const getLastChild = async () => {
   try {
-    const response = await axios.get(
-      `${TESTAPI}/api/infantes`
-    );
+    const response = await axios.get(`${TESTAPI}/api/infantes`);
     const latestChildArray = response.data.length - 1;
     const latestChild = response.data[latestChildArray];
-    // console.log("Latest Child ID:", latestChild.id);
-    // console.log("Latest Child Codigo Identificador:", latestChild.codigo_identificador);
     return latestChild;
   } catch (error) {
     console.error(error);
@@ -50,6 +46,8 @@ export const postNewChild = async (objectChild) => {
   }
 };
 
+// ******** POST SCORES *********
+
 // ENVIA LOS DATOS DE INDEPENDENCIA AL DUCHARSE, VESTIRSE, ALIMENTARSE, DORMIR: `${TESTAPI}/api/independencia`
 export const postIndependenceScore = async (results) => {
   try {
@@ -63,23 +61,14 @@ export const postIndependenceScore = async (results) => {
   }
 };
 
-// TRAE LOS DATOS DE INDEPENDENCIA POR ID
-export const getIndependenceScore = async (id) => {
-  try {
-    const response = await axios.get(`${TESTAPI}/api/independencia/${id}`);
-    // console.log("Respuesta de getApi: ", response.data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
 // ENVIA LOS DATOS DE HABILIDADES HIGIENE: `${TESTAPI}/api/habilidadeshigiene`
-export const postSkillGroomingScore = async(results) => {
+export const postSkillGroomingScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/habilidadeshigiene`, results);
+    const response = await axios.post(
+      `${TESTAPI}/api/habilidadeshigiene`,
+      results
+    );
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
@@ -89,10 +78,13 @@ export const postSkillGroomingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABILIDADES VESTIDO: `${TESTAPI}/api/habilidadesvestido`
-export const postSkillDressingScore = async(results) => {
+export const postSkillDressingScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/habilidadesvestido`, results);
+    const response = await axios.post(
+      `${TESTAPI}/api/habilidadesvestido`,
+      results
+    );
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
@@ -102,10 +94,13 @@ export const postSkillDressingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABILIDADES ALIMENTACION: `${TESTAPI}/api/habilidadesalimentacion`
-export const postSkillFeedingScore = async(results) => {
+export const postSkillFeedingScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/habilidadesalimentacion`, results);
+    const response = await axios.post(
+      `${TESTAPI}/api/habilidadesalimentacion`,
+      results
+    );
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
@@ -115,10 +110,13 @@ export const postSkillFeedingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABITOS ALIMENTACION: `${TESTAPI}/api/habitosalimentacion`
-export const postHabitsFeedingScore = async(results) => {
+export const postHabitsFeedingScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/habitosalimentacion`, results);
+    const response = await axios.post(
+      `${TESTAPI}/api/habitosalimentacion`,
+      results
+    );
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
@@ -128,7 +126,7 @@ export const postHabitsFeedingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABITOS SUENIO: `${TESTAPI}/api/habitosdormir`
-export const postHabitsSleepingScore = async(results) => {
+export const postHabitsSleepingScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
     const response = await axios.post(`${TESTAPI}/api/habitosdormir`, results);
@@ -141,10 +139,13 @@ export const postHabitsSleepingScore = async(results) => {
 };
 
 // ENVIA LOS DATOS DE HABITOS RESPONSABILIDADES: `${TESTAPI}/api/habitosresponsabilidad`
-export const postHabitsResponsabilityScore = async(results) => {
+export const postHabitsResponsabilityScore = async (results) => {
   try {
     console.log("Datos a enviar a la API:", results);
-    const response = await axios.post(`${TESTAPI}/api/habitosresponsabilidad`, results);
+    const response = await axios.post(
+      `${TESTAPI}/api/habitosresponsabilidad`,
+      results
+    );
     console.log("Respuesta de API: ", response.data);
     return true;
   } catch (error) {
