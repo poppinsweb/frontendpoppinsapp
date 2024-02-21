@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const TESTSCORES = "http://localhost:3000";
+const TESTSCORES = "http://localhost:3000/api";
 
 // ************** GET SCORES ************
 // TRAE LOS SCORES DE INDEPENDENCIA POR ID
 export const getIndependenceScore = async (id) => {
   try {
-    const response = await axios.get(`${TESTSCORES}/api/independencia/${id}`);
+    const response = await axios.get(`${TESTSCORES}/independencia/${id}`); //
     // console.log("Respuesta de getApi: ", response.data);
     return response.data;
   } catch (error) {
@@ -17,8 +17,8 @@ export const getIndependenceScore = async (id) => {
 
 export const getSkillsGroomingScore = async (id) => {
   try {
-    const response = await axios.get(`${TESTSCORES}/api/habilidades_higiene/${id}`);
-    console.log("Respuesta de getApi: ", response.data);
+    const response = await axios.get(`${TESTSCORES}/habilidadeshigiene/${id}`);
+    // console.log("Respuesta de getApi: ", response.data);
     return response.data;
   } catch (error) {
     console.error(error);

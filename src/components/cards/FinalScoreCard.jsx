@@ -3,21 +3,26 @@ import { useLatestChild } from "../../context/ChildContext";
 import { useEffect, useState } from "react";
 import { useScores } from "../../context/ScoresContext";
 
-const initialCategoryData = {
-  // 0: "id",
+const initialindependenceData = {
+  0: "id",
   1: "Independencia en el Baño",
   2: "Independencia en el Vestido",
   3: "Independencia en la Alimentación",
   4: "Independencia del Sueño",
-  5: "Habilidades de Aseo Personal",
-  6: "Habilidades del Vestido",
-  7: "Habilidades en la Alimentación",
-  8: "Habitos de alimentación",
-  9: "Habitos de sueño",
-  10: "Responsabilidades Personales y Escolares",
+  // 5: "Habilidades de Aseo Personal",
+  // 6: "Habilidades del Vestido",
+  // 7: "Habilidades en la Alimentación",
+  // 8: "Habitos de alimentación",
+  // 9: "Habitos de sueño",
+  // 10: "Responsabilidades Personales y Escolares",
 };
 
-// const categoryArray = Object.values(initialCategoryData);
+const initialskillGroomData = {
+  0: "id",
+  1: "Habilidades de Aseo Personal"
+}
+
+// const categoryArray = Object.values(initialindependenceData);
 
 export const FinalScoreCard = () => {
   const { latestChild, updateLatestChild } = useLatestChild();
@@ -27,7 +32,8 @@ export const FinalScoreCard = () => {
     getSkillsGroomingScores,
     skillGroomingScores,
   } = useScores();
-  const [categoryData, setCategoryData] = useState({});
+  const [independenceData, setIndependenceData] = useState({});
+  const [skillGroomData, setSkillGroomData] = useState({});
 
   // console.log(independenceScores);
   // console.log(skillGroomingScores);
@@ -42,16 +48,35 @@ export const FinalScoreCard = () => {
 
   // TRAE LOS SCORES DE INDEPENDENCIA
   useEffect(() => {
-    if (latestChild) {
+    if (latestChild && !independenceScores) {
       getIndependenceScores(latestChild.id);
     }
-  }, [latestChild, getIndependenceScores]); //
+  }, [latestChild, getIndependenceScores]); // 
 
   useEffect(() => {
     if (independenceScores) {
-      setCategoryData(independenceScores);
+      setIndependenceData(independenceScores);
     }
   }, [independenceScores]);
+
+
+  // TRAE LOS SCORES DE habilaseo
+  useEffect(() => {
+    if (latestChild && !skillGroomingScores) {
+      getSkillsGroomingScores(latestChild.id);
+    }
+  }, [latestChild, getSkillsGroomingScores]); // 
+
+  useEffect(() => {
+    if (skillGroomingScores) {
+      setIndependenceData((prevData) => ({
+        ...prevData,
+        skillGroomingScores,
+      }));
+    }
+  }, [skillGroomingScores]);
+
+  console.log(skillGroomingScores);
 
   return (
     <>
@@ -66,11 +91,11 @@ export const FinalScoreCard = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          {Object.entries(categoryData).map(([categoryIndex, value], index) => {
-            const category = initialCategoryData[categoryIndex];
+          {Object.entries(independenceData).map(([categoryIndex, value], index) => {
+            const category = initialindependenceData[categoryIndex];
             if (index !== 0 && index != 5)
               return (
-                <tr key={index}>
+                <tr key={categoryIndex}>
                   <td>{category}</td>
                   {value === 4 ? (
                     <td className="table-primary">{value}</td>

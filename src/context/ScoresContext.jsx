@@ -34,10 +34,10 @@ export const ScoresProvider = ({ children }) => {
   // habilidades-aseo scores
   const getSkillsGroomingScores = async(id) => {
     try {
-      const skillGroomingScore = await getSkillsGroomingScore(id)
+      const skillGroomingScore = await getSkillsGroomingScore(id);
       const scoresArray = Object.values(skillGroomingScore);
       setSkillGroomingScores(scoresArray);
-      console.log(scoresArray);
+      // console.log(scoresArray);
     } catch (error) {
       console.error("Error al obtener el score: ", error);
     }
