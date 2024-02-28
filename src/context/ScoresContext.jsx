@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { getIndependenceScore,  getSkillsGroomingScore } from "../services/scoresAxiosAPI";
+import { getIndependenceScore, getSkillsGroomingScore } from "../services/scoresAxiosAPI";
+// import { postIndependenceScore } from "../services/testAxiosAPI";
 
 export const ScoresContext = createContext();
 
@@ -31,7 +32,7 @@ export const ScoresProvider = ({ children }) => {
     }
   };  
 
-  // habilidades-aseo scores
+  //habilidades-aseo scores
   const getSkillsGroomingScores = async(id) => {
     try {
       const skillGroomingScore = await getSkillsGroomingScore(id);

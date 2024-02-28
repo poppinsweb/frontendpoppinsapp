@@ -6,7 +6,7 @@ const TESTSCORES = "http://localhost:3000/api";
 // TRAE LOS SCORES DE INDEPENDENCIA POR ID
 export const getIndependenceScore = async (id) => {
   try {
-    const response = await axios.get(`${TESTSCORES}/independencia/${id}`); //
+    const response = await axios.get(`${TESTSCORES}/independencia/${id}`);
     // console.log("Respuesta de getApi: ", response.data);
     return response.data;
   } catch (error) {

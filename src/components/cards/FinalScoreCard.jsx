@@ -3,37 +3,16 @@ import { useLatestChild } from "../../context/ChildContext";
 import { useEffect, useState } from "react";
 import { useScores } from "../../context/ScoresContext";
 
-const initialindependenceData = {
-  0: "id",
-  1: "Independencia en el Baño",
-  2: "Independencia en el Vestido",
-  3: "Independencia en la Alimentación",
-  4: "Independencia del Sueño",
-  // 5: "Habilidades de Aseo Personal",
-  // 6: "Habilidades del Vestido",
-  // 7: "Habilidades en la Alimentación",
-  // 8: "Habitos de alimentación",
-  // 9: "Habitos de sueño",
-  // 10: "Responsabilidades Personales y Escolares",
-};
-
-const initialskillGroomData = {
-  0: "id",
-  1: "Habilidades de Aseo Personal"
-}
-
-// const categoryArray = Object.values(initialindependenceData);
-
 export const FinalScoreCard = () => {
   const { latestChild, updateLatestChild } = useLatestChild();
   const {
     independenceScores,
     getIndependenceScores,
-    getSkillsGroomingScores,
     skillGroomingScores,
+    getSkillsGroomingScores,
   } = useScores();
   const [independenceData, setIndependenceData] = useState({});
-  const [skillGroomData, setSkillGroomData] = useState({});
+  const [skillGroomingData, setSkillGromingData] = useState({});
 
   // console.log(independenceScores);
   // console.log(skillGroomingScores);
@@ -48,35 +27,26 @@ export const FinalScoreCard = () => {
 
   // TRAE LOS SCORES DE INDEPENDENCIA
   useEffect(() => {
-    if (latestChild && !independenceScores) {
+    if (latestChild && !independenceScores && !skillGroomingScores) {
       getIndependenceScores(latestChild.id);
-    }
-  }, [latestChild, getIndependenceScores]); // 
-
-  useEffect(() => {
-    if (independenceScores) {
-      setIndependenceData(independenceScores);
-    }
-  }, [independenceScores]);
-
-
-  // TRAE LOS SCORES DE habilaseo
-  useEffect(() => {
-    if (latestChild && !skillGroomingScores) {
       getSkillsGroomingScores(latestChild.id);
     }
-  }, [latestChild, getSkillsGroomingScores]); // 
+  }, [latestChild, getIndependenceScores, getSkillsGroomingScores]); //
 
   useEffect(() => {
-    if (skillGroomingScores) {
-      setIndependenceData((prevData) => ({
-        ...prevData,
-        skillGroomingScores,
-      }));
+    if (independenceScores || skillGroomingScores) {
+      setIndependenceData(independenceScores);
+      setSkillGromingData(skillGroomingScores);
     }
-  }, [skillGroomingScores]);
+  }, [independenceScores, skillGroomingScores]);
 
-  console.log(skillGroomingScores);
+  // console.log(independenceData[5]);
+  // console.log(skillGroomingData[10]);
+  // console.log(skillGromingScore);
+
+  const independenceScore = independenceData && independenceData[5] ? independenceData[5] / 4 : 0;
+  const rawSkillGromingScore = skillGroomingData && skillGroomingData[10] ? skillGroomingData[10] / 9 : 0;
+  const skillGromingScore = rawSkillGromingScore.toFixed(0);
 
   return (
     <>
@@ -91,35 +61,167 @@ export const FinalScoreCard = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          {Object.entries(independenceData).map(([categoryIndex, value], index) => {
-            const category = initialindependenceData[categoryIndex];
-            if (index !== 0 && index != 5)
-              return (
-                <tr key={categoryIndex}>
-                  <td>{category}</td>
-                  {value === 4 ? (
-                    <td className="table-primary">{value}</td>
-                  ) : (
-                    <td className="table-primary"></td>
-                  )}
-                  {value === 3 ? (
-                    <td className="table-success">{value}</td>
-                  ) : (
-                    <td className="table-success"></td>
-                  )}
-                  {value === 2 ? (
-                    <td className="table-warning">{value}</td>
-                  ) : (
-                    <td className="table-warning"></td>
-                  )}
-                  {value === 1 || value === 0 ? (
-                    <td className="table-danger">{value}</td>
-                  ) : (
-                    <td className="table-danger"></td>
-                  )}
-                </tr>
-              );
-          })}
+          <tr>
+            <td>Independencia</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{independenceScore}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{independenceScore}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{independenceScore}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{independenceScore}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Habilidades del Aseo Personal</td>
+            {skillGromingScore == 4 ? (
+              <td className="table-primary">{skillGromingScore}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {skillGromingScore == 3 ? (
+              <td className="table-success">{skillGromingScore}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {skillGromingScore == 2 ? (
+              <td className="table-warning">{skillGromingScore}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {skillGromingScore == 1 ? (
+              <td className="table-danger">{skillGromingScore}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Habilidades del Vestido</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Habilidades de la Alimentación</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Hábitos de Alimentación</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Hábitos de Sueño</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
+          <tr>
+            <td>Responsabilidades Personales y Escolares</td>
+            {independenceScore == 4 ? (
+              <td className="table-primary">{}</td>
+            ) : (
+              <td className="table-primary"></td>
+            )}
+            {independenceScore == 3 ? (
+              <td className="table-success">{}</td>
+            ) : (
+              <td className="table-success"></td>
+            )}
+            {independenceScore == 2 ? (
+              <td className="table-warning">{}</td>
+            ) : (
+              <td className="table-warning"></td>
+            )}
+            {independenceScore == 1 ? (
+              <td className="table-danger">{}</td>
+            ) : (
+              <td className="table-danger"></td>
+            )}
+          </tr>
         </tbody>
       </table>
       DESCARGAR___ ___ IMPRIMIR
