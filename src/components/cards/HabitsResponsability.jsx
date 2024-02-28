@@ -73,7 +73,7 @@ export const HabitsResponsability = () => {
           console.log("Puntaje enviado a la API:", res);
 
           if (res) {
-            navigate("/habitos-dormir");
+            navigate("/resultados");
           }
         } catch (error) {
           console.error("Error al enviar resultados a la API: ", error);

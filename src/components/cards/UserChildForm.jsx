@@ -1,17 +1,14 @@
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import { postNewChild } from "../../services/testAxiosAPI";
 import "../../styles/users/userChild.css";
 
 export function UserChildForm() {
   const { gender, socialLevel, educationType, degree } = userChildFormOptions;
-
   const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
-
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS

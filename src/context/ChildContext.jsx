@@ -12,6 +12,7 @@ export const useLatestChild = () => {
   }
   return context;
 };
+
 // ***********
 
 export const ChildProvider = ({ children }) => {
@@ -37,7 +38,6 @@ export const ChildProvider = ({ children }) => {
     try {
       const lastChild = await getLastChild();
       setLatestChild(lastChild);
-      // console.log("Dato actualizado correctamente:", lastChild);
     } catch (error) {
       console.error("Error al actualizar el infante: ", error);
     }
