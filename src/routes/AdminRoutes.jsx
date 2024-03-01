@@ -18,10 +18,8 @@ import { PageHabitsResponsability } from "../pages/userPages/PageHabitsResponsab
 import { CreateUser } from "../pages/admin/CreateUser";
 
 export function AdminRoutes() {
-  // const { userRol } = useAuth();
   const { user } = useAuth();
   // console.log(user.rol);
-  // const userRol = "admin"
   
   return (
     <>
