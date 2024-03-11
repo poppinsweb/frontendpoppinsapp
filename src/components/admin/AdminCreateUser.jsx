@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthProvider";
-
 import "../../styles/admin/create-user.css";
 
 const rol = {
@@ -9,16 +9,23 @@ const rol = {
 };
 
 export const AdminCreateUser = () => {
+  const [showToken, setShowToken] = useState(false);
   const { register, handleSubmit } = useForm();
-  const { signup } = useAuth();
+  const { signup, tokenChild } = useAuth();
 
   const onSubmit = async (values) => {
     try {
+      if (values.email && values.password && values.rol === "usuario") {
+        setShowToken(true);
+      }
       await signup(values);
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
+
+  console.log(tokenChild);
+
   return (
     <>
       <h2 className="title-register">Registro de Usuarios</h2>
@@ -43,6 +50,8 @@ export const AdminCreateUser = () => {
             <option value={rol.admin}>Admin</option>
           </select>
         </div>
+        {/* hay que agaregar el token a la info que se manda al backend y a la base de datos. */}
+        {showToken && <div>TOKEN: { tokenChild }</div>}
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar
         </button>

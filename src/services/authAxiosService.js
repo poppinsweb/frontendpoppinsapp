@@ -5,6 +5,7 @@ const API = "http://localhost:3000";
 // REGISTRO DE USUARIOS, SE RENDERIZARA EN LA RUTA ADMIN COMPONENTE ADMINCREATEUSER
 export const registerRequest = async (user) => {
   try {
+
     const response = await axios.post(`${API}/api/registro`, user);
     console.log("Respuesta register en auth: ", response);
     if (response.status === 201) {

@@ -1,5 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, registerRequest, getAllUsers } from "../services/authAxiosService";
+import {
+  loginRequest,
+  registerRequest,
+  getAllUsers,
+} from "../services/authAxiosService";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
@@ -21,6 +25,22 @@ export const AuthProvider = ({ children }) => {
   JSON.parse(localStorage.getItem("user")) || null;
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
+  const [tokenChild, setTokenChild] = useState("");
+
+  // console.log(user);
+
+  const createToken = () => {
+    // CODIGO PARA CREAR EL TOKEN
+    let randomString = Date.now().toString(20).substring(7).toUpperCase();
+    let randomNumber = Math.random().toString(20).substring(7).toUpperCase();
+    const tokenChild = (randomString + randomNumber);
+    
+    useEffect(() => {
+      setTokenChild(tokenChild)
+    }, [])
+  };
+  createToken();
+  console.log(tokenChild);
 
   // LISTAR USUARIOS REGISTRADOS
   const getUsers = async () => {
@@ -84,6 +104,8 @@ export const AuthProvider = ({ children }) => {
         signin,
         signup,
         logout,
+        createToken,
+        tokenChild,
       }}
     >
       {children}

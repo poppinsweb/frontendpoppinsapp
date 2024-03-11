@@ -301,7 +301,8 @@ export const FinalScoreCard = () => {
           </tr>
         </tbody>
       </table>
-      DESCARGAR___ ___ IMPRIMIR
+      DESCARGAR 
+      {/* REACT PDF LIBRARY */}
     </>
   );
 };

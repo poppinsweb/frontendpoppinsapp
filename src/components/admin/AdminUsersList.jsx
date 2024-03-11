@@ -13,7 +13,7 @@ export const AdminUsersList = () => {
   useEffect(() => {
     getAllChildren(setChildren);
   }, []);
-  // console.log(children);
+  // console.log(children[0].usuario_id);
 
   const handleDelete = async (userId) => {
     try {
@@ -35,6 +35,7 @@ export const AdminUsersList = () => {
                 <th>ROL</th>
                 <th>EMAIL</th>
                 <th>ID</th>
+                <th>#TOKEN</th>
                 <th>ELIMINAR</th>
               </tr>
             </thead>
@@ -44,6 +45,7 @@ export const AdminUsersList = () => {
                   <td>{user.rol}</td>
                   <td>{user.email}</td>
                   <td>{user.id}</td>
+                  <td>{user.tokenChild}</td>
                   <td>
                     <button
                       className="btn btn-outline-danger"
@@ -71,6 +73,7 @@ export const AdminUsersList = () => {
                 <th>Nacimiento AAAA-MM-DD</th>
                 <th>SEXO</th>
                 <th>GRADO</th>
+                <th>USUARIO_ID</th>
               </tr>
             </thead>
             <tbody>
@@ -81,6 +84,7 @@ export const AdminUsersList = () => {
                   <td>{child.fecha_nacimiento}</td>
                   <td>{child.sexo}</td>
                   <td>{child.grado}</td>
+                  <td>{child.usuario_id}</td>
                 </tr>
               ))}
             </tbody>

@@ -7,7 +7,7 @@ export const getAllChildren = async (state) => {
   try {
     const response = await axios.get(`${TESTAPI}/api/infantes`);
     state(response.data);
-    console.log(response.data);
+    // console.log(response.data);
     return response;
   } catch (error) {
     console.error(error);

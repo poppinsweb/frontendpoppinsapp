@@ -11,7 +11,7 @@ export function UserChildForm() {
   const [userSelect, setUserSelect] = useState("");
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [userBirth, setUserBirth] = useState(""); // RESOLVER COMO CONVERTIR EN MESES Y ANIOS
+  const [userBirth, setUserBirth] = useState("");
   const [childID, setChildID] = useState(null);
 
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ export function UserChildForm() {
         className="logo2"
         alt="Logo paraguas"
       />
-      <h2 className="user-title">Datos Personales del Niño</h2>
+      <h2 className="user-title">Datos del Niño</h2>
       <div className="row main-row">
         <div className="col first-col">
           <form onSubmit={handleSubmit}>

@@ -16,6 +16,7 @@ import { PageHabitsFeeding } from "../pages/userPages/PageHabitsFeeding";
 import { PageHabitsSleeping } from "../pages/userPages/PageHabitsSleeping";
 import { PageHabitsResponsability } from "../pages/userPages/PageHabitsResponsability";
 import { CreateUser } from "../pages/admin/CreateUser";
+import { PageUserAdultData } from "../pages/userPages/PageUserAdultData";
 
 export function AdminRoutes() {
   const { user } = useAuth();
@@ -31,6 +32,7 @@ export function AdminRoutes() {
             <Route path="/crear" element={<CreateUser />} />
             <Route path="/list" element={<UserList />} />
 
+            <Route path="/adulto" element={<PageUserAdultData />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
             <Route path="/independencia" element={<PageIndependence />} />
