@@ -22,25 +22,26 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  JSON.parse(localStorage.getItem("user")) || null;
+  // JSON.parse(localStorage.getItem("user")) || null;
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
-  const [tokenChild, setTokenChild] = useState("");
+  const [codigoEncuesta, setCodigoEncuesta] = useState("");
 
   // console.log(user);
 
-  const createToken = () => {
-    // CODIGO PARA CREAR EL TOKEN
+  const generateCodigoEncuesta = () => {
+    // CODIGO PARA CREAR EL codigoEncuesta
     let randomString = Date.now().toString(20).substring(7).toUpperCase();
     let randomNumber = Math.random().toString(20).substring(7).toUpperCase();
-    const tokenChild = (randomString + randomNumber);
-    
-    useEffect(() => {
-      setTokenChild(tokenChild)
-    }, [])
+    return randomString + randomNumber;
   };
-  createToken();
-  console.log(tokenChild);
+    
+  useEffect(() => {
+    const codigo = generateCodigoEncuesta();
+    setCodigoEncuesta(codigo);
+  }, []);
+  
+  
 
   // LISTAR USUARIOS REGISTRADOS
   const getUsers = async () => {
@@ -53,14 +54,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   // REGISTRO DE USUARIO
-  const signup = async (user) => {
+  const signup = async (userData) => {
     try {
-      const res = await registerRequest(user);
-      console.log("Respuesta de registrar en context", res);
+      const codigoEncuesta = generateCodigoEncuesta();
+      const res = await registerRequest(userData, codigoEncuesta);
+      console.log("respuesta de registrar en context", res);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   // LOGIN DE USUARIO
   const signin = async (user) => {
@@ -75,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       if (res.usuarioEncontrado.rol === "admin") {
         navigate("/admin");
       } else {
-        navigate("/token");
+        navigate("/codigoEncuesta");
       }
       console.log(user);
     } catch (error) {
@@ -104,8 +106,8 @@ export const AuthProvider = ({ children }) => {
         signin,
         signup,
         logout,
-        createToken,
-        tokenChild,
+        generateCodigoEncuesta,
+        codigoEncuesta,
       }}
     >
       {children}

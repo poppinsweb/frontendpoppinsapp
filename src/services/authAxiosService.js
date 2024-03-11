@@ -3,11 +3,11 @@ import axios from "axios";
 const API = "http://localhost:3000";
 
 // REGISTRO DE USUARIOS, SE RENDERIZARA EN LA RUTA ADMIN COMPONENTE ADMINCREATEUSER
-export const registerRequest = async (user) => {
+export const registerRequest = async (user, codigoEncuesta) => {
   try {
 
-    const response = await axios.post(`${API}/api/registro`, user);
-    console.log("Respuesta register en auth: ", response);
+    const response = await axios.post(`${API}/api/registro`, {...user, codigoEncuesta});
+    console.log("Respuesta register en auth: ", response.data);
     if (response.status === 201) {
       return response.data;
     } else {
@@ -60,10 +60,10 @@ export const removeUser = async (userId) => {
 };
 
 // // Edita un usuario
-// export const update = async (id, email) => {
+// export const update = async (userId, codigoEncuesta) => {
 //   try {
-//     return await axios.put(`${API}/api/${id}`, {
-//       email,
+//     return await axios.put(`${API}/api/usuarios/${userId}`, {
+//       codigoEncuesta,
 //     });
 //   } catch (error) {
 //     console.error(error);

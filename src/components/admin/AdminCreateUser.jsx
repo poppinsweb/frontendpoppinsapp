@@ -9,22 +9,22 @@ const rol = {
 };
 
 export const AdminCreateUser = () => {
-  const [showToken, setShowToken] = useState(false);
+  const [showcodigoEncuesta, setShowcodigoEncuesta] = useState(false);
   const { register, handleSubmit } = useForm();
-  const { signup, tokenChild } = useAuth();
+  const { signup, codigoEncuesta } = useAuth();
 
   const onSubmit = async (values) => {
     try {
-      if (values.email && values.password && values.rol === "usuario") {
-        setShowToken(true);
-      }
       await signup(values);
+      // if (values.email && values.password && values.rol === "usuario") {
+      //   setShowcodigoEncuesta(true);
+      // }
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
+  // console.log(codigoEncuesta);
 
-  console.log(tokenChild);
 
   return (
     <>
@@ -49,9 +49,14 @@ export const AdminCreateUser = () => {
             <option value={rol.usuario}>Usuario</option>
             <option value={rol.admin}>Admin</option>
           </select>
+          <input 
+            type="hidden" 
+            {...register("codigoEncuesta")}
+            value={codigoEncuesta}
+          />
         </div>
-        {/* hay que agaregar el token a la info que se manda al backend y a la base de datos. */}
-        {showToken && <div>TOKEN: { tokenChild }</div>}
+        {/* hay que agaregar el codigoEncuesta a la info que se manda al backend y a la base de datos. */}
+        {showcodigoEncuesta && <div>Codigo Encuesta: { codigoEncuesta }</div>}
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar
         </button>

@@ -14,6 +14,7 @@ export const AdminUsersList = () => {
     getAllChildren(setChildren);
   }, []);
   // console.log(children[0].usuario_id);
+  // console.log(users);
 
   const handleDelete = async (userId) => {
     try {
@@ -45,7 +46,7 @@ export const AdminUsersList = () => {
                   <td>{user.rol}</td>
                   <td>{user.email}</td>
                   <td>{user.id}</td>
-                  <td>{user.tokenChild}</td>
+                  <td>{user.codigoEncuesta}</td>
                   <td>
                     <button
                       className="btn btn-outline-danger"
