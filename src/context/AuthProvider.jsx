@@ -22,28 +22,34 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  // JSON.parse(localStorage.getItem("user")) || null;
+  const [allUsers, setAllUsers] = useState(null);
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
   const [codigoEncuesta, setCodigoEncuesta] = useState("");
 
   // console.log(user);
 
+  // GENERA EL CODIGOENCUESTA
   const generateCodigoEncuesta = () => {
-    // CODIGO PARA CREAR EL codigoEncuesta
     let randomString = Date.now().toString(20).substring(7).toUpperCase();
     let randomNumber = Math.random().toString(20).substring(7).toUpperCase();
     return randomString + randomNumber;
   };
-    
+
+  // LLAMA A LA FUNCION QUE CREA EL CODIGO ENCUESTA
   useEffect(() => {
     const codigo = generateCodigoEncuesta();
     setCodigoEncuesta(codigo);
   }, []);
-  
-  
 
-  // LISTAR USUARIOS REGISTRADOS
+  // TRAE TODOS LOS USUARIOS
+  useEffect(() => {
+    getAllUsers(setAllUsers);
+  }, []);
+
+  // console.log(allUsers);
+
+  // LISTA LOS USUARIOS REGISTRADOS
   const getUsers = async () => {
     try {
       const users = await getUsers(setUserList);
@@ -62,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   // LOGIN DE USUARIO
   const signin = async (user) => {
@@ -101,6 +107,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        allUsers,
         user,
         userList,
         signin,

@@ -4,7 +4,7 @@ export const TokenNavigation = () => {
   return (
     <div className="navitoken-main-container">
       <div className="btn-token-container">
-        <a href="/personales">
+        <a href="/adulto">
           <button className="btn btn-outline btn-token-navigation">
             Crear Usuario
           </button>

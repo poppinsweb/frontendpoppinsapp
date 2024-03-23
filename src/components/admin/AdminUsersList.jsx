@@ -6,9 +6,12 @@ export const AdminUsersList = () => {
   const [users, setUsers] = useState(null);
   const [children, setChildren] = useState(null);
 
+  // console.log(allUsers);
+
   useEffect(() => {
     getAllUsers(setUsers);
   }, []);
+  console.log(users);
 
   useEffect(() => {
     getAllChildren(setChildren);
@@ -20,6 +23,7 @@ export const AdminUsersList = () => {
     try {
       await removeUser(userId);
       getAllUsers(setUsers);
+      // setUsers(allUsers)
     } catch (error) {
       console.error("Error al eliminar al usuario", error);
     }
