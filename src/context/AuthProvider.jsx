@@ -25,22 +25,6 @@ export const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState(null);
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
-  const [codigoEncuesta, setCodigoEncuesta] = useState("");
-
-  // console.log(user);
-
-  // GENERA EL CODIGOENCUESTA
-  const generateCodigoEncuesta = () => {
-    let randomString = Date.now().toString(20).substring(7).toUpperCase();
-    let randomNumber = Math.random().toString(20).substring(7).toUpperCase();
-    return randomString + randomNumber;
-  };
-
-  // LLAMA A LA FUNCION QUE CREA EL CODIGO ENCUESTA
-  useEffect(() => {
-    const codigo = generateCodigoEncuesta();
-    setCodigoEncuesta(codigo);
-  }, []);
 
   // TRAE TODOS LOS USUARIOS
   useEffect(() => {
@@ -62,8 +46,8 @@ export const AuthProvider = ({ children }) => {
   // REGISTRO DE USUARIO
   const signup = async (userData) => {
     try {
-      const codigoEncuesta = generateCodigoEncuesta();
-      const res = await registerRequest(userData, codigoEncuesta);
+      // const codigoEncuesta = generateCodigoEncuesta();
+      const res = await registerRequest(userData);
       console.log("respuesta de registrar en context", res);
     } catch (error) {
       console.error(error);
@@ -77,10 +61,7 @@ export const AuthProvider = ({ children }) => {
       console.log(res);
       setUser(res.usuario);
       localStorage.setItem("user", JSON.stringify(res.usuario));
-      console.log(
-        "Response de iniciar sesion en context: ",
-        res.usuario.rol
-      );
+      console.log("Response de iniciar sesion en context: ", res.usuario.rol);
       if (res.usuario.rol === "admin") {
         navigate("/admin");
       } else {
@@ -98,12 +79,12 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem("user"));
-  //   if (storedUser) {
-  //     setUser(storedUser);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -114,8 +95,6 @@ export const AuthProvider = ({ children }) => {
         signin,
         signup,
         logout,
-        generateCodigoEncuesta,
-        codigoEncuesta,
       }}
     >
       {children}

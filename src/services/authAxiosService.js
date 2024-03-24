@@ -58,14 +58,3 @@ export const removeUser = async (userId) => {
     console.error(error);
   }
 };
-
-// // Edita un usuario
-// export const update = async (userId) => {
-//   try {
-//     return await axios.put(`${API}/api/usuarios/${userId}`, {
-//       codigoEncuesta,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

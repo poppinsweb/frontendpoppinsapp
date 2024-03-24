@@ -6,8 +6,6 @@ export const AdminUsersList = () => {
   const [users, setUsers] = useState(null);
   const [children, setChildren] = useState(null);
 
-  // console.log(allUsers);
-
   useEffect(() => {
     getAllUsers(setUsers);
   }, []);
@@ -16,8 +14,6 @@ export const AdminUsersList = () => {
   useEffect(() => {
     getAllChildren(setChildren);
   }, []);
-  // console.log(children[0].usuario_id);
-  // console.log(users);
 
   const handleDelete = async (userId) => {
     try {
@@ -28,7 +24,6 @@ export const AdminUsersList = () => {
       console.error("Error al eliminar al usuario", error);
     }
   };
-
   return (
     <>
       <div>

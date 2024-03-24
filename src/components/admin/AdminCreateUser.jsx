@@ -9,23 +9,16 @@ const rol = {
 };
 
 export const AdminCreateUser = () => {
-  const [showcodigoEncuesta, setShowcodigoEncuesta] = useState(false);
   const { register, handleSubmit } = useForm();
-  const { signup, codigoEncuesta } = useAuth();
+  const { signup } = useAuth();
 
   const onSubmit = async (values) => {
     try {
       await signup(values);
-      // if (values.email && values.password && values.rol === "usuario") {
-      //   setShowcodigoEncuesta(true);
-      // }
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
-  // console.log(codigoEncuesta);
-
-
   return (
     <>
       <h2 className="title-register">Registro de Usuarios</h2>
@@ -49,14 +42,7 @@ export const AdminCreateUser = () => {
             <option value={rol.usuario}>Usuario</option>
             <option value={rol.admin}>Admin</option>
           </select>
-          <input 
-            type="hidden" 
-            {...register("codigoEncuesta")}
-            value={codigoEncuesta}
-          />
         </div>
-        {/* hay que agaregar el codigoEncuesta a la info que se manda al backend y a la base de datos. */}
-        {showcodigoEncuesta && <div>Codigo Encuesta: { codigoEncuesta }</div>}
         <button className="btn btn-color" id="btn-register" type="submit">
           Registrar
         </button>
