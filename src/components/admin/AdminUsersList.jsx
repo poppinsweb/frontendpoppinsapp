@@ -39,7 +39,6 @@ export const AdminUsersList = () => {
               <tr>
                 <th>ROL</th>
                 <th>EMAIL</th>
-                <th>ID</th>
                 <th>#TOKEN</th>
                 <th>ELIMINAR</th>
               </tr>
@@ -49,8 +48,7 @@ export const AdminUsersList = () => {
                 <tr key={user.id}>
                   <td>{user.rol}</td>
                   <td>{user.email}</td>
-                  <td>{user.id}</td>
-                  <td>{user.codigoEncuesta}</td>
+                  <td>{user.user_token}</td>
                   <td>
                     <button
                       className="btn btn-outline-danger"

@@ -74,13 +74,14 @@ export const AuthProvider = ({ children }) => {
   const signin = async (user) => {
     try {
       const res = await loginRequest(user);
-      setUser(res.usuarioEncontrado);
-      localStorage.setItem("user", JSON.stringify(res.usuarioEncontrado));
+      console.log(res);
+      setUser(res.usuario);
+      localStorage.setItem("user", JSON.stringify(res.usuario));
       console.log(
         "Response de iniciar sesion en context: ",
-        res.usuarioEncontrado.rol
+        res.usuario.rol
       );
-      if (res.usuarioEncontrado.rol === "admin") {
+      if (res.usuario.rol === "admin") {
         navigate("/admin");
       } else {
         navigate("/codigoEncuesta");
@@ -97,12 +98,12 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedUser = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUser) {
+  //     setUser(storedUser);
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider
