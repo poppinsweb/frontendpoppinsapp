@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
       if (res.usuario.rol === "admin") {
         navigate("/admin");
       } else {
-        navigate("/codigoEncuesta");
+        navigate("/token");
       }
       console.log(user);
     } catch (error) {

@@ -43,7 +43,7 @@ export const AdminUsersList = () => {
                 <tr key={user.id}>
                   <td>{user.rol}</td>
                   <td>{user.email}</td>
-                  <td>{user.user_token}</td>
+                  <td>{user.usuario_token}</td>
                   <td>
                     <button
                       className="btn btn-outline-danger"
@@ -82,7 +82,7 @@ export const AdminUsersList = () => {
                   <td>{child.fecha_nacimiento}</td>
                   <td>{child.sexo}</td>
                   <td>{child.grado}</td>
-                  <td>{child.usuario_id}</td>
+                  <td>{child.usuario_token}</td>
                 </tr>
               ))}
             </tbody>

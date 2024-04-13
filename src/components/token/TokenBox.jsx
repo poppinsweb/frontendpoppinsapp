@@ -1,31 +1,45 @@
 import "../../styles/users/token.css";
 import { useAuth } from "../../context/AuthProvider";
+import { useState, useEffect } from "react";
 
 export const TokenBox = () => {
-  const { user, allUsers } = useAuth();
+  const [radio, setRadio] = useState(null);
+  const { user } = useAuth();
+
+  const alert = () => {
+    console.log("click");
+  };
+
+  useEffect(() => {
+    setRadio(user.usuario_token);
+  }, []);
+  console.log(user);
 
   // CREAR EL MECANISMO DE ASOCIAR A ENCUESTA X2
   return (
     <div className="box-tokens-container">
-      <h2 className="code-title">Código de la Encuesta</h2>
-      <form className="radio-token-container">
-        {allUsers && allUsers.map((userData, index) => (
-        <label key={index} className="token-lable">
-          <input
-            type="radio"
-            className="radio-button"
-            name="testCode"
-            value={userData.codigoEncuesta}
-          />
-          Código: {userData.codigoEncuesta}
-        </label>
-        ))}
-      </form>
       {user && user.rol === "admin" ? (
-        <button className="btn btn-color btn-add">+ Agregar Token</button>
+        <button className="btn btn-color btn-add" onClick={alert}>
+          + Crear Token
+        </button>
       ) : (
-        // AGREGAR FUNCIONALIDAD AL BOTON PARA AGREGAR TOKENS SEGUN ID DE USER
-        <></>
+        <>
+          <h2 className="code-title">Token</h2>
+          <form className="radio-token-container">
+            <label key={user.id} className="token-lable">
+              <input
+                type="radio"
+                className="radio-button"
+                name="testCode"
+                value={user.usario_token}
+              />
+              {user.usuario_token}
+            </label>
+            <button className="btn btn-outline btn-token-navigation">
+            Encuesta Final
+          </button>
+          </form>
+        </>
       )}
     </div>
   );

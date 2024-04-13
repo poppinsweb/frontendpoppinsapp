@@ -15,6 +15,8 @@ export const AdminCreateUser = () => {
   const onSubmit = async (values) => {
     try {
       await signup(values);
+      if (signup)
+      console.log("registro exitoso");
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }

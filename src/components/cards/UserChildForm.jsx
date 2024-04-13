@@ -4,21 +4,27 @@ import { useNavigate } from "react-router-dom";
 import { userChildFormOptions } from "../constants/userChildFormOptions";
 import { postNewChild } from "../../services/testAxiosAPI";
 import "../../styles/users/userChild.css";
+import { useAuth } from "../../context/AuthProvider";
 
 export function UserChildForm() {
   const { gender, socialLevel, educationType, degree } = userChildFormOptions;
+  const { user } = useAuth();
   const [userData, setUserData] = useState({});
   const [userSelect, setUserSelect] = useState("");
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState("");
-  const [childID, setChildID] = useState(null);
+  // const [userID, setUserID] = useState(null);
 
   const navigate = useNavigate();
 
+  const test_code = user.usuario_token;
+
   useEffect(() => {
-    console.log(childID);
+    // setUserID(user.id);
   }, [])
+
+// console.log(userID);
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -39,15 +45,13 @@ export function UserChildForm() {
     e.preventDefault();
     try {
       const selected = { ...userData, ...userSelect, 
+        // "usuarioId": userID,
         "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
       };
-      // console.log(selected);
+      console.log(selected);
       const res = await postNewChild(selected);
       if (res) {
-        const idChild = res.id;
-        console.log("ID infante: ", idChild);
-        setChildID(idChild);
-        navigate("/independencia");
+        navigate("/token");
       }
       return res;
     } catch (error) {
@@ -215,6 +219,10 @@ export function UserChildForm() {
             ) : (
               <p> * * * * * *</p>
             )}
+            <p>
+              <strong>Código de la Encuesta</strong>
+            </p>
+            { test_code }
           </div>
         </div>
       </div>

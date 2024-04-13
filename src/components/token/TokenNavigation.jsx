@@ -4,16 +4,16 @@ export const TokenNavigation = () => {
   return (
     <div className="navitoken-main-container">
       <div className="btn-token-container">
-        <a href="/adulto">
+        <a href="/personales">
           <button className="btn btn-outline btn-token-navigation">
-            Crear Usuario
+            Encuesta Inicial
           </button>
         </a>
       </div>
       <div className="btn-token-container">
         <a href="/independencia">
           <button className="btn btn-outline btn-token-navigation">
-            Aplicar Test
+            Encuesta Final
           </button>
           {/* OJO QUE EL USUARIO YA DEBE ESTAR CREADO PARA ESCOGER ESTA OPCION */}
         </a>

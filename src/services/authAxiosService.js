@@ -40,7 +40,7 @@ export const getAllUsers = async (updateState) => {
     // console.log("Iniciando la solicitud GET...");
     const response = await axios.get(`${API}/api/usuarios`);
     updateState(response.data);
-    // console.log("Respuesta: ", response.data);
+    console.log("Respuesta user: ", response.data);
     return response.data;
   } catch (error) {
     console.error(error);

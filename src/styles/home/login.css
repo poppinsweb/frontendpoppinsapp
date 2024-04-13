@@ -21,7 +21,7 @@
 }
 
 /* MEDIUM SCREEN */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .page-container {
     background-size: cover;
     padding: 50px;
@@ -41,16 +41,14 @@
 }
 
 /* LARGE SCREEN */
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .page-container {
     min-height: 1250px;
     padding: 0;
   }
 
   .login-card {
-    width: 50%;
-    /* width: 900px;
-    height: 600px; */
+    width: 40%;
   }
 
   .title-login {
@@ -70,8 +68,9 @@
 }
 
 /* LARGER SCREEN */
-@media (min-width: 1500px) {
+@media (min-width: 1200px) {
   .login-card {
-    width: 40%;
+    width: 30%;
+    margin-top: 100px;
   }
 }
