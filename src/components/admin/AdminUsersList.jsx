@@ -19,7 +19,6 @@ export const AdminUsersList = () => {
     try {
       await removeUser(userId);
       getAllUsers(setUsers);
-      // setUsers(allUsers)
     } catch (error) {
       console.error("Error al eliminar al usuario", error);
     }

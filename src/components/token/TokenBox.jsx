@@ -6,9 +6,7 @@ export const TokenBox = () => {
   const [radio, setRadio] = useState(null);
   const { user } = useAuth();
 
-  const alert = () => {
-    console.log("click");
-  };
+  console.log(user);
 
   useEffect(() => {
     setRadio(user.usuario_token);
@@ -17,30 +15,31 @@ export const TokenBox = () => {
 
   // CREAR EL MECANISMO DE ASOCIAR A ENCUESTA X2
   return (
-    <div className="box-tokens-container">
-      {user && user.rol === "admin" ? (
-        <button className="btn btn-color btn-add" onClick={alert}>
-          + Crear Token
-        </button>
-      ) : (
-        <>
-          <h2 className="code-title">Token</h2>
-          <form className="radio-token-container">
-            <label key={user.id} className="token-lable">
-              <input
-                type="radio"
-                className="radio-button"
-                name="testCode"
-                value={user.usario_token}
-              />
-              {user.usuario_token}
-            </label>
-            <button className="btn btn-outline btn-token-navigation">
-            Encuesta Final
-          </button>
-          </form>
-        </>
-      )}
+    <>
+      {user.rol === "admin" ? <div className="box-tokens-container-admin"> 
+        <h2 className="code-title">Token</h2>
+        <div>
+          Usuario: {user.usuario_token}
+        </div>     
+        <button className="btn btn-color">Crear Token</button>
+      </div> 
+      :
+      <div className="box-tokens-container">
+      <h2 className="code-title">Token</h2>
+      <form className="radio-token-container">
+        <label key={user.id} className="token-lable">
+          <input
+            type="radio"
+            className="radio-button"
+            name="testCode"
+            value={user.usario_token}
+          />
+          {user.usuario_token}
+        </label>
+        <button className="btn btn-color">Datos del Niño</button>
+      </form>
     </div>
+      }
+    </>
   );
 };

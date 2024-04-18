@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
+// **************************************************************
 // HOOK PARA LLAMAR A ESTE CONTEXTO
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -16,8 +17,7 @@ export const useAuth = () => {
   }
   return context;
 };
-
-// ***********
+// ********************************************************************
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -25,13 +25,12 @@ export const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState(null);
   const [user, setUser] = useState();
   const [userList, setUserList] = useState([{}]);
+  // const [userToken, setUserToken] = useState();
 
   // TRAE TODOS LOS USUARIOS
   useEffect(() => {
     getAllUsers(setAllUsers);
   }, []);
-
-  // console.log(allUsers);
 
   // LISTA LOS USUARIOS REGISTRADOS
   const getUsers = async () => {
@@ -46,7 +45,6 @@ export const AuthProvider = ({ children }) => {
   // REGISTRO DE USUARIO
   const signup = async (userData) => {
     try {
-      // const codigoEncuesta = generateCodigoEncuesta();
       const res = await registerRequest(userData);
       console.log("respuesta de registrar en context", res);
     } catch (error) {

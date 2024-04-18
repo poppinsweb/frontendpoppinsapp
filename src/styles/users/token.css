@@ -138,6 +138,18 @@
     padding: 0 50px;
   }
 
+  .box-tokens-container-admin {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 40px 0;
+    width: 30%;
+    background-color: #d6dff97e;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 0px #000000bf;
+  }
+
   .infotoken-main-container {
     margin-right: 50px;
   }

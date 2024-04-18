@@ -2,13 +2,26 @@ import axios from "axios";
 
 const API = "http://localhost:3000";
 
+// // CREAR EL TOKEN DE USUARIO
+// export const createUserToken = async() => {
+//   try {
+//     const response = await axios.post(`${API}/api/crear-token`)
+//     if (response.status === 201 || response.status === 200) {
+//     console.log("respuesta de token en axios", response);
+//     // return response.data;
+//     }
+//   } catch (error) {
+//     console.error("Error en la creacion del token de usuario", error);
+//     throw error;
+//   }
+// }
+
 // REGISTRO DE USUARIOS, SE RENDERIZARA EN LA RUTA ADMIN COMPONENTE ADMINCREATEUSER
 export const registerRequest = async (user) => {
   try {
-
     const response = await axios.post(`${API}/api/registro`, {...user});
-    console.log("Respuesta register en auth: ", response.data);
-    if (response.status === 201) {
+    if (response.status === 201 || response.status === 200) {
+      console.log("Respuesta register en auth: ", response.data);
       return response.data;
     } else {
       throw new Error(

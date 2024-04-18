@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthProvider";
 import "../../styles/admin/create-user.css";
@@ -15,12 +14,12 @@ export const AdminCreateUser = () => {
   const onSubmit = async (values) => {
     try {
       await signup(values);
-      if (signup)
-      console.log("registro exitoso");
+      if (signup) console.log("registro exitoso");
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
+ 
   return (
     <>
       <h2 className="title-register">Registro de Usuarios</h2>
