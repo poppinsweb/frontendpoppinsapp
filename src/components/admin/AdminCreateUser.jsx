@@ -13,13 +13,16 @@ export const AdminCreateUser = () => {
 
   const onSubmit = async (values) => {
     try {
-      await signup(values);
-      if (signup) console.log("registro exitoso");
+      const registrado = await signup(values);
+      console.log("Registro exitoso", registrado);
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
- 
+
+  const handleClick = () => {
+
+  }
   return (
     <>
       <h2 className="title-register">Registro de Usuarios</h2>
@@ -44,7 +47,7 @@ export const AdminCreateUser = () => {
             <option value={rol.admin}>Admin</option>
           </select>
         </div>
-        <button className="btn btn-color" id="btn-register" type="submit">
+        <button className="btn btn-color" id="btn-register" type="submit" onClick={handleClick}>
           Registrar
         </button>
       </form>

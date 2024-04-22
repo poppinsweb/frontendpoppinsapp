@@ -14,14 +14,14 @@ export function UserChildForm() {
   const [userName, setUserName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userBirth, setUserBirth] = useState("");
-  // const [userID, setUserID] = useState(null);
+  const [userToken, setUserToken] = useState(null);
 
   const navigate = useNavigate();
 
-  const test_code = user.usuario_token;
+  // const test_code = user.usuario_token;
 
   useEffect(() => {
-    // setUserID(user.id);
+    setUserToken(user.usuario_token);
   }, [])
 
 // console.log(userID);
@@ -222,7 +222,8 @@ export function UserChildForm() {
             <p>
               <strong>Código de la Encuesta</strong>
             </p>
-            { test_code }
+            { userToken } 
+            {/* test_code */}
           </div>
         </div>
       </div>
