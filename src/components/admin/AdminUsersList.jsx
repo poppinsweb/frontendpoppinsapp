@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { assignTokenToUser, getAllUsers, removeUser } from "../../services/authAxiosService";
+import { getAllUsers, removeUser } from "../../services/authAxiosService";
 
 import { getAllChildren } from "../../services/testAxiosAPI";
 
@@ -7,16 +7,15 @@ export const AdminUsersList = () => {
   const [users, setUsers] = useState(null);
   const [children, setChildren] = useState(null);
 
+  
   useEffect(() => {
     getAllUsers(setUsers);
   }, []);
 
-  // CREA EL TOKEN EN USER_TOKEN
-  // if (users) {
-  //   const lastUserId = users[users.length - 1].id;
-  //   console.log(lastUserId);
-  //   assignTokenToUser(lastUserId)
-  // }
+  useEffect(() => {
+    getAllUsers(setUsers);
+    if(users) console.log(users[users.length-1].id);
+  }, []);
 
   useEffect(() => {
     getAllChildren(setChildren);
@@ -38,15 +37,18 @@ export const AdminUsersList = () => {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>ROL</th>
                 <th>EMAIL</th>
                 <th>#TOKEN</th>
-                <th>ELIMINAR</th>
+                <th>ELIMINAR USUARIO</th>
+                
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user.id}>
+                  <td>{user.id}</td>
                   <td>{user.rol}</td>
                   <td>{user.email}</td>
                   <td>{user.usuario_token}</td>

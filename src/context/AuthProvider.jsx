@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerRequest, loginRequest, getAllUsers, assignTokenToUser,
+import { createUserRequest, loginRequest, getAllUsers, getUserToken,
 } from "../services/authAxiosService";
 
 
@@ -41,12 +41,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   // REGISTRO DE USUARIO
-  const signup = async (userData) => {
+  const userRegister = async (userData) => {
     try {
-      const res = await registerRequest(userData);
-      console.log("respuesta de registrar en context", res);
+      const createdUser = await createUserRequest(userData);
+      const userId = createdUser.id;
+      console.log("respuesta de registrar en context", userId);
 
-      // if (res) await assignTokenToUser(res.id)
+     const tokenUser = await getUserToken(userId);
+     console.log(tokenUser);
     } catch (error) {
       console.error("Error en el registro de usuario:",error);
     }
@@ -91,7 +93,7 @@ export const AuthProvider = ({ children }) => {
         user,
         userList,
         signin,
-        signup,
+        userRegister,
         logout,
       }}
     >

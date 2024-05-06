@@ -3,15 +3,13 @@ import axios from "axios";
 const API = "http://localhost:3000";
 
 // REGISTRO DE USUARIOS, SE RENDERIZARA EN LA RUTA ADMIN COMPONENTE ADMINCREATEUSER
-export const registerRequest = async (user) => {
+export const createUserRequest = async (user) => {
   try {
-    const response = await axios.post(`${API}/api/registro`, {...user});
+    const response = await axios.post(`${API}/api/registro`, { ...user });
     if (response.status === 201 || response.status === 200) {
       console.log("Respuesta register en auth: ", response.data);
-
       const userId = response.data.id;
       console.log(userId);
-
       return response.data;
     } else {
       throw new Error(
@@ -24,25 +22,25 @@ export const registerRequest = async (user) => {
   }
 };
 
-// Función para asignar el token al usuario en codigo_token
-export const assignTokenToUser = async (userId) => {
+// OBTIENE EL TOKEN ASOCIADO AL USUARIO POR ID ~~~ revisar codigo para ver si es usado
+export const getUserToken = async (userId) => {
   try {
-    // Realiza la solicitud POST para asignar el token al usuario
-    const response = await axios.post(`${API}/api/usertoken/${userId}`);
-    console.log("Token asignado al usuario: ", response.data);
-    return response.data;
+    const response = await axios.get(`${API}/api/usertoken/${userId}`);
+    return response.data.codigoToken;
   } catch (error) {
-    console.error("Error al asignar el token al usuario", error);
+    console.error("Error al obtener token de usuario: ", error);
     throw error;
   }
 };
+
+// **************************************************************************
 
 // LOGIN REQUEST
 export const loginRequest = async (user) => {
   try {
     console.log("Enviando solicitud de inicio de sesión...");
     const response = await axios.post(`${API}/api/login`, user);
-    
+
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -56,7 +54,7 @@ export const getAllUsers = async (updateState) => {
     // console.log("Iniciando la solicitud GET...");
     const response = await axios.get(`${API}/api/usuarios`);
     updateState(response.data);
-    console.log("Respuesta user: ", response.data);
+    // console.log("Respuesta user: ", response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -74,17 +72,3 @@ export const removeUser = async (userId) => {
     console.error(error);
   }
 };
-
-// // LLAMAR AL TOKEN DE USUARIO DESDE USER
-// export const callUserToken = async() => {
-//   try {
-//     const response = await axios.post(`${API}/api/crear-token`)
-//     if (response.status === 201 || response.status === 200) {
-//     console.log("respuesta de token en axios", response);
-//     // return response.data;
-//     }
-//   } catch (error) {
-//     console.error("Error en la creacion del token de usuario", error);
-//     throw error;
-//   }
-// }

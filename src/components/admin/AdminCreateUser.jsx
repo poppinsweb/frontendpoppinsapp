@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthProvider";
 import "../../styles/admin/create-user.css";
@@ -9,19 +10,19 @@ const rol = {
 
 export const AdminCreateUser = () => {
   const { register, handleSubmit } = useForm();
-  const { signup } = useAuth();
+  const { userRegister } = useAuth();
 
   const onSubmit = async (values) => {
     try {
-      const registrado = await signup(values);
-      console.log("Registro exitoso", registrado);
+      const registrado = await userRegister(values);
+      console.log("Registro exitoso", registrado); // Condicional para validar registro
     } catch (error) {
       console.error("Error en la solicitud de registro:", error);
     }
   };
 
   const handleClick = () => {
-
+    console.log("Registro Exitoso");
   }
   return (
     <>
@@ -47,7 +48,12 @@ export const AdminCreateUser = () => {
             <option value={rol.admin}>Admin</option>
           </select>
         </div>
-        <button className="btn btn-color" id="btn-register" type="submit" onClick={handleClick}>
+        <button
+          className="btn btn-color"
+          id="btn-register"
+          type="submit"
+          onClick={ handleClick }
+        >
           Registrar
         </button>
       </form>
@@ -98,4 +104,4 @@ export const AdminCreateUser = () => {
 //         text: "El correo ya se encuentra registrado",
 //       });
 //     }
-//   }
+// }
