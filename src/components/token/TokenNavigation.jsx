@@ -4,7 +4,7 @@ export const TokenNavigation = () => {
   return (
     <div className="navitoken-main-container">
       <div className="btn-token-container">
-        <a href="/personales">
+        <a href="/independencia">
           <button className="btn btn-outline btn-token-navigation">
             Encuesta Inicial
           </button>
@@ -12,15 +12,15 @@ export const TokenNavigation = () => {
       </div>
       <div className="btn-token-container">
         <a href="/independencia">
-          <button className="btn btn-outline btn-token-navigation">
+          <button className="btn btn-outline btn-token-navigation" disabled={true}> 
             Encuesta Final
           </button>
-          {/* OJO QUE EL USUARIO YA DEBE ESTAR CREADO PARA ESCOGER ESTA OPCION */}
+          {/* HAY QUE CREAR CONDICIONAL PARA ACTIVAR BOTON SEGUN PRIMERA O SEGUNDA ENCUESTA */}
         </a>
       </div>
       <div className="btn-token-container">
         <a href="/resultados">
-          <button className="btn btn-outline btn-token-navigation">
+          <button className="btn btn-outline btn-token-navigation" disabled={true}>
             Ver Resultados / Imprimir
             {/* OJO QUE LA ENCUESTA DEBE ESTAR COMPLETA PARA ESCOGER ESTA OPCION */}
           </button>

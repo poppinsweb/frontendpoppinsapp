@@ -1,4 +1,3 @@
-// import { useAuth } from "../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthProvider";
@@ -8,7 +7,6 @@ export function Navbar() {
   const navigate = useNavigate();
 
   const { user, logout } = useAuth()
-  //  user = "email"
 
   const handleLogout = () => {
     logout()
@@ -48,14 +46,11 @@ export function Navbar() {
               <NavLink className="nav-link" to="/crear">Crear</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/list">Lista</NavLink>
+              <NavLink className="nav-link" to="/lista">Lista</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/token">Token</NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/adulto">AdultoData</NavLink>
-            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/personales">NiñoData</NavLink>
             </li>

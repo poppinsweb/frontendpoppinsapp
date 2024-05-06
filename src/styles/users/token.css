@@ -66,11 +66,17 @@
 .btn-token-navigation {
   color: #434343;
   background-color: #bec2d3;
+  /* background-color: rgb(101, 181, 218); */
   border-radius: 10px;
   width: 300px;
   height: 50px;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
   font-size: 24px;
+}
+
+.btn-token-navigation:disabled {
+  background-color: #6e6d6d;
+  color: #0a0a0a;
 }
 
 /* MEDIUM SCREEN */
@@ -111,7 +117,11 @@
 
   .token-lable {
     font-size: 1.2rem;
-    
+    margin-bottom: 20px;
+  }
+
+  .radio-token-container {
+    display: block;
   }
 
   .radio-button {
@@ -135,7 +145,8 @@
 
   .box-tokens-container {
     width: 120%;
-    padding: 0 50px;
+    padding: 0 15px;
+    margin: 10px 0;
   }
 
   .box-tokens-container-admin {

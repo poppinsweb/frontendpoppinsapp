@@ -20,7 +20,6 @@ import { PageUserAdultData } from "../pages/userPages/PageUserAdultData";
 
 export function AdminRoutes() {
   const { user } = useAuth();
-  // console.log(user.rol);
   
   return (
     <>
@@ -30,7 +29,7 @@ export function AdminRoutes() {
             <Route path="/inicio" element={<LandingPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/crear" element={<CreateUser />} />
-            <Route path="/list" element={<UserList />} />
+            <Route path="/lista" element={<UserList />} />
 
             <Route path="/adulto" element={<PageUserAdultData />} />
             <Route path="/personales" element={<PageUserChildData />} />
@@ -49,7 +48,7 @@ export function AdminRoutes() {
         ) : (
           <>
 
-        {/* todo el mundo */}
+        {/* USUARIOS REGISTRADOS */}
             <Route path="/inicio" element={<LandingPage />} />
             <Route path="/personales" element={<PageUserChildData />} />
             <Route path="/token" element={<UserToken />} />
@@ -61,7 +60,6 @@ export function AdminRoutes() {
             <Route path="/habitos-dormir" element={<PageHabitsSleeping />} />
             <Route path="/responsabilidades" element={<PageHabitsResponsability/>} />
             <Route path="/resultados" element={<PageUserResult />} />
-            {/* <Route path="/*" element={<Navigate to="/token" />} /> */}
           </>
         )}
       </Routes>
