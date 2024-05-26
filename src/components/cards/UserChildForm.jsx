@@ -24,7 +24,8 @@ export function UserChildForm() {
     setUserToken(user.usuario_token);
   }, [])
 
-// console.log(userID);
+ // console.log(userID);
+ //console.log(userToken);
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -45,12 +46,13 @@ export function UserChildForm() {
     e.preventDefault();
     try {
       const selected = { ...userData, ...userSelect, 
-        // "usuarioId": userID,
-        "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, "")
+        "codigo_identificador": userName[0] + userLastName[0] + userBirth.replace(/-/g, ""),
+        "usuario_token": userToken
       };
       console.log(selected);
       const res = await postNewChild(selected);
       if (res) {
+        console.log(res);
         navigate("/token");
       }
       return res;
@@ -198,10 +200,10 @@ export function UserChildForm() {
               </div>
             </div>
             {Object.values(userSelect).length >= 4 ? (
-              <button className="btn btn-admin btn-color">Ir a Encuesta</button>
+              <button className="btn btn-admin btn-color">Enviar</button>
             ) : (
               <button disabled className="btn btn-admin btn-color">
-                Ir a Encuesta
+                Diligencie todos los espacios
               </button>
             )}
           </form>

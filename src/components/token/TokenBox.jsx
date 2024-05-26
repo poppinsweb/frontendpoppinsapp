@@ -1,10 +1,10 @@
 import "../../styles/users/token.css";
 import { useAuth } from "../../context/AuthProvider";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const TokenBox = () => {
-  const [radio, setRadio] = useState(null);
+  // const [radio, setRadio] = useState(null);
   const { user } = useAuth();
 
   const navigate = useNavigate();
@@ -26,7 +26,8 @@ export const TokenBox = () => {
       {user.rol === "admin" ? (
         <div className="box-tokens-container-admin">
           <h2 className="code-title">Token</h2>
-          <div>Usuario: {user.usuario_token}</div>
+          {/* LISTAR TODOS LOS TOKENS? */}
+          <div>Encuesta: {user.usuario_token}</div>
           <button className="btn btn-color">Crear Token</button>
         </div>
       ) : (
