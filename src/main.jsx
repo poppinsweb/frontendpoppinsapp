@@ -2,21 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/AuthProvider.jsx";
+// import { AuthProvider } from "./context/AuthProvider.jsx";
 import "./styles/index.css";
-import { ChildProvider } from "./context/ChildContext.jsx";
-import { ScoresProvider } from "./context/ScoresContext.jsx";
+// import { ChildProvider } from "./context/ChildContext.jsx";
+// import { ScoresProvider } from "./context/ScoresContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <ChildProvider>
-          <ScoresProvider>
+      {/* <AuthProvider> */}
+        {/* <ChildProvider>
+          <ScoresProvider> */}
             <App />
-          </ScoresProvider>
-        </ChildProvider>
-      </AuthProvider>
+          {/* </ScoresProvider>
+        </ChildProvider> */}
+      {/* </AuthProvider> */}
     </BrowserRouter>
   </React.StrictMode>
 );

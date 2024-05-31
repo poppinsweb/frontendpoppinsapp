@@ -1,3 +1,4 @@
+import Evaluation from "../../services/evaluationService/Evaluation";
 import "../../styles/home/home.css";
 
 export function Home() {
@@ -76,6 +77,8 @@ export function Home() {
           </div>
         </div>
       </section>
+      <div>
+      </div>
     </div>
   );
 }

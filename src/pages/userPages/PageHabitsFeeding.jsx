@@ -1,9 +1,9 @@
-import { HabitsFeeding } from "../../components/cards/HabitsFeeding";
+// import { HabitsFeeding } from "../../components/cards/HabitsFeeding";
 
-export const PageHabitsFeeding = () => {
-  return (
-    <>
-      <HabitsFeeding />,
-    </>
-  )
-}
+// export const PageHabitsFeeding = () => {
+//   return (
+//     <>
+//       <HabitsFeeding />,
+//     </>
+//   )
+// }

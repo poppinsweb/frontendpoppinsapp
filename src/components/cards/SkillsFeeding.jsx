@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLatestChild } from "../../context/ChildContext";
 import { abilityFeedingQuestions } from "../constants/abilityFeedingQuestions";
 import "../../styles/users/questions.css";
-import { postSkillFeedingScore } from "../../services/testAxiosAPI";
+// import { postSkillFeedingScore } from "../../services/testAxiosAPI";
 
 export const SkillsFeeding = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);

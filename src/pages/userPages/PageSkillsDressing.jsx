@@ -1,9 +1,9 @@
-import { SkillsDressing }from "../../components/cards/SkillsDressing";
+// import { SkillsDressing }from "../../components/cards/SkillsDressing";
 
-export const PageSkillsDressing = () => {
-  return (
-    <div>
-      <SkillsDressing/>
-    </div>
-  )
-}
+// export const PageSkillsDressing = () => {
+//   return (
+//     <div>
+//       <SkillsDressing/>
+//     </div>
+//   )
+// }

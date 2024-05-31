@@ -1,9 +1,9 @@
-import { HabitsSleeping } from "../../components/cards/HabitsSleeping";
+// import { HabitsSleeping } from "../../components/cards/HabitsSleeping";
 
-export const PageHabitsSleeping = () => {
-  return (
-    <>
-      <HabitsSleeping />
-    </>
-  )
-}
+// export const PageHabitsSleeping = () => {
+//   return (
+//     <>
+//       <HabitsSleeping />
+//     </>
+//   )
+// }

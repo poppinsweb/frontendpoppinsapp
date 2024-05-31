@@ -1,7 +1,7 @@
-import { UserAdultForm } from "../../components/cards/UserAdultForm"
+// import { UserAdultForm } from "../../components/cards/UserAdultForm"
 
-export const PageUserAdultData = () => {
-  return (
-    <UserAdultForm />
-  )
-}
+// export const PageUserAdultData = () => {
+//   return (
+//     <UserAdultForm />
+//   )
+// }

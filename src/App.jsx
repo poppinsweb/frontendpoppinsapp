@@ -1,34 +1,41 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { AuthContext, useAuth } from "./context/AuthProvider";
+// import { AuthContext, useAuth } from "./context/AuthProvider";
 import { Navbar } from "./components/ui/Navbar";
 import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
 import { UserAuthPage } from "./pages/auth/UserAuthPage";
-import { AdminRoutes } from "./routes/AdminRoutes";
+// import { AdminRoutes } from "./routes/AdminRoutes";
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+
 import "./styles/App.css";
+import { PageIndependence } from "./pages/userPages/PageIndependence";
 
 function App() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // console.log(user.rol);
 
   return (
     <>
       <Navbar />
       <Routes>
-        {user ? (
+        {/* {user ? ( */}
           <>
-            <Route path="/*" element={<AdminRoutes />} />
+            {/* <Route path="/*" element={<AdminRoutes />} /> */}
+            <Route path="/admin" element={<AdminDashboard />} />
+
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
           </>
-        ) : (
+        {/* ) : ( */}
           <>
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
             <Route path="/*" element={<UserAuthPage />} />
+            <Route path="/encuesta" element={<PageIndependence />} />
+
           </>
-        )}
+        {/* )} */}
       </Routes>
     </>
   );

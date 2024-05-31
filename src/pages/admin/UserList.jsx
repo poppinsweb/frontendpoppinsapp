@@ -1,11 +1,11 @@
 // UsersPage
-import { AdminUsersList } from "../../components/admin/AdminUsersList";
+// import { AdminUsersList } from "../../components/admin/AdminUsersList";
 
-export function UserList() {
+// export function UserList() {
 
-  return (
-    <div className='container my-4 w-50'>
-        <AdminUsersList />
-    </div>
-  );
-}
+//   return (
+//     <div className='container my-4 w-50'>
+//         <AdminUsersList />
+//     </div>
+//   );
+// }

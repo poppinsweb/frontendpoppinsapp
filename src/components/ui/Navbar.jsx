@@ -1,20 +1,20 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthProvider";
+// import { useAuth } from "../../context/AuthProvider";
 import '../../styles/App.css';
 
 export function Navbar() {
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth()
+  // const { user, logout } = useAuth()
 
-  const handleLogout = () => {
-    logout()
-    navigate("/");
-  }
-  const handleLogIn = () => {
-    navigate("/login");
-  }
+  // const handleLogout = () => {
+  //   logout()
+  //   navigate("/");
+  // }
+  // const handleLogIn = () => {
+  //   navigate("/login");
+  // }
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>
@@ -55,9 +55,9 @@ export function Navbar() {
               <NavLink className="nav-link" to="/personales">NiñoData</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/independencia">Independencia</NavLink>
+              <NavLink className="nav-link" to="/encuesta">Encuesta</NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/habilidades-aseo">Habilaseo</NavLink>
             </li>
             <li className="nav-item">
@@ -74,13 +74,13 @@ export function Navbar() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/responsabilidades">Responsab</NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/resultados">Result</NavLink>
             </li>
           </ul>
         </div>
-        <div
+        {/* <div
           className='collapse navbar-collapse justify-content-end'
           id='navbarNavLogout'>
           <span className='nav-item nav-link text-primary mx-3'>
@@ -97,7 +97,7 @@ export function Navbar() {
               </>
             )
         }
-        </div>
+        </div> */}
       </div>
     </nav>
   );

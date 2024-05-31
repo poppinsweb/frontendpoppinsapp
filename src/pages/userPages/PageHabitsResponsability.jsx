@@ -1,10 +1,10 @@
-import { HabitsResponsability } from "../../components/cards/HabitsResponsability";
+// import { HabitsResponsability } from "../../components/cards/HabitsResponsability";
 
-export const PageHabitsResponsability = () => {
-  return (
-    <>
-      <HabitsResponsability />
-    </>
-  )
-}
+// export const PageHabitsResponsability = () => {
+//   return (
+//     <>
+//       <HabitsResponsability />
+//     </>
+//   )
+// }
 
