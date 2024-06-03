@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLatestChild } from "../../context/ChildContext";
-import useGetEvaluations from "../../services/evaluationService/hooks/useGetEvaluations";
+// import { useNavigate } from "react-router-dom";
+// import { useLatestChild } from "../../context/ChildContext";
+import { useGetIndependence } from "../../services/evaluationService/hooks/useGetIndependence";
 import "../../styles/users/questions.css";
 
 const CardQuestions = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const navigate = useNavigate();
-  const questionsData = useGetEvaluations(); // Obtiene los datos desde la base de datos
+  // const navigate = useNavigate();
+  const questionsData = useGetIndependence(); // Obtiene los datos desde la base de datos
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -44,22 +44,22 @@ const CardQuestions = () => {
             questionId: questionsData[0].questions[index]._id,
             response,
           })),
-          datos_infante_id: latestChild.id,
+          // datos_infante_id: latestChild.id,
         };
 
         setResultsSent(true);
 
-        try {
-          const res = await postIndependenceScore(dataToSend);
+        console.log(dataToSend);
 
-          console.log("Puntaje enviado a la API:", res);
-
-          if (res) {
-            navigate("/habilidades-aseo");
-          }
-        } catch (error) {
-          console.error("Error al enviar resultados a la API: ", error);
-        }
+        // try {
+        //   const res = await postIndependenceScore(dataToSend);
+        //   console.log("Puntaje enviado a la API:", res);
+        //   if (res) {
+        //     navigate("/habilidades-aseo");
+        //   }
+        // } catch (error) {
+        //   console.error("Error al enviar resultados a la API: ", error);
+        // }
       }
     }
   };

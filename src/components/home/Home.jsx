@@ -1,4 +1,4 @@
-import Evaluation from "../../services/evaluationService/Evaluation";
+// import Evaluation from "../../services/evaluationService/Evaluation";
 import "../../styles/home/home.css";
 
 export function Home() {
