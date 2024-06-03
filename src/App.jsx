@@ -9,11 +9,15 @@ import { UserAuthPage } from "./pages/auth/UserAuthPage";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
 import "./styles/App.css";
-// import { PageIndependence } from "./pages/userPages/PageIndependence";
-import { PageSkillsGrooming } from "./pages/userPages/PageSkillsGrooming";
+
 import IndependencePage from "./pages/cards/IndependencePage";
-
-
+import SkillsGroomingPage from "./pages/cards/SkillsGroomingPage";
+import SkillsDressingPage from "./pages/cards/SkillsDressingPage";
+import SkillsFeedingPage from "./pages/cards/SkillsFeedingPage";
+import HabitsFeedingPage from "./pages/cards/HabitsFeedingPage";
+import HabitsSleepingPage from "./pages/cards/HabitsSleepingPage";
+import ResponsabilitiesPage from "./pages/cards/ResponsabilitiesPage";
+import AditionalsPage from "./pages/cards/AditionalsPage";
 
 function App() {
   // const { user } = useAuth();
@@ -36,8 +40,14 @@ function App() {
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
             <Route path="/" element={<UserAuthPage />} />
-            <Route path="/encuesta" element={<IndependencePage />} />
-            <Route path="/habilidades-aseo" element={<PageSkillsGrooming />} />
+            <Route path="/independencia" element={<IndependencePage />} />
+            <Route path="/habilidades-aseo" element={<SkillsGroomingPage />} />
+            <Route path="/habilidades-vestido" element={<SkillsDressingPage />} />
+            <Route path="/habilidades-alimentacion" element={<SkillsFeedingPage />} />
+            <Route path="/habitos-alimentacion" element={<HabitsFeedingPage />} />
+            <Route path="/habitos-dormir" element={<HabitsSleepingPage />} />
+            <Route path="/responsabilidades" element={<ResponsabilitiesPage />} />
+            <Route path="/adicionales" element={<AditionalsPage />} />
 
           </>
         {/* )} */}

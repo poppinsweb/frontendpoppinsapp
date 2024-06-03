@@ -1,13 +1,15 @@
 import React from 'react';
-import { useGetIndependence } from '../../services/evaluationService/hooks/useGetIndependence';
+import { useFetchData } from '../../services/evaluationService/hooks/useGetEvaluations';
 import CardQuestions from '../../components/cards/CardQuestions';
 
 const SkillsGroomingPage = () => {
-  const questionsData = useGetIndependence();
+  const { data: questionsData, loading, error } = useFetchData('http://localhost:3000/evaluations/skillsgrooming');
+  if(loading) return <p>Loading...</p>
+  if(error) return <p>Error loading data: {error.message}</p>
 
   return (
     <div>
-      <h1>Habilidades del Aseo</h1>
+      {/* <h1>Habilidades del Aseo Personal</h1> */}
       {questionsData && questionsData.length > 0 ? (
         <CardQuestions questionsData={questionsData} />
       ) : (

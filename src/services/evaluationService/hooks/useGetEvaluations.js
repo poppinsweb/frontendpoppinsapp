@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useGetEvaluations = () => {
+const useFetchData = (endpoint) => {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async() => {
       try {
-        const URL = "http://localhost:3000/evaluations";
-        const request = await axios.get(URL);
+        setLoading(true);
+        const request = await axios.get(endpoint);
         setData(request.data);
       } catch (error) {
-        console.log(error);
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
-  return data;
+  }, [endpoint]);
+  
+  return { data, loading, error };
 };
 
-export { useGetEvaluations };
+export { useFetchData };

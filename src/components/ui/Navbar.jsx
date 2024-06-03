@@ -55,7 +55,7 @@ export function Navbar() {
               <NavLink className="nav-link" to="/personales">NiñoData</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/encuesta">Encuesta</NavLink>
+              <NavLink className="nav-link" to="/independencia">Independencia</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/habilidades-aseo">Habilaseo</NavLink>
@@ -74,6 +74,9 @@ export function Navbar() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/responsabilidades">Responsab</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/adicionales">Adicionales</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/resultados">Result</NavLink>
