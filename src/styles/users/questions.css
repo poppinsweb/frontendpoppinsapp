@@ -139,6 +139,14 @@
     background-size: cover;
   }
 
+  .question-container-independence h1 {
+    font-size: 1.5rem;
+  }
+
+  .question-container-independence p {
+    font-size: 0;
+  }
+
   .question-container {
     padding: 120px 100px;
   }

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 // import { AuthContext, useAuth } from "./context/AuthProvider";
 import { Navbar } from "./components/ui/Navbar";
@@ -10,6 +10,8 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
 import "./styles/App.css";
 import { PageIndependence } from "./pages/userPages/PageIndependence";
+
+
 
 function App() {
   // const { user } = useAuth();
@@ -26,9 +28,9 @@ function App() {
 
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
-          </>
+          {/* </> */}
         {/* ) : ( */}
-          <>
+          {/* <> */}
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
             <Route path="/*" element={<UserAuthPage />} />
