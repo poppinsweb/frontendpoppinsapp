@@ -11,7 +11,7 @@
 }
 
 /* CONTENEDOR DE LA CARD */
-.question-container, .question-container-independence {
+.question-container, .question-container-questions {
   margin: 0 auto;
   min-height: 200px;
   width: 90%;
@@ -131,7 +131,7 @@
     min-height: 1000px;
   }
 
-   .question-container-independence, .question-container {
+   .question-container-questions, .question-container {
     width: 1050px;
     height: 650px;
     padding: 50px 100px;
@@ -139,11 +139,11 @@
     background-size: cover;
   }
 
-  .question-container-independence h1 {
+  .question-container-questions h1 {
     font-size: 1.5rem;
   }
 
-  .question-container-independence p {
+  .question-container-questions p {
     font-size: 0;
   }
 
@@ -161,7 +161,7 @@
     padding-bottom: 20px;
   }
 
-  .main-question-title-independence, .main-question-title {
+  .main-question-title-questions, .main-question-title {
     font-size: 2rem;
     text-align: left;
   }

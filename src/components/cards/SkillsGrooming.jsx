@@ -1,136 +1,124 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { useLatestChild } from "../../context/ChildContext";
-// import { abilityGroomingQuestions } from "../constants/abilityGroomingQuestions";
-// import "../../styles/users/questions.css";
-// import { postSkillGroomingScore } from "../../services/testAxiosAPI";
+import { useGetEvaluations } from "../../services/evaluationService/hooks/useGetEvaluations";
+import "../../styles/users/questions.css";
 
-// export const SkillsGrooming = () => {
-//   const [currentQuestion, setCurrentQuestion] = useState(0);
-//   const [resultsSent, setResultsSent] = useState(false);
-//   const [userResponses, setUserResponses] = useState(
-//     Array(abilityGroomingQuestions.questions.length).fill(null)
-//   );
-//   const { latestChild, updateLatestChild } = useLatestChild();
+const CardQuestions = () => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [resultsSent, setResultsSent] = useState(false);
+  const [userResponses, setUserResponses] = useState([]);
+  // const navigate = useNavigate();
+  const questionsData = useGetEvaluations(); // Obtiene los datos desde la base de datos
 
-//   const navigate = useNavigate();
+  useEffect(() => {
+    if (questionsData && questionsData.length > 0) {
+      setUserResponses(Array(questionsData[0].questions.length).fill(null));
+    }
+  }, [questionsData]);
 
-//   useEffect(() => {
-//     const loadInitialData = async () => {
-//       await updateLatestChild();
-//     };
-//     loadInitialData();
-//   }, []);
+  const handleAnswer = (choice) => {
+    setUserResponses((prevResponses) => [
+      ...prevResponses.slice(0, currentQuestion),
+      choice,
+      ...prevResponses.slice(currentQuestion + 1),
+    ]);
+  };
 
-//   const handleAnswer = (choice) => {
-//     setUserResponses((prevResponses) => [
-//       ...prevResponses.slice(0, currentQuestion),
-//       choice,
-//       ...prevResponses.slice(currentQuestion + 1),
-//     ]);
-//   };
+  const handleBeforeQuestion = () => {
+    setCurrentQuestion((prev) => Math.max(prev - 1, 0));
+  };
 
-//   const handleBeforeQuestion = () => {
-//     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
-//   };
+  const handleNextQuestion = async () => {
+    const nextQuestion = currentQuestion + 1;
 
-//   const handleNextQuestion = async() => {
-//     const nextQuestion = currentQuestion + 1;
+    if (questionsData && nextQuestion < questionsData[0].questions.length) {
+      setCurrentQuestion(nextQuestion);
+      setResultsSent(false);
+    } else {
+      if (userResponses.includes(null)) {
+        alert("Responde todas las preguntas antes de enviar los resultados");
+      } else {
+        const dataToSend = {
+          questions: userResponses.map((response, index) => ({
+            questionId: questionsData[0].questions[index]._id,
+            response,
+          })),
+          // datos_infante_id: latestChild.id,
+        };
 
-//     if (nextQuestion < abilityGroomingQuestions.questions.length) {
-//       setCurrentQuestion(nextQuestion);
-//       setResultsSent(false);
-//     } else {
-//       if (userResponses.includes(null)) {
-//         alert("Responde todas las preguntas antes de enviar los resultados");
-//       } else {
-//         const fieldMap = {
-//           secarse_alducharse: "Se seca el cuerpo después del baño",
-//           se_peina: "Se peina el cabello",
-//           selimpia_nariz: "Se limpia la nariz",
-//           selimpia_cola: "Se limpia después de ir al baño (cuando hace popó)",
-//           selava_manos: "Se lava las manos al salir del baño",
-//           secepilla_dientes:
-//             "Se cepilla los dientes solo (recibe apoyo por las noches)",
-//           esfinteres_dia: "Controla esfínteres de día",
-//           esfinteres_noche: "Controla esfínteres de noche",
-//           soltar_inodoro: "Suelta el baño después de usarlo",
-//         };
+        setResultsSent(true);
 
-//         const dataToSend = {
-//           ...Object.fromEntries(
-//             abilityGroomingQuestions.questions.map((_, index) => [
-//               Object.keys(fieldMap)[index],
-//               userResponses[index],
-//             ])
-//           ),
-//           datos_infante_id: latestChild.id,
-//         };
+        console.log(dataToSend);
 
-//         setResultsSent(true);
+        // try {
+        //   const res = await postEvaluationsScore(dataToSend);
+        //   console.log("Puntaje enviado a la API:", res);
+        //   if (res) {
+        //     navigate("/habilidades-aseo");
+        //   }
+        // } catch (error) {
+        //   console.error("Error al enviar resultados a la API: ", error);
+        // }
+      }
+    }
+  };
 
-//         try {
-//           const res = await postSkillGroomingScore(dataToSend);
+  if (!questionsData || questionsData.length === 0) {
+    return <p>Loading...</p>;
+  }
 
-//           console.log("Puntaje enviado a la API:", res);
+  const currentQuestionData = questionsData[0].questions[currentQuestion];
 
-//           if (res) {
-//             navigate("/habilidades-vestido");
-//           }
-//         } catch (error) {
-//           console.error("Error al enviar resultados a la API: ", error);
-//         }
-//       }
-//     }
-//   };
-//   return (
-//     <div className="question-main-container">
-//       <div className="question-container">
-//         <h2 className="main-question-title">Habilidades de Aseo Personal</h2>
-//         <>
-//           <h2 className="secoundary-question-title">
-//             {abilityGroomingQuestions.questions[currentQuestion].question}
-//           </h2>
-//           <ul className="question-section-ability">
-//             {abilityGroomingQuestions.questions[currentQuestion].choices.map(
-//               (choice, index) => (
-//                 <div key={index} className="question-li">
-//                   <li
-//                     onClick={() => handleAnswer(index + 1)}
-//                     className={
-//                       userResponses[currentQuestion] === index + 1
-//                         ? "selected-answer question-text"
-//                         : null
-//                     }
-//                   >
-//                     {choice}
-//                   </li>
-//                 </div>
-//               )
-//             )}
-//           </ul>
-//           <span className="active-question-no">{currentQuestion + 1}</span>
-//           <span className="total-question">
-//             /{abilityGroomingQuestions.questions.length}
-//           </span>
-//         </>
-//       </div>
-//       <div className="btn-container">
-//         <button
-//           onClick={handleBeforeQuestion}
-//           className="btn-color"
-//           disabled={currentQuestion === 0 || resultsSent}
-//         >
-//           {resultsSent || currentQuestion === 0 ? "Inactivo" : "Anterior"}
-//         </button>
-//         <button
-//           onClick={handleNextQuestion}
-//           disabled={resultsSent}
-//           className="btn-color"
-//         >
-//           {resultsSent ? "Siguiente Sección" : "Siguiente"}
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <div className="question-main-container">
+      <div className="question-container-questions">
+        <h1>{questionsData[0].title}</h1>
+        <>
+          <h2 className="secoundary-question-title">
+            {currentQuestionData.title}
+          </h2>
+          <p>{currentQuestionData.description}</p>
+          <ul className="question-section">
+            {currentQuestionData.options.map((option, index) => (
+              <div key={index} className="question-li">
+                <li
+                  onClick={() => handleAnswer(option.score)}
+                  className={
+                    userResponses[currentQuestion] === option.score
+                      ? "selected-answer question-text"
+                      : null
+                  }
+                >
+                  {option.label}
+                </li>
+              </div>
+            ))}
+          </ul>
+          <span className="active-question-no">{currentQuestion + 1}</span>
+          <span className="total-question">
+            /{questionsData[0].questions.length}
+          </span>
+        </>
+      </div>
+      <div className="btn-container">
+        <button
+          onClick={handleBeforeQuestion}
+          className="btn-color"
+          disabled={currentQuestion === 0 || resultsSent}
+        >
+          {resultsSent || currentQuestion === 0 ? "Inactivo" : "Anterior"}
+        </button>
+        <button
+          onClick={handleNextQuestion}
+          disabled={resultsSent}
+          className="btn-color"
+        >
+          {resultsSent ? "Siguiente Sección" : "Siguiente"}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default CardQuestions;

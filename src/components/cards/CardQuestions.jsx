@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useLatestChild } from "../../context/ChildContext";
-import { useGetIndependence } from "../../services/evaluationService/hooks/useGetIndependence";
-import "../../styles/users/questions.css";
+import React, { useState, useEffect } from 'react';
+import Card from './Card';
 
-const CardQuestions = () => {
+const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  // const navigate = useNavigate();
-  const questionsData = useGetIndependence(); // Obtiene los datos desde la base de datos
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -44,22 +39,12 @@ const CardQuestions = () => {
             questionId: questionsData[0].questions[index]._id,
             response,
           })),
-          // datos_infante_id: latestChild.id,
         };
 
         setResultsSent(true);
-
         console.log(dataToSend);
 
-        // try {
-        //   const res = await postIndependenceScore(dataToSend);
-        //   console.log("Puntaje enviado a la API:", res);
-        //   if (res) {
-        //     navigate("/habilidades-aseo");
-        //   }
-        // } catch (error) {
-        //   console.error("Error al enviar resultados a la API: ", error);
-        // }
+        // Implementar lógica de envío aquí
       }
     }
   };
@@ -72,35 +57,14 @@ const CardQuestions = () => {
 
   return (
     <div className="question-main-container">
-      <div className="question-container-independence">
-        <h1>{questionsData[0].title}</h1>
-        <>
-          <h2 className="secoundary-question-title">
-            {currentQuestionData.title}
-          </h2>
-          <p>{currentQuestionData.description}</p>
-          <ul className="question-section">
-            {currentQuestionData.options.map((option, index) => (
-              <div key={index} className="question-li">
-                <li
-                  onClick={() => handleAnswer(option.score)}
-                  className={
-                    userResponses[currentQuestion] === option.score
-                      ? "selected-answer question-text"
-                      : null
-                  }
-                >
-                  {option.label}
-                </li>
-              </div>
-            ))}
-          </ul>
-          <span className="active-question-no">{currentQuestion + 1}</span>
-          <span className="total-question">
-            /{questionsData[0].questions.length}
-          </span>
-        </>
-      </div>
+      <Card
+        title={currentQuestionData.title}
+        description={currentQuestionData.description}
+        options={currentQuestionData.options}
+        handleAnswer={handleAnswer}
+        userResponse={userResponses[currentQuestion]}
+        currentQuestion={currentQuestion}
+      />
       <div className="btn-container">
         <button
           onClick={handleBeforeQuestion}

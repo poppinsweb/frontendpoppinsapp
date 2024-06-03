@@ -9,7 +9,9 @@ import { UserAuthPage } from "./pages/auth/UserAuthPage";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
 import "./styles/App.css";
-import { PageIndependence } from "./pages/userPages/PageIndependence";
+// import { PageIndependence } from "./pages/userPages/PageIndependence";
+import { PageSkillsGrooming } from "./pages/userPages/PageSkillsGrooming";
+import IndependencePage from "./pages/cards/IndependencePage";
 
 
 
@@ -33,8 +35,9 @@ function App() {
           {/* <> */}
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
-            <Route path="/*" element={<UserAuthPage />} />
-            <Route path="/encuesta" element={<PageIndependence />} />
+            <Route path="/" element={<UserAuthPage />} />
+            <Route path="/encuesta" element={<IndependencePage />} />
+            <Route path="/habilidades-aseo" element={<PageSkillsGrooming />} />
 
           </>
         {/* )} */}

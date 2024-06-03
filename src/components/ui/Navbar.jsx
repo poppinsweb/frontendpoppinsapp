@@ -57,7 +57,7 @@ export function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/encuesta">Encuesta</NavLink>
             </li>
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <NavLink className="nav-link" to="/habilidades-aseo">Habilaseo</NavLink>
             </li>
             <li className="nav-item">
@@ -74,7 +74,7 @@ export function Navbar() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/responsabilidades">Responsab</NavLink>
-            </li> */}
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/resultados">Result</NavLink>
             </li>
