@@ -18,6 +18,7 @@ import HabitsFeedingPage from "./pages/cards/HabitsFeedingPage";
 import HabitsSleepingPage from "./pages/cards/HabitsSleepingPage";
 import ResponsabilitiesPage from "./pages/cards/ResponsabilitiesPage";
 import AditionalsPage from "./pages/cards/AditionalsPage";
+import UserList from "./pages/admin/UserList";
 
 function App() {
   // const { user } = useAuth();
@@ -31,6 +32,7 @@ function App() {
           <>
             {/* <Route path="/*" element={<AdminRoutes />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/lista" element={<UserList />} />
 
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />

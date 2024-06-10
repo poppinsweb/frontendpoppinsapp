@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFetchData } from '../../services/evaluationService/hooks/useGetEvaluations';
+import { useFetchData } from '../../services/hooks/useFetchData';
 import CardQuestions from '../../components/cards/CardQuestions';
 
 const SkillsGroomingPage = () => {
