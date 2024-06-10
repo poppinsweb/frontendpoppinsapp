@@ -1,7 +1,4 @@
 // import { useEffect, useState } from "react";
-// import { getAllUsers, removeUser } from "../../services/authAxiosService";
-
-// import { getAllChildren } from "../../services/testAxiosAPI";
 
 // export const AdminUsersList = () => {
 //   const [users, setUsers] = useState(null);
