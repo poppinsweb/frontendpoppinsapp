@@ -10,24 +10,24 @@
 }
 
 .logo2 {
-  margin-top: 80px;
+  margin-top: 60px;
   width: 240px;
-  height: 218px; 
+  height: 218px;
 }
 
 .user-title {
   font-size: 2.8rem;
 }
 
-.user-label {
-  margin: 1rem 0;
+form .user-label {
+  /* margin: 1rem 0; */
   color: #6a1396;
   width: 90%;
   background-color: #f0f8ff39;
 }
 
-.user-input,
-.user-select {
+form .user-input,
+form .user-select {
   width: 90%;
   height: 45px;
   margin: 0px auto;
@@ -43,51 +43,67 @@
   .code-container {
     margin-top: 50rem;
   }
+
+  .container .user-container {
+    
+  }
 }
 
 /* LARGE SCREEN */
 @media (min-width: 1200px) {
-  .logo2 {
+  .user-container {
+    /* background-image: url("../images/cloud-stars.jpg"); */
+    background-size: contain;
+    /* background-repeat: no-repeat; */
+    /* font-size: 1.5rem; */
+    /* color: #4a0a6a; */
+    min-height: 100vh;
+    /* width: 1000vh; */
+    background-color: #6971a1;
+  }
+
+  /* .logo2 {
     position: relative;
     top: 700px;
     left: 450px;
     width: 450px;
     height: 450px; 
+  } */
+
+  select {
+    text-align: center;
   }
 
-  .css-13cymwt-control {
+  /* .css-13cymwt-control {
     width: 750px;
-  }
+  } */
 }
 
 /* LARGER SCREEN */
 @media (min-width: 1500px) {
-
-  .css-13cymwt-control {
+  /* .css-13cymwt-control {
     width: 500px;
-  }
- 
+  } */
+
   .main-row {
     padding-top: 100px;
   }
-  
-  .user-label {
-    margin: 1.5rem 0;
-  }
-  
-  .user-input,
-  .user-select,
-  .user-label {
+
+  form .user-input,
+  form .user-select,
+  form .user-label {
     width: 500px;
     height: 45px;
+    margin: 5px auto;
   }
-  
+
   .logo2 {
-    width: 550px;
-    height: 550px;
-    top: 800px; 
+    width: 400px;
+    height: 400px;
+    top: 800px;
+    margin-left: 500px;
   }
-  
+
   .code-container {
     margin-right: 20rem;
   }

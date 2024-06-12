@@ -2,7 +2,6 @@
 import { useFetchData } from "../../services/hooks/useFetchData";
 
 const UserList = () => {
-
   const { data, loading, error } = useFetchData(
     "http://localhost:3000/api/users"
   );
