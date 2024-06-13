@@ -7,12 +7,12 @@ const IndependencePage = () => {
 
   if(loading) return <p>Loading...</p>
   if(error) return <p>Error loading data: {error.message}</p>
-
   return (
     <div>
-      {/* <h1>Independencia</h1> */}
       {questionsData && questionsData.length > 0 ? (
-        <CardQuestions questionsData={questionsData} />
+        <>
+          <CardQuestions questionsData={questionsData} />
+        </>
       ) : (
         <p>Loading...</p>
       )}

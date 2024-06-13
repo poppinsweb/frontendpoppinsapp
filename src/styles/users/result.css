@@ -1,5 +1,5 @@
 .results-container {
-  /* background-image: url("../images/card-fondo.jpg"); */
+  background-image: url("../images/card-fondo.jpg");
   background-repeat: no-repeat;
   background-size: contain;
   margin: 0 auto;
@@ -20,7 +20,7 @@
 
 .header-container p {
   font-size: 20px;
-  margin-bottom: 30px;
+  margin: 30px;
 }
 
 .main-title {

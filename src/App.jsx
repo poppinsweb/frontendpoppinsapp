@@ -20,6 +20,7 @@ import ResponsabilitiesPage from "./pages/cards/ResponsabilitiesPage";
 import AditionalsPage from "./pages/cards/AditionalsPage";
 import UserList from "./pages/admin/UserList";
 import PageChildData from "./pages/userPages/PageChildData";
+import { EvaluationResultPage } from "./pages/cards/EvaluationResultPage";
 
 function App() {
   // const { user } = useAuth();
@@ -52,6 +53,7 @@ function App() {
             <Route path="/habitos-dormir" element={<HabitsSleepingPage />} />
             <Route path="/responsabilidades" element={<ResponsabilitiesPage />} />
             <Route path="/adicionales" element={<AditionalsPage />} />
+            <Route path="/resultados" element={<EvaluationResultPage />} />
 
           </>
         {/* )} */}

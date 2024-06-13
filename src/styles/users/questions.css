@@ -172,6 +172,10 @@
   }
 }
 
+.num-question {
+  text-align: right;
+}
+
 /* LARGER SCREEN */
 @media (min-width: 1900px) {
   .question-main-container {

@@ -20,6 +20,8 @@ const CardQuestions = ({ questionsData }) => {
     ]);
   };
 
+  console.log(userResponses);
+
   const handleBeforeQuestion = () => {
     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
   };
@@ -54,7 +56,6 @@ const CardQuestions = ({ questionsData }) => {
   }
 
   const currentQuestionData = questionsData[0].questions[currentQuestion];
-
   return (
     <div className="question-main-container">
       <Card
@@ -69,9 +70,9 @@ const CardQuestions = ({ questionsData }) => {
         <button
           onClick={handleBeforeQuestion}
           className="btn-color"
-          disabled={currentQuestion === 0 || resultsSent}
+          hidden={currentQuestion <= 0 || resultsSent}
         >
-          {resultsSent || currentQuestion === 0 ? "Inactivo" : "Anterior"}
+          {resultsSent || currentQuestion === 0 ? "inactivo" : "Anterior"}
         </button>
         <button
           onClick={handleNextQuestion}
