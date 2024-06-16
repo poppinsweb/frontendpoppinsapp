@@ -1,7 +1,13 @@
 import React from "react";
+import { useFetchData } from "../../services/hooks/useFetchData";
 import "../../styles/users/result.css";
 
 export const EvaluationResultPage = () => {
+  const { data:childrenData, loading: childrenLoading, error: childrenError } = useFetchData("http://localhost:3000/api/childrenres");
+  
+  if (childrenLoading) return <p>Loading...</p>;
+  if (childrenError) return <p>Error loading children data: {childrenError.message}</p>;
+
   let independenceScore = null;
   let skillGromingScore = null;
   let skillDressingScore = null;
@@ -10,12 +16,14 @@ export const EvaluationResultPage = () => {
   let habitSleepingScore = null;
   let responsabilityScore = null;
 
+  // ES NECESARIO ASOCIAR A UN TOKEN Y O A UN ID *********
+
   return (
     <>
       <h1 className="main-title">Poppins Resultados</h1>
       <div className="header-container">
         <p>
-          <strong>Nombre: apellidos:</strong>
+          <strong>Nombre:{childrenData.firstName} apellidos:{childrenData.lastName}</strong>
         </p>
         <p>
           <strong>Edad: </strong>
