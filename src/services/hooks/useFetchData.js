@@ -24,4 +24,4 @@ const useFetchData = (endpoint) => {
   return { data, loading, error };
 };
 
-export { useFetchData };
+export {useFetchData};

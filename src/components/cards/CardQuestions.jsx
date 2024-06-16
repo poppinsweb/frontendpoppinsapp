@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSubmitForm } from "../../services/hooks/useSubmitForm"; // Asegúrate de importar el hook correctamente
 import Card from './Card';
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
+  const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/responses");
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -15,12 +17,10 @@ const CardQuestions = ({ questionsData }) => {
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => [
       ...prevResponses.slice(0, currentQuestion),
-      choice,
+      { optionId: choice.id, answer: choice.label }, // Asumiendo que "answer" será el "label" de la opción
       ...prevResponses.slice(currentQuestion + 1),
     ]);
   };
-
-  console.log(userResponses);
 
   const handleBeforeQuestion = () => {
     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
@@ -37,16 +37,24 @@ const CardQuestions = ({ questionsData }) => {
         alert("Responde todas las preguntas antes de enviar los resultados");
       } else {
         const dataToSend = {
-          questions: userResponses.map((response, index) => ({
-            questionId: questionsData[0].questions[index]._id,
-            response,
+          evaluationId: "60d21b5667d0d8992e610c86", // Reemplazar con el ID correcto de la evaluación
+          userId: "60d21b4667d0d8992e610c85", // Reemplazar con el ID correcto del usuario
+          responses: userResponses.map((response, index) => ({
+            questionId: questionsData[0].questions[index].id,
+            optionId: response.optionId,
+            answer: response.answer,
           })),
         };
 
-        setResultsSent(true);
         console.log(dataToSend);
+        const responseData = await submitForm(dataToSend);
 
-        // Implementar lógica de envío aquí
+        if (responseData) {
+          console.log("Respuestas enviadas correctamente:", responseData);
+          setResultsSent(true);
+        } else {
+          console.error("Error submitting user responses:", submitError);
+        }
       }
     }
   };
@@ -63,7 +71,7 @@ const CardQuestions = ({ questionsData }) => {
         description={currentQuestionData.description}
         options={currentQuestionData.options}
         handleAnswer={handleAnswer}
-        userResponse={userResponses[currentQuestion]}
+        userResponse={userResponses[currentQuestion]?.optionId || null} // pasar el id de la opción seleccionada
         currentQuestion={currentQuestion}
       />
       <div className="btn-container">
@@ -76,11 +84,12 @@ const CardQuestions = ({ questionsData }) => {
         </button>
         <button
           onClick={handleNextQuestion}
-          disabled={resultsSent}
+          disabled={resultsSent || submitting}
           className="btn-color"
         >
-          {resultsSent ? "Siguiente Sección" : "Siguiente"}
+          {submitting ? "Enviando..." : resultsSent ? "Siguiente Sección" : "Siguiente"}
         </button>
+        {submitError && <p>Error submitting data: {submitError}</p>}
       </div>
     </div>
   );
