@@ -1,65 +1,65 @@
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/AuthProvider";
-import "../../styles/admin/create-user.css";
+// import { useState, useEffect } from "react";
+// import { useForm } from "react-hook-form";
+// import { useAuth } from "../../context/AuthProvider";
+// import "../../styles/admin/create-user.css";
 
-const rol = {
-  usuario: "usuario",
-  admin: "admin",
-};
+// const rol = {
+//   usuario: "usuario",
+//   admin: "admin",
+// };
 
-export const AdminCreateUser = () => {
-  const { register, handleSubmit } = useForm();
-  const { userRegister } = useAuth();
+// export const AdminCreateUser = () => {
+//   const { register, handleSubmit } = useForm();
+//   const { userRegister } = useAuth();
 
-  const onSubmit = async (values) => {
-    try {
-      const registrado = await userRegister(values);
-      console.log("Registro exitoso", registrado); // Condicional para validar registro
-    } catch (error) {
-      console.error("Error en la solicitud de registro:", error);
-    }
-  };
+//   const onSubmit = async (values) => {
+//     try {
+//       const registrado = await userRegister(values);
+//       console.log("Registro exitoso", registrado); // Condicional para validar registro
+//     } catch (error) {
+//       console.error("Error en la solicitud de registro:", error);
+//     }
+//   };
 
-  const handleClick = () => {
-    console.log("Registro Exitoso");
-  }
-  return (
-    <>
-      <h2 className="title-register">Registro de Usuarios</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="login-container">
-          <input
-            className="form-control my-3"
-            placeholder="E-mail"
-            type="email"
-            name="email"
-            {...register("email", { required: true })}
-          />
-          <input
-            className="form-control my-3 "
-            placeholder="Password"
-            type="password"
-            {...register("password", { required: true })}
-          />
-          <label>Rol</label>
-          <select {...register("rol")} className="form-select my-3">
-            <option value={rol.usuario}>Usuario</option>
-            <option value={rol.admin}>Admin</option>
-          </select>
-        </div>
-        <button
-          className="btn btn-color"
-          id="btn-register"
-          type="submit"
-          onClick={ handleClick }
-        >
-          Registrar
-        </button>
-      </form>
-    </>
-  );
-};
+//   const handleClick = () => {
+//     console.log("Registro Exitoso");
+//   }
+//   return (
+//     <>
+//       <h2 className="title-register">Registro de Usuarios</h2>
+//       <form onSubmit={handleSubmit(onSubmit)}>
+//         <div className="login-container">
+//           <input
+//             className="form-control my-3"
+//             placeholder="E-mail"
+//             type="email"
+//             name="email"
+//             {...register("email", { required: true })}
+//           />
+//           <input
+//             className="form-control my-3 "
+//             placeholder="Password"
+//             type="password"
+//             {...register("password", { required: true })}
+//           />
+//           <label>Rol</label>
+//           <select {...register("rol")} className="form-select my-3">
+//             <option value={rol.usuario}>Usuario</option>
+//             <option value={rol.admin}>Admin</option>
+//           </select>
+//         </div>
+//         <button
+//           className="btn btn-color"
+//           id="btn-register"
+//           type="submit"
+//           onClick={ handleClick }
+//         >
+//           Registrar
+//         </button>
+//       </form>
+//     </>
+//   );
+// };
 
 // if (!email || !password || !password2) {
 //   Swal.fire({

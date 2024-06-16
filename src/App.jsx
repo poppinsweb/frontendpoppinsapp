@@ -21,6 +21,7 @@ import AditionalsPage from "./pages/cards/AditionalsPage";
 import UserList from "./pages/admin/UserList";
 import PageChildData from "./pages/userPages/PageChildData";
 import { EvaluationResultPage } from "./pages/cards/EvaluationResultPage";
+import { AdminCreateUser } from "./pages/admin/CreateUser";
 
 function App() {
   // const { user } = useAuth();
@@ -35,6 +36,7 @@ function App() {
             {/* <Route path="/*" element={<AdminRoutes />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/lista" element={<UserList />} />
+            <Route path="/crear" element={<AdminCreateUser />} />
 
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
