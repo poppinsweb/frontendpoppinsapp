@@ -20,6 +20,10 @@
   border-radius: 10px;
 }
 
+label {
+  font-size: 1.8rem;
+}
+
 /* MEDIUM SCREEN */
 @media (min-width: 768px) {
   .page-container {
@@ -33,10 +37,6 @@
     width: 60%;
     /* width: 500px;
     height: 400px; */
-  }
-
-  .btn-google {
-    margin: 20px 0;
   }
 }
 

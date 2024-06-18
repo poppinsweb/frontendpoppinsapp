@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/ui/Navbar";
 import { LandingPage } from "./pages/home/LandingPage";
 import { ConstructionPage } from "./pages/home/landingPages/ConstructionPage";
-import { UserAuthPage } from "./pages/auth/UserAuthPage";
+import LoginPage from "./pages/auth/LoginPage";
 // import { AdminRoutes } from "./routes/AdminRoutes";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
@@ -45,7 +45,8 @@ function App() {
           {/* <> */}
             <Route path="/" index element={<LandingPage />} />
             <Route path="/construction" element={<ConstructionPage />} />
-            <Route path="/" element={<UserAuthPage />} />
+            <Route path="/login" element={<LoginPage />} />
+
             <Route path="/personales" element={<PageChildData />} />
             <Route path="/independencia" element={<IndependencePage />} />
             <Route path="/habilidades-aseo" element={<SkillsGroomingPage />} />

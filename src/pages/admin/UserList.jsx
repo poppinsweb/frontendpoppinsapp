@@ -29,7 +29,7 @@ const UserList = () => {
             {usersData.map((user, index) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
-                <td>{user.token}</td>
+                <td>{user.evaluationtoken}</td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
                 <td>{user.admin.toString()}</td>

@@ -1,26 +1,26 @@
 import { NavLink, useNavigate } from "react-router-dom";
-
-// import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../context/AuthProvider";
 import '../../styles/App.css';
+import { useEffect } from "react";
 
 export function Navbar() {
   const navigate = useNavigate();
 
-  // const { user, logout } = useAuth()
+  const { user, login, logout } = useAuth()
 
-  // const handleLogout = () => {
-  //   logout()
-  //   navigate("/");
-  // }
-  // const handleLogIn = () => {
-  //   navigate("/login");
-  // }
+  const handleLogout = () => {
+    logout()
+    navigate("/");
+  }
+  const handleLogIn = () => {
+    navigate("/login");
+  }
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>
-        {/* <h1 className='navbar-brand'>
+        <h1 className='navbar-brand'>
           Poppins
-        </h1> */}
+        </h1>
         <button
           className='navbar-toggler'
           type='button'
@@ -83,7 +83,7 @@ export function Navbar() {
             </li>
           </ul>
         </div>
-        {/* <div
+        <div
           className='collapse navbar-collapse justify-content-end'
           id='navbarNavLogout'>
           <span className='nav-item nav-link text-primary mx-3'>
@@ -100,7 +100,7 @@ export function Navbar() {
               </>
             )
         }
-        </div> */}
+        </div>
       </div>
     </nav>
   );
