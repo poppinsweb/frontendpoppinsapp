@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import {useFetchData}  from "../../services/hooks/useFetchData";
 import {useSubmitForm} from "../../services/hooks/useSubmitForm";
+import { useAuth } from "../../context/AuthProvider";
 import "../../styles/users/userChild.css";
 
 const PageChildData = () => {
@@ -9,9 +10,16 @@ const PageChildData = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const { user } = useAuth();
   const { data, loading, error } = useFetchData( "http://localhost:3000/api/children");
   const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/childrenres")
 
+  // if(user){ 
+  //   console.log(user.evaluationtoken)
+  // };
+
+  const evaluationtoken = user.evaluationtoken;
+  
   useEffect(() => {
     if (data && data.length > 0) {
       setOptions(data[0].categories);
@@ -45,6 +53,7 @@ const PageChildData = () => {
     const formData = {
       firstName,
       lastName,
+      evaluationtoken,
       responses: selectedOptions,
     };
 
@@ -125,7 +134,7 @@ const PageChildData = () => {
             <button type="submit" className="btn btn-admin btn-color" disabled={submitting}>
               {submitting ? "Enviando..." : "Enviar"}
             </button>
-            {submitError && <p>Error submitting data: {submitError}</p>}
+            {submitError && <p>Error submitting data: {submitError.message}</p>}
           </form>
         </div>
       </div>

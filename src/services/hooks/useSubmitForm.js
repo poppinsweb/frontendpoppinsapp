@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 const useSubmitForm = (endpoint) => {
   const [loading, setLoading] = useState(false);
@@ -9,25 +9,41 @@ const useSubmitForm = (endpoint) => {
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await axios.post(endpoint, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    //   try {
+    //     const response = await axios.post(endpoint, data);
+    //     return response.data;
+    //   } catch (err) {
+    //     console.error("Error submitting form:", err); // Más detalles de depuración
+    //     setError(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
 
-      setLoading(false);
-      console.log('Response data', response.data);
+    try {
+      const response = await axios.post(
+        endpoint,
+        data
+        //   {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        // }
+      );
+
+      // setLoading(false);
+      console.log("Response data", response.data);
       return response.data;
     } catch (err) {
       setLoading(false);
-      console.error('Error', err);
-      setError(err.message);
-      return null;
+      console.error("Error submitting form:", err);
+      setError(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return { submitForm, loading, error };
 };
 
-export {useSubmitForm};
+export { useSubmitForm };

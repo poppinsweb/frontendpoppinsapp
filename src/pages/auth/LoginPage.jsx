@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import "../../styles/home/login.css";
 
@@ -9,29 +9,22 @@ const LoginPage = () => {
   const [message, setMessage] = useState("");
 
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const loginData = {
-      email,
-      password,
-    };
-
     try {
       const successLogin = await login(email, password);
-
-      if (successLogin) {
-        setMessage('Login successful');
+        setMessage("Login successful");
         setEmail("");
         setPassword("");
-      }
+        navigate('/personales')
     } catch (error) {
       setMessage("Failed to login");
       console.error("Error:", error);
     }
   };
-
   return (
     <div className="page-container">
       <div className="login-card">
@@ -57,7 +50,9 @@ const LoginPage = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-color btn-login">Login</button>
+          <button type="submit" className="btn btn-color btn-login">
+            Login
+          </button>
         </form>
         {message && <p>{message}</p>}
       </div>
