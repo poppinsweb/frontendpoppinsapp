@@ -1,7 +1,8 @@
 import { Footer } from "../../components/home/Footer";
 import { Home } from "../../components/home/Home";
+import { Navbar } from "../../components/ui/Navbar";
 
-export function LandingPage() {
+function LandingPage() {
   return (
     <div className="">
       <Home />
@@ -9,3 +10,5 @@ export function LandingPage() {
     </div>
   );
 }
+
+export default LandingPage;

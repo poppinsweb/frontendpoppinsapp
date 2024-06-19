@@ -2,7 +2,7 @@ import { AdminQuestionFilter } from "../../components/admin/AdminQuestionFilter"
 // import { UserChildData } from "../../components/admin/UserChildData";
 import "../../styles/admin/admin.css";
 
-export function AdminDashboard() {
+export default function AdminDashboard() {
   return (
     <>
       <div className="container main-container">

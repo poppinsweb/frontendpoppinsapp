@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../styles/admin/create-user.css";
 
-export const AdminCreateUser = () => {
+const AdminCreateUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
@@ -19,7 +19,7 @@ export const AdminCreateUser = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users",
+        "http://localhost:3000/api/register",
         userData
       );
 
@@ -79,3 +79,5 @@ export const AdminCreateUser = () => {
     </div>
   );
 };
+
+export default AdminCreateUser;

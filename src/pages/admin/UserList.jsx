@@ -20,7 +20,6 @@ const UserList = () => {
               <th>ID</th>
               <th>Token</th>
               <th>Email</th>
-              <th>Password</th>
               <th>Admin</th>
               <th>Eliminar</th>
             </tr>
@@ -31,7 +30,6 @@ const UserList = () => {
                 <td>{user._id}</td>
                 <td>{user.evaluationtoken}</td>
                 <td>{user.email}</td>
-                <td>{user.password}</td>
                 <td>{user.admin.toString()}</td>
                 <td>
                   <button
