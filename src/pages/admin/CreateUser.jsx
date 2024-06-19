@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../styles/admin/create-user.css";
 
-const AdminCreateUser = () => {
+const CreateUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
@@ -80,4 +80,4 @@ const AdminCreateUser = () => {
   );
 };
 
-export default AdminCreateUser;
+export default CreateUser;

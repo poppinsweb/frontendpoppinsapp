@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async() => {
-    await axios.post('/auth/auth/logout', {}, { withCredentials: true });
+    await axios.post('http://localhost:3000/api/auth/logout', {}, { withCredentials: true });
     setUser(null); // Limpiar el usuario al hacer logout
     localStorage.removeItem('sessionActive');
   };

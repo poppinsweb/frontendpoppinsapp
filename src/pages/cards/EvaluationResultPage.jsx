@@ -2,7 +2,7 @@ import React from "react";
 import { useFetchData } from "../../services/hooks/useFetchData";
 import "../../styles/users/result.css";
 
-export const EvaluationResultPage = () => {
+const EvaluationResultPage = () => {
   const { data:childrenData, loading: childrenLoading, error: childrenError } = useFetchData("http://localhost:3000/api/childrenres");
   
   if (childrenLoading) return <p>Loading...</p>;
@@ -218,3 +218,5 @@ export const EvaluationResultPage = () => {
     </>
   );
 };
+
+export default EvaluationResultPage;

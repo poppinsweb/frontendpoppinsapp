@@ -20,4 +20,3 @@ const SkillsFeedingPage = () => {
 }
 
 export default SkillsFeedingPage;
-
