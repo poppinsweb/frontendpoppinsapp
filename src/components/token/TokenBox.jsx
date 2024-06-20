@@ -4,23 +4,18 @@ import { useAuth } from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 export const TokenBox = () => {
-  // const [radio, setRadio] = useState(null);
   const { user } = useAuth();
 
   const navigate = useNavigate();
 
+  // TODO: CONDICIONAR ESTA NAVEGACION SI YA HAY UN USUARIO CHILD ASOCIADO AL TOKEN
   const handleNavigate = () => {
     navigate("/personales");
   };
 
-  // console.log(user);
+  console.log(user);
 
-  // useEffect(() => {
-  //   setRadio(user.usuario_token);
-  // }, []);
-  // console.log(user);
-
-  // CREAR EL MECANISMO DE ASOCIAR A ENCUESTA X2
+  // TODO: CREAR EL MECANISMO DE ASOCIAR A ENCUESTA X2
   return (
     <>
       {user.rol === "admin" ? (
@@ -35,7 +30,7 @@ export const TokenBox = () => {
           <h2 className="code-title">Token</h2>
           <div className="radio-token-container">
             <label key={user.id} className="token-lable">
-              {user.usuario_token}
+              {user.evaluationtoken}
             </label>
             <button className="btn btn-color" onClick={handleNavigate}>
               Datos del Niño

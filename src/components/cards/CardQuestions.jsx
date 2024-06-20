@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSubmitForm } from "../../services/hooks/useSubmitForm"; // Asegúrate de importar el hook correctamente
+import { useSubmitForm } from "../../services/hooks/useSubmitForm";
+import { useAuth } from '../../context/AuthProvider';
 import Card from './Card';
 
 const CardQuestions = ({ questionsData }) => {
@@ -7,6 +8,10 @@ const CardQuestions = ({ questionsData }) => {
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
   const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/responses");
+  const { user } = useAuth();
+
+  // console.log(user);
+  // console.log(questionsData[0]._id);
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -17,7 +22,7 @@ const CardQuestions = ({ questionsData }) => {
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => [
       ...prevResponses.slice(0, currentQuestion),
-      { optionId: choice.id, answer: choice.label }, // Asumiendo que "answer" será el "label" de la opción
+      { optionId: choice.id, answer: choice.label },
       ...prevResponses.slice(currentQuestion + 1),
     ]);
   };
@@ -37,8 +42,8 @@ const CardQuestions = ({ questionsData }) => {
         alert("Responde todas las preguntas antes de enviar los resultados");
       } else {
         const dataToSend = {
-          evaluationId: "60d21b5667d0d8992e610c86", // Reemplazar con el ID correcto de la evaluación
-          userId: "60d21b4667d0d8992e610c85", // Reemplazar con el ID correcto del usuario
+          evaluationId: questionsData[0]._id, // Reemplazar con el ID correcto de la evaluación
+          userId: user.id, // Reemplazar con el ID correcto del usuario
           responses: userResponses.map((response, index) => ({
             questionId: questionsData[0].questions[index].id,
             optionId: response.optionId,
@@ -47,7 +52,7 @@ const CardQuestions = ({ questionsData }) => {
         };
 
         console.log(dataToSend);
-        const responseData = await submitForm(dataToSend);
+        const responseData = await submitForm(dataToSend, user.evaluationtoken);
 
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);

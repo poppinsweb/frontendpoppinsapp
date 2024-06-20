@@ -16,10 +16,11 @@ import HabitsFeedingPage from "./pages/cards/HabitsFeedingPage";
 import PageChildData from "./pages/userPages/PageChildData";
 import AditionalsPage from "./pages/cards/AditionalsPage";
 import EvaluationResultPage from "./pages/cards/EvaluationResultPage";
+import { UserToken } from "./pages/userPages/UserToken";
 
 export default function App() {
   const { user } = useAuth();
-  user ? console.log(user.admin) : console.log("no user");
+  // user ? console.log(user.admin) : console.log("no user");
   return (
     <>
       <Navbar />
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/responsabilidades" element={<ResponsabilitiesPage />} />
           <Route path="/adicionales" element={<AditionalsPage />} />
           <Route path="/resultados" element={<EvaluationResultPage />} />
+          <Route path="/token" element={<UserToken />} />
           {/* <Route path="/*" element={<Navigate to="/" />} /> */}
         </Routes>
       ) : (
@@ -55,6 +57,7 @@ export default function App() {
           <Route path="/responsabilidades" element={<ResponsabilitiesPage />} />
           <Route path="/adicionales" element={<AditionalsPage />} />
           <Route path="/resultados" element={<EvaluationResultPage />} />
+          <Route path="/token" element={<UserToken />} />
           {/* <Route path="/*" element={<Navigate to="/personales" />} /> */}
         </Routes>
       ) : (
