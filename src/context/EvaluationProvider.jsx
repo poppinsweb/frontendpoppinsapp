@@ -18,55 +18,105 @@ export const useEvaluation = () => {
 export const EvaluationProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [independenceData, setIndependenceData] = useState(null);
-  // const [skillGroomingData, setSkillGroomingData] = useState(null);
+  const [skillsGroomingData, setSkillsGroomingData] = useState(null);
+  const [skillsDressingData, setSkillsDressingData] = useState(null);
+  const [skillsFeedingData, setSkillsFeedingData] = useState(null);
+  const [habitsFeedingData, setHabitsFeedingData] = useState(null);
+  const [habitsSleepingData, setHabitsSleepingData] = useState(null);
+  const [responsabilitiesData, setResponsibilitiesData] = useState(null);
+  const [aditionalData, setAditionalData] = useState(null);
+
   const [error, setError] = useState(null);
   const { user } = useAuth();
 
- useEffect(() => {
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const responses = await axios.get("http://localhost:3000/api/responses");
-
-      const filteredData = responses.data.filter(res => res.evaluationtoken === user.evaluationtoken)
-
-      const independenceResponses = filteredData.flatMap(res => {
-        res.responses.filter(response => [1, 2, 3, 4].includes(response.questionId))
-      });
-
-      setIndependenceData(independenceResponses);
-
-
-      console.log(responses);
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await axios.get("http://localhost:3000/api/evalresponses", {
+  //       params: { evaluationtoken: user.evaluationtoken }
+  //     });
+  //     console.log(response);
+  //     const data = response.data;
+  
+  //     setIndependenceData(data.independenceResponses);
+  //     setSkillsGroomingData(data.skillGroomingAverage);
+  //     setSkillsDressingData(data.skillsDressingAverage);
+  //     setSkillsFeedingData(data.skillsFeedingAverage);
+  //     setHabitsFeedingData(data.habitsFeedingAverage);
+  //     setHabitsSleepingData(data.habitsSleepingAverage);
+  //     setResponsibilitiesData(data.responsibilitiesAverage);
+  //     setAditionalData(data.aditionalAverage);
       
-      const independence = responses.data;
-      const skillGrooming = responses.data[1];
-      console.log(skillGrooming);
+     
+  
+  //   } catch (error) {
+  //     setError(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchData();
+  //   }
+  // }, [user]);
+  
 
-      const dataResponse = independence.find(res => res.evaluationtoken === user.evaluationtoken);
-      setIndependenceData(dataResponse)
-      
-    } catch (error) {
-      setError(err);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const responses = await axios.get(
+          "http://localhost:3000/api/evalresponses"
+        );
+
+        // Filtrar datos según el evaluationtoken
+        const filteredData = responses.data.filter(
+          (res) => res.evaluationtoken === user.evaluationtoken
+        );
+        // console.log("filteredData", filteredData);
+
+        if (filteredData.length > 0) {
+          // Asignar las respuestas correspondientes
+          const independenceResponses = filteredData[0];
+          const skillGroomingResponses = filteredData[1];
+
+          setIndependenceData(independenceResponses ? independenceResponses : null);
+          setSkillsGroomingData(skillGroomingResponses ? skillGroomingResponses : null);
+        } else {
+          setIndependenceData(null);
+          setSkillsGroomingData(null);
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      fetchData();
     }
-  };
-
-  if(user){
-    fetchData();
-  }
- }, [user]);
-// console.log(independenceData);
+  }, [user]);
+  // console.log(independenceData);
+  // console.log(skillGroomingData);
   return (
     <EvaluationContext.Provider
       value={{
         loading,
         independenceData,
-        error
+        skillsGroomingData,
+        skillsDressingData,
+        skillsFeedingData,
+        habitsFeedingData,
+        habitsSleepingData,
+        responsabilitiesData,
+        aditionalData,
+        error,
       }}
     >
-      { children }
+      {children}
     </EvaluationContext.Provider>
   );
 };
