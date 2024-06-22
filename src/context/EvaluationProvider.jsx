@@ -37,7 +37,7 @@ export const EvaluationProvider = ({ children }) => {
   //     });
   //     console.log(response);
   //     const data = response.data;
-  
+
   //     setIndependenceData(data.independenceResponses);
   //     setSkillsGroomingData(data.skillGroomingAverage);
   //     setSkillsDressingData(data.skillsDressingAverage);
@@ -46,22 +46,6 @@ export const EvaluationProvider = ({ children }) => {
   //     setHabitsSleepingData(data.habitsSleepingAverage);
   //     setResponsibilitiesData(data.responsibilitiesAverage);
   //     setAditionalData(data.aditionalAverage);
-      
-     
-  
-  //   } catch (error) {
-  //     setError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   if (user) {
-  //     fetchData();
-  //   }
-  // }, [user]);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,14 +63,15 @@ export const EvaluationProvider = ({ children }) => {
 
         if (filteredData.length > 0) {
           // Asignar las respuestas correspondientes
-          const independenceResponses = filteredData[0];
-          const skillGroomingResponses = filteredData[1];
+          const independenceResponses = responses.data[0];
+          const skillGroomingResponses = responses.data[1];
 
-          setIndependenceData(independenceResponses ? independenceResponses : null);
-          setSkillsGroomingData(skillGroomingResponses ? skillGroomingResponses : null);
-        } else {
-          setIndependenceData(null);
-          setSkillsGroomingData(null);
+          setIndependenceData(
+            independenceResponses ? independenceResponses : null
+          );
+          setSkillsGroomingData(
+            skillGroomingResponses ? skillGroomingResponses : null
+          );
         }
       } catch (error) {
         setError(error);
@@ -99,20 +84,22 @@ export const EvaluationProvider = ({ children }) => {
       fetchData();
     }
   }, [user]);
+
   // console.log(independenceData);
-  // console.log(skillGroomingData);
+  // console.log(skillsGroomingData);
+
   return (
     <EvaluationContext.Provider
       value={{
         loading,
         independenceData,
         skillsGroomingData,
-        skillsDressingData,
-        skillsFeedingData,
-        habitsFeedingData,
-        habitsSleepingData,
-        responsabilitiesData,
-        aditionalData,
+        // skillsDressingData,
+        // skillsFeedingData,
+        // habitsFeedingData,
+        // habitsSleepingData,
+        // responsabilitiesData,
+        // aditionalData,
         error,
       }}
     >

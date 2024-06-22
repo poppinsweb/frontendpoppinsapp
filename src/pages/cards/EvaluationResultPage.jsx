@@ -6,19 +6,20 @@ import { useAuth } from "../../context/AuthProvider";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
+  const { user } = useAuth();
   const {
     data: childrenData,
     loading: childrenLoading,
     error: childrenError,
-  } = useFetchData("http://localhost:3000/api/childrenres");
+  } = useFetchData("http://localhost:3000/api/childrenres"); // necesita filter y no find por evaluationtoken?
+
   const {
     independenceData,
-    skillGroomingData,
+    skillsGroomingData,
     loading: evaluationLoading,
     error: evaluationError,
   } = useEvaluation();
-  const { user } = useAuth();
-
+  
   if (childrenLoading || evaluationLoading) return <p>Loading...</p>;
   if (childrenError)
     return <p>Error loading children data: {childrenError.message}</p>;
@@ -32,7 +33,7 @@ const EvaluationResultPage = () => {
     return <p>No matching child data found</p>;
   }
 
-  // console.log(skillGroomingData);
+  console.log(skillsGroomingData.responses);
 
   // Asumiendo que independenceData y skillGroomingData son arrays
   const showerIndependence = independenceData && independenceData.responses ? independenceData.responses.find(res => res.questionId === 1) : null;
@@ -40,7 +41,7 @@ const EvaluationResultPage = () => {
   const feedingIndependence = independenceData && independenceData.responses ? independenceData.responses.find(res => res.questionId === 3) : null;
   const sleepingIndependence = independenceData && independenceData.responses ? independenceData.responses.find(res => res.questionId === 4) : null;
 
-  const skillGroomingScore = skillGroomingData && skillGroomingData.responses ? skillGroomingData.responses.find(res => res.category === 5) : null;
+  const skillGroomingScore = skillsGroomingData && skillsGroomingData.responses ? skillsGroomingData.responses.find(res => res.questionId === 6) : null; // Hay que promediar las respuestas del array
  
 
   const responses = childData.responses;
