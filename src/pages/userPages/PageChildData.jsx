@@ -43,6 +43,8 @@ const PageChildData = () => {
     );
   };
 
+// console.log(firstName, lastName, selectedOptions);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
@@ -53,13 +55,13 @@ const PageChildData = () => {
     const formData = {
       firstName,
       lastName,
-      evaluationtoken,
+      // evaluationtoken,
       responses: selectedOptions,
     };
 
     console.log("Form data to submit:", formData);
 
-    const data = await submitForm(formData);
+    const data = await submitForm(formData, evaluationtoken);
     if (data) {
       console.log(data);
     } else {

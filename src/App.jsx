@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      {user && user.admin == true ? (
+      {user && user.admin === true ? (
         <Routes>
           <Route path="/lista" element={<UserList />} />
           <Route path="/admin" element={<AdminDashboard />} />
@@ -45,7 +45,7 @@ export default function App() {
       ) : (
         <Routes></Routes>
       )}
-      {user && user.admin == false ? (
+      {user && user.admin === false ? (
         <Routes>
           <Route path="/personales" element={<PageChildData />} />
           <Route path="/independencia" element={<IndependencePage />} />
