@@ -3,7 +3,7 @@ import { useFetchData } from '../../services/hooks/useFetchData';
 import CardQuestions from '../../components/cards/CardQuestions';
 
 const IndependencePage = () => {
-  const { data: questionsData, loading, error } = useFetchData('http://localhost:3000/api/independence');
+  const { data: questionsData, loading, error } = useFetchData('http://localhost:3000/api/evaluation');
 
   if(loading) return <p>Loading...</p>
   if(error) return <p>Error loading data: {error.message}</p>

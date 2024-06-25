@@ -17,62 +17,39 @@ export const useEvaluation = () => {
 
 export const EvaluationProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState(null);
   const [independenceData, setIndependenceData] = useState(null);
-  const [skillsGroomingData, setSkillsGroomingData] = useState(null);
-  const [skillsDressingData, setSkillsDressingData] = useState(null);
-  const [skillsFeedingData, setSkillsFeedingData] = useState(null);
-  const [habitsFeedingData, setHabitsFeedingData] = useState(null);
-  const [habitsSleepingData, setHabitsSleepingData] = useState(null);
-  const [responsabilitiesData, setResponsibilitiesData] = useState(null);
-  const [aditionalData, setAditionalData] = useState(null);
-
-  const [error, setError] = useState(null);
+  
   const { user } = useAuth();
 
-  // const fetchData = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.get("http://localhost:3000/api/evalresponses", {
-  //       params: { evaluationtoken: user.evaluationtoken }
-  //     });
-  //     console.log(response);
-  //     const data = response.data;
-
-  //     setIndependenceData(data.independenceResponses);
-  //     setSkillsGroomingData(data.skillGroomingAverage);
-  //     setSkillsDressingData(data.skillsDressingAverage);
-  //     setSkillsFeedingData(data.skillsFeedingAverage);
-  //     setHabitsFeedingData(data.habitsFeedingAverage);
-  //     setHabitsSleepingData(data.habitsSleepingAverage);
-  //     setResponsibilitiesData(data.responsibilitiesAverage);
-  //     setAditionalData(data.aditionalAverage);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const responses = await axios.get(
-          "http://localhost:3000/api/evalresponses"
+          "http://localhost:3000/api/evaluationresponses", {params: { evaluationtoken: user.evaluationtoken }}
         );
 
+        // console.log(responses.evaluationtoken);
         // Filtrar datos según el evaluationtoken
-        const filteredData = responses.data.filter(
-          (res) => res.evaluationtoken === user.evaluationtoken
-        );
+        // const filteredData = responses.data.filter(
+        //   (res) => res.evaluationtoken === user.evaluationtoken
+        // );
         // console.log("filteredData", filteredData);
 
-        if (filteredData.length > 0) {
-          // Asignar las respuestas correspondientes
-          const independenceResponses = responses.data[0];
-          const skillGroomingResponses = responses.data[1];
+        // if (filteredData.length > 0) {
+        //   // Asignar las respuestas correspondientes
+        //   // const independenceResponses = responses.data[0];
+        //   // const skillGroomingResponses = responses.data[1];
 
-          setIndependenceData(
-            independenceResponses ? independenceResponses : null
-          );
-          setSkillsGroomingData(
-            skillGroomingResponses ? skillGroomingResponses : null
-          );
-        }
+        //   // setIndependenceData(
+        //   //   independenceResponses ? independenceResponses : null
+        //   // );
+        //   // setSkillsGroomingData(
+        //   //   skillGroomingResponses ? skillGroomingResponses : null
+        //   // );
+        // }
       } catch (error) {
         setError(error);
       } finally {
@@ -83,7 +60,7 @@ export const EvaluationProvider = ({ children }) => {
     if (user) {
       fetchData();
     }
-  }, [user]);
+  }, [user]); 
 
   // console.log(independenceData);
   // console.log(skillsGroomingData);
@@ -93,7 +70,7 @@ export const EvaluationProvider = ({ children }) => {
       value={{
         loading,
         independenceData,
-        skillsGroomingData,
+        // skillsGroomingData,
         // skillsDressingData,
         // skillsFeedingData,
         // habitsFeedingData,
