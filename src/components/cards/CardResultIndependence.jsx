@@ -15,8 +15,6 @@ export const CardResultIndependence = () => {
   if (!independenceD) {
     return <p>No independence data found</p>;
   }
-  // console.log(user.evaluationtoken);
-  // console.log(independenceData[0].responses);
 
   const showerIndependence = independenceData[0].responses[0];
   const dressingIndependence = independenceData[0].responses[1];
@@ -29,7 +27,7 @@ export const CardResultIndependence = () => {
       <table className="table table-hover results-container">
         <thead className="result-titles">
           <tr>
-            <th>CATEGORIA</th>
+            <th className="th-width">INDEPENDENCIA</th>
             <th className="table-primary">INDEPENDIENTE</th>
             <th className="table-success">SEMI-INDEPENDIENTE</th>
             <th className="table-warning">SEMI-DEPENDIENTE</th>
@@ -38,7 +36,7 @@ export const CardResultIndependence = () => {
         </thead>
         <tbody className="result-titles">
           <tr>
-            <td>Independencia para bañarse</td>
+            <td>Para bañarse</td>
             {showerIndependence && showerIndependence.optionId == 4 ? (
               <td className="table-primary">
                 <IoCheckmarkDoneSharp />
@@ -69,7 +67,7 @@ export const CardResultIndependence = () => {
             )}
           </tr>
           <tr>
-            <td>Independencia para vestirse</td>
+            <td>Para vestirse</td>
             {dressingIndependence && dressingIndependence.optionId == 4 ? (
               <td className="table-primary">{dressingIndependence.optionId}</td>
             ) : (
@@ -99,7 +97,7 @@ export const CardResultIndependence = () => {
             )}
           </tr>
           <tr>
-            <td>Independencia para alimentarse</td>
+            <td>Para alimentarse</td>
             {feedingIndependence && feedingIndependence.optionId == 4 ? (
               <td className="table-primary">{feedingIndependence.optionId}</td>
             ) : (
@@ -130,7 +128,7 @@ export const CardResultIndependence = () => {
             )}
           </tr>
           <tr>
-            <td>Independencia para dormir</td>
+            <td>Para dormir</td>
             {sleepingIndependence && sleepingIndependence.optionId == 4 ? (
               <td className="table-primary">
                 <IoCheckmarkDoneSharp />
