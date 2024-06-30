@@ -9,7 +9,6 @@ const SkillsGroomingPage = () => {
 
   return (
     <div>
-      {/* <h1>Habilidades del Aseo Personal</h1> */}
       {questionsData && questionsData.length > 0 ? (
         <CardQuestions questionsData={questionsData} />
       ) : (

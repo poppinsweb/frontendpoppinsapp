@@ -9,7 +9,6 @@ const SkillsFeedingPage = () => {
 
   return (
     <div>
-      {/* <h1>Habilidades de la Alimentación</h1> */}
       {questionsData && questionsData.length > 0 ? (
         <CardQuestions questionsData={questionsData} />
       ) : (

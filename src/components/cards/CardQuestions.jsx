@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSubmitForm } from "../../services/hooks/useSubmitForm";
-import { useAuth } from '../../context/AuthProvider';
-import Card from './Card';
+import React, { useState, useEffect } from "react";
+import { useChild } from "../../context/ChildProvider";
+import Card from "./Card";
+import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/responses");
-  const { user } = useAuth();
-
-  // console.log(user);
-  // console.log(questionsData[0]._id);
+  const { data: childData, loading: childLoading, error: childError } = useChild();
+  const { submitEvaluation, loading: submitting, error: submitError } = useSubmitEvaluation("http://localhost:3000/api/completevaluations");
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -26,6 +23,8 @@ const CardQuestions = ({ questionsData }) => {
       ...prevResponses.slice(currentQuestion + 1),
     ]);
   };
+  // console.log(questionsData[0].questions);
+  console.log(userResponses);
 
   const handleBeforeQuestion = () => {
     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
@@ -43,7 +42,7 @@ const CardQuestions = ({ questionsData }) => {
       } else {
         const dataToSend = {
           evaluationId: questionsData[0]._id, // Reemplazar con el ID correcto de la evaluación
-          userId: user.id, // Reemplazar con el ID correcto del usuario
+          evaluationtoken: childData.evaluationtoken, // Utilizar el ID del niño obtenido desde el contexto
           responses: userResponses.map((response, index) => ({
             questionId: questionsData[0].questions[index].id,
             optionId: response.optionId,
@@ -51,8 +50,7 @@ const CardQuestions = ({ questionsData }) => {
           })),
         };
 
-        console.log(dataToSend);
-        const responseData = await submitForm(dataToSend, user.evaluationtoken);
+        const responseData = await submitEvaluation(dataToSend);
 
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
@@ -64,8 +62,11 @@ const CardQuestions = ({ questionsData }) => {
     }
   };
 
+  if (childLoading) return <p>Loading child data...</p>;
+  if (childError) return <p>Error loading child data: {childError.message}</p>;
+
   if (!questionsData || questionsData.length === 0) {
-    return <p>Loading...</p>;
+    return <p>Loading questions...</p>;
   }
 
   const currentQuestionData = questionsData[0].questions[currentQuestion];
@@ -79,6 +80,9 @@ const CardQuestions = ({ questionsData }) => {
         userResponse={userResponses[currentQuestion]?.optionId || null} // pasar el id de la opción seleccionada
         currentQuestion={currentQuestion}
       />
+      <div className="question-counter">
+        Pregunta {currentQuestion + 1} de {questionsData[0].questions.length}
+      </div>
       <div className="btn-container">
         <button
           onClick={handleBeforeQuestion}
@@ -92,9 +96,13 @@ const CardQuestions = ({ questionsData }) => {
           disabled={resultsSent || submitting}
           className="btn-color"
         >
-          {submitting ? "Enviando..." : resultsSent ? "Siguiente Sección" : "Siguiente"}
+          {submitting
+            ? "Enviando..."
+            : resultsSent
+            ? "Siguiente Sección"
+            : "Siguiente"}
         </button>
-        {submitError && <p>Error submitting data: {submitError}</p>}
+        {submitError && <p>Error submitting data: {submitError.message}</p>}
       </div>
     </div>
   );

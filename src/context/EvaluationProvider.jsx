@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "./AuthProvider";
+// import { useAuth } from "./AuthProvider";
+import { useChild } from "./ChildProvider";
 
 export const EvaluationContext = createContext();
 
@@ -18,38 +19,27 @@ export const useEvaluation = () => {
 export const EvaluationProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
    const [error, setError] = useState(null);
-  const [independenceData, setIndependenceData] = useState(null);
-  
-  const { user } = useAuth();
-
+   const [linkedResponses, setLinkedResponses] = useState([]);
+  // const [independenceData, setIndependenceData] = useState(null);
+  const { data: dataChild } = useChild()
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const responses = await axios.get(
-          "http://localhost:3000/api/evaluationresponses", {params: { evaluationtoken: user.evaluationtoken }}
+          "http://localhost:3000/api/evaluationresponses"
         );
 
-        // console.log(responses.evaluationtoken);
-        // Filtrar datos según el evaluationtoken
-        // const filteredData = responses.data.filter(
-        //   (res) => res.evaluationtoken === user.evaluationtoken
-        // );
-        // console.log("filteredData", filteredData);
+        console.log(responses);
 
-        // if (filteredData.length > 0) {
-        //   // Asignar las respuestas correspondientes
-        //   // const independenceResponses = responses.data[0];
-        //   // const skillGroomingResponses = responses.data[1];
-
-        //   // setIndependenceData(
-        //   //   independenceResponses ? independenceResponses : null
-        //   // );
-        //   // setSkillsGroomingData(
-        //   //   skillGroomingResponses ? skillGroomingResponses : null
-        //   // );
-        // }
+        if (dataChild) {
+          const linkedResponses = responses.data.filter(response =>
+            response.childId === dataChild._id
+          );
+          setLinkedResponses(linkedResponses);
+          console.log("Linked Responses:", linkedResponses);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -57,27 +47,17 @@ export const EvaluationProvider = ({ children }) => {
       }
     };
 
-    if (user) {
+    if (dataChild) {
       fetchData();
     }
-  }, [user]); 
-
-  // console.log(independenceData);
-  // console.log(skillsGroomingData);
+  }, [dataChild]); 
 
   return (
     <EvaluationContext.Provider
       value={{
         loading,
-        independenceData,
-        // skillsGroomingData,
-        // skillsDressingData,
-        // skillsFeedingData,
-        // habitsFeedingData,
-        // habitsSleepingData,
-        // responsabilitiesData,
-        // aditionalData,
         error,
+        linkedResponses,
       }}
     >
       {children}

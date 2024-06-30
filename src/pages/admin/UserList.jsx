@@ -1,4 +1,3 @@
-// adminUsersPage
 import { useFetchData } from "../../services/hooks/useFetchData";
 
 const UserList = () => {

@@ -1,10 +1,12 @@
 import React from 'react';
+import { FaCheck } from 'react-icons/fa';
 import "../../styles/users/questions.css";
 
 const Card = ({ title, description, options, handleAnswer, userResponse, currentQuestion }) => {
   
   return (
     <div className="question-container-questions">
+      
       <div className="num-question">
       </div>
       <h3 className="secoundary-question-title">{title}</h3> 
@@ -23,6 +25,11 @@ const Card = ({ title, description, options, handleAnswer, userResponse, current
               }
             >
               {option.label}
+              {userResponse === option.id && (
+                <div className="icon-container">
+                  <FaCheck className="check-icon" />
+                </div>
+              )}
             </li>
           </div>
         ))}

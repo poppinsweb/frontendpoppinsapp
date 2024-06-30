@@ -1,16 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useSubmitForm = (endpoint) => {
+const useSubmitEvaluation = (endpoint) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const submitForm = async (data, evaluationtoken) => {
+  const submitEvaluation = async (data, evaluationtoken) => {
     setLoading(true);
     setError(null);
     console.log(data);
     try {  
-     const response = await axios.post(endpoint, {...data, evaluationtoken});
+     const response = await axios.post(endpoint, { ...data });
      setLoading(false);
      console.log("Response data", response.data);
      return response.data;
@@ -23,7 +23,7 @@ const useSubmitForm = (endpoint) => {
     }
   };
 
-  return { submitForm, loading, error };
+  return { submitEvaluation, loading, error };
 };
 
-export { useSubmitForm };
+export { useSubmitEvaluation };

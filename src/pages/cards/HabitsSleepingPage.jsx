@@ -9,7 +9,6 @@ const HabitsSleepingPage = () => {
 
   return (
     <div>
-      {/* <h1>Habilidades del Vestido</h1> */}
       {questionsData && questionsData.length > 0 ? (
         <CardQuestions questionsData={questionsData} />
       ) : (

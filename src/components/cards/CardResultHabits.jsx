@@ -45,7 +45,7 @@ export const CardResultHabits = () => {
     const habitsSleeping = data[8].responses.map(response => response.optionId);
     const responsabilities = data[9].responses.map(response => response.optionId);
 
-    console.log(responsabilities);
+    // console.log(responsabilities);
 
   const habitNamesFeeding = [
     "Comer frutas",
