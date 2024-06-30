@@ -2,15 +2,17 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useAuth } from "../../context/AuthProvider";
 import { useChild } from "../../context/ChildProvider";
+// import { useEvaluation } from "../../context/EvaluationProvider";
 import { CardResultIndependence } from "../../components/cards/CardResultIndependence";
-import { CardResultSkills } from "../../components/cards/CardResultSkills";
-import { CardResultHabits } from "../../components/cards/CardResultHabits";
+// import { CardResultSkills } from "../../components/cards/CardResultSkills";
+// import { CardResultHabits } from "../../components/cards/CardResultHabits";
 import umbrella from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
   const { user } = useAuth();
   const { data: childrenData, loading: childrenLoading, error: childrenError } = useChild();
+  // const { linkedResponses, loading: evaluationLoading, error: evaluationError } = useEvaluation();
 
   if (childrenLoading) return <p>Loading...</p>;
   if (childrenError) return <p>Error loading children data: {childrenError.message}</p>;
@@ -25,7 +27,6 @@ const EvaluationResultPage = () => {
   const nivelEscolar = responses[3]?.value || "N/A";
   const aniosEdad = responses[4]?.value || "N/A";
   const mesesEdad = responses[5]?.value || "N/A";
-
   const { firstName, lastName } = childrenData || {};
 
   const handleDownloadPdf = async () => {
@@ -86,8 +87,8 @@ const EvaluationResultPage = () => {
           </p>
         </div>
         <CardResultIndependence />
-        <CardResultSkills />
-        <CardResultHabits />
+        {/* <CardResultSkills /> */}
+        {/* <CardResultHabits /> */}
       </div>
       <button className="btn-color" onClick={handleDownloadPdf}>
         Download PDF

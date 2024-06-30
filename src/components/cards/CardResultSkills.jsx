@@ -35,7 +35,7 @@ const renderSkillCells = (skills, skillNames) => {
 
 export const CardResultSkills = () => {
   const { user } = useAuth();
-  const { data, loading, error } = useFetchData("http://localhost:3000/api/evaluationresponses");
+  const { data, loading, error } = useFetchData("http://localhost:3000/api/completevaluations");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data: {data.message}</p>;

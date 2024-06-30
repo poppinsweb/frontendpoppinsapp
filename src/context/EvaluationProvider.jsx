@@ -18,27 +18,23 @@ export const useEvaluation = () => {
 
 export const EvaluationProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-   const [error, setError] = useState(null);
-   const [linkedResponses, setLinkedResponses] = useState([]);
-  // const [independenceData, setIndependenceData] = useState(null);
-  const { data: dataChild } = useChild()
+  const [error, setError] = useState(null);
+  const [completEvaluation, setCompletEvaluation] = useState([]);
+  const { data: dataChild } = useChild();
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const responses = await axios.get(
-          "http://localhost:3000/api/evaluationresponses"
-        );
+        const responses = await axios.get("http://localhost:3000/api/completevaluations");
 
-        console.log(responses);
+        // console.log("Fetched responses:", responses.data);
 
         if (dataChild) {
-          const linkedResponses = responses.data.filter(response =>
-            response.childId === dataChild._id
+          const filteredResponses = responses.data.filter(
+            response => response.evaluationtoken === dataChild.evaluationtoken
           );
-          setLinkedResponses(linkedResponses);
-          console.log("Linked Responses:", linkedResponses);
+          setCompletEvaluation(filteredResponses);
         }
       } catch (error) {
         setError(error);
@@ -50,14 +46,14 @@ export const EvaluationProvider = ({ children }) => {
     if (dataChild) {
       fetchData();
     }
-  }, [dataChild]); 
+  }, [dataChild]);
 
   return (
     <EvaluationContext.Provider
       value={{
         loading,
         error,
-        linkedResponses,
+        completEvaluation,
       }}
     >
       {children}
