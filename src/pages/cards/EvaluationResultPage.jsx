@@ -4,23 +4,28 @@ import { useAuth } from "../../context/AuthProvider";
 import { useChild } from "../../context/ChildProvider";
 // import { useEvaluation } from "../../context/EvaluationProvider";
 import { CardResultIndependence } from "../../components/cards/CardResultIndependence";
-// import { CardResultSkills } from "../../components/cards/CardResultSkills";
-// import { CardResultHabits } from "../../components/cards/CardResultHabits";
+import { CardResultSkills } from "../../components/cards/CardResultSkills";
+import { CardResultHabits } from "../../components/cards/CardResultHabits";
 import umbrella from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
   const { user } = useAuth();
-  const { data: childrenData, loading: childrenLoading, error: childrenError } = useChild();
-  // const { linkedResponses, loading: evaluationLoading, error: evaluationError } = useEvaluation();
+  const {
+    data: childrenData,
+    loading: childrenLoading,
+    error: childrenError,
+  } = useChild();
 
   if (childrenLoading) return <p>Loading...</p>;
-  if (childrenError) return <p>Error loading children data: {childrenError.message}</p>;
+  if (childrenError)
+    return <p>Error loading children data: {childrenError.message}</p>;
 
-  // if (childrenData) console.log("childrenData content:", childrenData);
+  // if (childrenData) console.log("childrenData content:", childrenData.createdAt);
 
   const responses = childrenData?.responses || [];
 
+  const fechaAplicacion = childrenData?.createdAt;
   const sexo = responses[0]?.value || "N/A";
   const estrato = responses[1]?.value || "N/A";
   const tipoInstitucion = responses[2]?.value || "N/A";
@@ -52,12 +57,22 @@ const EvaluationResultPage = () => {
     const imgWidth = imgProps.width;
     const imgHeight = imgProps.height;
 
-    const scaleFactor = Math.min(usableWidth / imgWidth, usableHeight / imgHeight);
+    const scaleFactor = Math.min(
+      usableWidth / imgWidth,
+      usableHeight / imgHeight
+    );
 
     const newImgWidth = imgWidth * scaleFactor;
     const newImgHeight = imgHeight * scaleFactor;
 
-    pdf.addImage(imgData, "PNG", marginLeft, marginTop, newImgWidth, newImgHeight);
+    pdf.addImage(
+      imgData,
+      "PNG",
+      marginLeft,
+      marginTop,
+      newImgWidth,
+      newImgHeight
+    );
     pdf.save("poppinsEduca_result.pdf");
   };
 
@@ -70,25 +85,42 @@ const EvaluationResultPage = () => {
         <h1 className="main-title">Evaluación de hábitos e independencia</h1>
         <h2>en la rutina diaria</h2>
         <div className="header-container">
-          <p>
-            <strong>Nombre: </strong>
-            {firstName + " " + lastName}
-          </p>
-          <p>
-            <strong>Edad: </strong>
-            {aniosEdad} años - {mesesEdad} meses
-          </p>
-          <p>
-            <strong>Sexo:</strong> {sexo}
-          </p>
-          <p>
-            <strong>Grado: </strong>
-            {nivelEscolar}
-          </p>
+          <div className="header-container">
+            <table className="table table-borderless ">
+              <tbody>
+                <tr>
+                  <th>
+                    <strong>Nombre:</strong>
+                  </th>
+                  <th>
+                    <strong>Edad:</strong>
+                  </th>
+                  <th>
+                    <strong>Sexo:</strong>
+                  </th>
+                  <th>
+                    <strong>Grado:</strong>
+                  </th>
+                  <th>
+                    <strong>Fecha:</strong>
+                  </th>
+                </tr>
+                <tr>
+                  <td>{firstName + " " + lastName}</td>
+                  <td>
+                    {aniosEdad} años - {mesesEdad} meses
+                  </td>
+                  <td>{sexo}</td>
+                  <td>{nivelEscolar}</td>
+                  <td>{fechaAplicacion?.slice(0, 10)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <CardResultIndependence />
-        {/* <CardResultSkills /> */}
-        {/* <CardResultHabits /> */}
+        <CardResultSkills />
+        <CardResultHabits />
       </div>
       <button className="btn-color" onClick={handleDownloadPdf}>
         Download PDF

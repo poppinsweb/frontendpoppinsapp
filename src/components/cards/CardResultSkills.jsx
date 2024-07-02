@@ -1,74 +1,114 @@
-import { IoCheckmarkDoneSharp, IoCheckmarkSharp, IoWarningOutline } from "react-icons/io5";
-import { useFetchData } from "../../services/hooks/useFetchData";
+import { IoCheckmarkDoneSharp, IoCheckmarkSharp } from "react-icons/io5";
+import { useEvaluation } from "../../context/EvaluationProvider";
 import { useAuth } from "../../context/AuthProvider";
-
-const SkillIcon = ({ skillLevel, icon, children }) => (
-  skillLevel && (
-    <div style={{ color: skillLevel === 1 || skillLevel === 2 ? "blue" : "inherit", whiteSpace: "nowrap" }}>
-      {icon} {children} 
-    </div>
-  )
-);
-
-const renderSkillCells = (skills, skillNames) => {
-  const showCheckmarks = !skills.some(skill => skill <= 2);
-
-  return ["primary", "success", "warning", "danger"].map((color, levelIndex) => (
-    <td key={color} className={`table-${color}`}>
-      {skills.map((skillLevel, index) => {
-        if (!showCheckmarks && (4 - levelIndex === 4 || 4 - levelIndex === 3)) {
-          return null;
-        }
-        return (
-          <SkillIcon
-            key={index}
-            skillLevel={skillLevel === 4 - levelIndex ? skillLevel : null}
-            icon={4 - levelIndex === 4 ? <IoCheckmarkDoneSharp /> : 4 - levelIndex === 3 ? <IoCheckmarkSharp /> : <IoWarningOutline />}
-          >
-            {(4 - levelIndex === 2 || 4 - levelIndex === 1) ? skillNames[index] : null}
-          </SkillIcon>
-        );
-      })}
-    </td>
-  ));
-};
 
 export const CardResultSkills = () => {
   const { user } = useAuth();
-  const { data, loading, error } = useFetchData("http://localhost:3000/api/completevaluations");
+  const {
+    completEvaluation,
+    loading: evaluationLoading,
+    error: evaluationError,
+  } = useEvaluation();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data: {data.message}</p>;
+  if (evaluationLoading) return <p>Loading...</p>;
+  if (evaluationError)
+    return <p>Error loading evaluation data: {evaluationError.message}</p>;
 
-  const skillsGrooming = data[4].responses.map(response => response.optionId);
-  const skillsDressing = data[5].responses.map(response => response.optionId);
-  const skillsFeeding = data[6].responses.map(response => response.optionId);
+  if (!completEvaluation || completEvaluation.length === 0) {
+    return <p>No evaluation data found</p>;
+  }
 
-  const skillNamesGrooming = [
-    "Secarse el cuerpo",
-    "Peinarse el cabello",
-    "Limpiarse la Nariz",
-    "Aseo íntimo al defecar",
-    "Lavarse las manos luego de usar el baño",
-    "Cepillarse los Dientes",
-    "Control de Esfínteres en el Día",
-    "Control de Esfínteres en la Noche",
-    "Descargar o Vaciar el Baño al Usarlo",
-  ]
+  const evaluation = completEvaluation[0];
+  console.log(evaluation.responses);
 
-  const skillNamesDressing = [
-    "Abotonarse",
-    "Amarrarse los cordones",
-    "Ponerse las medias",
-    "Ponerse los zapatos",
-    "Subir y bajar cremalleras"
+  if (!evaluation.responses || evaluation.responses.length === 0) {
+    return <p>No skills responses found</p>;
+  }
+
+  const skillCategories = [
+    {
+      name: "Habilidades de aseo",
+      skillNames: [
+        "Secarse el cuerpo",
+        "Peinarse el cabello",
+        "Limpiarse la Nariz",
+        "Aseo íntimo al defecar",
+        "Lavarse las manos luego de usar el baño",
+        "Cepillarse los Dientes",
+        "Control de Esfínteres en el Día",
+        "Control de Esfínteres en la Noche",
+        "Descargar o Vaciar el Baño al Usarlo",
+      ],
+      questionIds: [5, 6, 7, 8, 9, 10, 11, 12, 13],
+    },
+    {
+      name: "Habilidades de vestido",
+      skillNames: [
+        "Abotonarse",
+        "Amarrarse los cordones",
+        "Ponerse las medias",
+        "Ponerse los zapatos",
+        "Subir y bajar cremalleras",
+      ],
+      questionIds: [14, 15, 16, 17, 18],
+    },
+    {
+      name: "Habilidades de alimentación",
+      skillNames: ["Utiliza la cuchara", "Utiliza el tenedor", "Utiliza el cuchillo"],
+      questionIds: [19, 20, 21],
+    },
   ];
 
-  const skillNamesFeeding = [
-    "Utiliza la cuchara",
-    "Utiliza el tenedor",
-    "Utiliza el cuchillo"
-  ];
+  const renderCategoryRow = (category) => {
+    const responses = evaluation.responses.filter((response) =>
+      category.questionIds.includes(response.questionId)
+    );
+
+    const groupedDescriptions = {
+      1: [],
+      2: [],
+    };
+    let hasOptionId3 = false;
+    let hasOptionId4 = false;
+    let renderIcons = true;
+
+    responses.forEach((response) => {
+      if (response.optionId === 1 || response.optionId === 2) {
+        groupedDescriptions[response.optionId].push(response.description);
+        renderIcons = false; // Disable icon rendering if there's an optionId of 1 or 2
+      } else if (response.optionId === 3) {
+        hasOptionId3 = true;
+      } else if (response.optionId === 4) {
+        hasOptionId4 = true;
+      }
+    });
+
+    return (
+      <tr key={category.name}>
+        <td>{category.name}</td>
+        <td className="table-primary">
+          {renderIcons && hasOptionId4 && <IoCheckmarkDoneSharp />}
+        </td>
+        <td className="table-success">
+          {renderIcons && hasOptionId3 && <IoCheckmarkSharp />}
+        </td>
+        <td className="table-warning">
+          {groupedDescriptions[2].length > 0 && (
+            <div>
+              {groupedDescriptions[2].join("\n")}
+            </div>
+          )}
+        </td>
+        <td className="table-danger">
+          {groupedDescriptions[1].length > 0 && (
+            <div style={{ whiteSpace: "pre-wrap" }}>
+              {groupedDescriptions[1].join("\n")}
+            </div>
+          )}
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div>
@@ -84,18 +124,7 @@ export const CardResultSkills = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          <tr>
-            <td>Aseo</td>
-            {renderSkillCells(skillsGrooming, skillNamesGrooming)}
-          </tr>
-          <tr>
-            <td>Vestido</td>
-            {renderSkillCells(skillsDressing, skillNamesDressing)}
-          </tr>
-          <tr>
-            <td>Alimentación</td>
-            {renderSkillCells(skillsFeeding, skillNamesFeeding)}
-          </tr>
+          {skillCategories.map((category) => renderCategoryRow(category))}
         </tbody>
       </table>
     </div>

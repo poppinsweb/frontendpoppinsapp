@@ -7,8 +7,19 @@ const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const { data: childData, loading: childLoading, error: childError } = useChild();
-  const { submitEvaluation, loading: submitting, error: submitError } = useSubmitEvaluation("http://localhost:3000/api/completevaluations");
+  const {
+    data: childData,
+    loading: childLoading,
+    error: childError,
+  } = useChild();
+
+  // console.log(childData);
+
+  const {
+    submitEvaluation,
+    loading: submitting,
+    error: submitError,
+  } = useSubmitEvaluation("http://localhost:3000/api/completevaluations");
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
@@ -19,11 +30,15 @@ const CardQuestions = ({ questionsData }) => {
   const handleAnswer = (choice) => {
     setUserResponses((prevResponses) => [
       ...prevResponses.slice(0, currentQuestion),
-      { optionId: choice.id, answer: choice.label },
+      {
+        optionId: choice.id,
+        answer: choice.label,
+        description: questionsData[0].questions[currentQuestion].description,
+      },
       ...prevResponses.slice(currentQuestion + 1),
     ]);
   };
-  // console.log(questionsData[0].questions);
+  // console.log(questionsData[0].questions[0].description);
   console.log(userResponses);
 
   const handleBeforeQuestion = () => {
@@ -46,9 +61,12 @@ const CardQuestions = ({ questionsData }) => {
           responses: userResponses.map((response, index) => ({
             questionId: questionsData[0].questions[index].id,
             optionId: response.optionId,
+            description: response.description,
             answer: response.answer,
           })),
         };
+
+        console.log(dataToSend);
 
         const responseData = await submitEvaluation(dataToSend);
 

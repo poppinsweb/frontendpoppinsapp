@@ -21,7 +21,7 @@ export const CardResultIndependence = () => {
   // Usar la primera evaluación completa en el array (ajusta según tu lógica)
   const evaluation = completEvaluation[0];
 
-  // console.log(evaluation.responses);
+  console.log(evaluation.responses);
 
   // Verifica si existen las respuestas dentro de la evaluación
   if (!evaluation.responses || evaluation.responses.length === 0) {
@@ -101,7 +101,7 @@ export const CardResultIndependence = () => {
             )}
             {dressingIndependence && dressingIndependence.optionId == 2 ? (
               <td className="table-warning">
-                <div style={{ color: "blue", textWrap: "wrap" }}>
+                <div>
                   {dressingIndependence.answer}
                 </div>
               </td>
