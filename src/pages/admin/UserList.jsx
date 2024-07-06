@@ -49,26 +49,22 @@ const UserList = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                {/* <th>CODIGO</th> */}
-                {/* <th>Nacimiento AAAA-MM-DD</th> */}
+                <th>Token</th>
                 <th>NOMBRES</th>
                 <th>APELLIDOS</th>
                 <th>SEXO</th>
                 <th>GRADO</th>
-                {/* <th>USUARIO_ID</th> */}
               </tr>
             </thead>
             <tbody>
               {childrenData.map((child) => (
                 <tr key={child._id}>
                   <td>{child._id}</td>
+                  <td>{child.evaluationtoken}</td>
                   <td>{child.firstName}</td>
-                  {/* <td>{child.codigo_identificador}</td> */}
-                  {/* <td>{child.fecha_nacimiento}</td> */}
                   <td>{child.lastName}</td>
                   <td>{child.responses[0].value}</td>
-                  <td>{child.responses[0].value}</td>
-                  {/* <td>{child.usuario_token}</td> */}
+                  <td>{child.responses[3].value}</td>
                 </tr>
               ))}
             </tbody>

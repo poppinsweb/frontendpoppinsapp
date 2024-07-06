@@ -2,17 +2,18 @@ import { LogoToken } from "../../components/token/LogoToken";
 import { InfoToken } from "../../components/token/InfoToken";
 import { TokenBox } from "../../components/token/TokenBox";
 import { TokenNavigation } from "../../components/token/TokenNavigation";
-// import { useAuth } from "../../context/AuthProvider";
+import { AdminToken } from "../../components/token/AdminToken";
+import { useAuth } from "../../context/AuthProvider";
 
 export function UserToken() {
-//   const { user } = useAuth();
+  const { user } = useAuth();
   return (
     <>
-      {/* {user && user.admin === true ? ( */}
+      {user && user.admin === true ? (
         <div className="token-main-container">
-          <TokenBox />
+          <AdminToken />
         </div>
-      {/* ) : ( */}
+       ) : ( 
         <>
           <div className="token-main-container">
             <LogoToken />
@@ -29,7 +30,7 @@ export function UserToken() {
             </div>
           </div>
         </>
-      {/* )} */}
+       )} 
     </>
   );
 }
