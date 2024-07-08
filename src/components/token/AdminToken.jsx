@@ -1,104 +1,125 @@
 import React, { useState } from "react";
+import { useEvaluationToken } from "../../context/EvaluationTokenProvider";
 import { useFetchData } from "../../services/hooks/useFetchData";
 
 export const AdminToken = () => {
-  const {
-    data: usersTokens,
-    loading: tokensLoading,
-    error: tokensError,
-  } = useFetchData("http://localhost:3000/api/tokens");
-  const [error, setError] = useState(null);
+  const { evaluTokens, error, loading, fetchEvaluTokens } = useEvaluationToken();
+  const { data: usersData, loading: usersLoading, error: usersError } = useFetchData("http://localhost:3000/api/users");
+  const [localError, setLocalError] = useState(null);
+  const [numTokensMap, setNumTokensMap] = useState({});
 
-  const handleCreate = async (email, userId) => {
+  const handleCreate = async (email, userId, numTokens) => {
     try {
-      const response = await fetch("http://localhost:3000/api/create-token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, userId, childId: "childId_placeholder" }), // Actualizar este valor según sea necesario
-      });
+      for (let i = 0; i < numTokens; i++) {
+        const response = await fetch("http://localhost:3000/api/create-token", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, userId }),
+        });
 
-      if (!response.ok) {
-        throw new Error("Error creating token");
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Error creating token");
+        }
       }
-
-      const result = await response.json();
-      console.log("Token created:", result.token);
+      fetchEvaluTokens();
     } catch (err) {
       console.error("Error:", err);
-      setError(err.message);
+      setLocalError(err.message);
     }
   };
 
   const handleDelete = async (tokenId) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/delete-token/${tokenId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://localhost:3000/api/delete-token/${tokenId}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
-        throw new Error("Error eliminando evaluationtoken");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error deleting token");
       }
 
-      const result = await response.json();
-      console.log("Evaluation token eliminado:", result.message);
-      // Opcional: actualizar la UI para reflejar la eliminación del token
+      fetchEvaluTokens();
     } catch (err) {
       console.error("Error:", err);
-      setError(err.message);
+      setLocalError(err.message);
     }
   };
 
-  if (tokensLoading) return <p>Loading...</p>;
-  if (tokensError) return <p>Error loading tokens data: {tokensError.message}</p>;
-  if (error) return <p>Error: {error}</p>;
+  const handleNumTokensChange = (userId, numTokens) => {
+    setNumTokensMap((prevMap) => ({ ...prevMap, [userId]: numTokens }));
+  };
 
-  // Ordenar los tokens por email alfabéticamente
-  const sortedTokens = usersTokens.tokens.sort((a, b) => a.email.localeCompare(b.email));
+  if (loading || usersLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading tokens data: {error}</p>;
+  if (usersError) return <p>Error loading users data: {usersError.message}</p>;
+  if (localError) return <p>Error: {localError}</p>;
+
+  const sortedUsers = usersData.sort((a, b) => a.email.localeCompare(b.email));
 
   return (
-    <>
-      <div>
-        <h2>TOKENS</h2>
-        <table className="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Token</th>
-              <th>Crear Token</th>
-              <th>Eliminar Token</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedTokens.map((token) => (
-              <tr key={token._id}>
-                <td>{token.email}</td>
-                <td>{token.evaluationToken}</td>
+    <div>
+      <h2>TOKENS</h2>
+      <table className="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Tokens</th>
+            <th className="num">Número de Tokens</th>
+            <th>Crear Token</th>
+            <th>Eliminar Token</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedUsers.map((user) => (
+            <React.Fragment key={user._id}>
+              <tr>
+                <td>{user.email}</td>
+                <td>
+                  {evaluTokens
+                    .filter((token) => token.userId === user._id)
+                    .map((token) => (
+                      <div key={token._id}>{token.evaluationToken}</div>
+                    ))}
+                </td>
+                <td className="num">
+                  <input
+                    type="number"
+                    value={numTokensMap[user._id] || 1}
+                    onChange={(e) => handleNumTokensChange(user._id, Number(e.target.value))}
+                    min="1"
+                    className="form-control"
+                  />
+                </td>
                 <td>
                   <button
                     className="btn btn-outline-success"
-                    onClick={() => handleCreate(token.email, token.userId)}
+                    onClick={() => handleCreate(user.email, user._id, numTokensMap[user._id] || 1)}
                   >
                     Crear
                   </button>
                 </td>
                 <td>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={() => handleDelete(token._id)}
-                  >
-                    Borrar
-                  </button>
+                  {evaluTokens
+                    .filter((token) => token.userId === user._id)
+                    .map((token) => (
+                      <button
+                        key={token._id}
+                        className="btn btn-outline-danger"
+                        onClick={() => handleDelete(token._id)}
+                      >
+                        Borrar {token.evaluationToken}
+                      </button>
+                    ))}
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
