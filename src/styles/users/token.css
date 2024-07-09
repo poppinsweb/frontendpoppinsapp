@@ -77,7 +77,12 @@
 .btn-token-navigation:disabled {
   background-color: #6e6d6d;
   color: #0a0a0a;
+  
 }
+
+td.num th.num {
+  width: 25px;
+ }
 
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {

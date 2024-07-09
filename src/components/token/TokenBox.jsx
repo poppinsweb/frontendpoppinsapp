@@ -1,9 +1,15 @@
-import "../../styles/users/token.css";
 import { useAuth } from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useFetchData } from "../../services/hooks/useFetchData";
+import "../../styles/users/token.css";
 
 export const TokenBox = () => {
   const { user } = useAuth();
+  const {
+    data: tokensData,
+    loading: tokensLoading,
+    error: tokensError,
+  } = useFetchData("http://localhost:3000/api/tokens");
 
   const navigate = useNavigate();
 
@@ -11,9 +17,12 @@ export const TokenBox = () => {
     navigate("/personales");
   };
 
-  console.log(user);
+  const userEvaluationTokens = tokensData?.tokens.filter(
+    (token) => token.userId === user.id
+  );
 
-  // TODO: CREAR EL MECANISMO DE ASOCIAR A ENCUESTA X2
+  if (tokensLoading) return <p>Loading...</p>;
+  if (tokensError) return <p>Error loading tokens data: {error}</p>;
   return (
     <>
       {user.rol === "admin" ? (
@@ -28,7 +37,11 @@ export const TokenBox = () => {
           <div className="radio-token-container">
             <label key={user.id} className="token-lable">
               {user.evaluationtoken}
+              {userEvaluationTokens.map((token, index) => (
+                <div key={index}>{token.evaluationToken}</div>
+              ))}
             </label>
+
             <button className="btn btn-color" onClick={handleNavigate}>
               Datos del Niño
             </button>

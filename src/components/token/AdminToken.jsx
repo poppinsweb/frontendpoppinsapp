@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEvaluationToken } from "../../context/EvaluationTokenProvider";
 import { useFetchData } from "../../services/hooks/useFetchData";
+import "../../styles/admin/admin-token.css";
 
 export const AdminToken = () => {
   const { evaluTokens, error, loading, fetchEvaluTokens } = useEvaluationToken();
@@ -26,7 +27,7 @@ export const AdminToken = () => {
       }
       fetchEvaluTokens();
     } catch (err) {
-      console.error("Error:", err);
+      console.log("Error:", err);
       setLocalError(err.message);
     }
   };
@@ -63,7 +64,7 @@ export const AdminToken = () => {
   return (
     <div>
       <h2>TOKENS</h2>
-      <table className="table table-hover table-striped">
+      <table className="table table-hover table-striped custom-table">
         <thead>
           <tr>
             <th>Email</th>
@@ -85,13 +86,13 @@ export const AdminToken = () => {
                       <div key={token._id}>{token.evaluationToken}</div>
                     ))}
                 </td>
-                <td className="num">
+                <td>
                   <input
                     type="number"
                     value={numTokensMap[user._id] || 1}
                     onChange={(e) => handleNumTokensChange(user._id, Number(e.target.value))}
                     min="1"
-                    className="form-control"
+                    className="form-control num"
                   />
                 </td>
                 <td>
