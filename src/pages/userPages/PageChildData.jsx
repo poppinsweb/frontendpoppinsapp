@@ -1,7 +1,7 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {useFetchData}  from "../../services/hooks/useFetchData";
-import {useSubmitForm} from "../../services/hooks/useSubmitForm";
+import { useFetchData } from "../../services/hooks/useFetchData";
+import { useSubmitForm } from "../../services/hooks/useSubmitForm";
 import { useAuth } from "../../context/AuthProvider";
 import "../../styles/users/userChild.css";
 
@@ -10,16 +10,20 @@ const PageChildData = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { user } = useAuth();
-  const { data, loading, error } = useFetchData( "http://localhost:3000/api/children");
-  const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/childrenres")
-
-  // if(user){ 
-  //   console.log(user.evaluationtoken)
-  // };
+  const { data, loading, error } = useFetchData(
+    "http://localhost:3000/api/children"
+  );
+  const {
+    submitForm,
+    loading: submitting,
+    error: submitError,
+  } = useSubmitForm("http://localhost:3000/api/childrenres");
 
   const evaluationtoken = user.evaluationtoken;
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (data && data.length > 0) {
       setOptions(data[0].categories);
@@ -43,7 +47,22 @@ const PageChildData = () => {
     );
   };
 
-// console.log(firstName, lastName, selectedOptions);
+  const checkIfUserExists = async (firstName, lastName) => {
+    const response = await fetch(`http://localhost:3000/api/childrenres?firstName=${firstName}&lastName=${lastName}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${evaluationtoken}`
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.length > 0; // Devuelve true si el usuario existe, false si no.
+    } else {
+      throw new Error('Error checking user existence');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,20 +74,39 @@ const PageChildData = () => {
     const formData = {
       firstName,
       lastName,
-      // evaluationtoken,
       responses: selectedOptions,
     };
 
-    console.log("Form data to submit:", formData);
+    try {
+      setIsSubmitting(true);
+      const userExists = await checkIfUserExists(firstName, lastName);
 
-    const data = await submitForm(formData, evaluationtoken);
-    if (data) {
-      console.log(data);
-    } else {
-      console.error('Error submitting user responses:', submitError);
+      if (userExists) {
+        if (!window.confirm("El usuario ya existe. ¿Desea sobrescribir los datos?")) {
+          setIsSubmitting(false);
+          return;
+        }
+      }
+
+      const data = await submitForm(formData, evaluationtoken);
+
+      if (data) {
+        console.log("Enviado...", data);
+        alert('Enviado');
+        // Limpiar el formulario
+        setFirstName("");
+        setLastName("");
+        setSelectedOptions({});
+        navigate('/independencia')
+      } else {
+        console.error("Error submitting user responses:", submitError);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
-    console.log("Selected options: ", data);
-  }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data: {error.message}</p>;
@@ -133,8 +171,12 @@ const PageChildData = () => {
                 </select>
               </div>
             ))}
-            <button type="submit" className="btn btn-admin btn-color" disabled={submitting}>
-              {submitting ? "Enviando..." : "Enviar"}
+            <button
+              type="submit"
+              className="btn btn-admin btn-color"
+              disabled={isSubmitting || submitting}
+            >
+              {isSubmitting || submitting ? "Enviando..." : "Enviar"}
             </button>
             {submitError && <p>Error submitting data: {submitError.message}</p>}
           </form>

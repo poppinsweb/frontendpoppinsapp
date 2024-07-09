@@ -1,6 +1,5 @@
 import "../../styles/users/token.css";
 import { useAuth } from "../../context/AuthProvider";
-// import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const TokenBox = () => {
@@ -8,7 +7,6 @@ export const TokenBox = () => {
 
   const navigate = useNavigate();
 
-  // TODO: CONDICIONAR ESTA NAVEGACION SI YA HAY UN USUARIO CHILD ASOCIADO AL TOKEN
   const handleNavigate = () => {
     navigate("/personales");
   };
@@ -21,7 +19,6 @@ export const TokenBox = () => {
       {user.rol === "admin" ? (
         <div className="box-tokens-container-admin">
           <h2 className="code-title">Token</h2>
-          {/* LISTAR TODOS LOS TOKENS? */}
           <div>Encuesta: {user.usuario_token}</div>
           <button className="btn btn-color">Crear Token</button>
         </div>

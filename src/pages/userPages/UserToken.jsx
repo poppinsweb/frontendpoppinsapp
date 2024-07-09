@@ -13,15 +13,13 @@ export function UserToken() {
         <div className="token-main-container">
           <AdminToken />
         </div>
-       ) : ( 
+      ) : (
         <>
           <div className="token-main-container">
             <LogoToken />
+            <InfoToken />
             <div className="row">
-              <div className="col-md-4">
-                <InfoToken />
-              </div>
-              <div className="col-md-4 token-card">
+              <div className="col-md-6 token-card">
                 <TokenBox />
               </div>
               <div className="col-md-4">
@@ -30,7 +28,7 @@ export function UserToken() {
             </div>
           </div>
         </>
-       )} 
+      )}
     </>
   );
 }

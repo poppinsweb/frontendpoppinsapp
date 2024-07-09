@@ -8,6 +8,7 @@ export function Navbar() {
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
+    localStorage.clear();
     logout();
     navigate("/");
   };

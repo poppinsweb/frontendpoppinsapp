@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useChild } from "../../context/ChildProvider";
+import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
 
@@ -12,8 +13,7 @@ const CardQuestions = ({ questionsData }) => {
     loading: childLoading,
     error: childError,
   } = useChild();
-
-  // console.log(childData);
+  const navigate = useNavigate();
 
   const {
     submitEvaluation,
@@ -38,8 +38,6 @@ const CardQuestions = ({ questionsData }) => {
       ...prevResponses.slice(currentQuestion + 1),
     ]);
   };
-  // console.log(questionsData[0].questions[0].description);
-  console.log(userResponses);
 
   const handleBeforeQuestion = () => {
     setCurrentQuestion((prev) => Math.max(prev - 1, 0));
@@ -56,8 +54,8 @@ const CardQuestions = ({ questionsData }) => {
         alert("Responde todas las preguntas antes de enviar los resultados");
       } else {
         const dataToSend = {
-          evaluationId: questionsData[0]._id, // Reemplazar con el ID correcto de la evaluación
-          evaluationtoken: childData.evaluationtoken, // Utilizar el ID del niño obtenido desde el contexto
+          evaluationId: questionsData[0]._id,
+          evaluationtoken: childData.evaluationtoken,
           responses: userResponses.map((response, index) => ({
             questionId: questionsData[0].questions[index].id,
             optionId: response.optionId,
@@ -73,6 +71,7 @@ const CardQuestions = ({ questionsData }) => {
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
+          navigate("/resultados");  // Navegar a /resultados después del envío exitoso
         } else {
           console.error("Error submitting user responses:", submitError);
         }
@@ -95,7 +94,7 @@ const CardQuestions = ({ questionsData }) => {
         description={currentQuestionData.description}
         options={currentQuestionData.options}
         handleAnswer={handleAnswer}
-        userResponse={userResponses[currentQuestion]?.optionId || null} // pasar el id de la opción seleccionada
+        userResponse={userResponses[currentQuestion]?.optionId || null}
         currentQuestion={currentQuestion}
       />
       <div className="question-counter">

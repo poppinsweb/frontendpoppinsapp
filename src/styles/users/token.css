@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-image: url("../images/cloud-stars2.jpg"); */
+  background-image: url("../images/cloud-stars2.jpg");
   background-repeat: no-repeat;
   background-size: contain;
   min-height: 1100px;
@@ -124,9 +124,9 @@
     display: block;
   }
 
-  .form-control {
+  /* .form-control {
     width: 60px;
-  }
+  } */
 
   .radio-button {
     margin-right: 10px;
@@ -139,7 +139,7 @@
 
   .btn-token-container {
     margin: 20px;
-    padding: 0px 10px;
+    padding: 0px 50px;
   }
 
   .logo-token {
@@ -154,19 +154,11 @@
   }
 
   .box-tokens-container-admin {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* justify-content: center; */
     padding: 40px 0;
     width: 30%;
     background-color: #d6dff97e;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 0px #000000bf;
-  }
-
-  .infotoken-main-container {
-    margin-right: 50px;
   }
 
   .navitoken-main-container {
@@ -175,8 +167,8 @@
   }
 
   .btn-info-text {
-    font-size: 20px;
-    padding: 10px;
+    font-size: 1.5rem;
+    padding: 0px 150px;
   }
 }
 

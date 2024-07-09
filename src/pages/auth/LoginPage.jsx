@@ -19,7 +19,7 @@ const LoginPage = () => {
         setMessage("Login successful");
         setEmail("");
         setPassword("");
-        navigate('/personales')
+        navigate('/token')
     } catch (error) {
       setMessage("Failed to login");
       console.error("Error:", error);
