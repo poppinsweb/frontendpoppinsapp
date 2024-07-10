@@ -68,11 +68,11 @@ export function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/independencia">
-                Independencia
+              <NavLink className="nav-link" to="/encuesta">
+                Encuesta
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/habilidades-aseo">
                 Habilaseo
               </NavLink>
@@ -106,10 +106,15 @@ export function Navbar() {
               <NavLink className="nav-link" to="/adicionales">
                 Adicionales
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/resultados">
                 Result
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/carrito">
+                Cart
               </NavLink>
             </li>
           </ul>

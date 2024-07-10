@@ -1,0 +1,28 @@
+.main-cart {
+  text-align: center;
+}
+
+.product, .cart {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button {
+  font-size: 20px;
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+.controls input {
+  font-size: 20px;
+  width: 50px;
+  text-align: center;
+}

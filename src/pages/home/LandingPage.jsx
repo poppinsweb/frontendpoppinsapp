@@ -1,6 +1,5 @@
 import { Footer } from "../../components/home/Footer";
 import { Home } from "../../components/home/Home";
-import { Navbar } from "../../components/ui/Navbar";
 
 function LandingPage() {
   return (

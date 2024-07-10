@@ -68,10 +68,10 @@ export const AdminToken = () => {
         <thead>
           <tr>
             <th>Email</th>
-            <th>Tokens</th>
+            {/* <th>Tokens</th> */}
             <th className="num">Número de Tokens</th>
             <th>Crear Token</th>
-            <th>Eliminar Token</th>
+            <th>Eliminar Token (click) </th>
           </tr>
         </thead>
         <tbody>
@@ -79,13 +79,13 @@ export const AdminToken = () => {
             <React.Fragment key={user._id}>
               <tr>
                 <td>{user.email}</td>
-                <td>
+                {/* <td>
                   {evaluTokens
                     .filter((token) => token.userId === user._id)
                     .map((token) => (
                       <div key={token._id}>{token.evaluationToken}</div>
                     ))}
-                </td>
+                </td> */}
                 <td>
                   <input
                     type="number"
@@ -112,7 +112,7 @@ export const AdminToken = () => {
                         className="btn btn-outline-danger"
                         onClick={() => handleDelete(token._id)}
                       >
-                        Borrar {token.evaluationToken}
+                        {token.evaluationToken}
                       </button>
                     ))}
                 </td>
