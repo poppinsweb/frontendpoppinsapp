@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEvaluationToken } from "../../context/EvaluationTokenProvider";
 import { useFetchData } from "../../services/hooks/useFetchData";
-import "../../styles/admin/admin-token.css";
 
 export const AdminToken = () => {
   const { evaluTokens, error, loading, fetchEvaluTokens } = useEvaluationToken();
@@ -62,13 +61,12 @@ export const AdminToken = () => {
   const sortedUsers = usersData.sort((a, b) => a.email.localeCompare(b.email));
 
   return (
-    <div>
+    <div className="admin-token-main-container">
       <h2>TOKENS</h2>
       <table className="table table-hover table-striped custom-table">
         <thead>
           <tr>
             <th>Email</th>
-            {/* <th>Tokens</th> */}
             <th className="num">Número de Tokens</th>
             <th>Crear Token</th>
             <th>Eliminar Token (click) </th>
@@ -79,13 +77,6 @@ export const AdminToken = () => {
             <React.Fragment key={user._id}>
               <tr>
                 <td>{user.email}</td>
-                {/* <td>
-                  {evaluTokens
-                    .filter((token) => token.userId === user._id)
-                    .map((token) => (
-                      <div key={token._id}>{token.evaluationToken}</div>
-                    ))}
-                </td> */}
                 <td>
                   <input
                     type="number"

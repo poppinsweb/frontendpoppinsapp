@@ -10,6 +10,7 @@
   min-height: 1100px;
   width: auto;
   background-color: #6971a1;
+  padding: 50px;
 }
 
 .navitoken-main-container {
@@ -80,17 +81,9 @@
   
 }
 
-td.num th.num {
-  width: 25px;
- }
-
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {
-  .token-main-container {
-    height: 800px;
-  }
-
-  .logo-token {
+   .logo-token {
     margin: 2rem 0;
   }
 
@@ -108,9 +101,14 @@ td.num th.num {
     margin-top: 0;
   }
 
-  .box-tokens-container {
-    width: 100%;
+  /* .box-tokens-container {
+    width: auto;
     margin: 0 10px;
+  }  */
+  
+  .token-lable {
+    font-size: 1rem;
+    margin-bottom: 20px;
   }
 }
 
@@ -118,28 +116,13 @@ td.num th.num {
 @media (min-width: 1200px) {
   .code-title {
     font-size: 1.5rem;
-  }
-
-  .token-lable {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-top: 30px;
   }
 
   .radio-token-container {
     display: block;
-  }
-
-  /* .form-control {
-    width: 60px;
-  } */
-
-  .radio-button {
-    margin-right: 10px;
-  }
-
-  .token-main-container {
-    padding-top: 0px;
-    height: 1000px;
+    text-align: left;
+    padding: 0 80px;
   }
 
   .btn-token-container {
@@ -152,18 +135,14 @@ td.num th.num {
     margin-top: 0;
   }
 
-  .box-tokens-container {
-    width: 120%;
-    padding: 0 15px;
-    margin: 10px 0;
+  label.token-label {
+    font-size: 1.5rem;
   }
 
-  .box-tokens-container-admin {
-    padding: 40px 0;
-    width: 30%;
-    background-color: #d6dff97e;
-    border-radius: 20px;
-    box-shadow: 5px 5px 10px 0px #000000bf;
+  .btn-token {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   .navitoken-main-container {
@@ -174,6 +153,15 @@ td.num th.num {
   .btn-info-text {
     font-size: 1.5rem;
     padding: 0px 150px;
+  }
+
+  .custom-table {
+    width: 90%; 
+    margin: 0 auto;
+  }
+  
+  .num {
+    width: 80px; 
   }
 }
 

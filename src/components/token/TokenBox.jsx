@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useFetchData } from "../../services/hooks/useFetchData";
@@ -12,9 +13,10 @@ export const TokenBox = () => {
   } = useFetchData("http://localhost:3000/api/tokens");
 
   const navigate = useNavigate();
+  const [selectedToken, setSelectedToken] = useState("");
 
   const handleNavigate = () => {
-    navigate("/personales");
+    navigate("/personales", { state: { token: selectedToken } });
   };
 
   const userEvaluationTokens = tokensData?.tokens.filter(
@@ -22,32 +24,42 @@ export const TokenBox = () => {
   );
 
   if (tokensLoading) return <p>Loading...</p>;
-  if (tokensError) return <p>Error loading tokens data: {error}</p>;
+  if (tokensError)
+    return <p>Error loading tokens data: {tokensError.message}</p>;
+
+  const handleTokenChange = (event) => {
+    setSelectedToken(event.target.value);
+    console.log(selectedToken);
+  };
+
   return (
     <>
-      {user.rol === "admin" ? (
-        <div className="box-tokens-container-admin">
-          <h2 className="code-title">Token</h2>
-          <div>Encuesta: {user.usuario_token}</div>
-          <button className="btn btn-color">Crear Token</button>
-        </div>
-      ) : (
-        <div className="box-tokens-container">
-          <h2 className="code-title">Token</h2>
-          <div className="radio-token-container">
-            <label key={user.id} className="token-lable">
-              {user.evaluationtoken}
-              {userEvaluationTokens.map((token, index) => (
-                <div key={index}>{token.evaluationToken}</div>
-              ))}
+      <div className="box-tokens-container">
+        <h2 className="code-title">Token</h2>
+        <div className="radio-token-container">
+          {userEvaluationTokens.map((token, index) => (
+            <label key={index} className="token-label">
+              <input
+                type="radio"
+                name="token"
+                value={token.evaluationToken}
+                checked={selectedToken === token.evaluationToken}
+                onChange={handleTokenChange}
+              />
+              {token.evaluationToken}
             </label>
-
-            <button className="btn btn-color" onClick={handleNavigate}>
+          ))}
+          <div className="btn-token">
+            <button
+              className="btn btn-color"
+              onClick={handleNavigate}
+              disabled={!selectedToken}
+            >
               Datos del Niño
             </button>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
