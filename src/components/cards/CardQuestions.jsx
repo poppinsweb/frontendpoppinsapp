@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
+import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
-import Card from "./Card";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const {
-    data: childData,
-    loading: childLoading,
-    error: childError,
-  } = useChild();
+  const { data: childData, loading: childLoading, error: childError } = useChild();
   const navigate = useNavigate();
+
+  // console.log(childData);
 
   const {
     submitEvaluation,
@@ -89,6 +87,7 @@ const CardQuestions = ({ questionsData }) => {
   const currentQuestionData = questionsData[0].questions[currentQuestion];
   return (
     <div className="question-main-container">
+      <div> Niño: {childData?.firstName}</div>
       <Card
         title={currentQuestionData.title}
         description={currentQuestionData.description}

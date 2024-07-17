@@ -1,8 +1,7 @@
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { useAuth } from "../../context/AuthProvider";
+import { useLocation } from "react-router-dom";
 import { useChild } from "../../context/ChildProvider";
-// import { useEvaluation } from "../../context/EvaluationProvider";
 import { CardResultIndependence } from "../../components/cards/CardResultIndependence";
 import { CardResultSkills } from "../../components/cards/CardResultSkills";
 import { CardResultHabits } from "../../components/cards/CardResultHabits";
@@ -10,18 +9,16 @@ import umbrella from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
-  const { user } = useAuth();
-  const {
-    data: childrenData,
-    loading: childrenLoading,
-    error: childrenError,
-  } = useChild();
+  const { data: childrenData, loading: childrenLoading, error: childrenError } = useChild();
+
+  const location = useLocation();
+  const { evaluationtoken } = location.state || {};
 
   if (childrenLoading) return <p>Loading...</p>;
   if (childrenError)
     return <p>Error loading children data: {childrenError.message}</p>;
 
-  // if (childrenData) console.log("childrenData content:", childrenData.createdAt);
+  console.log(evaluationtoken);
 
   const responses = childrenData?.responses || [];
 

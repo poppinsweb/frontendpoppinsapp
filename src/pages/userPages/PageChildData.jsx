@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useFetchData } from "../../services/hooks/useFetchData";
 import { useSubmitForm } from "../../services/hooks/useSubmitForm";
-import { useAuth } from "../../context/AuthProvider";
 import "../../styles/users/userChild.css";
+import { useChild } from "../../context/ChildProvider";
 
 const PageChildData = () => {
   const [options, setOptions] = useState([]);
@@ -11,7 +11,6 @@ const PageChildData = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user } = useAuth();
   const { data, loading, error } = useFetchData(
     "http://localhost:3000/api/children"
   );
@@ -20,9 +19,16 @@ const PageChildData = () => {
     loading: submitting,
     error: submitError,
   } = useSubmitForm("http://localhost:3000/api/childrenres");
+  const {
+    data: childData,
+    loading: childLoading,
+    error: childError,
+  } = useChild();
 
-  const evaluationtoken = user.evaluationtoken;
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const { evaluationtoken } = location.state || {};
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -48,19 +54,22 @@ const PageChildData = () => {
   };
 
   const checkIfUserExists = async (firstName, lastName) => {
-    const response = await fetch(`http://localhost:3000/api/childrenres?firstName=${firstName}&lastName=${lastName}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${evaluationtoken}`
+    const response = await fetch(
+      `http://localhost:3000/api/childrenres?firstName=${firstName}&lastName=${lastName}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${evaluationtoken}`,
+        },
       }
-    });
+    );
 
     if (response.ok) {
       const data = await response.json();
       return data.length > 0; // Devuelve true si el usuario existe, false si no.
     } else {
-      throw new Error('Error checking user existence');
+      throw new Error("Error checking user existence");
     }
   };
 
@@ -82,7 +91,11 @@ const PageChildData = () => {
       const userExists = await checkIfUserExists(firstName, lastName);
 
       if (userExists) {
-        if (!window.confirm("El usuario ya existe. ¿Desea sobrescribir los datos?")) {
+        if (
+          !window.confirm(
+            "El usuario ya existe. ¿Desea sobrescribir los datos?"
+          )
+        ) {
           setIsSubmitting(false);
           return;
         }
@@ -92,12 +105,12 @@ const PageChildData = () => {
 
       if (data) {
         console.log("Enviado...", data);
-        alert('Enviado');
+        alert("Enviado");
         // Limpiar el formulario
         setFirstName("");
         setLastName("");
         setSelectedOptions({});
-        navigate('/independencia')
+        navigate("/encuesta");
       } else {
         console.error("Error submitting user responses:", submitError);
       }
@@ -108,8 +121,8 @@ const PageChildData = () => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data: {error.message}</p>;
+  if (loading || childLoading) return <p>Loading...</p>;
+  if (error || childError) return <p>Error loading data: {error.message}</p>;
 
   return (
     <div className="user-container">
@@ -119,6 +132,7 @@ const PageChildData = () => {
         alt="Logo paraguas"
       />
       <h2 className="user-title">Datos del Niño</h2>
+      <div>Token Seleccionado: {childData?.evaluationtoken}</div>
       <div>
         <div>
           <form onSubmit={handleSubmit}>

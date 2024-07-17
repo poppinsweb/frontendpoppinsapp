@@ -15,8 +15,16 @@ export const TokenBox = () => {
   const navigate = useNavigate();
   const [selectedToken, setSelectedToken] = useState("");
 
-  const handleNavigate = () => {
-    navigate("/personales", { state: { token: selectedToken } });
+  const handleNavigatePersonales = () => {
+    navigate("/personales", { state: { evaluationtoken: selectedToken } });
+  };
+
+  const handleNavigateResult = () => {
+    navigate("/resultados", { state: { evaluationtoken: selectedToken } });
+  };
+
+  const handleNavigateEvaluation = () => {
+    navigate("/encuesta", { state: { evaluationtoken: selectedToken } });
   };
 
   const userEvaluationTokens = tokensData?.tokens.filter(
@@ -28,8 +36,9 @@ export const TokenBox = () => {
     return <p>Error loading tokens data: {tokensError.message}</p>;
 
   const handleTokenChange = (event) => {
-    setSelectedToken(event.target.value);
-    console.log(selectedToken);
+    const newToken = event.target.value;
+    setSelectedToken(newToken);
+    console.log(newToken);
   };
 
   return (
@@ -40,6 +49,7 @@ export const TokenBox = () => {
           {userEvaluationTokens.map((token, index) => (
             <label key={index} className="token-label">
               <input
+                className="radio-token"
                 type="radio"
                 name="token"
                 value={token.evaluationToken}
@@ -52,12 +62,43 @@ export const TokenBox = () => {
           <div className="btn-token">
             <button
               className="btn btn-color"
-              onClick={handleNavigate}
+              onClick={handleNavigatePersonales}
               disabled={!selectedToken}
             >
               Datos del Niño
             </button>
           </div>
+        </div>
+      </div>
+      <div className="navitoken-main-container">
+        <div className="btn-token-container">
+          <button
+            className="btn btn-outline btn-token-navigation"
+            onClick={handleNavigateEvaluation}
+            disabled={!selectedToken}
+          >
+            Encuesta Inicial
+          </button>
+        </div>
+        <div className="btn-token-container">
+          <button
+            className="btn btn-outline btn-token-navigation"
+            onClick={handleNavigateEvaluation}
+            disabled={!selectedToken}
+          >
+            Encuesta Final
+          </button>
+          {/* HAY QUE CREAR CONDICIONAL PARA ACTIVAR BOTON SEGUN PRIMERA O SEGUNDA ENCUESTA */}
+        </div>
+        <div className="btn-token-container">
+          <button
+            className="btn btn-outline btn-token-navigation"
+            disabled={!selectedToken}
+            onClick={handleNavigateResult}
+          >
+            Ver Resultados / Imprimir
+            {/* OJO QUE LA ENCUESTA DEBE ESTAR COMPLETA PARA ESCOGER ESTA OPCION */}
+          </button>
         </div>
       </div>
     </>

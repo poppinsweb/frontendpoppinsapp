@@ -22,7 +22,7 @@ const CreateUser = () => {
         "http://localhost:3000/api/register",
         userData
       );
-
+      console.log(response);
       setMessage("User registered successfully!");
       // Reset form fields
       setEmail("");

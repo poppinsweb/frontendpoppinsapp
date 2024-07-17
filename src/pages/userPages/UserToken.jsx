@@ -1,7 +1,7 @@
 import { LogoToken } from "../../components/token/LogoToken";
 import { InfoToken } from "../../components/token/InfoToken";
 import { TokenBox } from "../../components/token/TokenBox";
-import { TokenNavigation } from "../../components/token/TokenNavigation";
+// import { TokenNavigation } from "../../components/token/TokenNavigation";
 import { AdminToken } from "../../components/token/AdminToken";
 import { useAuth } from "../../context/AuthProvider";
 
@@ -19,11 +19,8 @@ export function UserToken() {
             <LogoToken />
             <InfoToken />
             <div className="row">
-              <div className="col-md-6 token-card">
+              <div className="col-md-10 token-card">
                 <TokenBox />
-              </div>
-              <div className="col-md-4">
-                <TokenNavigation />
               </div>
             </div>
           </div>

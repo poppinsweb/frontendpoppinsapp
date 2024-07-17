@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "./AuthProvider";
+import { useEvaluationToken } from "./EvaluationTokenProvider";
+import { useLocation } from "react-router-dom";
 
 export const ChildContext = createContext();
 
-// Hook para llamar a este contexto
 export const useChild = () => {
   const context = useContext(ChildContext);
   if (!context) {
@@ -17,7 +17,8 @@ export const ChildProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const { user } = useAuth();
+  const location = useLocation();
+  const { evaluationtoken } = location.state || {};
 
   useEffect(() => {
     const fetchChildData = async () => {
@@ -25,7 +26,7 @@ export const ChildProvider = ({ children }) => {
       try {
         const response = await axios.get("http://localhost:3000/api/childrenres");
         const childData = response.data.find(
-          (child) => child.evaluationtoken === user.evaluationtoken
+          (child) => child.evaluationtoken === evaluationtoken
         );
 
         if (!childData) {
@@ -43,10 +44,10 @@ export const ChildProvider = ({ children }) => {
       }
     };
 
-    if (user && user.evaluationtoken) {
+    if (evaluationtoken) {
       fetchChildData();
     }
-  }, [user]);
+  }, [evaluationtoken]);
 
   return (
     <ChildContext.Provider value={{ loading, error, data }}>

@@ -45,7 +45,7 @@ export default function App() {
       {user && user.admin === false ? (
         <Routes>
           <Route path="/personales" element={<PageChildData />} />
-          <Route path="/independencia" element={<IndependencePage />} />
+          <Route path="/encuesta" element={<IndependencePage />} />
           <Route path="/resultados" element={<EvaluationResultPage />} />
           <Route path="/token" element={<UserToken />} />
           {/* <Route path="/*" element={<Navigate to="/personales" />} /> */}
