@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useFetchData } from "../../services/hooks/useFetchData";
 import { useSubmitForm } from "../../services/hooks/useSubmitForm";
 import "../../styles/users/userChild.css";
-import { useChild } from "../../context/ChildProvider";
 
 const PageChildData = () => {
   const [options, setOptions] = useState([]);
@@ -11,19 +10,8 @@ const PageChildData = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { data, loading, error } = useFetchData(
-    "http://localhost:3000/api/children"
-  );
-  const {
-    submitForm,
-    loading: submitting,
-    error: submitError,
-  } = useSubmitForm("http://localhost:3000/api/childrenres");
-  const {
-    data: childData,
-    loading: childLoading,
-    error: childError,
-  } = useChild();
+  const { data, loading, error } = useFetchData("http://localhost:3000/api/children");
+  const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/childrenres");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,24 +42,13 @@ const PageChildData = () => {
     );
   };
 
-  const checkIfUserExists = async (firstName, lastName) => {
-    const response = await fetch(
-      `http://localhost:3000/api/childrenres?firstName=${firstName}&lastName=${lastName}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${evaluationtoken}`,
-        },
-      }
+  const checkIfUserExists = (firstName, lastName) => {
+    if (!data) return false;
+    return data.some(
+      (child) =>
+        child.firstName?.toLowerCase() === firstName.toLowerCase() &&
+        child.lastName?.toLowerCase() === lastName.toLowerCase()
     );
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.length > 0; // Devuelve true si el usuario existe, false si no.
-    } else {
-      throw new Error("Error checking user existence");
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -89,7 +66,7 @@ const PageChildData = () => {
 
     try {
       setIsSubmitting(true);
-      const userExists = await checkIfUserExists(firstName, lastName);
+      const userExists = checkIfUserExists(firstName, lastName);
 
       if (userExists) {
         if (
@@ -107,11 +84,11 @@ const PageChildData = () => {
       if (data) {
         console.log("Enviado...", data);
         alert("Enviado");
-        // Limpiar el formulario
+        // Limpia el formulario
         setFirstName("");
         setLastName("");
         setSelectedOptions({});
-        navigate("/encuesta");
+        navigate("/token");
       } else {
         console.error("Error submitting user responses:", submitError);
       }
@@ -122,8 +99,8 @@ const PageChildData = () => {
     }
   };
 
-  // if (loading || childLoading) return <p>Loading...</p>;
-  // if (error || childError) return <p>Error loading data: {error.message}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data: {error.message}</p>;
 
   return (
     <div className="user-container">
@@ -189,7 +166,7 @@ const PageChildData = () => {
             <button
               type="submit"
               className="btn btn-admin btn-color"
-              disabled={isSubmitting || submitting}
+              disabled={!validateForm() || isSubmitting || submitting}
             >
               {isSubmitting || submitting ? "Enviando..." : "Enviar"}
             </button>

@@ -4,7 +4,6 @@ import "../../styles/App.css";
 
 export function Navbar() {
   const navigate = useNavigate();
-
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -12,9 +11,11 @@ export function Navbar() {
     logout();
     navigate("/");
   };
+
   const handleLogIn = () => {
     navigate("/login");
   };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -32,91 +33,85 @@ export function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
+            {/* Enlaces comunes */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
-                Login
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/admin">
-                Admin
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/crear">
-                Crear
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/lista">
-                Lista
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/token">
-                Token
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/personales">
-                NiñoData
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/encuesta">
-                Encuesta
-              </NavLink>
-            </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-aseo">
-                Habilaseo
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-vestido">
-                Habilvestido
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/habilidades-alimentacion">
-                Habilalimenta
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/habitos-alimentacion">
-                Hábitalimenta
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/habitos-dormir">
-                Hábitsueño
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/responsabilidades">
-                Responsab
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/adicionales">
-                Adicionales
-              </NavLink>
-            </li> */}
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/resultados">
-                Result
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/carrito">
-                Cart
-              </NavLink>
-            </li>
+
+            {/* Enlaces para usuarios no logueados */}
+            {!user && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    Login
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/carrito">
+                    Cart
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Enlaces para admin */}
+            {user && user.admin && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/crear">
+                    Crear
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/admin">
+                    Admin
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/lista">
+                    Lista
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/token">
+                    Token
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Enlaces para usuarios logueados */}
+            {user && !user.admin && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/token">
+                    Token
+                  </NavLink>
+                </li>
+                {/* <li className="nav-item">
+                  <NavLink className="nav-link" to="/personales">
+                    NiñoData
+                  </NavLink>
+                </li> */}
+                {/* <li className="nav-item">
+                  <NavLink className="nav-link" to="/encuesta">
+                    Encuesta
+                  </NavLink>
+                </li> */}
+                {/* <li className="nav-item">
+                  <NavLink className="nav-link" to="/resultados">
+                    Result
+                  </NavLink>
+                </li> */}
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/carrito">
+                    Cart
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div
@@ -127,17 +122,13 @@ export function Navbar() {
             {user?.email}
           </span>
           {user ? (
-            <>
-              <button className="btn btn-outline-danger" onClick={handleLogout}>
-                Logout
-              </button>
-            </>
+            <button className="btn btn-outline-danger" onClick={handleLogout}>
+              Logout
+            </button>
           ) : (
-            <>
-              <button className="btn btn-outline-success" onClick={handleLogIn}>
-                Login
-              </button>
-            </>
+            <button className="btn btn-outline-success" onClick={handleLogIn}>
+              Login
+            </button>
           )}
         </div>
       </div>
