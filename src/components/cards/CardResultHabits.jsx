@@ -1,9 +1,9 @@
 import { IoCheckmarkDoneSharp, IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
-import { useAuth } from "../../context/AuthProvider";
+// import { useAuth } from "../../context/AuthProvider";
 
 export const CardResultHabits = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const {
     completEvaluation,
     loading: evaluationLoading,

@@ -9,9 +9,9 @@ export const EvaluationContext = createContext();
 // HOOK PARA LLAMAR A ESTE CONTEXTO
 export const useEvaluation = () => {
   const context = useContext(EvaluationContext);
-  if (!context) {
-    throw new Error("useEvaluation must be used within an EvaluationProvider");
-  }
+  // if (!context) {
+  //   throw new Error("useEvaluation must be used within an EvaluationProvider");
+  // }
   return context;
 };
 // ********************************************************************

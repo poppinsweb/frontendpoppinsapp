@@ -44,9 +44,9 @@ export const CardResultIndependence = () => {
 
   const renderDescriptions = (descriptions) => {
     if (!descriptions) return null;
-    return descriptions.split("-").map((item, index) => (
-      <div key={index}>- {item.trim()}</div>
-    ));
+    return descriptions
+      .split("-")
+      .map((item, index) => <div key={index}>- {item.trim()}</div>);
   };
 
   const renderCategoryRow = (category) => {
@@ -89,7 +89,9 @@ export const CardResultIndependence = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          {independenceCategories.map((category) => renderCategoryRow(category))}
+          {independenceCategories.map((category) =>
+            renderCategoryRow(category)
+          )}
         </tbody>
       </table>
     </div>
