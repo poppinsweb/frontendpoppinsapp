@@ -3,6 +3,7 @@ import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
+import axios from 'axios';
 import { InfoToken } from "../token/InfoToken";
 
 const CardQuestions = ({ questionsData }) => {
@@ -14,9 +15,8 @@ const CardQuestions = ({ questionsData }) => {
     loading: childLoading,
     error: childError,
   } = useChild();
-  const navigate = useNavigate();
 
-  console.log(childData);
+  const navigate = useNavigate();
 
   const {
     submitEvaluation,
@@ -67,14 +67,19 @@ const CardQuestions = ({ questionsData }) => {
           })),
         };
 
-        console.log(dataToSend);
-
         const responseData = await submitEvaluation(dataToSend);
 
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
-          navigate("/resultados"); // Navegar a /resultados después del envío exitoso
+          alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
+          // Actualizar el uso del token
+          try {
+            await axios.post(`http://localhost:3000/api/tokens/${childData.evaluationtoken}/use`);
+            navigate("/token");
+          } catch (error) {
+            console.error("Error updating token usage:", error);
+          }
         } else {
           console.error("Error submitting user responses:", submitError);
         }
@@ -88,8 +93,8 @@ const CardQuestions = ({ questionsData }) => {
   if (!questionsData || questionsData.length === 0) {
     return <p>Loading questions...</p>;
   }
-
   const currentQuestionData = questionsData[0].questions[currentQuestion];
+
   return (
     <div className="question-main-container">
       <div>
@@ -123,7 +128,7 @@ const CardQuestions = ({ questionsData }) => {
           {submitting
             ? "Enviando..."
             : resultsSent
-            ? "Siguiente Sección"
+            ? "Resultados Enviados"
             : "Siguiente"}
         </button>
         {submitError && <p>Error submitting data: {submitError.message}</p>}

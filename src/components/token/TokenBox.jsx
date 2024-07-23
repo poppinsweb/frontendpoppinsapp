@@ -1,19 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useFetchData } from "../../services/hooks/useFetchData";
 import "../../styles/users/token.css";
 
 export const TokenBox = () => {
+  const [selectedToken, setSelectedToken] = useState("");
+  const [isEvaluationCompleted, setIsEvaluationCompleted] = useState(false);
+  const [tokenUsageCount, setTokenUsageCount] = useState(0);
   const { user } = useAuth();
   const {
     data: tokensData,
     loading: tokensLoading,
     error: tokensError,
   } = useFetchData("http://localhost:3000/api/tokens");
+  const {
+    data: evaluationsData,
+    loading: evaluationsLoading,
+    error: evaluationsError,
+  } = useFetchData("http://localhost:3000/api/completevaluations");
 
   const navigate = useNavigate();
-  const [selectedToken, setSelectedToken] = useState("");
+
+  useEffect(() => {
+    if (selectedToken) {
+      // Filtrar el token seleccionado
+      const selectedTokenData = tokensData?.tokens.find(
+        (token) => token.evaluationToken === selectedToken
+      );
+      
+      if (selectedTokenData) {
+        setTokenUsageCount(selectedTokenData.usageCount);
+      }
+
+      // Verificar si la evaluación está completa
+      const evaluation = evaluationsData?.find((ev) => ev.evaluationtoken === selectedToken
+      );
+      setIsEvaluationCompleted(!!evaluation?.responses?.length);
+    }
+  }, [selectedToken, tokensData, evaluationsData]);
+
+  const userEvaluationTokens = tokensData?.tokens.filter(
+    (token) => token.userId === user.id
+  );
+
+  if (tokensLoading || evaluationsLoading) return <p>Loading...</p>;
+  if (tokensError) return <p>Error loading tokens data: {tokensError.message}</p>;
+  if (evaluationsError) return <p>Error loading evaluations data: {evaluationsError.message}</p>;
+
+  const handleTokenChange = (event) => {
+    const newToken = event.target.value;
+    setSelectedToken(newToken);
+  };
 
   const handleNavigatePersonales = () => {
     navigate("/personales", { state: { evaluationtoken: selectedToken } });
@@ -27,19 +65,9 @@ export const TokenBox = () => {
     navigate("/encuesta", { state: { evaluationtoken: selectedToken } });
   };
 
-  const userEvaluationTokens = tokensData?.tokens.filter(
-    (token) => token.userId === user.id
-  );
-
-  if (tokensLoading) return <p>Loading...</p>;
-  if (tokensError)
-    return <p>Error loading tokens data: {tokensError.message}</p>;
-
-  const handleTokenChange = (event) => {
-    const newToken = event.target.value;
-    setSelectedToken(newToken);
-    console.log(newToken);
-  };
+  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount >= 1;
+  const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount < 1;
+  const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
   return (
     <>
@@ -75,29 +103,27 @@ export const TokenBox = () => {
           <button
             className="btn btn-outline btn-token-navigation"
             onClick={handleNavigateEvaluation}
-            disabled={!selectedToken}
+            disabled={isInitialEvaluationDisabled}
           >
-            Encuesta Inicial
+            Evaluación Inicial
           </button>
         </div>
         <div className="btn-token-container">
           <button
             className="btn btn-outline btn-token-navigation"
             onClick={handleNavigateEvaluation}
-            disabled={!selectedToken}
+            disabled={isFinalEvaluationDisabled}
           >
-            Encuesta Final
+            Evaluación Final
           </button>
-          {/* HAY QUE CREAR CONDICIONAL PARA ACTIVAR BOTON SEGUN PRIMERA O SEGUNDA ENCUESTA */}
         </div>
         <div className="btn-token-container">
           <button
             className="btn btn-outline btn-token-navigation"
-            disabled={!selectedToken}
+            disabled={isResultDisabled}
             onClick={handleNavigateResult}
           >
             Ver Resultados / Imprimir
-            {/* OJO QUE LA ENCUESTA DEBE ESTAR COMPLETA PARA ESCOGER ESTA OPCION */}
           </button>
         </div>
       </div>

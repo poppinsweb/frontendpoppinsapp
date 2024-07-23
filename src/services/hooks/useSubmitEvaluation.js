@@ -5,19 +5,18 @@ const useSubmitEvaluation = (endpoint) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const submitEvaluation = async (data, evaluationtoken) => {
+  const submitEvaluation = async (data) => {
     setLoading(true);
     setError(null);
     console.log(data);
     try {  
-     const response = await axios.post(endpoint, { ...data });
-     setLoading(false);
+     const response = await axios.post(endpoint, data);
      console.log("Response data", response.data);
      return response.data;
     } catch (err) {
-      setLoading(false);
       console.error("Error submitting form:", err);
       setError(err);
+      return null;
     } finally {
       setLoading(false);
     }
