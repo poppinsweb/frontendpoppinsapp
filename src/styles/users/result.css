@@ -22,13 +22,13 @@
 
 .header-container table td{
   padding: 0 25px;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .main-title {
   flex-wrap: wrap;
   color: #683498;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
 }
 
 .main-title-one {
@@ -42,7 +42,7 @@ tbody td.table-warning, td.table-danger {
 }
 
 .table>:not(caption)>*>* {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .table-title {

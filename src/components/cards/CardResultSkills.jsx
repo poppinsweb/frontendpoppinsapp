@@ -59,6 +59,13 @@ export const CardResultSkills = () => {
     },
   ];
 
+  const renderDescriptions = (descriptions) => {
+    if (!descriptions) return null;
+    return descriptions.split("-").map((item, index) => (
+      <div key={index}>- {item.trim()}</div>
+    ));
+  };
+
   const renderCategoryRow = (category) => {
     const responses = evaluation.responses.filter((response) =>
       category.questionIds.includes(response.questionId)
@@ -95,14 +102,18 @@ export const CardResultSkills = () => {
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 && (
             <div>
-              {groupedDescriptions[2].join("\n")}
+              {groupedDescriptions[2].map((description, index) => (
+                <div key={index}>{renderDescriptions(description)}</div>
+              ))}
             </div>
           )}
         </td>
         <td className="table-danger">
           {groupedDescriptions[1].length > 0 && (
             <div style={{ whiteSpace: "pre-wrap" }}>
-              {groupedDescriptions[1].join("\n")}
+              {groupedDescriptions[1].map((description, index) => (
+                <div key={index}>{renderDescriptions(description)}</div>
+              ))}
             </div>
           )}
         </td>

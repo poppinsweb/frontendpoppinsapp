@@ -1,9 +1,7 @@
 import { IoCheckmarkDoneSharp, IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
-import { useAuth } from "../../context/AuthProvider";
 
 export const CardResultIndependence = () => {
-  const { user } = useAuth();
   const {
     completEvaluation,
     loading: evaluationLoading,
@@ -18,23 +16,64 @@ export const CardResultIndependence = () => {
     return <p>No evaluation data found</p>;
   }
 
-  // Usar la primera evaluación completa en el array (ajusta según tu lógica)
   const evaluation = completEvaluation[0];
-
   console.log(evaluation.responses);
 
-  // Verifica si existen las respuestas dentro de la evaluación
   if (!evaluation.responses || evaluation.responses.length === 0) {
     return <p>No independence responses found</p>;
   }
 
-  // Accede a las respuestas de independencia
-  const showerIndependence = evaluation.responses[0];
-  const dressingIndependence = evaluation.responses[1];
-  const feedingIndependence = evaluation.responses[2];
-  const sleepingIndependence = evaluation.responses[3];
+  const independenceCategories = [
+    {
+      name: "Para bañarse",
+      response: evaluation.responses[0],
+    },
+    {
+      name: "Para vestirse",
+      response: evaluation.responses[1],
+    },
+    {
+      name: "Para alimentarse",
+      response: evaluation.responses[2],
+    },
+    {
+      name: "Para dormir",
+      response: evaluation.responses[3],
+    },
+  ];
 
-  // console.log(showerIndependence.answer);
+  const renderDescriptions = (descriptions) => {
+    if (!descriptions) return null;
+    return descriptions.split("-").map((item, index) => (
+      <div key={index}>- {item.trim()}</div>
+    ));
+  };
+
+  const renderCategoryRow = (category) => {
+    const { response } = category;
+
+    return (
+      <tr key={category.name}>
+        <td>{category.name}</td>
+        <td className="table-primary">
+          {response && response.optionId == 4 && <IoCheckmarkDoneSharp />}
+        </td>
+        <td className="table-success">
+          {response && response.optionId == 3 && <IoCheckmarkSharp />}
+        </td>
+        <td className="table-warning">
+          {response && response.optionId == 2 && (
+            <div>{renderDescriptions(response.answer)}</div>
+          )}
+        </td>
+        <td className="table-danger">
+          {response && response.optionId == 1 && (
+            <div>{renderDescriptions(response.answer)}</div>
+          )}
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div>
@@ -50,140 +89,7 @@ export const CardResultIndependence = () => {
           </tr>
         </thead>
         <tbody className="result-titles">
-          <tr>
-            <td>Para bañarse</td>
-            {showerIndependence && showerIndependence.optionId == 4 ? (
-              <td className="table-primary">
-                <IoCheckmarkDoneSharp />
-              </td>
-            ) : (
-              <td className="table-primary"></td>
-            )}
-            {showerIndependence && showerIndependence.optionId == 3 ? (
-              <td className="table-success">
-                <IoCheckmarkDoneSharp />
-              </td>
-            ) : (
-              <td className="table-success"></td>
-            )}
-            {showerIndependence && showerIndependence.optionId == 2 ? (
-              <td className="table-warning">
-                {showerIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-warning"></td>
-            )}
-            {showerIndependence && showerIndependence.optionId == 1 ? (
-              <td className="table-danger">
-                {showerIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-danger"></td>
-            )}
-          </tr>
-          <tr>
-            <td>Para vestirse</td>
-            {dressingIndependence && dressingIndependence.optionId == 4 ? (
-              <td className="table-primary">
-                <IoCheckmarkDoneSharp />
-              </td>
-            ) : (
-              <td className="table-primary"></td>
-            )}
-            {dressingIndependence && dressingIndependence.optionId == 3 ? (
-              <td className="table-success">
-                <IoCheckmarkSharp />
-              </td>
-            ) : (
-              <td className="table-success"></td>
-            )}
-            {dressingIndependence && dressingIndependence.optionId == 2 ? (
-              <td className="table-warning">
-                <div>
-                  {dressingIndependence.answer}
-                </div>
-              </td>
-            ) : (
-              <td className="table-warning"></td>
-            )}
-            {dressingIndependence && dressingIndependence.optionId == 1 ? (
-              <td className="table-danger">
-                {dressingIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-danger"></td>
-            )}
-          </tr>
-          <tr>
-            <td>Para alimentarse</td>
-            {feedingIndependence && feedingIndependence.optionId == 4 ? (
-              <td className="table-primary">
-                <IoCheckmarkDoneSharp />
-              </td>
-            ) : (
-              <td className="table-primary"></td>
-            )}
-            {feedingIndependence && feedingIndependence.optionId == 3 ? (
-              <td className="table-success">
-                <IoCheckmarkSharp />
-              </td>
-            ) : (
-              <td className="table-success"></td>
-            )}
-            {feedingIndependence && feedingIndependence.optionId == 2 ? (
-              <td className="table-warning">
-                {feedingIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-warning"></td>
-            )}
-            {feedingIndependence && feedingIndependence.optionId == 1 ? (
-              <td className="table-danger">
-                {feedingIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-danger"></td>
-            )}
-          </tr>
-          <tr>
-            <td>Para dormir</td>
-            {sleepingIndependence && sleepingIndependence.optionId == 4 ? (
-              <td className="table-primary">
-                <IoCheckmarkDoneSharp />
-              </td>
-            ) : (
-              <td className="table-primary"></td>
-            )}
-            {sleepingIndependence && sleepingIndependence.optionId == 3 ? (
-              <td className="table-success">
-                <IoCheckmarkSharp />
-              </td>
-            ) : (
-              <td className="table-success"></td>
-            )}
-            {sleepingIndependence && sleepingIndependence.optionId == 2 ? (
-              <td className="table-warning">
-                {sleepingIndependence.answer}
-                <div></div>
-              </td>
-            ) : (
-              <td className="table-warning"></td>
-            )}
-            {sleepingIndependence && sleepingIndependence.optionId == 1 ? (
-              <td className="table-danger">
-                <div style={{ color: "blue", textWrap: "wrap" }}>
-                  {sleepingIndependence.answer}
-                </div>
-              </td>
-            ) : (
-              <td className="table-danger"></td>
-            )}
-          </tr>
+          {independenceCategories.map((category) => renderCategoryRow(category))}
         </tbody>
       </table>
     </div>
