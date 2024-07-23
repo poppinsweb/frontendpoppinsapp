@@ -3,15 +3,20 @@ import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
+import { InfoToken } from "../token/InfoToken";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const { data: childData, loading: childLoading, error: childError } = useChild();
+  const {
+    data: childData,
+    loading: childLoading,
+    error: childError,
+  } = useChild();
   const navigate = useNavigate();
 
-  // console.log(childData);
+  console.log(childData);
 
   const {
     submitEvaluation,
@@ -69,7 +74,7 @@ const CardQuestions = ({ questionsData }) => {
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
-          navigate("/resultados");  // Navegar a /resultados después del envío exitoso
+          navigate("/resultados"); // Navegar a /resultados después del envío exitoso
         } else {
           console.error("Error submitting user responses:", submitError);
         }
@@ -87,6 +92,9 @@ const CardQuestions = ({ questionsData }) => {
   const currentQuestionData = questionsData[0].questions[currentQuestion];
   return (
     <div className="question-main-container">
+      <div>
+        <InfoToken />
+      </div>
       <div> Niño: {childData?.firstName}</div>
       <Card
         title={currentQuestionData.title}

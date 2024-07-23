@@ -125,7 +125,7 @@ export const CardResultHabits = () => {
 
   return (
     <div>
-      <h2>Hábitos y Responsabilidades</h2>
+      <h2 className="table-title">Hábitos y Responsabilidades</h2>
       <table className="table table-hover results-container">
         <thead className="result-titles">
           <tr>

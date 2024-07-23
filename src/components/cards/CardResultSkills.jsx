@@ -112,7 +112,7 @@ export const CardResultSkills = () => {
 
   return (
     <div>
-      <h2>Habilidades</h2>
+      <h2 className="table-title">Habilidades</h2>
       <table className="table table-hover results-container">
         <thead className="result-titles">
           <tr>

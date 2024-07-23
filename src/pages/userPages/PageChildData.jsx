@@ -29,6 +29,7 @@ const PageChildData = () => {
   const navigate = useNavigate();
 
   const { evaluationtoken } = location.state || {};
+  console.log("en pagechild", evaluationtoken);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -121,8 +122,8 @@ const PageChildData = () => {
     }
   };
 
-  if (loading || childLoading) return <p>Loading...</p>;
-  if (error || childError) return <p>Error loading data: {error.message}</p>;
+  // if (loading || childLoading) return <p>Loading...</p>;
+  // if (error || childError) return <p>Error loading data: {error.message}</p>;
 
   return (
     <div className="user-container">
@@ -132,7 +133,7 @@ const PageChildData = () => {
         alt="Logo paraguas"
       />
       <h2 className="user-title">Datos del Niño</h2>
-      <div>Token Seleccionado: {childData?.evaluationtoken}</div>
+      <div>Token Seleccionado: {evaluationtoken}</div>
       <div>
         <div>
           <form onSubmit={handleSubmit}>

@@ -38,21 +38,28 @@ const EvaluationResultPage = () => {
       useCORS: true,
     });
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF();
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    const marginLeft = 10;
-    const marginTop = 20;
-    const marginRight = 10;
-    const marginBottom = 10;
+    // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
+    const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "in",
+    format: "letter",
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth(); // 8.5 pulgadas
+    const pdfHeight = pdf.internal.pageSize.getHeight(); // 11 pulgadas
+
+    const marginLeft = 0.25; // 0.5 pulgadas de margen izquierdo
+    const marginTop = 1.0; // 0.5 pulgadas de margen superior
+    const marginRight = 0.25; // 0.5 pulgadas de margen derecho
+    const marginBottom = 0.25; // 0.5 pulgadas de margen inferior
 
     const usableWidth = pdfWidth - marginLeft - marginRight;
     const usableHeight = pdfHeight - marginTop - marginBottom;
 
     const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = imgProps.width;
-    const imgHeight = imgProps.height;
+    const imgWidth = imgProps.width / 96; // Convertir a pulgadas (asumiendo 96 ppi)
+    const imgHeight = imgProps.height / 96; // Convertir a pulgadas (asumiendo 96 ppi)
 
     const scaleFactor = Math.min(
       usableWidth / imgWidth,
@@ -70,7 +77,7 @@ const EvaluationResultPage = () => {
       newImgWidth,
       newImgHeight
     );
-    pdf.save("poppinsEduca_result.pdf");
+    pdf.save("poppinsEduca_resultados.pdf");
   };
 
   return (
@@ -79,8 +86,8 @@ const EvaluationResultPage = () => {
         <div>
           <img className="img-result" src={umbrella} alt="logo paraguas" />
         </div>
-        <h1 className="main-title">Evaluación de hábitos e independencia</h1>
-        <h2>en la rutina diaria</h2>
+        <h1 className="main-title main-title-one">Evaluación de hábitos e independencia</h1>
+        <h2 className="main-title">en la rutina diaria</h2>
         <div className="header-container">
           <div className="header-container">
             <table className="table table-borderless ">
@@ -120,7 +127,7 @@ const EvaluationResultPage = () => {
         <CardResultHabits />
       </div>
       <button className="btn-color" onClick={handleDownloadPdf}>
-        Download PDF
+        Descargar PDF
       </button>
     </>
   );

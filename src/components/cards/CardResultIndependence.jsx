@@ -38,7 +38,7 @@ export const CardResultIndependence = () => {
 
   return (
     <div>
-      <h2>Independencia</h2>
+      <h2 className="table-title">Independencia</h2>
       <table className="table table-hover results-container">
         <thead className="result-titles">
           <tr>
