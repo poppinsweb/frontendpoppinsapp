@@ -17,7 +17,7 @@ export const CardResultIndependence = () => {
   }
 
   const evaluation = completEvaluation[0];
-  console.log(evaluation.responses);
+  // console.log(evaluation);
 
   if (!evaluation.responses || evaluation.responses.length === 0) {
     return <p>No independence responses found</p>;

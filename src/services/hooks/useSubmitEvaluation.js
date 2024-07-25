@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useSubmitEvaluation = (endpoint) => {
+const useSubmitEvaluation = (url) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -10,7 +10,7 @@ const useSubmitEvaluation = (endpoint) => {
     setError(null);
     console.log(data);
     try {  
-     const response = await axios.post(endpoint, data);
+     const response = await axios.post(url, data);
      console.log("Response data", response.data);
      return response.data;
     } catch (err) {

@@ -18,7 +18,7 @@ const EvaluationResultPage = () => {
   if (childrenError)
     return <p>Error loading children data: {childrenError.message}</p>;
 
-  console.log(evaluationtoken);
+  // console.log(evaluationtoken);
 
   const responses = childrenData?.responses || [];
 

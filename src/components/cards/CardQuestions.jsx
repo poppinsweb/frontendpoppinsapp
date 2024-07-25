@@ -10,36 +10,33 @@ const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const {
-    data: childData,
-    loading: childLoading,
-    error: childError,
-  } = useChild();
-
+  const { data: childData, loading: childLoading, error: childError } = useChild();
   const navigate = useNavigate();
-
-  const {
-    submitEvaluation,
-    loading: submitting,
-    error: submitError,
-  } = useSubmitEvaluation("http://localhost:3000/api/completevaluations");
+  const { submitEvaluation, loading: submitting, error: submitError } = useSubmitEvaluation("http://localhost:3000/api/completevaluation");
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
-      setUserResponses(Array(questionsData[0].questions.length).fill(null));
+      const savedResponses = sessionStorage.getItem('userResponses');
+      if (savedResponses) {
+        setUserResponses(JSON.parse(savedResponses));
+      } else {
+        setUserResponses(Array(questionsData[0].questions.length).fill(null));
+      }
     }
   }, [questionsData]);
 
   const handleAnswer = (choice) => {
-    setUserResponses((prevResponses) => [
-      ...prevResponses.slice(0, currentQuestion),
+    const updatedResponses = [
+      ...userResponses.slice(0, currentQuestion),
       {
         optionId: choice.id,
         answer: choice.label,
         description: questionsData[0].questions[currentQuestion].description,
       },
-      ...prevResponses.slice(currentQuestion + 1),
-    ]);
+      ...userResponses.slice(currentQuestion + 1),
+    ];
+    setUserResponses(updatedResponses);
+    sessionStorage.setItem('userResponses', JSON.stringify(updatedResponses));
   };
 
   const handleBeforeQuestion = () => {
@@ -67,21 +64,26 @@ const CardQuestions = ({ questionsData }) => {
           })),
         };
 
-        const responseData = await submitEvaluation(dataToSend);
+        // console.log("datatosend", dataToSend);
 
-        if (responseData) {
-          console.log("Respuestas enviadas correctamente:", responseData);
-          setResultsSent(true);
-          alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
-          // Actualizar el uso del token
+        const responseData = await submitEvaluation(dataToSend);
+          if (responseData) {
+            console.log("Respuestas enviadas correctamente:", responseData);
+            setResultsSent(true);
+            alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
+          console.log("datatosend", dataToSend);
+
+          
+          // Actualiza el uso del token
           try {
             await axios.post(`http://localhost:3000/api/tokens/${childData.evaluationtoken}/use`);
+            sessionStorage.removeItem('userResponses'); // Limpia el almacenamiento después de enviar las respuestas
             navigate("/token");
           } catch (error) {
             console.error("Error updating token usage:", error);
           }
         } else {
-          console.error("Error submitting user responses:", submitError);
+          console.error("Error submitting responses:", submitError);
         }
       }
     }
@@ -94,6 +96,8 @@ const CardQuestions = ({ questionsData }) => {
     return <p>Loading questions...</p>;
   }
   const currentQuestionData = questionsData[0].questions[currentQuestion];
+
+  console.log(userResponses);
 
   return (
     <div className="question-main-container">

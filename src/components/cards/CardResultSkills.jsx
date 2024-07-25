@@ -19,7 +19,7 @@ export const CardResultSkills = () => {
   }
 
   const evaluation = completEvaluation[0];
-  console.log(evaluation.responses);
+  // console.log(evaluation.responses);
 
   if (!evaluation.responses || evaluation.responses.length === 0) {
     return <p>No skills responses found</p>;
