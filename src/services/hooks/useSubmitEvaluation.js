@@ -11,7 +11,9 @@ const useSubmitEvaluation = (url) => {
     console.log(data);
     try {  
      const response = await axios.post(url, data);
+
      console.log("Response data", response.data);
+
      return response.data;
     } catch (err) {
       console.error("Error submitting form:", err);

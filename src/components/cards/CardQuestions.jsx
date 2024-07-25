@@ -64,16 +64,13 @@ const CardQuestions = ({ questionsData }) => {
           })),
         };
 
-        // console.log("datatosend", dataToSend);
-
+        // Verificar si el token ya se ha usado una vez
         const responseData = await submitEvaluation(dataToSend);
-          if (responseData) {
-            console.log("Respuestas enviadas correctamente:", responseData);
-            setResultsSent(true);
-            alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
-          console.log("datatosend", dataToSend);
+        if (responseData) {
+          console.log("Respuestas enviadas correctamente:", responseData);
+          setResultsSent(true);
+          alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
 
-          
           // Actualiza el uso del token
           try {
             await axios.post(`http://localhost:3000/api/tokens/${childData.evaluationtoken}/use`);

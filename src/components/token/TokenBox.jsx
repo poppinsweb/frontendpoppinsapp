@@ -6,7 +6,6 @@ import "../../styles/users/token.css";
 
 export const TokenBox = () => {
   const [selectedToken, setSelectedToken] = useState("");
-  const [isEvaluationCompleted, setIsEvaluationCompleted] = useState(false);
   const [tokenUsageCount, setTokenUsageCount] = useState(0);
   const { user } = useAuth();
   const {
@@ -32,11 +31,6 @@ export const TokenBox = () => {
       if (selectedTokenData) {
         setTokenUsageCount(selectedTokenData.usageCount);
       }
-
-      // Verificar si la evaluación está completa
-      const evaluation = evaluationsData?.find((ev) => ev.evaluationtoken === selectedToken
-      );
-      setIsEvaluationCompleted(!!evaluation?.responses?.length);
     }
   }, [selectedToken, tokensData, evaluationsData]);
 
@@ -65,8 +59,10 @@ export const TokenBox = () => {
     navigate("/encuesta", { state: { evaluationtoken: selectedToken } });
   };
 
-  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount >= 1;
-  const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount < 1;
+  // console.log(tokenUsageCount);
+
+  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount > 2;
+  const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1; 
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
   return (
@@ -105,16 +101,17 @@ export const TokenBox = () => {
             onClick={handleNavigateEvaluation}
             disabled={isInitialEvaluationDisabled}
           >
-            Evaluación Inicial
+            Ir a Encuesta
           </button>
         </div>
         <div className="btn-token-container">
           <button
             className="btn btn-outline btn-token-navigation"
-            onClick={handleNavigateEvaluation}
+            onClick={handleNavigateResult}
             disabled={isFinalEvaluationDisabled}
           >
-            Evaluación Final
+            {/* AJUSTAR LOGICA DE BOTON */}
+            Ver Segundos Resultados 
           </button>
         </div>
         <div className="btn-token-container">
@@ -123,7 +120,7 @@ export const TokenBox = () => {
             disabled={isResultDisabled}
             onClick={handleNavigateResult}
           >
-            Ver Resultados / Imprimir
+            Ver Primeros Resultados
           </button>
         </div>
       </div>
