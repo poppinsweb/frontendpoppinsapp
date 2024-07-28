@@ -61,7 +61,7 @@ export const TokenBox = () => {
 
   // console.log(tokenUsageCount);
 
-  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount > 2;
+  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount >= 2;
   const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1; 
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
@@ -111,7 +111,7 @@ export const TokenBox = () => {
             disabled={isFinalEvaluationDisabled}
           >
             {/* AJUSTAR LOGICA DE BOTON */}
-            Ver Segundos Resultados 
+            Resultados Seguimiento
           </button>
         </div>
         <div className="btn-token-container">
@@ -120,7 +120,7 @@ export const TokenBox = () => {
             disabled={isResultDisabled}
             onClick={handleNavigateResult}
           >
-            Ver Primeros Resultados
+            Consultar Resultados #1
           </button>
         </div>
       </div>

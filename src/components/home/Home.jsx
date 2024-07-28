@@ -16,7 +16,7 @@ export function Home() {
       <section>
         <div className="row services-container">
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
-            <a href="/login">
+            <a href="/infoencuesta">
               <img
                 src={"src/styles/images/tests.png"}
                 alt="test"
@@ -26,7 +26,7 @@ export function Home() {
             </a>
           </div>
           <div className="col-12 col-md-6 col-lg-4 img-individual-container2">
-            <a href="/construction">
+            <a href="/construction"> 
               <img
                 src={"src/styles/images/paraguas.png"}
                 alt="service"

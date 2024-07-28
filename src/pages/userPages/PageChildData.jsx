@@ -10,8 +10,15 @@ const PageChildData = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { data, loading, error } = useFetchData("http://localhost:3000/api/children");
-  const { submitForm, loading: submitting, error: submitError } = useSubmitForm("http://localhost:3000/api/childrenres");
+  const [isChecked, setIsChecked] = useState(false);
+  const { data, loading, error } = useFetchData(
+    "http://localhost:3000/api/children"
+  );
+  const {
+    submitForm,
+    loading: submitting,
+    error: submitError,
+  } = useSubmitForm("http://localhost:3000/api/childrenres");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -88,6 +95,7 @@ const PageChildData = () => {
         setFirstName("");
         setLastName("");
         setSelectedOptions({});
+        setIsChecked(false);
         navigate("/token");
       } else {
         console.error("Error submitting user responses:", submitError);
@@ -163,10 +171,25 @@ const PageChildData = () => {
                 </select>
               </div>
             ))}
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={isChecked}
+                onChange={(e) => setIsChecked(e.target.checked)}
+                // id="flexSwitchCheckDefault"
+              />
+              <label
+                className="form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Acepto la política de tratamiento de datos personales
+              </label>
+            </div>
             <button
               type="submit"
               className="btn btn-admin btn-color"
-              disabled={!validateForm() || isSubmitting || submitting}
+              disabled={!validateForm() || isSubmitting || submitting || !isChecked}
             >
               {isSubmitting || submitting ? "Enviando..." : "Enviar"}
             </button>

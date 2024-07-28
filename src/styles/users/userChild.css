@@ -43,40 +43,30 @@ form .user-select {
   .code-container {
     margin-top: 50rem;
   }
-
-  .container .user-container {
-    
-  }
 }
 
 /* LARGE SCREEN */
 @media (min-width: 1200px) {
   .user-container {
-    /* background-image: url("../images/cloud-stars.jpg"); */
     background-size: contain;
-    /* background-repeat: no-repeat; */
-    /* font-size: 1.5rem; */
-    /* color: #4a0a6a; */
     min-height: 100vh;
-    /* width: 1000vh; */
     background-color: #6971a1;
   }
-
-  /* .logo2 {
-    position: relative;
-    top: 700px;
-    left: 450px;
-    width: 450px;
-    height: 450px; 
-  } */
 
   select {
     text-align: center;
   }
 
-  /* .css-13cymwt-control {
-    width: 750px;
-  } */
+  .form-check .form-check-input{
+    float: unset;
+    margin-top: 20px;
+  }
+
+  .form-check-label {
+    margin-left: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+  }
 }
 
 /* LARGER SCREEN */

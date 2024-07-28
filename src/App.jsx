@@ -10,6 +10,7 @@ import { Construction } from "./components/home/Construction";
 import AdminRoutes from "./routes/AdminRoutes";
 import UserRoutes from "./routes/UserRoutes";
 import PrivateRoute from "./routes/PrivateRoute";
+import { PageInfoEncuesta } from "./pages/home/landingPages/pageInfoEncuesta";
 
 export default function App() {
   const { user } = useAuth();
@@ -25,6 +26,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/construction" element={<Construction />} />
+        <Route path="/infoencuesta" element={<PageInfoEncuesta />} />
         <Route path="/login" element={<PrivateRoute element={<LoginPage />} redirectTo="/" />} />
         <Route path="/carrito" element={<Cart />} />
         <Route path="/register" element={<RegisterUser />} />

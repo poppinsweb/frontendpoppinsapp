@@ -70,15 +70,9 @@ const CardQuestions = ({ questionsData }) => {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
           alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
-
-          // Actualiza el uso del token
-          try {
-            await axios.post(`http://localhost:3000/api/tokens/${childData.evaluationtoken}/use`);
-            sessionStorage.removeItem('userResponses'); // Limpia el almacenamiento después de enviar las respuestas
-            navigate("/token");
-          } catch (error) {
-            console.error("Error updating token usage:", error);
-          }
+          sessionStorage.removeItem('userResponses'); // Limpia el almacenamiento después de enviar las respuestas
+          navigate("/token");
+          
         } else {
           console.error("Error submitting responses:", submitError);
         }
@@ -94,12 +88,12 @@ const CardQuestions = ({ questionsData }) => {
   }
   const currentQuestionData = questionsData[0].questions[currentQuestion];
 
-  console.log(userResponses);
+  // console.log(userResponses);
 
   return (
     <div className="question-main-container">
       <div>
-        <InfoToken />
+        {/* AQUI LAS INSTRUCCIONES DE LA ENCUESTA */}
       </div>
       <div> Niño: {childData?.firstName}</div>
       <Card

@@ -13,24 +13,28 @@ export const InfoToken = () => {
           onClick={handleToggleCollapse}
           className="btn btn-outline btn-token-navigation"
         >
-          Instrucciones
+          Instrucciones abrir/cerrar
         </button>
         {collapsed ? null : (
           <>
             <p className="btn-info-text">
-              1. Elija la opción adecuada para su caso: Si es la primera vez que
-              diligencia la encuesta, llene los datos del niño, de lo
-              contrario, elija el token al que quiere acceder y a continuación,
-              click en Encuesta Inicial.
-            </p>
-            <p className="btn-info-text">
-              2. Cada token tiene acceso a dos aplicaciones de la encuesta, por
-              favor verifique en qué fase de aplicación se encuentra. Recuerde
-              que la segunda aplicación se adjunta a los datos que se crearon en
-              la primera.
-            </p>
-            <p className="btn-info-text">
-              3. Son alrededor de 50 preguntas, por favor tómese su tiempo para responder y verifique que cada pregunta tuvo respuesta antes de oprimir el botón Siguiente.
+            PARA USUARIOS NUEVOS:
+              <ol>
+                <li>Elija el TOKEN que tenga disponible</li>
+                <li>Presione el botón "Datos del Niño"</li> 
+                <li>Diligencie todos los datos personales del niño</li>
+                <li>Acepte la autorización para el tratamiento de datos personales</li>
+                <li>Al presionar "Enviar" será redirigido de nuevo a esta página, entonces siga las instrucciones del 6 al 11</li>
+              </ol>
+              <p>PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL NIÑO:</p>
+              <ol start={6}>
+                <li>Elija el TOKEN que ya contiene los datos del niño</li>
+                <li>Si es la primera vez que llena la encuesta con este TOKEN, podrá presionar el botón "Ir a Encuesta", lo cual le llevará al inicio de ésta.</li>
+                <li>Por favor disponga de aproximadamente 20 a 30 minutos para diligenciar todas las preguntas (51 en total)</li>
+                <li>Es MUY IMPORTANTE que la persona que diligencia la encuesta conozca bien al niño y sea honesta con las respuestas</li>
+                <li>Al finalizar el diligenciamiento será redirigido de nuevo a esta página, y se activará el botón "Consultar Resultados #1"</li>
+                <li>Por favor esté pendiente para diligenciar la encuesta de seguimiento en un tiempo entre 5 y 6 meses. Para ello, siga las instrucciones de la 12 a la 15</li>
+              </ol>
             </p>
           </>
         )}
