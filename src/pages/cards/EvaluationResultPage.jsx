@@ -19,13 +19,18 @@ const EvaluationResultPage = () => {
     return <p>Error loading children data: {childrenError.message}</p>;
 
   // console.log(evaluationtoken);
+  // console.log(childrenData.createdAt);
 
   const responses = childrenData?.responses || [];
 
-  const fechaAplicacion = childrenData?.createdAt;
+  const fechaParte= childrenData?.createdAt?.slice(0, 10);
+  const [year, month, day] = fechaParte.split("-");
+  const fechaAplicacion = `${day}-${month}-${year}`;
+
+
   const sexo = responses[0]?.value || "N/A";
-  const estrato = responses[1]?.value || "N/A";
-  const tipoInstitucion = responses[2]?.value || "N/A";
+  // const estrato = responses[1]?.value || "N/A";
+  // const tipoInstitucion = responses[2]?.value || "N/A";
   const nivelEscolar = responses[3]?.value || "N/A";
   const aniosEdad = responses[4]?.value || "N/A";
   const mesesEdad = responses[5]?.value || "N/A";
@@ -116,7 +121,7 @@ const EvaluationResultPage = () => {
                   </td>
                   <td>{sexo}</td>
                   <td>{nivelEscolar}</td>
-                  <td>{fechaAplicacion?.slice(0, 10)}</td>
+                  <td>{fechaAplicacion}</td>
                 </tr>
               </tbody>
             </table>

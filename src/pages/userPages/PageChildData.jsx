@@ -120,36 +120,40 @@ const PageChildData = () => {
       <h2 className="user-title">Datos del Niño</h2>
       <div>Token Seleccionado: {evaluationtoken}</div>
       <div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label className="user-label" htmlFor="firstName">
-                <h3>Nombres</h3>
-              </label>
-            </div>
-            <input
-              type="text"
-              className="user-input"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-            <div>
-              <label className="user-label" htmlFor="lastName">
-                <h3>Apellidos</h3>
-              </label>
-            </div>
-            <input
-              type="text"
-              className="user-input"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className="user-label" htmlFor="firstName">
+              <h3>Nombres</h3>
+            </label>
+          </div>
+          <input
+            type="text"
+            className="user-input"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <div>
+            <label className="user-label" htmlFor="lastName">
+              <h3>Apellidos</h3>
+            </label>
+          </div>
+          <input
+            type="text"
+            className="user-input"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
 
-            {options.map((category) => (
+          {options.map((category) => {
+            if (category.category === "Años de edad" || category.category === "Meses") {
+              return null; // Omitir estos campos de la lista de categorías
+            }
+
+            return (
               <div key={category._id}>
                 <h3 className="user-label">{category.category}</h3>
                 <select
@@ -170,32 +174,72 @@ const PageChildData = () => {
                   ))}
                 </select>
               </div>
-            ))}
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                checked={isChecked}
-                onChange={(e) => setIsChecked(e.target.checked)}
-                // id="flexSwitchCheckDefault"
-              />
-              <label
-                className="form-check-label"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                Acepto la política de tratamiento de datos personales
+            );
+          })}
+
+          <div className="age-container">
+            <div className="age-item">
+              <label className="age-user-label" htmlFor="years">
+                Edad del niño
               </label>
+              <select
+                className="age-user-select"
+                id="years"
+                value={selectedOptions.years || ""}
+                onChange={(e) => handleSelectedChange("years", e.target.value)}
+              >
+                <option value="" disabled>
+                  Selecciona años
+                </option>
+                {[4, 5, 6, 7, 8].map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
             </div>
-            <button
-              type="submit"
-              className="btn btn-admin btn-color"
-              disabled={!validateForm() || isSubmitting || submitting || !isChecked}
-            >
-              {isSubmitting || submitting ? "Enviando..." : "Enviar"}
-            </button>
-            {submitError && <p>Error submitting data: {submitError.message}</p>}
-          </form>
-        </div>
+            <div className="age-item">
+              <label className="age-user-label" htmlFor="months">
+                Meses
+              </label>
+              <select
+                className="age-user-select"
+                id="months"
+                value={selectedOptions.months || ""}
+                onChange={(e) => handleSelectedChange("months", e.target.value)}
+              >
+                <option value="" disabled>
+                  Selecciona meses
+                </option>
+                {[...Array(12).keys()].map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
+            <label className="form-check-label">
+              Acepto la política de tratamiento de datos personales
+            </label>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-admin btn-color"
+            disabled={!validateForm() || isSubmitting || submitting || !isChecked}
+          >
+            {isSubmitting || submitting ? "Enviando..." : "Enviar"}
+          </button>
+          {submitError && <p>Error submitting data: {submitError.message}</p>}
+        </form>
       </div>
     </div>
   );

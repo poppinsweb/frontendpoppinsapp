@@ -1,4 +1,4 @@
-import { IoCheckmarkDoneSharp, IoCheckmarkSharp } from "react-icons/io5";
+import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
 // import { useAuth } from "../../context/AuthProvider";
 
@@ -107,7 +107,7 @@ export const CardResultHabits = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {renderIcons && hasOptionId4 && <IoCheckmarkDoneSharp />}
+          {renderIcons && hasOptionId4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
           {renderIcons && hasOptionId3 && <IoCheckmarkSharp />}

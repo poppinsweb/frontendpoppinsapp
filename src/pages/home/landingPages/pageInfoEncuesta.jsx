@@ -5,7 +5,7 @@ export const PageInfoEncuesta = () => {
         <h2 className="centered-title">
           <strong>INTRODUCCIÓN</strong> <br />
         </h2>
-        La Evaluación de hábitos e independencia en la rutina diaria se aplica en niños entre los 4 y 8 años y está
+        La Evaluación de hábitos e independencia en la rutina diaria se aplica con niños entre los 4 y 8 años y está
         deseñada para identificar tres aspectos: 
         <ol>
           <li>Independencia en actividades de baño, vestido, alimentación y sueño</li>

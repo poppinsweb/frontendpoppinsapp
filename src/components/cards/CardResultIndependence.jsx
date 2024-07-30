@@ -1,4 +1,4 @@
-import { IoCheckmarkDoneSharp, IoCheckmarkSharp } from "react-icons/io5";
+import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
 
 export const CardResultIndependence = () => {
@@ -56,7 +56,7 @@ export const CardResultIndependence = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {response && response.optionId == 4 && <IoCheckmarkDoneSharp />}
+          {response && response.optionId == 4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
           {response && response.optionId == 3 && <IoCheckmarkSharp />}

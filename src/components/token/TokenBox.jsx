@@ -27,7 +27,7 @@ export const TokenBox = () => {
       const selectedTokenData = tokensData?.tokens.find(
         (token) => token.evaluationToken === selectedToken
       );
-      
+
       if (selectedTokenData) {
         setTokenUsageCount(selectedTokenData.usageCount);
       }
@@ -39,8 +39,10 @@ export const TokenBox = () => {
   );
 
   if (tokensLoading || evaluationsLoading) return <p>Loading...</p>;
-  if (tokensError) return <p>Error loading tokens data: {tokensError.message}</p>;
-  if (evaluationsError) return <p>Error loading evaluations data: {evaluationsError.message}</p>;
+  if (tokensError)
+    return <p>Error loading tokens data: {tokensError.message}</p>;
+  if (evaluationsError)
+    return <p>Error loading evaluations data: {evaluationsError.message}</p>;
 
   const handleTokenChange = (event) => {
     const newToken = event.target.value;
@@ -62,7 +64,7 @@ export const TokenBox = () => {
   // console.log(tokenUsageCount);
 
   const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount >= 2;
-  const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1; 
+  const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1;
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
   return (
@@ -97,7 +99,7 @@ export const TokenBox = () => {
       <div className="navitoken-main-container">
         <div className="btn-token-container">
           <button
-            className="btn btn-outline btn-token-navigation"
+            className="btn btn-outline-secondary btn-token-navigation"
             onClick={handleNavigateEvaluation}
             disabled={isInitialEvaluationDisabled}
           >
@@ -106,21 +108,20 @@ export const TokenBox = () => {
         </div>
         <div className="btn-token-container">
           <button
-            className="btn btn-outline btn-token-navigation"
+            className="btn btn-outline-secondary btn-token-navigation"
+            disabled={isResultDisabled}
             onClick={handleNavigateResult}
-            disabled={isFinalEvaluationDisabled}
           >
-            {/* AJUSTAR LOGICA DE BOTON */}
-            Resultados Seguimiento
+            Resultados primera aplicación
           </button>
         </div>
         <div className="btn-token-container">
           <button
-            className="btn btn-outline btn-token-navigation"
-            disabled={isResultDisabled}
+            className="btn btn-outline-secondary btn-token-navigation"
             onClick={handleNavigateResult}
+            disabled={isFinalEvaluationDisabled}
           >
-            Consultar Resultados #1
+            Resultados segunda aplicación
           </button>
         </div>
       </div>
