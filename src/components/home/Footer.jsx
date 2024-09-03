@@ -42,7 +42,7 @@ export const Footer = () => {
             <a href="www.facebook.com" >
               <FaFacebook alt="Link-facebook" className="social" />
             </a>
-            <a href="www.instagram.com">
+            <a href="https://www.instagram.com/poppinseduca/">
               <FaInstagram alt="Link-instagram" className="social" />
             </a>
             <a href="www.linkedin.com">

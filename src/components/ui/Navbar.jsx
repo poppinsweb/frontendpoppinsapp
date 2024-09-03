@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
+import { BsCart4 } from "react-icons/bs";
 import "../../styles/App.css";
 
 export function Navbar() {
@@ -91,25 +92,10 @@ export function Navbar() {
                   </NavLink>
                 </li>
                 {/* <li className="nav-item">
-                  <NavLink className="nav-link" to="/personales">
-                    NiñoData
-                  </NavLink>
-                </li> */}
-                {/* <li className="nav-item">
-                  <NavLink className="nav-link" to="/encuesta">
-                    Encuesta
-                  </NavLink>
-                </li> */}
-                {/* <li className="nav-item">
-                  <NavLink className="nav-link" to="/resultados">
-                    Result
-                  </NavLink>
-                </li> */}
-                <li className="nav-item">
                   <NavLink className="nav-link" to="/carrito">
                     Cart
                   </NavLink>
-                </li>
+                </li> */}
               </>
             )}
           </ul>
@@ -118,6 +104,11 @@ export function Navbar() {
           className="collapse navbar-collapse justify-content-end"
           id="navbarNavLogout"
         >
+          <button className="btn icon-cart">
+            <NavLink className="nav-link" to="/carrito">
+              <BsCart4 />
+            </NavLink>
+          </button>
           <span className="nav-item nav-link text-primary mx-3">
             {user?.email}
           </span>

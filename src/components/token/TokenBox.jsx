@@ -7,17 +7,21 @@ import "../../styles/users/token.css";
 export const TokenBox = () => {
   const [selectedToken, setSelectedToken] = useState("");
   const [tokenUsageCount, setTokenUsageCount] = useState(0);
+  const [selectedChild, setSelectedChild] = useState("");
   const { user } = useAuth();
   const {
     data: tokensData,
     loading: tokensLoading,
     error: tokensError,
   } = useFetchData("http://localhost:3000/api/tokens");
+
   const {
     data: evaluationsData,
     loading: evaluationsLoading,
     error: evaluationsError,
   } = useFetchData("http://localhost:3000/api/completevaluations");
+
+  const { data:childData } = useFetchData("http://localhost:3000/api/childrenres")
 
   const navigate = useNavigate();
 
@@ -37,6 +41,24 @@ export const TokenBox = () => {
   const userEvaluationTokens = tokensData?.tokens.filter(
     (token) => token.userId === user.id
   );
+
+  useEffect(() => {
+    if (selectedToken && childData) {
+      const associatedChild = childData?.find(
+        (child) => child.evaluationtoken === selectedToken 
+      );
+      if (childData) console.log(associatedChild);
+      if (associatedChild) {
+        setSelectedChild(associatedChild);
+      } else {
+        setSelectedChild(null);
+      }
+    }
+  }, [selectedToken, childData]);
+
+  console.log(selectedChild);
+
+  
 
   if (tokensLoading || evaluationsLoading) return <p>Loading...</p>;
   if (tokensError)
@@ -62,10 +84,14 @@ export const TokenBox = () => {
   };
 
   // console.log(tokenUsageCount);
+  // console.log(childData);
+  // console.log(selectedChild);
 
-  const isInitialEvaluationDisabled = !selectedToken || tokenUsageCount >= 2;
+  const isInitialEvaluationDisabled = !selectedToken || !selectedChild || tokenUsageCount  >= 2;
   const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1;
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
+
+  const isDataChildButtonDissabled = !selectedToken || tokenUsageCount >= 1;;
 
   return (
     <>
@@ -89,7 +115,7 @@ export const TokenBox = () => {
             <button
               className="btn btn-color"
               onClick={handleNavigatePersonales}
-              disabled={!selectedToken}
+              disabled={isDataChildButtonDissabled}
             >
               Datos del Niño
             </button>

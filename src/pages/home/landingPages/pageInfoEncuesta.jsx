@@ -13,7 +13,7 @@ export const PageInfoEncuesta = () => {
           <li>Y nivel de interiorización de hábitos y rutinas básicas</li>
         </ol>
         Para diligenciarla debe adquirir un TOKEN que le permitirá hacer una evaluación inicial y una de seguimiento en un tiempo máximo de 6 meses. <br />
-        Duración de la Evaluación: 25 minutos aproximadamente.
+        Duración de la Evaluación: 10 minutos aproximadamente.
       </div>
       <div>
         <a href="/carrito">

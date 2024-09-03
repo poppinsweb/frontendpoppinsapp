@@ -55,10 +55,17 @@
   padding: 50px;
 }
 
-.nav-link:hover {
+.icon-cart {
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+.nav-link:hover, .icon-cart {
   cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
 }
 
 h1, h2, h3 {
   color: #543c80;
 }
+
+

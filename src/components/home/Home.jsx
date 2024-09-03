@@ -26,13 +26,13 @@ export function Home() {
             </a>
           </div>
           <div className="col-12 col-md-6 col-lg-4 img-individual-container2">
-            <a href="/construction"> 
+            <a href="/carrito"> 
               <img
                 src={"src/styles/images/paraguas.png"}
                 alt="service"
                 className="img-slider"
               />
-              <h2 className="text-slider">Talleres</h2>
+              <h2 className="text-slider">Compras</h2>
             </a>
           </div>
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">

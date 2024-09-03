@@ -1,8 +1,9 @@
 .main-cart {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-.product, .cart {
+.product {
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -25,4 +26,17 @@
   font-size: 20px;
   width: 50px;
   text-align: center;
+}
+
+.img-missions {
+  height: 300px;
+  border-radius: 20px;
+}
+
+.cart {
+  padding-top: 100px; 
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  font-size: large;
 }

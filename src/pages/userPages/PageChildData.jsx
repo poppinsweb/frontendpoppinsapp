@@ -191,7 +191,7 @@ const PageChildData = () => {
                 <option value="" disabled>
                   Selecciona años
                 </option>
-                {[4, 5, 6, 7, 8].map((year) => (
+                {[4, 5, 6, 7, 8, 9, 10].map((year) => (
                   <option key={year} value={year}>
                     {year}
                   </option>
@@ -200,7 +200,7 @@ const PageChildData = () => {
             </div>
             <div className="age-item">
               <label className="age-user-label" htmlFor="months">
-                Meses
+                Edad del niño
               </label>
               <select
                 className="age-user-select"
