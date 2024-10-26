@@ -1,6 +1,11 @@
 .main-cart {
+  background-color: #da8e2b;  
+}
+
+.main-cart-items {
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 }
 
 .product {
@@ -16,16 +21,24 @@
   justify-content: center;
 }
 
-.controls button {
-  font-size: 20px;
-  padding: 5px 10px;
+.controls-button, .controls-input {
+  font-size: 25px;
+  padding: 5px 20px;
   margin: 0 10px;
+  
+  border-radius: 10px;
 }
 
-.controls input {
-  font-size: 20px;
-  width: 50px;
+.controls-button:hover {
+  border-color: aqua;
+  cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
+}
+
+.controls-input {
+  width: 80px;
   text-align: center;
+  border-color: aqua;
+  font-size: 20px;
 }
 
 .img-missions {

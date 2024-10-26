@@ -28,6 +28,7 @@ export const RegisterUser = () => {
       setEmail("");
       setPassword("");
       setRole("user");
+      window.location.href = "/pago"
     } catch (error) {
       setMessage("Failed to register user");
       console.error("Error:", error);

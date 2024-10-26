@@ -8,6 +8,7 @@ const Cart = () => {
       nombre: "Token de Evaluación",
       cantidad: 0,
       precio: 20000,
+      imgSrc: "src/styles/images/token.png"
     },
     {
       id: 2,
@@ -56,7 +57,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    window.location.href = "/pago";
+    window.location.href = "/register";
   };
 
   const total = cartItems.reduce(
@@ -66,8 +67,10 @@ const Cart = () => {
 
   return (
     <>
-      <h1>Carrito de Compras</h1>
+      
       <div className="main-cart">
+        <div className="main-cart-title"><h1>Carrito de Compras</h1></div>
+        <div className="main-cart-items">
         {cartItems.map((item) => (
           <div key={item.id} className="product">
             <h2>{item.nombre}</h2>
@@ -80,19 +83,20 @@ const Cart = () => {
             )}
             <p>Precio: ${item.precio}</p>
             <div className="controls">
-              <button onClick={() => removeFromCart(item.id)}>-</button>
+              <button className="controls-button" onClick={() => removeFromCart(item.id)}>-</button>
               <input
+                className="controls-input"
                 type="number"
                 value={item.cantidad}
                 onChange={(e) => handleInputChange(item.id, e)}
               />
-              <button onClick={() => addToCart(item.id)}>+</button>
+              <button className="controls-button" onClick={() => addToCart(item.id)}>+</button>
             </div>
           </div>
         ))}
-      </div>
+      </div></div>
       <div className="cart">
-        <h2>Mi Compra</h2>
+        <h2>Resumen de mi Compra:</h2>
         {cartItems.map((item) => (
           <p key={item.id}>
             {item.nombre}: {item.cantidad} unidades

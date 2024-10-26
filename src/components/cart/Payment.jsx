@@ -2,7 +2,7 @@ import React from "react";
 
 export const Payment = () => {
   const handleCheckout = () => {
-    window.location.href = "/register";
+    window.location.href = "/login";
   };
   return (
     <>
