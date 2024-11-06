@@ -5,7 +5,7 @@
 
 .logo-container {
   background-image: url("../images/cloud-stars.jpg");
-  background-size: contain;
+  background-size: cover;
   background-color: #6870a1;
   background-repeat: no-repeat;
   height: 600px;
@@ -99,7 +99,7 @@ a {
     margin-top: 0;
     position: absolute;
     z-index: -1;
-    height: 1250px;
+    height: 1200px;
   }
 
   .logo {
@@ -135,10 +135,7 @@ a {
 
 /* LARGER SCREEN */
 @media (min-width: 1400px) {
-  .logo-container {
-    height: 1550px;
-  }
-
+  
  .logo {
     width: 700px;
     height: 643px;

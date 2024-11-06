@@ -5,7 +5,7 @@ function LandingPage() {
   return (
     <div className="">
       <Home />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

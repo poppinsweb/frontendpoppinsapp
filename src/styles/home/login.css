@@ -2,12 +2,15 @@
 .page-container {
   margin: 0 auto;
   padding: 90px 10px;
-  background-image: url("../images/fondo-nubes-blancas-lila.jpg");
-  background-size: contain;
-  height: 850px;
+  background-image: url("../images/fondo-nubes-blancas-lila-complete.jpg");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.footer-container-login {
+  margin-top: 0;
 }
 
 .login-card {
@@ -16,7 +19,7 @@
   border: 1px solid #444343;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px #414040;
-  padding-bottom: 50px;
+  padding: 50px;
   border-radius: 10px;
 }
 
@@ -27,23 +30,20 @@ label {
 /* MEDIUM SCREEN */
 @media (min-width: 768px) {
   .page-container {
-    background-size: cover;
-    padding: 50px;
     padding-top: 150px;
     min-height: 1054px;
   }
 
   .login-card {
     width: 60%;
-    /* width: 500px;
-    height: 400px; */
   }
 }
 
 /* LARGE SCREEN */
 @media (min-width: 992px) {
   .page-container {
-    min-height: 1250px;
+    background-size: contain;
+    min-height: 900px;
     padding: 0;
   }
 

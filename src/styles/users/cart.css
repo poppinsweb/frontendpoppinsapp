@@ -1,9 +1,15 @@
 .main-cart {
   background-color: #da8e2b;  
+  /* display: flex; */
+}
+
+.logo-cart {
+  height: 300px;
 }
 
 .main-cart-items {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding-top: 50px;
 }
@@ -14,6 +20,11 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.description {
+  width: 350px;
+  text-align: center;
+}
+
 
 .controls {
   display: flex;
@@ -41,8 +52,9 @@
   font-size: 20px;
 }
 
-.img-missions {
+.img-products {
   height: 300px;
+  width: 300px;
   border-radius: 20px;
 }
 

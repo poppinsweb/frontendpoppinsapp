@@ -11,6 +11,7 @@ import AdminRoutes from "./routes/AdminRoutes";
 import UserRoutes from "./routes/UserRoutes";
 import PrivateRoute from "./routes/PrivateRoute";
 import { PageInfoEncuesta } from "./pages/home/landingPages/pageInfoEncuesta";
+import { Footer } from "./components/home/Footer";
 
 export default function App() {
   const { user } = useAuth();
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/register" element={<RegisterUser />} />
         <Route path="/pago" element={<Payment />} />
       </Routes>
+      <Footer />
     </>
   );
 }

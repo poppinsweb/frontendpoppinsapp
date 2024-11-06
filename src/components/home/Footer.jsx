@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 export const Footer = () => {
   return (
-    <div className="container footer-container">
+    <div className="container footer-container footer-container-login">
       <footer className="text-center">
         <div className="container">
           <section className="mt-1 footer-links">
