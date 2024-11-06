@@ -62,14 +62,14 @@ export function Navbar() {
               <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/crear">
-                    Crear
+                    Crear usuario
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <NavLink className="nav-link" to="/admin">
                     Admin
                   </NavLink>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/lista">
                     Lista
