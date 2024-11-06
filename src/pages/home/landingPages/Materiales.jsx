@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "../../styles/users/cart.css";
+import { useNavigate } from "react-router-dom";
+import "../../../styles/users/cart.css"
 
-const Cart = () => {
-  const [cartItems, setCartItems] = useState([
+export const Materiales = () => {
+  const [Items, setItems] = useState([
     {
       id: 1,
       nombre: "Token de Evaluación",
@@ -101,62 +102,17 @@ const Cart = () => {
       imgSrc: "src/styles/images/combinacion-perfecta.jpg",
     },
   ]);
-  const [error, setError] = useState(null);
+   
+  const navigate = useNavigate();
 
-  const addToCart = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item
-      )
-    );
+  const handleNavigate = () => {
+    navigate("/carrito")
   };
-
-  const removeFromCart = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.cantidad > 0
-          ? { ...item, cantidad: item.cantidad - 1 }
-          : item
-      )
-    );
-  };
-
-  const handleInputChange = (id, e) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value) && value >= 0) {
-      setCartItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === id ? { ...item, cantidad: value } : item
-        )
-      );
-    }
-  };
-
-  const handleCheckout = () => {
-    // Check if any item has a quantity greater than zero
-    const hasItems = cartItems.some((item) => item.cantidad > 0);
-
-    if (!hasItems) {
-      // If no items have been selected, show an error message
-      setError("Por favor, seleccione al menos un producto antes de proceder.");
-      alert(error);
-      return;
-    }
-
-    // If items are selected, proceed to checkout
-    setError(null);
-    window.location.href = "/register";
-  };
-
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.cantidad * item.precio,
-    0
-  );
 
   return (
     <>
-      <div className="main-cart">
-        <div >
+      <div className="main-cart main-cart-green">
+        <div>
           <h1 className="title-cart">Material Educativo</h1>
           <img
             src="src/styles/images/UmbrellaFirst.png"
@@ -165,7 +121,7 @@ const Cart = () => {
           />
         </div>
         <div className="main-cart-items">
-          {cartItems.map((item) => (
+          {Items.map((item) => (
             <div key={item.id} className="product">
               <h2>{item.nombre}</h2>
               {item.imgSrc && (
@@ -177,47 +133,11 @@ const Cart = () => {
               )}
               <p className="description">{item.descripcion}</p>
               <p className="price">Precio: ${item.precio}</p>
-              <div className="controls">
-                <button
-                  className="controls-button"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  -
-                </button>
-                <input
-                  className="controls-input"
-                  type="number"
-                  value={item.cantidad}
-                  onChange={(e) => handleInputChange(item.id, e)}
-                />
-                <button
-                  className="controls-button"
-                  onClick={() => addToCart(item.id)}
-                >
-                  +
-                </button>
-              </div>
+              <button className="btn-color" onClick={ handleNavigate }>Comprar</button>
             </div>
           ))}
         </div>
       </div>
-      <div className="cart">
-        <h2>Resumen de mi Compra:</h2>
-        {cartItems
-          .filter((item) => item.cantidad > 0)
-          .map((item) => (
-            <p key={item.id}>
-              {item.nombre}: {item.cantidad} unidades
-            </p>
-          ))}
-        <p>Total: ${total}</p>
-
-        <button className="btn btn-outline-primary btn-pay" onClick={handleCheckout}>
-          Pagar
-        </button>
-      </div>
     </>
   );
 };
-
-export default Cart;

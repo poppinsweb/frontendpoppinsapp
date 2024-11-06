@@ -36,7 +36,7 @@ export function Home() {
             </a>
           </div>
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
-            <a href="/construction">
+            <a href="/materiales">
               <img
                 src={"src/styles/images/fondocolores.jpg"}
                 alt="service"
