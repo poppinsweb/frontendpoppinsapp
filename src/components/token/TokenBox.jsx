@@ -7,7 +7,7 @@ import "../../styles/users/token.css";
 export const TokenBox = () => {
   const [selectedToken, setSelectedToken] = useState("");
   const [tokenUsageCount, setTokenUsageCount] = useState(0);
-  const [selectedChild, setSelectedChild] = useState("");
+  const [selectedChild, setSelectedChild] = useState(null);
   const { user } = useAuth();
   const {
     data: tokensData,
@@ -21,7 +21,7 @@ export const TokenBox = () => {
     error: evaluationsError,
   } = useFetchData("http://localhost:3000/api/completevaluations");
 
-  const { data:childData } = useFetchData("http://localhost:3000/api/childrenres")
+  const { data: childData } = useFetchData("http://localhost:3000/api/childrenres");
 
   const navigate = useNavigate();
 
@@ -45,9 +45,8 @@ export const TokenBox = () => {
   useEffect(() => {
     if (selectedToken && childData) {
       const associatedChild = childData?.find(
-        (child) => child.evaluationtoken === selectedToken 
+        (child) => child.evaluationtoken === selectedToken
       );
-      if (childData) console.log(associatedChild);
       if (associatedChild) {
         setSelectedChild(associatedChild);
       } else {
@@ -55,10 +54,6 @@ export const TokenBox = () => {
       }
     }
   }, [selectedToken, childData]);
-
-  console.log(selectedChild);
-
-  
 
   if (tokensLoading || evaluationsLoading) return <p>Loading...</p>;
   if (tokensError)
@@ -83,19 +78,16 @@ export const TokenBox = () => {
     navigate("/encuesta", { state: { evaluationtoken: selectedToken } });
   };
 
-  // console.log(tokenUsageCount);
-  // console.log(childData);
-  // console.log(selectedChild);
-
-  const isInitialEvaluationDisabled = !selectedToken || !selectedChild || tokenUsageCount  >= 2;
+  const isInitialEvaluationDisabled = !selectedToken || !selectedChild || tokenUsageCount >= 2;
   const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1;
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
-  const isDataChildButtonDissabled = !selectedToken || tokenUsageCount >= 1;;
+  const isDataChildButtonDissabled = !selectedToken || tokenUsageCount >= 1 || (selectedChild && selectedChild.responses);
 
   return (
     <>
       <div className="box-tokens-container">
+        <p>**** HAGA CLICK SOBRE EL TOKEN QUE VA A UTILIZAR ****</p>
         <h2 className="code-title">Token</h2>
         <div className="radio-token-container">
           {userEvaluationTokens.map((token, index) => (

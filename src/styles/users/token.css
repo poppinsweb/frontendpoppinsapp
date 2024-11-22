@@ -175,7 +175,14 @@
 
   .btn-info-text {
     font-size: 1.5rem;
-    padding: 0px 150px;
+    padding: 40px 150px;
+  }
+
+  .btn-info-text-card {
+    font-size: 1.5rem;
+    padding: 40px 300px;
+    text-align: justify;
+    background-color: #bec2d355;
   }
 
   .custom-table {

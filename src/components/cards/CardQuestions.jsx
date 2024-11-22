@@ -3,8 +3,6 @@ import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
-import axios from 'axios';
-import { InfoToken } from "../token/InfoToken";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -64,15 +62,13 @@ const CardQuestions = ({ questionsData }) => {
           })),
         };
 
-        // Verificar si el token ya se ha usado una vez
         const responseData = await submitEvaluation(dataToSend);
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
           alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
-          sessionStorage.removeItem('userResponses'); // Limpia el almacenamiento después de enviar las respuestas
+          sessionStorage.removeItem('userResponses');
           navigate("/token");
-          
         } else {
           console.error("Error submitting responses:", submitError);
         }
@@ -87,8 +83,6 @@ const CardQuestions = ({ questionsData }) => {
     return <p>Loading questions...</p>;
   }
   const currentQuestionData = questionsData[0].questions[currentQuestion];
-
-  // console.log(userResponses);
 
   return (
     <div className="question-main-container">
@@ -117,8 +111,8 @@ const CardQuestions = ({ questionsData }) => {
         </button>
         <button
           onClick={handleNextQuestion}
-          disabled={resultsSent || submitting}
-          className="btn-color"
+          disabled={!userResponses[currentQuestion]?.optionId || resultsSent || submitting} // Deshabilitado si no hay respuesta
+          className="btn-color next-button"
         >
           {submitting
             ? "Enviando..."

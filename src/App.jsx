@@ -13,6 +13,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { PageInfoEncuesta } from "./pages/home/landingPages/pageInfoEncuesta";
 import { Materiales } from "./pages/home/landingPages/Materiales";
 import { Footer } from "./components/home/Footer";
+import { PrivacityPage } from "./pages/home/landingPages/footerPages/PrivacityPage";
 
 export default function App() {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/construction" element={<Construction />} />
+        <Route path="/privacity" element={<PrivacityPage />} />
         <Route path="/infoencuesta" element={<PageInfoEncuesta />} />
         <Route path="/materiales" element={<Materiales />} />
         <Route path="/login" element={<PrivateRoute element={<LoginPage />} redirectTo="/" />} />

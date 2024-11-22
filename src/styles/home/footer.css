@@ -59,6 +59,32 @@
   }
 }
 
+.privacity-container {
+  padding: 50px 350px;
+}
+
+.privacity-container ol li {
+  font-size: 22px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.privacity-container ol li::marker {
+  font-weight: bold;
+}
+
+.privacity-container ul li {
+  list-style-type: disc;
+}
+
+.actualization-date {
+  text-align: left;
+  padding-top: 20px;
+  font-size: 22px;
+}
+
+
+
 /* LARGE SCREEN */
 @media (min-width: 1050px) {
   .footer-container {

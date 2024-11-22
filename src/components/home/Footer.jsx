@@ -1,5 +1,5 @@
 import "../../styles/home/footer.css";
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export const Footer = () => {
   return (
@@ -24,7 +24,7 @@ export const Footer = () => {
             </div>
             <div className="row text-center d-flex justify-content-center pt-3">
               <div className="col-md-12">
-                <a href="/construction">Privacidad</a>
+                <a href="/privacity">Privacidad</a>
               </div>
             </div>
             <div className="row text-center d-flex justify-content-center pt-3">
@@ -39,9 +39,6 @@ export const Footer = () => {
             </div>
           </section>
           <section className="social-logos">
-            {/* <a href="www.facebook.com" >
-              <FaFacebook alt="Link-facebook" className="social" />
-            </a> */}
             <a href="https://www.instagram.com/poppinseduca/" target="_blank" rel="noopener noreferrer">
               <FaInstagram alt="Link-instagram" className="social" />
             </a>

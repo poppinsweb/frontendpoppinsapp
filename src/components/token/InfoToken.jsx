@@ -17,25 +17,49 @@ export const InfoToken = () => {
         </button>
         {collapsed ? null : (
           <>
-            <p className="btn-info-text">
-            PARA USUARIOS NUEVOS:
+            <div className="btn-info-text">
+              <p><strong>PRIMEROS PASOS:</strong></p>
               <ol>
                 <li>Elija el TOKEN que tenga disponible</li>
-                <li>Presione el botón "Datos del Niño"</li> 
+                <li>Presione el botón "Datos del Niño"</li>
                 <li>Diligencie todos los datos personales del niño</li>
-                <li>Acepte la autorización para el tratamiento de datos personales</li>
-                <li>Al presionar "Enviar" será redirigido de nuevo a esta página, entonces siga las instrucciones siguientes</li>
+                <li>
+                  Acepte la autorización para el tratamiento de datos personales
+                </li>
+                <li>
+                  Al presionar "Enviar" será redirigido de nuevo a esta página,
+                  entonces siga las instrucciones siguientes
+                </li>
               </ol>
-              <p>PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL NIÑO:</p>
+              <p><strong>
+                PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL
+                NIÑO:
+              </strong></p>
               <ol>
                 <li>Elija el TOKEN que ya contiene los datos del niño</li>
-                <li>Si es la primera vez que llena la encuesta con este TOKEN, podrá presionar el botón "Ir a Encuesta", lo cual le llevará al inicio de ésta.</li>
-                <li>Por favor disponga de aproximadamente 20 a 30 minutos para diligenciar todas las preguntas (51 en total)</li>
-                <li>Es MUY IMPORTANTE que la persona que diligencia la encuesta conozca bien al niño y sea honesta con las respuestas</li>
-                <li>Al finalizar el diligenciamiento encontrará los resultados en la pestaña: consultar los resultados -primera aplicación</li>
-                <li>Para diligenciar la segunda aplicación, o seguimiento, tiene un plazo máximo de 6 meses</li>
+                <li>
+                  Si es la primera vez que llena la encuesta con este TOKEN,
+                  podrá presionar el botón "Ir a Encuesta", lo cual le llevará
+                  al inicio de ésta.
+                </li>
+                <li>
+                  Por favor disponga de aproximadamente 20 a 30 minutos para
+                  diligenciar todas las preguntas (51 en total)
+                </li>
               </ol>
-            </p>
+              <p><strong>PARA USUARIOS QUE YA DILIGENCIARON LA PRIMERA ENCUESTA:</strong></p>
+              <ol>
+                <li>
+                  Para diligenciar la segunda aplicación de la encuesta,
+                  presione el botón "Ir a Encuesta", al finalizar se activarán
+                  los resultados de esta
+                </li>
+                <li>
+                  Recuerde que tiene un plazo máximo de 6 meses para esta
+                  segunda aplicación de la encuesta
+                </li>
+              </ol>
+            </div>
           </>
         )}
       </div>
