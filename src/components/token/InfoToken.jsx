@@ -1,22 +1,26 @@
 import { useState } from "react";
 
 export const InfoToken = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsedSections, setCollapsedSections] = useState([true, true, true]);
 
-  const handleToggleCollapse = () => {
-    setCollapsed(!collapsed);
+  const handleToggleCollapse = (index) => {
+    setCollapsedSections((prev) =>
+      prev.map((collapsed, i) => (i === index ? !collapsed : collapsed))
+    );
   };
+
   return (
     <div className="infotoken-main-container">
       <div className="btn-token-container">
-        <button
-          onClick={handleToggleCollapse}
-          className="btn btn-outline-secondary btn-token-navigation"
-        >
-          Instrucciones abrir/cerrar
-        </button>
-        {collapsed ? null : (
-          <>
+        {/* Botón 1 */}
+        <div className="btn-section">
+          <button
+            onClick={() => handleToggleCollapse(0)}
+            className="btn btn-outline-secondary btn-token-info"
+          >
+            Instrucciones si aún no diligencia los datos del niño abrir/cerrar
+          </button>
+          {!collapsedSections[0] && (
             <div className="btn-info-text">
               <p><strong>PRIMEROS PASOS:</strong></p>
               <ol>
@@ -31,10 +35,20 @@ export const InfoToken = () => {
                   entonces siga las instrucciones siguientes
                 </li>
               </ol>
-              <p><strong>
-                PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL
-                NIÑO:
-              </strong></p>
+            </div>
+          )}
+        </div>
+        {/* Botón 2 */}
+        <div className="btn-section">
+          <button
+            onClick={() => handleToggleCollapse(1)}
+            className="btn btn-outline-secondary btn-token-info"
+          >
+            Instrucciones si ya diligenció los datos del niño abrir/cerrar
+          </button>
+          {!collapsedSections[1] && (
+            <div className="btn-info-text">
+              <p><strong>PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL NIÑO:</strong></p>
               <ol>
                 <li>Elija el TOKEN que ya contiene los datos del niño</li>
                 <li>
@@ -47,6 +61,19 @@ export const InfoToken = () => {
                   diligenciar todas las preguntas (51 en total)
                 </li>
               </ol>
+            </div>
+          )}
+        </div>
+        {/* Botón 3 */}
+        <div className="btn-section">
+          <button
+            onClick={() => handleToggleCollapse(2)}
+            className="btn btn-outline-secondary btn-token-info"
+          >
+            Instrucciones si ya diligenció la primera vez la encuesta abrir/cerrar
+          </button>
+          {!collapsedSections[2] && (
+            <div className="btn-info-text">
               <p><strong>PARA USUARIOS QUE YA DILIGENCIARON LA PRIMERA ENCUESTA:</strong></p>
               <ol>
                 <li>
@@ -60,8 +87,8 @@ export const InfoToken = () => {
                 </li>
               </ol>
             </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

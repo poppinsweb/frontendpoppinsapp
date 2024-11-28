@@ -64,7 +64,7 @@
   margin: 1.5rem;
 }
 
-.btn-token-navigation {
+.btn-token-navigation, .btn-token-info {
   color: #434343;
   background-color: #bec2d3;
   /* background-color: rgb(101, 181, 218); */
@@ -87,7 +87,7 @@
     margin: 2rem 0;
   }
 
-  .btn-token-navigation{
+  .btn-token-navigation, .btn-token-info {
     font-size: 20px;
     width: 250px;
     height: 70px;
@@ -134,6 +134,11 @@
     margin-top: 30px;
   }
 
+  /* .container-info-token {
+    display: flex;
+    
+  } */
+
   .radio-token-container {
     display: block;
     text-align: left;
@@ -141,6 +146,8 @@
   }
 
   .btn-token-container {
+    display: flex;
+    gap: 50px;
     margin: 20px;
     padding: 0px 50px;
   }
@@ -160,6 +167,12 @@
 
   input.radio-token {
     margin-right: 10px;
+  }
+
+  .btn-token-info{
+    font-size: 20px;
+    width: 350px;
+    height: 100px;
   }
 
   .btn-token {
