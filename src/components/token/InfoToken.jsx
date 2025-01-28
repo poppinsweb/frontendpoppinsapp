@@ -18,7 +18,7 @@ export const InfoToken = () => {
             onClick={() => handleToggleCollapse(0)}
             className="btn btn-outline-secondary btn-token-info"
           >
-            Instrucciones si aún no diligencia los datos del niño abrir/cerrar
+            Instrucciones si aún no diligencia los datos del niño
           </button>
           {!collapsedSections[0] && (
             <div className="btn-info-text">
@@ -44,17 +44,14 @@ export const InfoToken = () => {
             onClick={() => handleToggleCollapse(1)}
             className="btn btn-outline-secondary btn-token-info"
           >
-            Instrucciones si ya diligenció los datos del niño abrir/cerrar
+            Instrucciones si ya diligenció los datos del niño
           </button>
           {!collapsedSections[1] && (
             <div className="btn-info-text">
-              <p><strong>PARA USUARIOS QUE YA DILIGENCIARON LOS DATOS PERSONALES DEL NIÑO:</strong></p>
               <ol>
                 <li>Elija el TOKEN que ya contiene los datos del niño</li>
                 <li>
-                  Si es la primera vez que llena la encuesta con este TOKEN,
-                  podrá presionar el botón "Ir a Encuesta", lo cual le llevará
-                  al inicio de ésta.
+                  Presione el botón "Ir a Encuesta"
                 </li>
                 <li>
                   Por favor disponga de aproximadamente 20 a 30 minutos para
@@ -70,11 +67,10 @@ export const InfoToken = () => {
             onClick={() => handleToggleCollapse(2)}
             className="btn btn-outline-secondary btn-token-info"
           >
-            Instrucciones si ya diligenció la primera vez la encuesta abrir/cerrar
+            Instrucciones para diligenciar encuesta de seguimiento
           </button>
           {!collapsedSections[2] && (
             <div className="btn-info-text">
-              <p><strong>PARA USUARIOS QUE YA DILIGENCIARON LA PRIMERA ENCUESTA:</strong></p>
               <ol>
                 <li>
                   Para diligenciar la segunda aplicación de la encuesta,

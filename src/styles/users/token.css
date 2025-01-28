@@ -43,7 +43,7 @@
   justify-content: center;
   padding: 40px 0;
   width: 80%;
-  background-color: #d6dff97e;
+  /* background-color: #e2f9d6; */
   border-radius: 20px;
   box-shadow: 5px 5px 10px 0px #000000bf;
 }
@@ -65,8 +65,8 @@
 }
 
 .btn-token-navigation, .btn-token-info {
-  color: #434343;
-  background-color: #bec2d3;
+  color: #fff;
+  background-color: #891883a2;
   /* background-color: rgb(101, 181, 218); */
   border-radius: 10px;
   width: 300px;

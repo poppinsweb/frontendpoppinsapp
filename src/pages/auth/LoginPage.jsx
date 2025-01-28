@@ -28,10 +28,10 @@ const LoginPage = () => {
   return (
     <div className="page-container">
       <div className="login-card">
-        <h2 className="title-login">User Login</h2>
+        <h2 className="title-login">Ingreso de Usuario</h2>
         <form onSubmit={handleLogin}>
           <div>
-            <label>Email:</label>
+            <label>Correo electrónico:</label>
             <input
               type="email"
               className="form-control"
@@ -41,7 +41,7 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Contraseña:</label>
             <input
               type="password"
               className="form-control"
@@ -51,7 +51,7 @@ const LoginPage = () => {
             />
           </div>
           <button type="submit" className="btn btn-color btn-login">
-            Login
+            Ingresar
           </button>
         </form>
         {message && <p>{message}</p>}

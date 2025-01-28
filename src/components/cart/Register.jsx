@@ -41,7 +41,7 @@ export const RegisterUser = () => {
         <h2 className="title-register">Registro de Usuario</h2>
         <form onSubmit={handleRegister}>
           <div>
-            <label>Email:</label>
+            <label>Correo Electrónico:</label>
             <input
               className="form-control"
               type="email"

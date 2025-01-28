@@ -40,7 +40,7 @@ const CreateUser = () => {
         <h2 className="title-register">Registrar Usuarios</h2>
         <form onSubmit={handleRegister}>
           <div>
-            <label>Email:</label>
+            <label>Correo Electrónico:</label>
             <input
               className="form-control"
               type="email"
@@ -50,7 +50,7 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Contraseña:</label>
             <input
               className="form-control"
               type="password"
@@ -60,14 +60,14 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label>Role:</label>
+            <label>Rol:</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
               className="form-select"
             >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="user">Usuario</option>
+              <option value="admin">Administrador</option>
             </select>
           </div>
           <button className="btn btn-color" type="submit">
