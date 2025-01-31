@@ -1,9 +1,7 @@
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
-// import { useAuth } from "../../context/AuthProvider";
 
 export const CardResultHabits = () => {
-  // const { user } = useAuth();
   const {
     completEvaluation,
     loading: evaluationLoading,
@@ -90,12 +88,12 @@ export const CardResultHabits = () => {
     };
     let hasOptionId3 = false;
     let hasOptionId4 = false;
-    let renderIcons = true;
+    // let renderIcons = true;
 
     responses.forEach((response) => {
       if (response.optionId === 1 || response.optionId === 2) {
         groupedDescriptions[response.optionId].push(response.description);
-        renderIcons = false; // Disable icon rendering if there's an optionId of 1 or 2
+        // renderIcons = false; // Disable icon rendering if there's an optionId of 1 or 2
       } else if (response.optionId === 3) {
         hasOptionId3 = true;
       } else if (response.optionId === 4) {
@@ -107,19 +105,13 @@ export const CardResultHabits = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {renderIcons && hasOptionId4 && <IoCheckmarkSharp />}
+          {hasOptionId4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {renderIcons && hasOptionId3 && <IoCheckmarkSharp />}
+          {hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
-          {groupedDescriptions[2].length > 0 && (
-            <div>
-              {groupedDescriptions[2].map((description, index) => (
-                <div key={index}>{renderDescriptions(description)}</div>
-              ))}
-            </div>
-          )}
+        {groupedDescriptions[2].length > 0 && renderDescriptions(groupedDescriptions[2].join('-'))}
         </td>
         <td className="table-danger">
           {groupedDescriptions[1].length > 0 && (
