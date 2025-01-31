@@ -184,6 +184,30 @@
   text-align: right;
 }
 
+.question-carousel {
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.carousel-button {
+  margin: 10px 5px;
+  padding: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.carousel-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.carousel-button.answered {
+  background-color: #28a745;
+  color: white;
+}
+
 /* LARGER SCREEN */
 @media (min-width: 1900px) {
   .question-main-container {

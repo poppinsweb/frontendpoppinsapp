@@ -3,18 +3,27 @@ import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
+import QuestionCarousel from "./QuestionCarousel";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [resultsSent, setResultsSent] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
-  const { data: childData, loading: childLoading, error: childError } = useChild();
+  const {
+    data: childData,
+    loading: childLoading,
+    error: childError,
+  } = useChild();
   const navigate = useNavigate();
-  const { submitEvaluation, loading: submitting, error: submitError } = useSubmitEvaluation("http://localhost:3000/api/completevaluation");
+  const {
+    submitEvaluation,
+    loading: submitting,
+    error: submitError,
+  } = useSubmitEvaluation("http://localhost:3000/api/completevaluation");
 
   useEffect(() => {
     if (questionsData && questionsData.length > 0) {
-      const savedResponses = sessionStorage.getItem('userResponses');
+      const savedResponses = sessionStorage.getItem("userResponses");
       if (savedResponses) {
         setUserResponses(JSON.parse(savedResponses));
       } else {
@@ -34,7 +43,7 @@ const CardQuestions = ({ questionsData }) => {
       ...userResponses.slice(currentQuestion + 1),
     ];
     setUserResponses(updatedResponses);
-    sessionStorage.setItem('userResponses', JSON.stringify(updatedResponses));
+    sessionStorage.setItem("userResponses", JSON.stringify(updatedResponses));
   };
 
   const handleBeforeQuestion = () => {
@@ -66,8 +75,10 @@ const CardQuestions = ({ questionsData }) => {
         if (responseData) {
           console.log("Respuestas enviadas correctamente:", responseData);
           setResultsSent(true);
-          alert("Resultados enviados correctamente. Por favor, haga clic en el botón de resultados.");
-          sessionStorage.removeItem('userResponses');
+          alert(
+            "Resultados enviados correctamente. Por favor, haga clic en el botón de resultados."
+          );
+          sessionStorage.removeItem("userResponses");
           navigate("/token");
         } else {
           console.error("Error submitting responses:", submitError);
@@ -86,9 +97,6 @@ const CardQuestions = ({ questionsData }) => {
 
   return (
     <div className="question-main-container">
-      <div>
-        {/* AQUI LAS INSTRUCCIONES DE LA ENCUESTA */}
-      </div>
       <div> Niño: {childData?.firstName}</div>
       <Card
         title={currentQuestionData.title}
@@ -101,6 +109,15 @@ const CardQuestions = ({ questionsData }) => {
       <div className="question-counter">
         Pregunta {currentQuestion + 1} de {questionsData[0].questions.length}
       </div>
+      <div>
+        <QuestionCarousel
+          questions={questionsData[0].questions}
+          currentQuestion={currentQuestion}
+          onQuestionClick={setCurrentQuestion}
+          userResponses={userResponses}
+          className="question-carousel"
+        />
+      </div>
       <div className="btn-container">
         <button
           onClick={handleBeforeQuestion}
@@ -111,7 +128,11 @@ const CardQuestions = ({ questionsData }) => {
         </button>
         <button
           onClick={handleNextQuestion}
-          disabled={!userResponses[currentQuestion]?.optionId || resultsSent || submitting} // Deshabilitado si no hay respuesta
+          disabled={
+            !userResponses[currentQuestion]?.optionId ||
+            resultsSent ||
+            submitting
+          } // Deshabilitado si no hay respuesta
           className="btn-color next-button"
         >
           {submitting

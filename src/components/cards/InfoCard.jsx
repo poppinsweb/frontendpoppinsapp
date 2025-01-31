@@ -13,7 +13,7 @@ export const InfoCard = () => {
           onClick={handleToggleCollapse}
           className="btn btn-outline-secondary btn-token-navigation"
         >
-          Instrucciones abrir/cerrar
+          Instrucciones Encuesta
         </button>
         {collapsed ? null : (
           <>
