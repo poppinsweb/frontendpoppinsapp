@@ -30,13 +30,13 @@ const Card = ({
                   })
                 }
                 className={
-                  userResponse === option.score
+                  userResponse === option.id || userResponse === option.label
                     ? "selected-answer question-text"
-                    : null
+                    : "question-text"
                 }
               >
                 {option.label}
-                {userResponse === option.id && (
+                {(userResponse === option.id || userResponse === option.label) && (
                   <div className="icon-container">
                     <FaCheck className="check-icon" />
                   </div>

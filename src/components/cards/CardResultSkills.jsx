@@ -1,9 +1,8 @@
+import React from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
-import { useAuth } from "../../context/AuthProvider";
 
 export const CardResultSkills = () => {
-  const { user } = useAuth();
   const {
     completEvaluation,
     loading: evaluationLoading,
@@ -19,7 +18,6 @@ export const CardResultSkills = () => {
   }
 
   const evaluation = completEvaluation[0];
-  // console.log(evaluation.responses);
 
   if (!evaluation.responses || evaluation.responses.length === 0) {
     return <p>No skills responses found</p>;
@@ -27,35 +25,16 @@ export const CardResultSkills = () => {
 
   const skillCategories = [
     {
-      name: "Habilidades de aseo",
-      skillNames: [
-        "Secarse el cuerpo",
-        "Peinarse el cabello",
-        "Limpiarse la Nariz",
-        "Aseo íntimo al defecar",
-        "Lavarse las manos luego de usar el baño",
-        "Cepillarse los Dientes",
-        "Control de Esfínteres en el Día",
-        "Control de Esfínteres en la Noche",
-        "Descargar o Vaciar el Baño al Usarlo",
-      ],
-      questionIds: [5, 6, 7, 8, 9, 10, 11, 12, 13],
+      name: "Habilidades Cognitivas",
+      questionIds: [1, 2, 3, 4, 5],
     },
     {
-      name: "Habilidades de vestido",
-      skillNames: [
-        "Abotonarse",
-        "Amarrarse los cordones",
-        "Ponerse las medias",
-        "Ponerse los zapatos",
-        "Subir y bajar cremalleras",
-      ],
-      questionIds: [14, 15, 16, 17, 18],
+      name: "Habilidades Sociales",
+      questionIds: [6, 7, 8, 9, 10],
     },
     {
-      name: "Habilidades de alimentación",
-      skillNames: ["Utiliza la cuchara", "Utiliza el tenedor", "Utiliza el cuchillo"],
-      questionIds: [19, 20, 21],
+      name: "Habilidades Emocionales",
+      questionIds: [11, 12, 13, 14, 15],
     },
   ];
 
@@ -77,12 +56,10 @@ export const CardResultSkills = () => {
     };
     let hasOptionId3 = false;
     let hasOptionId4 = false;
-    let renderIcons = true;
 
     responses.forEach((response) => {
       if (response.optionId === 1 || response.optionId === 2) {
         groupedDescriptions[response.optionId].push(response.description);
-        renderIcons = false; // Disable icon rendering if there's an optionId of 1 or 2
       } else if (response.optionId === 3) {
         hasOptionId3 = true;
       } else if (response.optionId === 4) {
@@ -94,10 +71,10 @@ export const CardResultSkills = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {renderIcons && hasOptionId4 && <IoCheckmarkSharp />}
+          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {renderIcons && hasOptionId3 && <IoCheckmarkSharp />}
+          {hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 && (
@@ -128,10 +105,10 @@ export const CardResultSkills = () => {
         <thead className="result-titles">
           <tr>
             <th>HABILIDADES</th>
-            <th className="table-primary">CON HABILIDAD</th>
-            <th className="table-success">EN PROCESO AVANZADO DE APRENDIZAJE</th>
-            <th className="table-warning">EN PROCESO INICIAL DE APRENDIZAJE</th>
-            <th className="table-danger">NO LO HA INTENTADO</th>
+            <th className="table-primary">ADQUIRIDO</th>
+            <th className="table-success">EN PROCESO AVANZADO DE ADQUISICIÓN</th>
+            <th className="table-warning">EN PROCESO INICIAL DE ADQUISICIÓN</th>
+            <th className="table-danger">NO ADQUIRIDO</th>
           </tr>
         </thead>
         <tbody className="result-titles">
@@ -141,3 +118,5 @@ export const CardResultSkills = () => {
     </div>
   );
 };
+
+export default CardResultSkills;

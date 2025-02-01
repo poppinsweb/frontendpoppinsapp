@@ -33,15 +33,25 @@ const CardQuestions = ({ questionsData }) => {
   }, [questionsData]);
 
   const handleAnswer = (choice) => {
+    const currentQuestionId = questionsData[0].questions[currentQuestion].id;
+    const isAdditionalQuestion = [49, 50, 51].includes(currentQuestionId);
+
     const updatedResponses = [
       ...userResponses.slice(0, currentQuestion),
       {
-        optionId: choice.id,
+        optionId: isAdditionalQuestion ? choice.label : choice.id,
         answer: choice.label,
         description: questionsData[0].questions[currentQuestion].description,
       },
       ...userResponses.slice(currentQuestion + 1),
     ];
+
+    if (isAdditionalQuestion) {
+      console.log(`Respuesta capturada para pregunta adicional (ID: ${currentQuestionId}):`, choice.label);
+    } else {
+      console.log(`Respuesta capturada para pregunta (ID: ${currentQuestionId}):`, choice.id);
+    }
+    
     setUserResponses(updatedResponses);
     sessionStorage.setItem("userResponses", JSON.stringify(updatedResponses));
   };
@@ -52,37 +62,16 @@ const CardQuestions = ({ questionsData }) => {
 
   const handleNextQuestion = async () => {
     const nextQuestion = currentQuestion + 1;
-
-    if (questionsData && nextQuestion < questionsData[0].questions.length) {
+    if (nextQuestion < questionsData[0].questions.length) {
       setCurrentQuestion(nextQuestion);
-      setResultsSent(false);
     } else {
-      if (userResponses.includes(null)) {
-        alert("Responde todas las preguntas antes de enviar los resultados");
-      } else {
-        const dataToSend = {
-          evaluationId: questionsData[0]._id,
-          evaluationtoken: childData.evaluationtoken,
-          responses: userResponses.map((response, index) => ({
-            questionId: questionsData[0].questions[index].id,
-            optionId: response.optionId,
-            description: response.description,
-            answer: response.answer,
-          })),
-        };
-
-        const responseData = await submitEvaluation(dataToSend);
-        if (responseData) {
-          console.log("Respuestas enviadas correctamente:", responseData);
-          setResultsSent(true);
-          alert(
-            "Resultados enviados correctamente. Por favor, haga clic en el botón de resultados."
-          );
-          sessionStorage.removeItem("userResponses");
-          navigate("/token");
-        } else {
-          console.error("Error submitting responses:", submitError);
-        }
+      try {
+        await submitEvaluation(userResponses);
+        setResultsSent(true);
+        sessionStorage.removeItem("userResponses");
+        navigate("/token");
+      } catch (error) {
+        console.error("Error submitting responses:", error);
       }
     }
   };

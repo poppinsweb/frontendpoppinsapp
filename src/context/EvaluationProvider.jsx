@@ -28,7 +28,7 @@ export const EvaluationProvider = ({ children }) => {
       try {
         const responses = await axios.get("http://localhost:3000/api/completevaluations");
 
-        // console.log("Fetched responses:", responses.data);
+        // console.log("Fetched responses:", responses);
 
         if (dataChild) {
           const filteredResponses = responses.data.filter(

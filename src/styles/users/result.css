@@ -15,11 +15,6 @@
   justify-content: center;
 }
 
-.header-container p {
-  /* font-size: 30px; */
-  /* margin: 30px; */
-}
-
 .header-container table td{
   padding: 0 25px;
   font-size: 20px;
@@ -60,4 +55,15 @@ tbody td.table-warning, td.table-danger {
   margin-left: 50px;
   transform: rotate(-30deg);
   opacity: 0.7;
+}
+
+.additional-questions-title {
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+.additional-questions {
+  margin: 20px 300px;
+  font-size: 1.2rem;
+  text-align: left;
 }

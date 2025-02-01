@@ -1,3 +1,4 @@
+import React from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
 
@@ -66,7 +67,22 @@ export const CardResultHabits = () => {
         "Establecimiento de horarios y rutinas",
         "Cumplimiento con horarios y rutinas acordadas",
       ],
-      questionIds: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51],
+      questionIds: [41, 42, 43, 44, 45, 46, 47, 48],
+    },
+  ];
+
+  const additionalQuestions = [
+    {
+      id: 49,
+      description: "Utiliza pañal para dormir",
+    },
+    {
+      id: 50,
+      description: "Toma tetero",
+    },
+    {
+      id: 51,
+      description: "Tiene menu especial",
     },
   ];
 
@@ -88,12 +104,10 @@ export const CardResultHabits = () => {
     };
     let hasOptionId3 = false;
     let hasOptionId4 = false;
-    // let renderIcons = true;
 
     responses.forEach((response) => {
       if (response.optionId === 1 || response.optionId === 2) {
         groupedDescriptions[response.optionId].push(response.description);
-        // renderIcons = false; // Disable icon rendering if there's an optionId of 1 or 2
       } else if (response.optionId === 3) {
         hasOptionId3 = true;
       } else if (response.optionId === 4) {
@@ -105,13 +119,14 @@ export const CardResultHabits = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {hasOptionId4 && <IoCheckmarkSharp />}
+          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {hasOptionId3 && <IoCheckmarkSharp />}
+          {hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
-        {groupedDescriptions[2].length > 0 && renderDescriptions(groupedDescriptions[2].join('-'))}
+          {groupedDescriptions[2].length > 0 &&
+            renderDescriptions(groupedDescriptions[2].join("-"))}
         </td>
         <td className="table-danger">
           {groupedDescriptions[1].length > 0 && (
@@ -124,6 +139,19 @@ export const CardResultHabits = () => {
         </td>
       </tr>
     );
+  };
+
+  const renderAdditionalQuestions = () => {
+    return additionalQuestions.map((question) => {
+      const response = evaluation.responses.find(
+        (response) => response.questionId === question.id
+      );
+      return (
+        <div key={question.id}>
+          <strong>{question.description}:</strong> {response ? response.answer : "No hay respuesta"}
+        </div>
+      );
+    });
   };
 
   return (
@@ -143,6 +171,12 @@ export const CardResultHabits = () => {
           {habitCategories.map((category) => renderCategoryRow(category))}
         </tbody>
       </table>
+      <h2 className="additional-questions-title">Preguntas adicionales</h2>
+      <div className="additional-questions">
+        {renderAdditionalQuestions()}
+      </div>
     </div>
   );
 };
+
+export default CardResultHabits;
