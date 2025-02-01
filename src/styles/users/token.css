@@ -43,7 +43,9 @@
   justify-content: center;
   padding: 40px 0;
   width: 80%;
-  /* background-color: #e2f9d6; */
+  /* background-color: #5c67a3; */
+  background-color: #cbc6dd;
+  /* color: #fff; */
   border-radius: 20px;
   box-shadow: 5px 5px 10px 0px #000000bf;
 }
@@ -77,8 +79,7 @@
 
 .btn-token-navigation:disabled {
   background-color: #6e6d6d;
-  color: #0a0a0a;
-  
+  color: #fff;
 }
 
 /* MEDIUM SCREEN */
@@ -191,11 +192,17 @@
     padding: 40px 150px;
   }
 
+  .btn-info-container-card {
+    justify-content: center;
+    margin: 20px;
+    padding: 0px 250px;
+  }
+
   .btn-info-text-card {
-    font-size: 1.5rem;
-    padding: 40px 300px;
+    font-size: 1.8rem;
+    margin: 0px;
     text-align: justify;
-    background-color: #bec2d355;
+    background-color: #bec2d392;
   }
 
   .custom-table {
