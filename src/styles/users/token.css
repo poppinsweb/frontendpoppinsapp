@@ -17,7 +17,8 @@
   margin-top: 20px;
 }
 
-.infotoken-main-container, .navitoken-main-container {
+.infotoken-main-container,
+.navitoken-main-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -42,8 +43,8 @@
   align-items: center;
   justify-content: center;
   padding: 40px 0;
-  width: 80%;
-  /* background-color: #e2f9d6; */
+  width: auto;
+  background-color: #cbc6dd;
   border-radius: 20px;
   box-shadow: 5px 5px 10px 0px #000000bf;
 }
@@ -64,10 +65,12 @@
   margin: 1.5rem;
 }
 
-.btn-token-navigation, .btn-token-info {
+.btn-token-navigation,
+.btn-token-info {
   color: #fff;
-  background-color: #891883a2;
-  /* background-color: rgb(101, 181, 218); */
+  /* background-color: #891883a2; */
+  background-color: #543c80;
+  border: #198754;
   border-radius: 10px;
   width: 300px;
   height: 50px;
@@ -75,19 +78,24 @@
   font-size: 24px;
 }
 
+.btn-token-info:hover {
+  background-color: #cbc6dd;
+  color: #000;
+}
+
 .btn-token-navigation:disabled {
   background-color: #6e6d6d;
-  color: #0a0a0a;
-  
+  color: #fff;
 }
 
 /* MEDIUM SCREEN */
 @media (min-width: 800px) {
-   .logo-token {
+  .logo-token {
     margin: 2rem 0;
   }
 
-  .btn-token-navigation, .btn-token-info {
+  .btn-token-navigation,
+  .btn-token-info {
     font-size: 20px;
     width: 250px;
     height: 70px;
@@ -101,11 +109,11 @@
     margin-top: 0;
   }
 
-  /* .box-tokens-container {
+  .box-tokens-container {
     width: auto;
     margin: 0 10px;
-  }  */
-  
+  }
+
   .token-lable {
     font-size: 1rem;
     margin-bottom: 20px;
@@ -134,11 +142,6 @@
     margin-top: 30px;
   }
 
-  /* .container-info-token {
-    display: flex;
-    
-  } */
-
   .radio-token-container {
     display: block;
     text-align: left;
@@ -158,7 +161,7 @@
   }
 
   .box-tokens-container {
-    width: 50%;
+    width: 800px;
   }
 
   label.token-label {
@@ -169,7 +172,7 @@
     margin-right: 10px;
   }
 
-  .btn-token-info{
+  .btn-token-info {
     font-size: 20px;
     width: 350px;
     height: 100px;
@@ -191,24 +194,29 @@
     padding: 40px 150px;
   }
 
+  .btn-info-container-card {
+    justify-content: center;
+    margin: 20px;
+    padding: 0px 250px;
+  }
+
   .btn-info-text-card {
-    font-size: 1.5rem;
-    padding: 40px 300px;
+    font-size: 1.8rem;
+    margin: 0px;
     text-align: justify;
-    background-color: #bec2d355;
+    background-color: #bec2d392;
   }
 
   .custom-table {
-    width: 90%; 
+    width: 90%;
     margin: 0 auto;
   }
-  
+
   .num {
-    width: 80px; 
+    width: 80px;
   }
 }
 
 /* LARGER SCREEN */
 @media (min-width: 1500px) {
- 
 }
