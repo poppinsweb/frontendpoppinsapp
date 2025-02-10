@@ -68,6 +68,10 @@ form .user-select {
     margin-top: 20px;
     background-color: #f0f8ff39;
   }
+
+  .link-form-check-label:hover {
+    cursor: url(https://cur.cursors-4u.net/others/oth-8/oth737.cur), auto !important; 
+  }
 }
 
 /* LARGER SCREEN */
