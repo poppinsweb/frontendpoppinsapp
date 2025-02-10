@@ -1,7 +1,6 @@
 /* MOBILE SIZE */
 .question-main-container {
   padding-top: 10rem;
-  /* background-image: url("../images/fondo-nubes-blancas-lila.jpg"); */
   background-size: contain;
   min-height: 1250px;
 }
@@ -19,11 +18,11 @@
   margin-bottom: 2rem;
   background-color: #9d8bafde;
 }
-
+/* 
 .main-question-title {
-  font-size: 2.8rem;
+  font-size: 1.5rem;
   color: #683498;
-}
+} */
 
 .secoundary-question-title {
   padding-top: 25px;
@@ -68,7 +67,7 @@
 
 /* CADA OPCION DE RESPUESTA DESPUES DEL CLICK */
 .question-text {
-  background-color: #b8adbb;
+  /* background-color: #b8adbb; */
   border-radius: 10px;
   padding: 10px;
 }
@@ -112,10 +111,10 @@
     background-size: cover;
   }
 
-  .main-question-title {
+  /* .main-question-title {
     font-size: 2rem;
     padding-top: 10px;
-  }
+  } */
 
   .secoundary-question-title {
     padding-top: 30px;
@@ -142,13 +141,13 @@
 
    .question-container-questions, .question-container {
     width: 1050px;
-    height: 700px;
+    height: 720px;
     padding: 50px 100px;
     background-size: cover;
   }
 
-  .question-container-questions h1 {
-    font-size: 1.5rem;
+  .question-container-questions h2 {
+    font-size: 2rem;
   }
 
   .question-container-questions p {
@@ -165,15 +164,6 @@
     padding-top: 0;
   }
 
-  .main-question-title {
-    padding-bottom: 20px;
-  }
-
-  .main-question-title-questions, .main-question-title {
-    font-size: 2rem;
-    text-align: left;
-  }
-
   .secoundary-question-title {
     padding-top: 0;
     font-size: 2rem;
@@ -182,6 +172,30 @@
 
 .num-question {
   text-align: right;
+}
+
+.question-carousel {
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.carousel-button {
+  margin: 10px 5px;
+  padding: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.carousel-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.carousel-button.answered {
+  background-color: #28a745;
+  color: white;
 }
 
 /* LARGER SCREEN */

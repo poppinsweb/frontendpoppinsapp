@@ -3,6 +3,7 @@ import Card from "./Card";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";
+import QuestionCarousel from "./QuestionCarousel";
 
 const CardQuestions = ({ questionsData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -86,9 +87,6 @@ const CardQuestions = ({ questionsData }) => {
 
   return (
     <div className="question-main-container">
-      <div>
-        {/* AQUI LAS INSTRUCCIONES DE LA ENCUESTA */}
-      </div>
       <div> Niño: {childData?.firstName}</div>
       <Card
         title={currentQuestionData.title}
@@ -100,6 +98,15 @@ const CardQuestions = ({ questionsData }) => {
       />
       <div className="question-counter">
         Pregunta {currentQuestion + 1} de {questionsData[0].questions.length}
+      </div>
+      <div>
+        <QuestionCarousel
+          questions={questionsData[0].questions}
+          currentQuestion={currentQuestion}
+          onQuestionClick={setCurrentQuestion}
+          userResponses={userResponses}
+          className="question-carousel"
+        />
       </div>
       <div className="btn-container">
         <button

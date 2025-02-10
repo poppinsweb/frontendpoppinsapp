@@ -15,7 +15,7 @@ const Card = ({
     <>
       <InfoCard />
       <div className="question-container-questions">
-        <div className="num-question"></div>
+        {/* <div className="num-question"></div> */}
         <h3 className="secoundary-question-title">{title}</h3>
         <h2>{description}</h2>
         <ul className="question-section">
