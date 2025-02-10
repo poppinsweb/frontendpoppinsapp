@@ -103,10 +103,12 @@ export const CardResultHabits = () => {
     };
     let hasOptionId3 = false;
     let hasOptionId4 = false;
+    let renderIcons = true;
 
     responses.forEach((response) => {
       if (response.optionId === 1 || response.optionId === 2) {
         groupedDescriptions[response.optionId].push(response.description);
+        renderIcons = false;
       } else if (response.optionId === 3) {
         hasOptionId3 = true;
       } else if (response.optionId === 4) {
@@ -118,10 +120,10 @@ export const CardResultHabits = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
+          {renderIcons && hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
+          {renderIcons && hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 &&
