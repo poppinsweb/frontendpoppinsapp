@@ -1,5 +1,3 @@
-import React from 'react';
-
 const QuestionCarousel = ({ questions, currentQuestion, onQuestionClick, userResponses }) => {
   return (
     <div className="question-carousel">
