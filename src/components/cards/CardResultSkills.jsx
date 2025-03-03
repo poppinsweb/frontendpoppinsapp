@@ -1,10 +1,8 @@
 import React from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
-// import { useAuth } from "../../context/AuthProvider";
 
 export const CardResultSkills = () => {
-  // const { user } = useAuth();
   const {
     completEvaluation,
     loading: evaluationLoading,
@@ -73,10 +71,10 @@ export const CardResultSkills = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {renderIcons && hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
+          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {renderIcons && hasOptionId3 && hasOptionId4 &&<IoCheckmarkSharp />}
+          {hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 && (

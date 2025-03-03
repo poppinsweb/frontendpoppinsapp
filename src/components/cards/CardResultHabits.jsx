@@ -1,4 +1,3 @@
-import React from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { useEvaluation } from "../../context/EvaluationProvider";
 
@@ -43,17 +42,19 @@ export const CardResultHabits = () => {
         "Comer en máximo 30 minutos",
         "Procesamiento de los alimentos (cortarlos, desmecharlos o volverlos papilla)",
       ],
-      questionIds: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
+      questionIds: [22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
+      // 26,
     },
     {
       name: "Hábitos de sueño",
       habitNames: [
         "Horario establecido para ir a dormir",
-        "Dormir entre 8 y 10 horas",
-        "Dormir entre 10 y 12 horas",
+        // "Dormir entre 8 y 10 horas",
+        // "Dormir entre 10 y 12 horas",
         "Dormir con las luces apagadas",
       ],
-      questionIds: [37, 38, 39, 40],
+      questionIds: [37, 40],
+      // 38, 39,
     },
     {
       name: "Responsabilidades",
@@ -73,6 +74,10 @@ export const CardResultHabits = () => {
 
   const additionalQuestions = [
     {
+      id: 38,
+      description: "Horas de sueño",
+    },
+    {
       id: 49,
       description: "Utiliza pañal para dormir",
     },
@@ -82,7 +87,7 @@ export const CardResultHabits = () => {
     },
     {
       id: 51,
-      description: "Tiene menu especial",
+      description: "Razones por las que tiene menu especial",
     },
   ];
 
@@ -108,7 +113,6 @@ export const CardResultHabits = () => {
     responses.forEach((response) => {
       if (response.optionId === 1 || response.optionId === 2) {
         groupedDescriptions[response.optionId].push(response.description);
-        renderIcons = false;
       } else if (response.optionId === 3) {
         hasOptionId3 = true;
       } else if (response.optionId === 4) {
@@ -120,10 +124,10 @@ export const CardResultHabits = () => {
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {renderIcons && hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
+          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
         </td>
         <td className="table-success">
-          {renderIcons && hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
+          {hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 &&
