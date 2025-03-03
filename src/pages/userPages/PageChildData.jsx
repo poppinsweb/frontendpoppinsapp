@@ -11,6 +11,7 @@ const PageChildData = () => {
   const [lastName, setLastName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [selectedChecks, setSelectedChecks] = useState([]);
   const { data, loading, error } = useFetchData(
     "http://localhost:3000/api/children"
   );
@@ -24,7 +25,7 @@ const PageChildData = () => {
   const navigate = useNavigate();
 
   const { evaluationtoken } = location.state || {};
-  console.log("en pagechild", evaluationtoken);
+  // console.log("en pagechild", evaluationtoken);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -37,6 +38,15 @@ const PageChildData = () => {
       ...prev,
       [category]: value,
     }));
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedChecks([...selectedChecks, value]);
+    } else {
+      setSelectedChecks(selectedChecks.filter((item) => item !== value));
+    }
   };
 
   const validateForm = () => {
@@ -69,7 +79,10 @@ const PageChildData = () => {
       firstName,
       lastName,
       responses: selectedOptions,
+      selectedChecks,
     };
+
+    console.log("Form data to be submitted:", formData);
 
     try {
       setIsSubmitting(true);
@@ -85,7 +98,6 @@ const PageChildData = () => {
           return;
         }
       }
-
       const data = await submitForm(formData, evaluationtoken);
 
       if (data) {
@@ -95,6 +107,7 @@ const PageChildData = () => {
         setFirstName("");
         setLastName("");
         setSelectedOptions({});
+        setSelectedChecks([]);
         setIsChecked(false);
         navigate("/token");
       } else {
@@ -149,7 +162,10 @@ const PageChildData = () => {
           />
 
           {options.map((category) => {
-            if (category.category === "Años de edad" || category.category === "Meses") {
+            if (
+              category.category === "Años de edad" ||
+              category.category === "Meses"
+            ) {
               return null; // Omitir estos campos de la lista de categorías
             }
 
@@ -182,41 +198,103 @@ const PageChildData = () => {
               <label className="age-user-label" htmlFor="years">
                 Edad del niño
               </label>
-              <select
-                className="age-user-select"
-                id="years"
-                value={selectedOptions.years || ""}
-                onChange={(e) => handleSelectedChange("years", e.target.value)}
-              >
-                <option value="" disabled>
-                  Selecciona años
-                </option>
-                {[4, 5, 6, 7, 8, 9, 10].map((year) => (
-                  <option key={year} value={year}>
-                    {year}
+              <div className="age-user-select">
+                <select
+                  className="age-user-select"
+                  id="years"
+                  value={selectedOptions.years || ""}
+                  onChange={(e) =>
+                    handleSelectedChange("years", e.target.value)
+                  }
+                >
+                  <option value="" disabled>
+                    Selecciona años
                   </option>
-                ))}
-              </select>
+                  {[4, 5, 6, 7, 8, 9, 10].map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className="age-user-select"
+                  id="months"
+                  value={selectedOptions.months || ""}
+                  onChange={(e) =>
+                    handleSelectedChange("months", e.target.value)
+                  }
+                >
+                  <option value="" disabled>
+                    Selecciona meses
+                  </option>
+                  {[...Array(12).keys()].map((month) => (
+                    <option key={month} value={month}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className="age-item">
-              <label className="age-user-label" htmlFor="months">
-                Edad del niño
+          </div>
+          <div className="adult-info">
+            <label className="user-label" htmlFor="adult">
+              Adulto que diligencia la encuesta:
+            </label>
+            <div className="user-checkbox">
+              <label>
+                <input
+                  type="checkbox"
+                  value="Mamá"
+                  checked={selectedChecks.includes("Mamá")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Mamá
               </label>
-              <select
-                className="age-user-select"
-                id="months"
-                value={selectedOptions.months || ""}
-                onChange={(e) => handleSelectedChange("months", e.target.value)}
-              >
-                <option value="" disabled>
-                  Selecciona meses
-                </option>
-                {[...Array(12).keys()].map((month) => (
-                  <option key={month} value={month}>
-                    {month}
-                  </option>
-                ))}
-              </select>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Papá"
+                  checked={selectedChecks.includes("Papá")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Papá
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Abuela/Abuelo"
+                  checked={selectedChecks.includes("Abuela/Abuelo")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Abuela/Abuelo
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Tía/Tío"
+                  checked={selectedChecks.includes("Tía/Tío")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Tía/Tío
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Niñera"
+                  checked={selectedChecks.includes("Niñera")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Niñera
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Otros"
+                  checked={selectedChecks.includes("Otros")}
+                  onChange={handleCheckboxChange}
+                />{" "}
+                Otros
+              </label>
             </div>
           </div>
 
@@ -228,13 +306,15 @@ const PageChildData = () => {
               onChange={(e) => setIsChecked(e.target.checked)}
             />
             <label className="form-check-label">
-              Acepto la política de tratamiento de datos personales
+              Acepto la <a href="/privacity">política de tratamiento de datos personales</a> 
             </label>
           </div>
           <button
             type="submit"
             className="btn btn-admin btn-color"
-            disabled={!validateForm() || isSubmitting || submitting || !isChecked}
+            disabled={
+              !validateForm() || isSubmitting || submitting || !isChecked
+            }
           >
             {isSubmitting || submitting ? "Enviando..." : "Enviar"}
           </button>

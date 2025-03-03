@@ -11,7 +11,6 @@ const UserRoutes = () => {
       <Route path="/encuesta" element={<IndependencePage />} />
       <Route path="/resultados" element={<EvaluationResultPage />} />
       <Route path="/token" element={<UserToken />} />
-      {/* <Route path="/*" element={<Navigate to="/personales" />} /> */}
     </Routes>
   );
 };

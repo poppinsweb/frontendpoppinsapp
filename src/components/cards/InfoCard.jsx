@@ -8,12 +8,12 @@ export const InfoCard = () => {
   };
   return (
     <div className="infotoken-main-container">
-      <div className="btn-token-container">
+      <div className="btn-info-container-card">
         <button
           onClick={handleToggleCollapse}
           className="btn btn-outline-secondary btn-token-navigation"
         >
-          Instrucciones abrir/cerrar
+          Instrucciones. Leer Antes de Iniciar
         </button>
         {collapsed ? null : (
           <>
