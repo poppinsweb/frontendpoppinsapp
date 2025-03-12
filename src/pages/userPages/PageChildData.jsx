@@ -305,7 +305,7 @@ const PageChildData = () => {
               onChange={(e) => setIsChecked(e.target.checked)}
             />
             <label className="form-check-label">
-              Acepto la <a href="/privacity">política de tratamiento de datos personales</a> 
+              Acepto la <a target="_blank" href="/privacity">política de tratamiento de datos personales</a> 
             </label>
           </div>
           <button
