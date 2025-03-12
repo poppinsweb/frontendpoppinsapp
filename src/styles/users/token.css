@@ -55,10 +55,10 @@
 }
 
 .radio-token-container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 15px;
+  font-size: 15px; */
 }
 
 .btn-add {
@@ -143,9 +143,14 @@
   }
 
   .radio-token-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-align: left;
     padding: 0 80px;
+  }
+
+  input.radio-token {
+    margin-right: 10px;
   }
 
   .btn-token-container {
@@ -166,10 +171,6 @@
 
   label.token-label {
     font-size: 1.1rem;
-  }
-
-  input.radio-token {
-    margin-right: 10px;
   }
 
   .btn-token-info {

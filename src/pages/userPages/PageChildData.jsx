@@ -297,7 +297,6 @@ const PageChildData = () => {
               </label>
             </div>
           </div>
-
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -324,5 +323,4 @@ const PageChildData = () => {
     </div>
   );
 };
-
 export default PageChildData;

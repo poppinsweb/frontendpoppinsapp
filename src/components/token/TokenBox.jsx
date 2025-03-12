@@ -90,6 +90,11 @@ export const TokenBox = () => {
     tokenUsageCount >= 1 ||
     (selectedChild && selectedChild.responses);
 
+  const getTokenAlias = (token) => {
+    const child = childData?.find((child) => child.evaluationtoken === token);
+    return child? `${child.firstName} ${child.lastName}` : token;
+  };
+
   return (
     <>
       <div className="box-tokens-container">
@@ -110,7 +115,7 @@ export const TokenBox = () => {
                     checked={selectedToken === token.evaluationToken}
                     onChange={handleTokenChange}
                   />
-                  {token.evaluationToken}
+                  {getTokenAlias(token.evaluationToken)}
                 </label>
               ))}
               <div className="btn-token">
