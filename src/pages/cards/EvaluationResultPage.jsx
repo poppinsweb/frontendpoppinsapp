@@ -24,7 +24,7 @@ const EvaluationResultPage = () => {
   const responses = childrenData?.responses || [];
 
   const fechaParte= childrenData?.createdAt?.slice(0, 10);
-  const [year, month, day] = fechaParte.split("-");
+  const [year, month, day] = fechaParte?.split("-");
   const fechaAplicacion = `${day}-${month}-${year}`;
 
 
