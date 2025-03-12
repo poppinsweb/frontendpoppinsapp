@@ -21,7 +21,9 @@ export const TokenBox = () => {
     error: evaluationsError,
   } = useFetchData("http://localhost:3000/api/completevaluations");
 
-  const { data: childData } = useFetchData("http://localhost:3000/api/childrenres");
+  const { data: childData } = useFetchData(
+    "http://localhost:3000/api/childrenres"
+  );
 
   const navigate = useNavigate();
 
@@ -78,41 +80,51 @@ export const TokenBox = () => {
     navigate("/encuesta", { state: { evaluationtoken: selectedToken } });
   };
 
-  const isInitialEvaluationDisabled = !selectedToken || !selectedChild || tokenUsageCount >= 2;
+  const isInitialEvaluationDisabled =
+    !selectedToken || !selectedChild || tokenUsageCount >= 2;
   const isFinalEvaluationDisabled = !selectedToken || tokenUsageCount <= 1;
   const isResultDisabled = !selectedToken || tokenUsageCount < 1;
 
-  const isDataChildButtonDissabled = !selectedToken || tokenUsageCount >= 1 || (selectedChild && selectedChild.responses);
+  const isDataChildButtonDissabled =
+    !selectedToken ||
+    tokenUsageCount >= 1 ||
+    (selectedChild && selectedChild.responses);
 
   return (
     <>
       <div className="box-tokens-container">
-        <p>**** HAGA CLICK SOBRE EL TOKEN QUE VA A UTILIZAR ****</p>
-        <h2 className="code-title">Token</h2>
-        <div className="radio-token-container">
-          {userEvaluationTokens.map((token, index) => (
-            <label key={index} className="token-label">
-              <input
-                className="radio-token"
-                type="radio"
-                name="token"
-                value={token.evaluationToken}
-                checked={selectedToken === token.evaluationToken}
-                onChange={handleTokenChange}
-              />
-              {token.evaluationToken}
-            </label>
-          ))}
-          <div className="btn-token">
-            <button
-              className="btn btn-color"
-              onClick={handleNavigatePersonales}
-              disabled={isDataChildButtonDissabled}
-            >
-              Datos del Niño
-            </button>
-          </div>
-        </div>
+        {userEvaluationTokens.length === 0 ? (
+          <p>No tiene tokens disponibles</p>
+        ) : (
+          <>
+            <p>**** HAGA CLICK SOBRE EL TOKEN QUE VA A UTILIZAR ****</p>
+            <h2 className="code-title">Token</h2>
+            <div className="radio-token-container">
+              {userEvaluationTokens.map((token, index) => (
+                <label key={index} className="token-label">
+                  <input
+                    className="radio-token"
+                    type="radio"
+                    name="token"
+                    value={token.evaluationToken}
+                    checked={selectedToken === token.evaluationToken}
+                    onChange={handleTokenChange}
+                  />
+                  {token.evaluationToken}
+                </label>
+              ))}
+              <div className="btn-token">
+                <button
+                  className="btn btn-color"
+                  onClick={handleNavigatePersonales}
+                  disabled={isDataChildButtonDissabled}
+                >
+                  Datos del Niño
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="navitoken-main-container">
         <div className="btn-token-container">
