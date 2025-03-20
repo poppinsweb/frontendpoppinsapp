@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from "./Card";
+import Card from "./Card.jsx";
 import { useChild } from "../../context/ChildProvider";
 import { useNavigate } from "react-router-dom";
 import { useSubmitEvaluation } from "../../services/hooks/useSubmitEvaluation";

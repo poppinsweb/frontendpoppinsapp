@@ -1,7 +1,7 @@
-import { LogoToken } from "../../components/token/LogoToken";
-import { InfoToken } from "../../components/token/InfoToken";
-import { TokenBox } from "../../components/token/TokenBox";
-import { AdminToken } from "../../components/token/AdminToken";
+import { LogoToken } from "../../components/token/LogoToken.jsx";
+import { InfoToken } from "../../components/token/InfoToken.jsx";
+import { TokenBox } from "../../components/token/TokenBox.jsx";
+import { AdminToken } from "../../components/token/AdminToken.jsx";
 import { useAuth } from "../../context/AuthProvider";
 
 export function UserToken() {

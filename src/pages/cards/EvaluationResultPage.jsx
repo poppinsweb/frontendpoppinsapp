@@ -2,9 +2,9 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useLocation } from "react-router-dom";
 import { useChild } from "../../context/ChildProvider";
-import { CardResultIndependence } from "../../components/cards/CardResultIndependence";
-import { CardResultSkills } from "../../components/cards/CardResultSkills";
-import { CardResultHabits } from "../../components/cards/CardResultHabits";
+import { CardResultIndependence } from "../../components/cards/CardResultIndependence.jsx";
+import { CardResultSkills } from "../../components/cards/CardResultSkills.jsx";
+import { CardResultHabits } from "../../components/cards/CardResultHabits.jsx";
 import umbrella from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/result.css";
 

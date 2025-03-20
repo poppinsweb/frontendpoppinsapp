@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFetchData } from '../../services/hooks/useFetchData';
-import CardQuestions from '../../components/cards/CardQuestions';
+import CardQuestions from '../../components/cards/CardQuestions.jsx';
 
 const IndependencePage = () => {
   const { data: questionsData, loading, error } = useFetchData('http://localhost:3000/api/evaluation');

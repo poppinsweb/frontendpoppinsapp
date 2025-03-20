@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import { InfoCard } from "./infoCard";
+import { InfoCard } from "./InfoCard.jsx";
 import "../../styles/users/questions.css";
 
 const Card = ({
