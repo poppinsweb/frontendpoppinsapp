@@ -175,6 +175,8 @@
 }
 
 .question-carousel {
+  /* display: flex; */
+  width: 70%;
   margin: 20px auto;
   padding: 20px;
 }
@@ -196,6 +198,10 @@
 .carousel-button.answered {
   background-color: #28a745;
   color: white;
+}
+
+.btn-container {
+  margin-top: 20px;
 }
 
 /* LARGER SCREEN */

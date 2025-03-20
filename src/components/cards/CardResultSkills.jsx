@@ -25,15 +25,15 @@ export const CardResultSkills = () => {
 
   const skillCategories = [
     {
-      name: "Habilidades Cognitivas",
+      name: "Habilidades de aseo personal",
       questionIds: [1, 2, 3, 4, 5],
     },
     {
-      name: "Habilidades Sociales",
+      name: "Habilidades del vestido",
       questionIds: [6, 7, 8, 9, 10],
     },
     {
-      name: "Habilidades Emocionales",
+      name: "Habilidades de la alimentación",
       questionIds: [11, 12, 13, 14, 15],
     },
   ];
