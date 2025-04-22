@@ -54,12 +54,12 @@
   justify-content: center;
 }
 
-.radio-token-container {
-  /* display: flex;
+/* .radio-token-container {
+  display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 15px; */
-}
+  font-size: 15px;
+} */
 
 .btn-add {
   margin: 1.5rem;

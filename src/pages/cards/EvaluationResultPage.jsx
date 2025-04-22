@@ -36,44 +36,97 @@ const EvaluationResultPage = () => {
   const mesesEdad = responses[5]?.value || "N/A";
   const { firstName, lastName } = childrenData || {};
 
+  // const handleDownloadPdf = async () => {
+  //   const element = document.getElementById("pdf-content");
+  //   const canvas = await html2canvas(element, {
+  //     scale: 2,
+  //     useCORS: true,
+  //   });
+  //   const imgData = canvas.toDataURL("image/png");
+
+  //   // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
+  //   const pdf = new jsPDF({
+  //   orientation: "portrait",
+  //   unit: "in",
+  //   format: "letter",
+  //   });
+
+  //   const pdfWidth = pdf.internal.pageSize.getWidth(); // 8.5 pulgadas
+  //   const pdfHeight = pdf.internal.pageSize.getHeight(); // 11 pulgadas
+
+  //   const marginLeft = 0.25; // 0.5 pulgadas de margen izquierdo
+  //   const marginTop = 1.0; // 0.5 pulgadas de margen superior
+  //   const marginRight = 0.25; // 0.5 pulgadas de margen derecho
+  //   const marginBottom = 0.25; // 0.5 pulgadas de margen inferior
+
+  //   const usableWidth = pdfWidth - marginLeft - marginRight;
+  //   const usableHeight = pdfHeight - marginTop - marginBottom;
+
+  //   const imgProps = pdf.getImageProperties(imgData);
+  //   const imgWidth = imgProps.width / 96; // Convertir a pulgadas (asumiendo 96 ppi)
+  //   const imgHeight = imgProps.height / 96; // Convertir a pulgadas (asumiendo 96 ppi)
+
+  //   const scaleFactor = Math.min(
+  //     usableWidth / imgWidth,
+  //     usableHeight / imgHeight
+  //   );
+
+  //   const newImgWidth = imgWidth * scaleFactor;
+  //   const newImgHeight = imgHeight * scaleFactor;
+
+  //   pdf.addImage(
+  //     imgData,
+  //     "PNG",
+  //     marginLeft,
+  //     marginTop,
+  //     newImgWidth,
+  //     newImgHeight
+  //   );
+  //   pdf.save("poppinsEduca_resultados.pdf");
+  // };
+
   const handleDownloadPdf = async () => {
+    const html2canvas = (await import('html2canvas')).default;
+    const { jsPDF } = await import('jspdf');
+  
     const element = document.getElementById("pdf-content");
     const canvas = await html2canvas(element, {
       scale: 2,
       useCORS: true,
     });
+  
     const imgData = canvas.toDataURL("image/png");
-
+  
     // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
     const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "in",
-    format: "letter",
+      orientation: "portrait",
+      unit: "in",
+      format: "letter",
     });
-
-    const pdfWidth = pdf.internal.pageSize.getWidth(); // 8.5 pulgadas
-    const pdfHeight = pdf.internal.pageSize.getHeight(); // 11 pulgadas
-
-    const marginLeft = 0.25; // 0.5 pulgadas de margen izquierdo
-    const marginTop = 1.0; // 0.5 pulgadas de margen superior
-    const marginRight = 0.25; // 0.5 pulgadas de margen derecho
-    const marginBottom = 0.25; // 0.5 pulgadas de margen inferior
-
+  
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+    const marginLeft = 0.25;
+    const marginTop = 1.0;
+    const marginRight = 0.25;
+    const marginBottom = 0.25;
+  
     const usableWidth = pdfWidth - marginLeft - marginRight;
     const usableHeight = pdfHeight - marginTop - marginBottom;
-
+  
     const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = imgProps.width / 96; // Convertir a pulgadas (asumiendo 96 ppi)
-    const imgHeight = imgProps.height / 96; // Convertir a pulgadas (asumiendo 96 ppi)
-
+    const imgWidth = imgProps.width / 96; // Asumiendo 96 ppi
+    const imgHeight = imgProps.height / 96;
+  
     const scaleFactor = Math.min(
       usableWidth / imgWidth,
       usableHeight / imgHeight
     );
-
+  
     const newImgWidth = imgWidth * scaleFactor;
     const newImgHeight = imgHeight * scaleFactor;
-
+  
     pdf.addImage(
       imgData,
       "PNG",
