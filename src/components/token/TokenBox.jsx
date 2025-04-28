@@ -13,17 +13,19 @@ export const TokenBox = () => {
     data: tokensData,
     loading: tokensLoading,
     error: tokensError,
-  } = useFetchData("http://localhost:3000/api/tokens");
+  } = useFetchData(`${import.meta.env.VITE_API_URL}/api/tokens`);
 
   const {
     data: evaluationsData,
     loading: evaluationsLoading,
     error: evaluationsError,
-  } = useFetchData("http://localhost:3000/api/completevaluations");
+  } = useFetchData(`${import.meta.env.VITE_API_URL}/api/completevaluations`);
 
   const { data: childData } = useFetchData(
-    "http://localhost:3000/api/childrenres"
+    `${import.meta.env.VITE_API_URL}/api/childrenres`
   );
+  console.log(`${import.meta.env.VITE_API_URL}/api/childrenres`);
+  
 
   const navigate = useNavigate();
 

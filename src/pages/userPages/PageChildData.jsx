@@ -13,13 +13,13 @@ const PageChildData = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [selectedChecks, setSelectedChecks] = useState([]);
   const { data, loading, error } = useFetchData(
-    "http://localhost:3000/api/children"
+    `${import.meta.env.VITE_API_URL}/api/children`
   );
   const {
     submitForm,
     loading: submitting,
     error: submitError,
-  } = useSubmitForm("http://localhost:3000/api/childrenres");
+  } = useSubmitForm(`${import.meta.env.VITE_API_URL}/api/childrenres`);
 
   const location = useLocation();
   const navigate = useNavigate();

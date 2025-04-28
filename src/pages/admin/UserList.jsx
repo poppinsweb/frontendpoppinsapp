@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useFetchData } from '../../services/hooks/useFetchData';
 
 const UserList = () => {
-  const { data: usersData, loading: usersLoading, error: usersError } = useFetchData("http://localhost:3000/api/users");
-  const { data: childrenData, loading: childrenLoading, error: childrenError } = useFetchData("http://localhost:3000/api/childrenres");
+  const { data: usersData, loading: usersLoading, error: usersError } = useFetchData(`${import.meta.env.VITE_API_URL}/api/users`);
+  const { data: childrenData, loading: childrenLoading, error: childrenError } = useFetchData(`${import.meta.env.VITE_API_URL}/api/childrenres`);
 
   const [users, setUsers] = useState([]);
   const [children, setChildren] = useState([]);
@@ -25,7 +25,7 @@ const UserList = () => {
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/delete-user/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/delete-user/${userId}`, {
         method: 'DELETE',
       });
 
@@ -47,7 +47,7 @@ const UserList = () => {
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/delete-child/${childId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/delete-child/${childId}`, {
         method: 'DELETE',
       });
 
