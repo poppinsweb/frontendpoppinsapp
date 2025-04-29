@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setLoading(true);
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { email, password, });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password, });
       setUser(response.data.user);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('sessionActive', 'true');
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async() => {
-    await axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`, {}, { withCredentials: true });
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {}, { withCredentials: true });
     setUser(null); // Limpiar el usuario al hacer logout
     localStorage.removeItem('sessionActive');
   };
