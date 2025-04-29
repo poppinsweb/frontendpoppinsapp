@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useFetchData } from "../../services/hooks/useFetchData";
 import { useSubmitForm } from "../../services/hooks/useSubmitForm";
+import umbrellafirst from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/userChild.css";
 
 const PageChildData = () => {
@@ -126,7 +127,7 @@ const PageChildData = () => {
   return (
     <div className="user-container">
       <img
-        src="src/styles/images/umbrellaFirst.png"
+        src={umbrellafirst}
         className="logo2"
         alt="Logo paraguas"
       />

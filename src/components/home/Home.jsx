@@ -1,5 +1,12 @@
-// import Evaluation from "../../services/evaluationService/Evaluation";
+import React from "react";
 import "../../styles/home/home.css";
+import umbrellafirst from "../../styles/images/UmbrellaFirst.png";
+import tests from "../../styles/images/tests.png";
+import paraguas from "../../styles/images/paraguas.png";  
+import fondocolores from "../../styles/images/fondocolores.jpg";
+import habitosfondo from "../../styles/images/habitosfondo.png";
+import lilafond from "../../styles/images/lilafond.png";
+import cursor from "../../styles/images/cursor.png";
 
 export function Home() {
   return (
@@ -7,7 +14,7 @@ export function Home() {
       <div className="row">
         <section className="col logo-container">
           <img
-            src="src/styles/images/UmbrellaFirst.png"
+            src={umbrellafirst}
             className="logo"
             alt="umbrella-logo"
           />
@@ -18,7 +25,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
             <a href="/infoencuesta">
               <img
-                src={"src/styles/images/tests.png"}
+                src={tests}
                 alt="test"
                 className="img-slider"
               />
@@ -28,7 +35,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container2">
             <a href="/carrito"> 
               <img
-                src={"src/styles/images/paraguas.png"}
+                src={paraguas}
                 alt="service"
                 className="img-slider"
               />
@@ -38,7 +45,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
             <a href="/materiales">
               <img
-                src={"src/styles/images/fondocolores.jpg"}
+                src={fondocolores}
                 alt="service"
                 className="img-slider"
               />
@@ -48,7 +55,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container2">
             <a href="/construction">
               <img
-                src={"src/styles/images/habitosfondo.png"}
+                src={habitosfondo}
                 alt="service"
                 className="img-slider"
               />
@@ -58,7 +65,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
             <a href="/construction">
               <img
-                src={"src/styles/images/lilafond.png"}
+                src={lilafond}
                 alt="service"
                 className="img-slider"
               />
@@ -68,7 +75,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container2">
             <a href="/construction">
               <img
-                src={"src/styles/images/cursor.png"}
+                src={cursor}
                 alt="service"
                 className="img-slider"
               />
