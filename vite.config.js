@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react-swc'; // o '@vitejs/plugin-react' si usa
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+  base: '/',
   plugins: [
     react(),
     visualizer({ open: true }) // esto es opcional
