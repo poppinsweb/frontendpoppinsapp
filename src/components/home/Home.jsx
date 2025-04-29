@@ -5,7 +5,7 @@ import tests from "../../styles/images/tests.png";
 import paraguas from "../../styles/images/paraguas.png";  
 import fondocolores from "../../styles/images/fondocolores.jpg";
 import habitosfondo from "../../styles/images/habitosfondo.png";
-import lilafond from "../../styles/images/lilafond.png";
+import lilaFond from "../../styles/images/lilaFond.png";
 import cursor from "../../styles/images/cursor.png";
 
 export function Home() {
@@ -65,7 +65,7 @@ export function Home() {
           <div className="col-12 col-md-6 col-lg-4 img-individual-container1">
             <a href="/construction">
               <img
-                src={lilafond}
+                src={lilaFond}
                 alt="service"
                 className="img-slider"
               />
