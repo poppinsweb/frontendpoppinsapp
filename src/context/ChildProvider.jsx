@@ -24,7 +24,7 @@ export const ChildProvider = ({ children }) => {
     const fetchChildData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/logout/childrenres`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/childrenres`);
         const childData = response.data.find(
           (child) => child.evaluationtoken === evaluationtoken
         );
