@@ -29,7 +29,7 @@ const PageChildData = () => {
   // console.log("en pagechild", evaluationtoken);
 
   useEffect(() => {
-    if (data && data.length > 0) {
+    if (data && data?.length > 0) {
       setOptions(data[0].categories);
     }
   }, [data]);

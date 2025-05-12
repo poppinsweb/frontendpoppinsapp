@@ -9,7 +9,7 @@ const IndependencePage = () => {
   if(error) return <p>Error loading data: {error.message}</p>
   return (
     <div>
-      {questionsData && questionsData.length > 0 ? (
+      {questionsData && questionsData?.length > 0 ? (
         <>
           <CardQuestions questionsData={questionsData} />
         </>
