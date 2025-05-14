@@ -90,9 +90,19 @@ const CardQuestions = ({ questionsData }) => {
   if (childLoading) return <p>Loading child data...</p>;
   if (childError) return <p>Error loading child data: {childError.message}</p>;
 
-  if (!questionsData || questionsData.length === 0) {
+  // if (!questionsData || questionsData?.length === 0) {
+  //   return <p>Loading questions...</p>;
+  // }
+
+  if (
+    !Array.isArray(questionsData) ||
+    questionsData.length === 0 ||
+    !Array.isArray(questionsData[0]?.questions) ||
+    questionsData[0].questions.length === 0
+  ) {
     return <p>Loading questions...</p>;
   }
+  
   const currentQuestionData = questionsData[0].questions[currentQuestion];
 
   return (
