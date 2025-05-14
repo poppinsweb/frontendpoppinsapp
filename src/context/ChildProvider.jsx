@@ -18,13 +18,14 @@ export const ChildProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const location = useLocation();
-  const { evaluationtoken } = location.state || {};
+  
+  const { evaluationtoken } = (location && location.state) || {};
 
   useEffect(() => {
     const fetchChildData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/childrenres`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/childrenres`);
         const childData = response.data.find(
           (child) => child.evaluationtoken === evaluationtoken
         );
