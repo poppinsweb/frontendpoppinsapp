@@ -99,17 +99,18 @@ export function Navbar() {
               </>
             )}
           </ul>
-        </div>
+          {/* Controles alineados a la derecha */}
         <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNavLogout"
+          // className="collapse navbar-collapse justify-content-end"
+          className="d-flex ms-auto align-items-center gap-2 mt-2 mt-lg-0"
+          // id="navbarNavLogout"
         >
-          <button className="btn icon-cart">
-            <NavLink className="nav-link" to="/carrito">
+          {/* <button className="btn icon-cart"> */}
+            <NavLink className="btn icon-cart nav-link" to="/carrito">
               <BsCart4 />
             </NavLink>
-          </button>
-          <span className="nav-item nav-link text-primary mx-3">
+          {/* </button> */}
+          <span className="nav-item nav-link text-primary">
             {user?.email}
           </span>
           {user ? (
@@ -121,6 +122,7 @@ export function Navbar() {
               Login
             </button>
           )}
+          </div>
         </div>
       </div>
     </nav>
