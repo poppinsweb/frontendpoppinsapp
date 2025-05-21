@@ -26,7 +26,7 @@ export const EvaluationProvider = ({ children }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const responses = await axios.get(`${import.meta.env.VITE_API_URL}/api/completevaluations"`);
+        const responses = await axios.get(`${import.meta.env.VITE_API_URL}/api/completevaluations`);
 
         // console.log("Fetched responses:", responses);
 
