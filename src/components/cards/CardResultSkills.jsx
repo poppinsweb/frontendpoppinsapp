@@ -63,9 +63,9 @@ export const CardResultSkills = () => {
 
   const renderDescriptions = (descriptions) => {
     if (!descriptions) return null;
-    return descriptions.split("-").map((item, index) => (
-      <div key={index}>- {item.trim()}</div>
-    ));
+    return descriptions
+      .split("-")
+      .map((item, index) => <div key={index}>- {item.trim()}</div>);
   };
 
   const renderCategoryRow = (category) => {
@@ -89,15 +89,22 @@ export const CardResultSkills = () => {
         hasOptionId4 = true;
       }
     });
+    const hasOption1or2 = responses.some(
+      (response) => response.optionId === 1 || response.optionId === 2
+    );
 
     return (
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
+          {/* Solo renderiza si NO hay optionId 1 o 2 */}
+          {hasOptionId4 && !hasOptionId3 && !hasOption1or2 && (
+            <IoCheckmarkSharp />
+          )}
         </td>
         <td className="table-success">
-          {hasOptionId3 && <IoCheckmarkSharp />}
+          {/* Solo renderiza si NO hay optionId 1 o 2 */}
+          {hasOptionId3 && !hasOption1or2 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 && (
@@ -129,7 +136,9 @@ export const CardResultSkills = () => {
           <tr>
             <th>HABILIDADES</th>
             <th className="table-primary">ADQUIRIDO</th>
-            <th className="table-success">EN PROCESO AVANZADO DE ADQUISICIÓN</th>
+            <th className="table-success">
+              EN PROCESO AVANZADO DE ADQUISICIÓN
+            </th>
             <th className="table-warning">EN PROCESO INICIAL DE ADQUISICIÓN</th>
             <th className="table-danger">NO ADQUIRIDO</th>
           </tr>

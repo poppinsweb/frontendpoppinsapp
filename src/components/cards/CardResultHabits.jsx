@@ -93,9 +93,9 @@ export const CardResultHabits = () => {
 
   const renderDescriptions = (descriptions) => {
     if (!descriptions) return null;
-    return descriptions.split("-").map((item, index) => (
-      <div key={index}>- {item.trim()}</div>
-    ));
+    return descriptions
+      .split("-")
+      .map((item, index) => <div key={index}>- {item.trim()}</div>);
   };
 
   const renderCategoryRow = (category) => {
@@ -120,14 +120,22 @@ export const CardResultHabits = () => {
       }
     });
 
+    const hasOption1or2 = responses.some(
+      (response) => response.optionId === 1 || response.optionId === 2
+    );
+
     return (
       <tr key={category.name}>
         <td>{category.name}</td>
         <td className="table-primary">
-          {hasOptionId4 && !hasOptionId3 && <IoCheckmarkSharp />}
+          {/* Solo renderiza si NO hay optionId 1 o 2 */}
+          {hasOptionId4 && !hasOptionId3 && !hasOption1or2 && (
+            <IoCheckmarkSharp />
+          )}
         </td>
         <td className="table-success">
-          {hasOptionId3 && hasOptionId4 && <IoCheckmarkSharp />}
+          {/* Solo renderiza si NO hay optionId 1 o 2 */}
+          {hasOptionId3 && !hasOption1or2 && <IoCheckmarkSharp />}
         </td>
         <td className="table-warning">
           {groupedDescriptions[2].length > 0 &&
@@ -153,7 +161,8 @@ export const CardResultHabits = () => {
       );
       return (
         <div key={question.id}>
-          <strong>{question.description}:</strong> {response ? response.answer : "No hay respuesta"}
+          <strong>{question.description}:</strong>{" "}
+          {response ? response.answer : "No hay respuesta"}
         </div>
       );
     });
@@ -167,7 +176,9 @@ export const CardResultHabits = () => {
           <tr>
             <th>HÁBITOS Y RESPONSABILIDADES</th>
             <th className="table-primary">ADQUIRIDO</th>
-            <th className="table-success">EN PROCESO AVANZADO DE ADQUISICIÓN</th>
+            <th className="table-success">
+              EN PROCESO AVANZADO DE ADQUISICIÓN
+            </th>
             <th className="table-warning">EN PROCESO INICIAL DE ADQUISICIÓN</th>
             <th className="table-danger">NO ADQUIRIDO</th>
           </tr>
@@ -177,9 +188,7 @@ export const CardResultHabits = () => {
         </tbody>
       </table>
       <h2 className="additional-questions-title">Preguntas adicionales</h2>
-      <div className="additional-questions">
-        {renderAdditionalQuestions()}
-      </div>
+      <div className="additional-questions">{renderAdditionalQuestions()}</div>
     </div>
   );
 };
