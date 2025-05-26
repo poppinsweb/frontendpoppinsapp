@@ -15,11 +15,11 @@ export const PageInfoEncuesta = () => {
         Para diligenciarla debe adquirir un TOKEN que le permitirá hacer una evaluación inicial y una de seguimiento en un tiempo máximo de 6 meses. <br />
         Duración de la Evaluación: 10 minutos aproximadamente.
       </div>
-      <div>
+      {/* <div>
         <a href="/carrito">
           <button className="btn-color">Adquirir Token</button>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };
