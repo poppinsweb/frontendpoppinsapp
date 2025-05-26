@@ -1,7 +1,6 @@
-import React from "react";
+
 import { Construction } from "../home/Construction";
 
-import React from 'react'
 
 export const Payment = () => {
   return (
