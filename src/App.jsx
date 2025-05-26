@@ -33,7 +33,7 @@ export default function App() {
         <Route path="/infoencuesta" element={<PageInfoEncuesta />} />
         {/* <Route path="/materiales" element={<Materiales />} /> */}
         <Route path="/login" element={<PrivateRoute element={<LoginPage />} redirectTo="/" />} />
-        <Route path="/carrito" element={<Cart />} />
+        {/* <Route path="/carrito" element={<Cart />} /> */}
         <Route path="/register" element={<RegisterUser />} />
         {/* <Route path="/pago" element={<Payment />} /> */}
       </Routes>
