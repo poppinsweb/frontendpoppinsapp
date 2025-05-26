@@ -26,15 +26,38 @@ export const CardResultSkills = () => {
   const skillCategories = [
     {
       name: "Habilidades de aseo personal",
-      questionIds: [1, 2, 3, 4, 5],
+      skillNames: [
+        "Secarse el cuerpo después del baño",
+        "Peinarse el cabello",
+        "Limpiarse la nariz",
+        "Limpiarse después de ir al baño",
+        "Lavarse las manos al salir del baño",
+        "Cepillarse los dientes solo",
+        "Controlar esfínteres durante el día",
+        "Controlar esfínteres durante la noche",
+        "Soltar el baño luego de usarlo",
+      ],
+      questionIds: [5, 6, 7, 8, 9, 10, 11, 12, 13],
     },
     {
       name: "Habilidades del vestido",
-      questionIds: [6, 7, 8, 9, 10],
+      skillNames: [
+        "Abotonarse",
+        "Amarrarse los cordones",
+        "Ponerse las medias",
+        "Ponerse los zapatos",
+        "Subir y bajar cremalleras",
+      ],
+      questionIds: [14, 15, 16, 17, 18],
     },
     {
       name: "Habilidades de la alimentación",
-      questionIds: [11, 12, 13, 14, 15],
+      skillNames: [
+        "Utilizar la cuchara",
+        "Utilizar el tenedor",
+        "Utilizar el cuchillo",
+      ],
+      questionIds: [19, 20, 21],
     },
   ];
 
