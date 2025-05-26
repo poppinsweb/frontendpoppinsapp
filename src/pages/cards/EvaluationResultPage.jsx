@@ -1,11 +1,11 @@
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useChild } from "../../context/ChildProvider";
 import { CardResultIndependence } from "../../components/cards/CardResultIndependence.jsx";
 import { CardResultSkills } from "../../components/cards/CardResultSkills.jsx";
 import { CardResultHabits } from "../../components/cards/CardResultHabits.jsx";
 import umbrella from "../../styles/images/UmbrellaFirst.png";
+import html2pdf from "html2pdf.js";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
@@ -22,9 +22,6 @@ const EvaluationResultPage = () => {
   if (childrenError)
     return <p>Error loading children data: {childrenError.message}</p>;
 
-  // console.log(evaluationtoken);
-  // console.log(childrenData.createdAt);
-
   const responses = childrenData?.responses || [];
 
   const fechaParte = childrenData?.createdAt?.slice(0, 10);
@@ -32,42 +29,44 @@ const EvaluationResultPage = () => {
   const fechaAplicacion = `${day}-${month}-${year}`;
 
   const sexo = responses[0]?.value || "N/A";
-  // const estrato = responses[1]?.value || "N/A";
-  // const tipoInstitucion = responses[2]?.value || "N/A";
   const nivelEscolar = responses[3]?.value || "N/A";
   const aniosEdad = responses[4]?.value || "N/A";
   const mesesEdad = responses[5]?.value || "N/A";
   const { firstName, lastName } = childrenData || {};
 
   // const handleDownloadPdf = async () => {
+  //   const html2canvas = (await import("html2canvas")).default;
+  //   const { jsPDF } = await import("jspdf");
+
   //   const element = document.getElementById("pdf-content");
   //   const canvas = await html2canvas(element, {
-  //     scale: 2,
+  //     scale: 3, // Aumentar la escala para mejorar la calidad
   //     useCORS: true,
   //   });
+
   //   const imgData = canvas.toDataURL("image/png");
 
   //   // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
   //   const pdf = new jsPDF({
-  //   orientation: "portrait",
-  //   unit: "in",
-  //   format: "letter",
+  //     orientation: "portrait",
+  //     unit: "in",
+  //     format: "letter",
   //   });
 
-  //   const pdfWidth = pdf.internal.pageSize.getWidth(); // 8.5 pulgadas
-  //   const pdfHeight = pdf.internal.pageSize.getHeight(); // 11 pulgadas
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = pdf.internal.pageSize.getHeight();
 
-  //   const marginLeft = 0.25; // 0.5 pulgadas de margen izquierdo
-  //   const marginTop = 1.0; // 0.5 pulgadas de margen superior
-  //   const marginRight = 0.25; // 0.5 pulgadas de margen derecho
-  //   const marginBottom = 0.25; // 0.5 pulgadas de margen inferior
+  //   const marginLeft = 1;
+  //   const marginTop = 1;
+  //   const marginRight = 1;
+  //   const marginBottom = 1;
 
   //   const usableWidth = pdfWidth - marginLeft - marginRight;
   //   const usableHeight = pdfHeight - marginTop - marginBottom;
 
   //   const imgProps = pdf.getImageProperties(imgData);
-  //   const imgWidth = imgProps.width / 96; // Convertir a pulgadas (asumiendo 96 ppi)
-  //   const imgHeight = imgProps.height / 96; // Convertir a pulgadas (asumiendo 96 ppi)
+  //   const imgWidth = imgProps.width / 100; // Asumiendo 96 ppi
+  //   const imgHeight = imgProps.height / 100;
 
   //   const scaleFactor = Math.min(
   //     usableWidth / imgWidth,
@@ -88,57 +87,18 @@ const EvaluationResultPage = () => {
   //   pdf.save("poppinsEduca_resultados.pdf");
   // };
 
-  const handleDownloadPdf = async () => {
-    const html2canvas = (await import("html2canvas")).default;
-    const { jsPDF } = await import("jspdf");
-
+   const handleDownloadPdf = () => {
     const element = document.getElementById("pdf-content");
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-
-    // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "in",
-      format: "letter",
-    });
-
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    const marginLeft = 0.25;
-    const marginTop = 1.0;
-    const marginRight = 0.25;
-    const marginBottom = 0.25;
-
-    const usableWidth = pdfWidth - marginLeft - marginRight;
-    const usableHeight = pdfHeight - marginTop - marginBottom;
-
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = imgProps.width / 96; // Asumiendo 96 ppi
-    const imgHeight = imgProps.height / 96;
-
-    const scaleFactor = Math.min(
-      usableWidth / imgWidth,
-      usableHeight / imgHeight
-    );
-
-    const newImgWidth = imgWidth * scaleFactor;
-    const newImgHeight = imgHeight * scaleFactor;
-
-    pdf.addImage(
-      imgData,
-      "PNG",
-      marginLeft,
-      marginTop,
-      newImgWidth,
-      newImgHeight
-    );
-    pdf.save("poppinsEduca_resultados.pdf");
+    html2pdf()
+      .set({
+        margin: 1, // pulgadas (~2.54cm)
+        filename: "poppinsEduca_resultados.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      })
+      .from(element)
+      .save();
   };
 
   return (
@@ -147,12 +107,11 @@ const EvaluationResultPage = () => {
         <div className="header-result-title">
           <img className="img-result" src={umbrella} alt="logo Poppins" />
           <h1 className="main-title main-title-one">
-            Evaluación de hábitos e independencia
+            Evaluación de hábitos e independencia en la rutina diaria
           </h1>
-          <h2 className="main-title">en la rutina diaria</h2>
         </div>
-        <div className="header-container">
-          <div className="header-container">
+        <div>
+          <div className="header-container1">
             <table className="table table-borderless ">
               <tbody>
                 <tr>
@@ -185,11 +144,13 @@ const EvaluationResultPage = () => {
             </table>
           </div>
         </div>
-        <CardResultIndependence />
-        <CardResultSkills />
-        <CardResultHabits />
+        <div className="result-table-container">
+          <CardResultIndependence />
+          <CardResultSkills />
+          <CardResultHabits />
+        </div>
       </div>
-      <button className="btn-color" onClick={handleDownloadPdf}>
+      <button className="btn-color btn-color-result" onClick={handleDownloadPdf}>
         Descargar PDF
       </button>
     </>
