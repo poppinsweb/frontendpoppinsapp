@@ -9,7 +9,11 @@ import umbrella from "../../styles/images/UmbrellaFirst.png";
 import "../../styles/users/result.css";
 
 const EvaluationResultPage = () => {
-  const { data: childrenData, loading: childrenLoading, error: childrenError } = useChild();
+  const {
+    data: childrenData,
+    loading: childrenLoading,
+    error: childrenError,
+  } = useChild();
 
   const location = useLocation();
   const { evaluationtoken } = location.state || {};
@@ -23,10 +27,9 @@ const EvaluationResultPage = () => {
 
   const responses = childrenData?.responses || [];
 
-  const fechaParte= childrenData?.createdAt?.slice(0, 10);
+  const fechaParte = childrenData?.createdAt?.slice(0, 10);
   const [year, month, day] = fechaParte?.split("-");
   const fechaAplicacion = `${day}-${month}-${year}`;
-
 
   const sexo = responses[0]?.value || "N/A";
   // const estrato = responses[1]?.value || "N/A";
@@ -86,47 +89,47 @@ const EvaluationResultPage = () => {
   // };
 
   const handleDownloadPdf = async () => {
-    const html2canvas = (await import('html2canvas')).default;
-    const { jsPDF } = await import('jspdf');
-  
+    const html2canvas = (await import("html2canvas")).default;
+    const { jsPDF } = await import("jspdf");
+
     const element = document.getElementById("pdf-content");
     const canvas = await html2canvas(element, {
       scale: 2,
       useCORS: true,
     });
-  
+
     const imgData = canvas.toDataURL("image/png");
-  
+
     // Crear un nuevo documento PDF con tamaño carta (8.5 x 11 pulgadas)
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "in",
       format: "letter",
     });
-  
+
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-  
+
     const marginLeft = 0.25;
     const marginTop = 1.0;
     const marginRight = 0.25;
     const marginBottom = 0.25;
-  
+
     const usableWidth = pdfWidth - marginLeft - marginRight;
     const usableHeight = pdfHeight - marginTop - marginBottom;
-  
+
     const imgProps = pdf.getImageProperties(imgData);
     const imgWidth = imgProps.width / 96; // Asumiendo 96 ppi
     const imgHeight = imgProps.height / 96;
-  
+
     const scaleFactor = Math.min(
       usableWidth / imgWidth,
       usableHeight / imgHeight
     );
-  
+
     const newImgWidth = imgWidth * scaleFactor;
     const newImgHeight = imgHeight * scaleFactor;
-  
+
     pdf.addImage(
       imgData,
       "PNG",
@@ -141,11 +144,13 @@ const EvaluationResultPage = () => {
   return (
     <>
       <div id="pdf-content">
-        <div>
-          <img className="img-result" src={umbrella} alt="logo paraguas" />
+        <div className="header-result-title">
+          <img className="img-result" src={umbrella} alt="logo Poppins" />
+          <h1 className="main-title main-title-one">
+            Evaluación de hábitos e independencia
+          </h1>
+          <h2 className="main-title">en la rutina diaria</h2>
         </div>
-        <h1 className="main-title main-title-one">Evaluación de hábitos e independencia</h1>
-        <h2 className="main-title">en la rutina diaria</h2>
         <div className="header-container">
           <div className="header-container">
             <table className="table table-borderless ">

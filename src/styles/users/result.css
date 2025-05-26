@@ -23,11 +23,11 @@
 .main-title {
   flex-wrap: wrap;
   color: #683498;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .main-title-one {
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 tbody td.table-warning, td.table-danger {
@@ -49,12 +49,17 @@ tbody td.table-warning, td.table-danger {
   display: block;
   position: absolute;
   /* z-index: -1; */
-  top: 200px;
-  left: 150px;
-  height: 300px;
-  margin-left: 50px;
+  top: 100px;
+  left: 270px;
+  /* height: 300px; */
+  /* margin-left: 50px; */
   transform: rotate(-30deg);
-  opacity: 0.7;
+  /* opacity: 0.7; */
+}
+
+img.img-result {
+  width: 150px;
+  height: auto;
 }
 
 .additional-questions-title {
